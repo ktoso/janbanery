@@ -1,8 +1,11 @@
+# dev directories
 idea
 target
 out
 
+# exclude these files
 *.class
 *tmp
 
+# project files
 kanbanery.properties
