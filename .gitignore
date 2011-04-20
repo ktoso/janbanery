@@ -1,0 +1,8 @@
+idea
+target
+out
+
+*.class
+*tmp
+
+kanbanery.properties
