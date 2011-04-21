@@ -1,15 +1,13 @@
 package pl.project13.janbanery.config;
 
-import pl.project13.janbanery.core.AuthMode;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import static pl.project13.janbanery.core.AuthMode.API_KEY_MODE;
-import static pl.project13.janbanery.core.AuthMode.USER_AND_PASS_MODE;
+import static pl.project13.janbanery.config.AuthMode.API_KEY_MODE;
+import static pl.project13.janbanery.config.AuthMode.USER_AND_PASS_MODE;
 
 /**
  * @author Konrad Malawski

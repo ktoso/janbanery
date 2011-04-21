@@ -1,4 +1,4 @@
-package pl.project13.janbanery.core;
+package pl.project13.janbanery.config;
 
 /**
  * @author Konrad Malawski

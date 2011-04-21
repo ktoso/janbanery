@@ -1,9 +1,7 @@
 package pl.project13.janbanery.config;
 
-import pl.project13.janbanery.core.AuthMode;
-
-import static pl.project13.janbanery.core.AuthMode.API_KEY_MODE;
-import static pl.project13.janbanery.core.AuthMode.USER_AND_PASS_MODE;
+import static pl.project13.janbanery.config.AuthMode.API_KEY_MODE;
+import static pl.project13.janbanery.config.AuthMode.USER_AND_PASS_MODE;
 
 /**
  * Date: 4/20/11
