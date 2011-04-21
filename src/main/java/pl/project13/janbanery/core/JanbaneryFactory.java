@@ -3,6 +3,7 @@ package pl.project13.janbanery.core;
 import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.DefaultConfiguration;
+import pl.project13.janbanery.config.GsonFactory;
 
 /**
  * Date: 4/20/11
@@ -22,7 +23,7 @@ public class JanbaneryFactory {
   }
 
   public JanbaneryImpl connectUsing(Configuration configuration) {
-    return new JanbaneryImpl(configuration, asyncHttpClient);
+    return new JanbaneryImpl(configuration, asyncHttpClient, GsonFactory.create());
   }
 
   public JanbaneryImpl connectUsing(String apiKey) {

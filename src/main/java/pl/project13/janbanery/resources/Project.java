@@ -16,12 +16,6 @@ public class Project extends KanbaneryResource implements Serializable {
   public Project() {
   }
 
-  public Project(Integer id, String name, String url, Date created_at, Date updated_at, String type) {
-    this.id = id;
-    this.name = name;
-    this.url = url;
-  }
-
   public Integer getId() {
     return id;
   }

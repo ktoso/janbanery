@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,21 +16,7 @@ public class TaskType extends KanbaneryResource implements Serializable {
   Integer project_id; // Project to which the task type is assigned
   Integer position; // Position in project's task types list, 1-based
 
-  Date   created_at; // Creation time
-  Date   updated_at; // Last update time
-  String type; // Type of this resource, set to "TaskType". Only for JSON responses. In XML responses node name is "task_type".
-
   public TaskType() {
-  }
-
-  public TaskType(String name, Integer color_code, Integer project_id, Integer position, Date created_at, Date updated_at, String type) {
-    this.name = name;
-    this.color_code = color_code;
-    this.project_id = project_id;
-    this.position = position;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.type = type;
   }
 
   public String getName() {
@@ -61,30 +49,6 @@ public class TaskType extends KanbaneryResource implements Serializable {
 
   public void setPosition(Integer position) {
     this.position = position;
-  }
-
-  public Date getCreated_at() {
-    return created_at;
-  }
-
-  public void setCreated_at(Date created_at) {
-    this.created_at = created_at;
-  }
-
-  public Date getUpdated_at() {
-    return updated_at;
-  }
-
-  public void setUpdated_at(Date updated_at) {
-    this.updated_at = updated_at;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
   }
 
   @Override

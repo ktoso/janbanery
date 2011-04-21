@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,16 +17,6 @@ public class SubTask extends KanbaneryResource implements Serializable {
   Boolean completed; // no	on create and update	If it was completed
 
   public SubTask() {
-  }
-
-  public SubTask(String body, Integer task_id, Integer creator_id, Boolean completed, Date created_at, Date updated_at, String type) {
-    this.body = body;
-    this.task_id = task_id;
-    this.creator_id = creator_id;
-    this.completed = completed;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.type = type;
   }
 
   public String getBody() {
@@ -57,30 +49,6 @@ public class SubTask extends KanbaneryResource implements Serializable {
 
   public void setCompleted(Boolean completed) {
     this.completed = completed;
-  }
-
-  public Date getCreated_at() {
-    return created_at;
-  }
-
-  public void setCreated_at(Date created_at) {
-    this.created_at = created_at;
-  }
-
-  public Date getUpdated_at() {
-    return updated_at;
-  }
-
-  public void setUpdated_at(Date updated_at) {
-    this.updated_at = updated_at;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
   }
 
   @Override

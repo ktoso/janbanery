@@ -12,4 +12,6 @@ public interface Configuration {
   void forceAuthMode(AuthMode authMode);
 
   AuthMode getAuthMode();
+
+  String getApiUrl();
 }

@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import org.joda.time.DateTime;
+
 import java.util.Date;
 
 /**
@@ -8,32 +10,26 @@ import java.util.Date;
  * @author Konrad Malawski
  */
 public abstract class KanbaneryResource {
-  protected Date   created_at; // Creation time
-  protected Date   updated_at; // Last update time
+  protected DateTime created_at; // Creation time
+  protected DateTime updated_at; // Last update time
   protected String type; // Type of this resource, set to "User". Only for JSON responses. In XML responses node name is "user".
 
   protected KanbaneryResource() {
   }
 
-  protected KanbaneryResource(Date created_at, Date updated_at, String type) {
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.type = type;
-  }
-
-  public Date getCreated_at() {
+  public DateTime getCreated_at() {
     return created_at;
   }
 
-  public void setCreated_at(Date created_at) {
+  public void setCreated_at(DateTime created_at) {
     this.created_at = created_at;
   }
 
-  public Date getUpdated_at() {
+  public DateTime getUpdated_at() {
     return updated_at;
   }
 
-  public void setUpdated_at(Date updated_at) {
+  public void setUpdated_at(DateTime updated_at) {
     this.updated_at = updated_at;
   }
 

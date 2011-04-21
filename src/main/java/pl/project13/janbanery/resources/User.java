@@ -18,17 +18,6 @@ public class User extends KanbaneryResource implements Serializable {
   public User() {
   }
 
-  public User(String api_token, User email, String first_name, String last_name, String gravatar_url, Date created_at, Date updated_at, String type) {
-    this.api_token = api_token;
-    this.email = email;
-    this.first_name = first_name;
-    this.last_name = last_name;
-    this.gravatar_url = gravatar_url;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.type = type;
-  }
-
   public String getApi_token() {
     return api_token;
   }
@@ -67,30 +56,6 @@ public class User extends KanbaneryResource implements Serializable {
 
   public void setGravatar_url(String gravatar_url) {
     this.gravatar_url = gravatar_url;
-  }
-
-  public Date getCreated_at() {
-    return created_at;
-  }
-
-  public void setCreated_at(Date created_at) {
-    this.created_at = created_at;
-  }
-
-  public Date getUpdated_at() {
-    return updated_at;
-  }
-
-  public void setUpdated_at(Date updated_at) {
-    this.updated_at = updated_at;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
   }
 
   @Override

@@ -17,15 +17,6 @@ public class Estimate extends KanbaneryResource implements Serializable {
   public Estimate() {
   }
 
-  public Estimate(BigDecimal value, String label, Integer project_id, Date created_at, Date updated_at, String type) {
-    this.value = value;
-    this.label = label;
-    this.project_id = project_id;
-    this.updated_at = updated_at;
-    this.type = type;
-    this.created_at = created_at;
-  }
-
   public BigDecimal getValue() {
     return value;
   }

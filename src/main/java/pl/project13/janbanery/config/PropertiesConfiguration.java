@@ -55,6 +55,11 @@ public class PropertiesConfiguration implements Configuration {
     return authMode;
   }
 
+  @Override
+  public String getApiUrl() {
+    return "https://kanbanery.com/api/v1/user/";
+  }
+
   private boolean isChangeToUserAndPassMode(AuthMode newMode) {
     return authMode == API_KEY_MODE && newMode == USER_AND_PASS_MODE;
   }

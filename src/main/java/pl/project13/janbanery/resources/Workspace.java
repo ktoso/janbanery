@@ -21,15 +21,6 @@ public class Workspace extends KanbaneryResource implements Serializable {
   public Workspace() {
   }
 
-  public Workspace(Integer id, String name, Collection<Project> projects, Date created_at, Date updated_at, String type) {
-    this.id = id;
-    this.name = name;
-    this.projects = projects;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.type = type;
-  }
-
   public Integer getId() {
     return id;
   }
@@ -52,30 +43,6 @@ public class Workspace extends KanbaneryResource implements Serializable {
 
   public void setProjects(Collection<Project> projects) {
     this.projects = projects;
-  }
-
-  public Date getCreated_at() {
-    return created_at;
-  }
-
-  public void setCreated_at(Date created_at) {
-    this.created_at = created_at;
-  }
-
-  public Date getUpdated_at() {
-    return updated_at;
-  }
-
-  public void setUpdated_at(Date updated_at) {
-    this.updated_at = updated_at;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
   }
 
   @Override
