@@ -9,11 +9,11 @@ import java.util.Date;
  * @author Konrad Malawski
  */
 public class User extends KanbaneryResource implements Serializable {
-  String   api_token; // User Token
-  User     email; // String	email
-  String   first_name; // 	User first name
-  String   last_name; // User last name
-  String   gravatar_url; // User's avatar (at gravatar.com)
+  String api_token; // User Token
+  User   email; // String	email
+  String first_name; // 	User first name
+  String last_name; // User last name
+  String gravatar_url; // User's avatar (at gravatar.com)
 
   public User() {
   }
@@ -95,19 +95,39 @@ public class User extends KanbaneryResource implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     User user = (User) o;
 
-    if (api_token != null ? !api_token.equals(user.api_token) : user.api_token != null) return false;
-    if (created_at != null ? !created_at.equals(user.created_at) : user.created_at != null) return false;
-    if (email != null ? !email.equals(user.email) : user.email != null) return false;
-    if (first_name != null ? !first_name.equals(user.first_name) : user.first_name != null) return false;
-    if (gravatar_url != null ? !gravatar_url.equals(user.gravatar_url) : user.gravatar_url != null) return false;
-    if (last_name != null ? !last_name.equals(user.last_name) : user.last_name != null) return false;
-    if (type != null ? !type.equals(user.type) : user.type != null) return false;
-    if (updated_at != null ? !updated_at.equals(user.updated_at) : user.updated_at != null) return false;
+    if (api_token != null ? !api_token.equals(user.api_token) : user.api_token != null) {
+      return false;
+    }
+    if (created_at != null ? !created_at.equals(user.created_at) : user.created_at != null) {
+      return false;
+    }
+    if (email != null ? !email.equals(user.email) : user.email != null) {
+      return false;
+    }
+    if (first_name != null ? !first_name.equals(user.first_name) : user.first_name != null) {
+      return false;
+    }
+    if (gravatar_url != null ? !gravatar_url.equals(user.gravatar_url) : user.gravatar_url != null) {
+      return false;
+    }
+    if (last_name != null ? !last_name.equals(user.last_name) : user.last_name != null) {
+      return false;
+    }
+    if (type != null ? !type.equals(user.type) : user.type != null) {
+      return false;
+    }
+    if (updated_at != null ? !updated_at.equals(user.updated_at) : user.updated_at != null) {
+      return false;
+    }
 
     return true;
   }

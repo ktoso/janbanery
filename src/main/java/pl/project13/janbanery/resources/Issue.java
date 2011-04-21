@@ -1,5 +1,6 @@
 package pl.project13.janbanery.resources;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,14 +8,10 @@ import java.util.Date;
  *
  * @author Konrad Malawski
  */
-public class Issue {
+public class Issue extends KanbaneryResource implements Serializable {
   String  url; // yes	on create and update	URL pointing to the issue in an external bug-tracking system
   Integer task_id; // no	 	Task
   Boolean resolved; // no	on create and update	If it was already resolved
-
-  Date    created_at; // no	 	Creation time
-  Date    updated_at; // no	 	Last update time
-  String  type; // no	 	Type of this resource, set to "Issue". Only for JSON responses. In XML responses node name is "issue".
 
   public Issue() {
   }
@@ -28,7 +25,6 @@ public class Issue {
     this.updated_at = updated_at;
     this.type = type;
   }
-
 
   public String getUrl() {
 
@@ -81,17 +77,33 @@ public class Issue {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     Issue issue = (Issue) o;
 
-    if (created_at != null ? !created_at.equals(issue.created_at) : issue.created_at != null) return false;
-    if (resolved != null ? !resolved.equals(issue.resolved) : issue.resolved != null) return false;
-    if (task_id != null ? !task_id.equals(issue.task_id) : issue.task_id != null) return false;
-    if (type != null ? !type.equals(issue.type) : issue.type != null) return false;
-    if (updated_at != null ? !updated_at.equals(issue.updated_at) : issue.updated_at != null) return false;
-    if (url != null ? !url.equals(issue.url) : issue.url != null) return false;
+    if (created_at != null ? !created_at.equals(issue.created_at) : issue.created_at != null) {
+      return false;
+    }
+    if (resolved != null ? !resolved.equals(issue.resolved) : issue.resolved != null) {
+      return false;
+    }
+    if (task_id != null ? !task_id.equals(issue.task_id) : issue.task_id != null) {
+      return false;
+    }
+    if (type != null ? !type.equals(issue.type) : issue.type != null) {
+      return false;
+    }
+    if (updated_at != null ? !updated_at.equals(issue.updated_at) : issue.updated_at != null) {
+      return false;
+    }
+    if (url != null ? !url.equals(issue.url) : issue.url != null) {
+      return false;
+    }
 
     return true;
   }

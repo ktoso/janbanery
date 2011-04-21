@@ -8,16 +8,16 @@ import java.util.Date;
  *
  * @author Konrad Malawski
  */
-public class ProjectMembership implements Serializable {
+public class ProjectMembership extends KanbaneryResource implements Serializable {
 
   String  email; // yes	on create 	User email
   String  permission; // yes	on create and update	One of permission types: [ manager, member, viewer ]
   Integer project_id; // no	 	Project id
   Integer user_id; // no	 	User id
 
-  Date    created_at; // no	 	Creation time
-  Date    updated_at; // no	 	Last update time
-  String  type; // no	 	Type of this resource, set to "ProjectMembership". Only for JSON responses. In XML responses node name is "project_memberships".
+  Date   created_at; // no	 	Creation time
+  Date   updated_at; // no	 	Last update time
+  String type; // no	 	Type of this resource, set to "ProjectMembership". Only for JSON responses. In XML responses node name is "project_memberships".
 
   public ProjectMembership() {
   }
@@ -90,18 +90,36 @@ public class ProjectMembership implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     ProjectMembership that = (ProjectMembership) o;
 
-    if (created_at != null ? !created_at.equals(that.created_at) : that.created_at != null) return false;
-    if (email != null ? !email.equals(that.email) : that.email != null) return false;
-    if (permission != null ? !permission.equals(that.permission) : that.permission != null) return false;
-    if (project_id != null ? !project_id.equals(that.project_id) : that.project_id != null) return false;
-    if (type != null ? !type.equals(that.type) : that.type != null) return false;
-    if (updated_at != null ? !updated_at.equals(that.updated_at) : that.updated_at != null) return false;
-    if (user_id != null ? !user_id.equals(that.user_id) : that.user_id != null) return false;
+    if (created_at != null ? !created_at.equals(that.created_at) : that.created_at != null) {
+      return false;
+    }
+    if (email != null ? !email.equals(that.email) : that.email != null) {
+      return false;
+    }
+    if (permission != null ? !permission.equals(that.permission) : that.permission != null) {
+      return false;
+    }
+    if (project_id != null ? !project_id.equals(that.project_id) : that.project_id != null) {
+      return false;
+    }
+    if (type != null ? !type.equals(that.type) : that.type != null) {
+      return false;
+    }
+    if (updated_at != null ? !updated_at.equals(that.updated_at) : that.updated_at != null) {
+      return false;
+    }
+    if (user_id != null ? !user_id.equals(that.user_id) : that.user_id != null) {
+      return false;
+    }
 
     return true;
   }

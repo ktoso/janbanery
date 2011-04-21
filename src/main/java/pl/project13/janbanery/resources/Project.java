@@ -8,14 +8,10 @@ import java.util.Date;
  *
  * @author Konrad Malawski
  */
-public class Project implements Serializable {
+public class Project extends KanbaneryResource implements Serializable {
   Integer id;//Project id
   String  name;//Project name
   String  url;//Full URL to the project
-
-  Date    created_at;//Creation time
-  Date    updated_at;//	Last update time
-  String  type;// of this resource, set to "Project". Only for JSON responses. In XML responses node name is "project".
 
   public Project() {
   }
@@ -24,9 +20,6 @@ public class Project implements Serializable {
     this.id = id;
     this.name = name;
     this.url = url;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.type = type;
   }
 
   public Integer getId() {
@@ -53,43 +46,36 @@ public class Project implements Serializable {
     this.url = url;
   }
 
-  public Date getCreated_at() {
-    return created_at;
-  }
-
-  public void setCreated_at(Date created_at) {
-    this.created_at = created_at;
-  }
-
-  public Date getUpdated_at() {
-    return updated_at;
-  }
-
-  public void setUpdated_at(Date updated_at) {
-    this.updated_at = updated_at;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     Project project = (Project) o;
 
-    if (created_at != null ? !created_at.equals(project.created_at) : project.created_at != null) return false;
-    if (id != null ? !id.equals(project.id) : project.id != null) return false;
-    if (name != null ? !name.equals(project.name) : project.name != null) return false;
-    if (type != null ? !type.equals(project.type) : project.type != null) return false;
-    if (updated_at != null ? !updated_at.equals(project.updated_at) : project.updated_at != null) return false;
-    if (url != null ? !url.equals(project.url) : project.url != null) return false;
+    if (created_at != null ? !created_at.equals(project.created_at) : project.created_at != null) {
+      return false;
+    }
+    if (id != null ? !id.equals(project.id) : project.id != null) {
+      return false;
+    }
+    if (name != null ? !name.equals(project.name) : project.name != null) {
+      return false;
+    }
+    if (type != null ? !type.equals(project.type) : project.type != null) {
+      return false;
+    }
+    if (updated_at != null ? !updated_at.equals(project.updated_at) : project.updated_at != null) {
+      return false;
+    }
+    if (url != null ? !url.equals(project.url) : project.url != null) {
+      return false;
+    }
 
     return true;
   }

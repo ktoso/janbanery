@@ -18,12 +18,11 @@ public enum Priority {
     this.priorityId = priorityId;
   }
 
-  public static Priority fromInteger(Integer id){
+  public static Priority fromInteger(Integer id) {
     for (Priority priority : Priority.values()) {
-      if(priority.priorityId.equals(id)){
+      if (priority.priorityId.equals(id)) {
         return priority;
       }
-
     }
     throw new NoSuchPriorityException("Tried to create priority for priority id = " + id);
   }

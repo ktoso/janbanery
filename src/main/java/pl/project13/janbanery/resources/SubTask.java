@@ -8,15 +8,11 @@ import java.util.Date;
  *
  * @author Konrad Malawski
  */
-public class SubTask implements Serializable {
+public class SubTask extends KanbaneryResource implements Serializable {
   String  body; // yes	on create and update	Short description
   Integer task_id; // 	no	 	Task
   Integer creator_id; // no	 	Who created it
   Boolean completed; // no	on create and update	If it was completed
-
-  Date    created_at; // no	 	Creation time
-  Date    updated_at; // no	 	Last update time
-  String  type; // no	 	Type of this resource, set to "Subtask". Only for JSON responses. In XML responses node name is "subtask".
 
   public SubTask() {
   }
@@ -89,18 +85,36 @@ public class SubTask implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     SubTask subTask = (SubTask) o;
 
-    if (body != null ? !body.equals(subTask.body) : subTask.body != null) return false;
-    if (completed != null ? !completed.equals(subTask.completed) : subTask.completed != null) return false;
-    if (created_at != null ? !created_at.equals(subTask.created_at) : subTask.created_at != null) return false;
-    if (creator_id != null ? !creator_id.equals(subTask.creator_id) : subTask.creator_id != null) return false;
-    if (task_id != null ? !task_id.equals(subTask.task_id) : subTask.task_id != null) return false;
-    if (type != null ? !type.equals(subTask.type) : subTask.type != null) return false;
-    if (updated_at != null ? !updated_at.equals(subTask.updated_at) : subTask.updated_at != null) return false;
+    if (body != null ? !body.equals(subTask.body) : subTask.body != null) {
+      return false;
+    }
+    if (completed != null ? !completed.equals(subTask.completed) : subTask.completed != null) {
+      return false;
+    }
+    if (created_at != null ? !created_at.equals(subTask.created_at) : subTask.created_at != null) {
+      return false;
+    }
+    if (creator_id != null ? !creator_id.equals(subTask.creator_id) : subTask.creator_id != null) {
+      return false;
+    }
+    if (task_id != null ? !task_id.equals(subTask.task_id) : subTask.task_id != null) {
+      return false;
+    }
+    if (type != null ? !type.equals(subTask.type) : subTask.type != null) {
+      return false;
+    }
+    if (updated_at != null ? !updated_at.equals(subTask.updated_at) : subTask.updated_at != null) {
+      return false;
+    }
 
     return true;
   }

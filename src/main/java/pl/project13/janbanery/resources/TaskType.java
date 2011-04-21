@@ -8,15 +8,15 @@ import java.util.Date;
  *
  * @author Konrad Malawski
  */
-public class TaskType implements Serializable {
-  String   name; // Name
-  Integer  color_code; // Color code
-  Integer  project_id; // Project to which the task type is assigned
-  Integer  position; // Position in project's task types list, 1-based
+public class TaskType extends KanbaneryResource implements Serializable {
+  String  name; // Name
+  Integer color_code; // Color code
+  Integer project_id; // Project to which the task type is assigned
+  Integer position; // Position in project's task types list, 1-based
 
-  Date created_at; // Creation time
-  Date updated_at; // Last update time
-  String   type; // Type of this resource, set to "TaskType". Only for JSON responses. In XML responses node name is "task_type".
+  Date   created_at; // Creation time
+  Date   updated_at; // Last update time
+  String type; // Type of this resource, set to "TaskType". Only for JSON responses. In XML responses node name is "task_type".
 
   public TaskType() {
   }
@@ -89,18 +89,36 @@ public class TaskType implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     TaskType taskType = (TaskType) o;
 
-    if (color_code != null ? !color_code.equals(taskType.color_code) : taskType.color_code != null) return false;
-    if (created_at != null ? !created_at.equals(taskType.created_at) : taskType.created_at != null) return false;
-    if (name != null ? !name.equals(taskType.name) : taskType.name != null) return false;
-    if (position != null ? !position.equals(taskType.position) : taskType.position != null) return false;
-    if (project_id != null ? !project_id.equals(taskType.project_id) : taskType.project_id != null) return false;
-    if (type != null ? !type.equals(taskType.type) : taskType.type != null) return false;
-    if (updated_at != null ? !updated_at.equals(taskType.updated_at) : taskType.updated_at != null) return false;
+    if (color_code != null ? !color_code.equals(taskType.color_code) : taskType.color_code != null) {
+      return false;
+    }
+    if (created_at != null ? !created_at.equals(taskType.created_at) : taskType.created_at != null) {
+      return false;
+    }
+    if (name != null ? !name.equals(taskType.name) : taskType.name != null) {
+      return false;
+    }
+    if (position != null ? !position.equals(taskType.position) : taskType.position != null) {
+      return false;
+    }
+    if (project_id != null ? !project_id.equals(taskType.project_id) : taskType.project_id != null) {
+      return false;
+    }
+    if (type != null ? !type.equals(taskType.type) : taskType.type != null) {
+      return false;
+    }
+    if (updated_at != null ? !updated_at.equals(taskType.updated_at) : taskType.updated_at != null) {
+      return false;
+    }
 
     return true;
   }

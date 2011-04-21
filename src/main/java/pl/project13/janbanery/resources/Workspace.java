@@ -9,14 +9,14 @@ import java.util.Date;
  *
  * @author Konrad Malawski
  */
-public class Workspace implements Serializable {
+public class Workspace extends KanbaneryResource implements Serializable {
   Integer             id; // Workspace id
   String              name; // 	Workspace name
   Collection<Project> projects; // Array of Project resources accessible by user
 
-  Date                created_at; // Creation time
-  Date                updated_at; // Last update time
-  String              type; // Type of this resource, set to "Workspace". Only for JSON responses. In XML responses node name is "workspace".
+  Date   created_at; // Creation time
+  Date   updated_at; // Last update time
+  String type; // Type of this resource, set to "Workspace". Only for JSON responses. In XML responses node name is "workspace".
 
   public Workspace() {
   }
@@ -80,17 +80,33 @@ public class Workspace implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     Workspace workspace = (Workspace) o;
 
-    if (created_at != null ? !created_at.equals(workspace.created_at) : workspace.created_at != null) return false;
-    if (id != null ? !id.equals(workspace.id) : workspace.id != null) return false;
-    if (name != null ? !name.equals(workspace.name) : workspace.name != null) return false;
-    if (projects != null ? !projects.equals(workspace.projects) : workspace.projects != null) return false;
-    if (type != null ? !type.equals(workspace.type) : workspace.type != null) return false;
-    if (updated_at != null ? !updated_at.equals(workspace.updated_at) : workspace.updated_at != null) return false;
+    if (created_at != null ? !created_at.equals(workspace.created_at) : workspace.created_at != null) {
+      return false;
+    }
+    if (id != null ? !id.equals(workspace.id) : workspace.id != null) {
+      return false;
+    }
+    if (name != null ? !name.equals(workspace.name) : workspace.name != null) {
+      return false;
+    }
+    if (projects != null ? !projects.equals(workspace.projects) : workspace.projects != null) {
+      return false;
+    }
+    if (type != null ? !type.equals(workspace.type) : workspace.type != null) {
+      return false;
+    }
+    if (updated_at != null ? !updated_at.equals(workspace.updated_at) : workspace.updated_at != null) {
+      return false;
+    }
 
     return true;
   }

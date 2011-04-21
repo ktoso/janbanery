@@ -47,14 +47,24 @@ public abstract class KanbaneryResource {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     KanbaneryResource that = (KanbaneryResource) o;
 
-    if (created_at != null ? !created_at.equals(that.created_at) : that.created_at != null) return false;
-    if (type != null ? !type.equals(that.type) : that.type != null) return false;
-    if (updated_at != null ? !updated_at.equals(that.updated_at) : that.updated_at != null) return false;
+    if (created_at != null ? !created_at.equals(that.created_at) : that.created_at != null) {
+      return false;
+    }
+    if (type != null ? !type.equals(that.type) : that.type != null) {
+      return false;
+    }
+    if (updated_at != null ? !updated_at.equals(that.updated_at) : that.updated_at != null) {
+      return false;
+    }
 
     return true;
   }

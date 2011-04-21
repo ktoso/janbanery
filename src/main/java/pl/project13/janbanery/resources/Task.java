@@ -20,31 +20,61 @@ public class Task extends KanbaneryResource implements Serializable {
   Priority Integer; // no	on create and update	Priority (0, 1 or 2)
   Boolean  ready_to_pull; // 	no	on create and update	If task is ready to be pulled
   Boolean  blocked; // no	 	If task is blocked by other task(s)
-  Date moved_at; // no	 	When task was moved to current column
+  Date     moved_at; // no	 	When task was moved to current column
 
   public Task() {
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    if (!super.equals(o)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     Task task = (Task) o;
 
-    if (Integer != null ? !Integer.equals(task.Integer) : task.Integer != null) return false;
-    if (blocked != null ? !blocked.equals(task.blocked) : task.blocked != null) return false;
-    if (column_id != null ? !column_id.equals(task.column_id) : task.column_id != null) return false;
-    if (creator_id != null ? !creator_id.equals(task.creator_id) : task.creator_id != null) return false;
-    if (description != null ? !description.equals(task.description) : task.description != null) return false;
-    if (estimate_id != null ? !estimate_id.equals(task.estimate_id) : task.estimate_id != null) return false;
-    if (moved_at != null ? !moved_at.equals(task.moved_at) : task.moved_at != null) return false;
-    if (owner_id != null ? !owner_id.equals(task.owner_id) : task.owner_id != null) return false;
-    if (position != null ? !position.equals(task.position) : task.position != null) return false;
-    if (ready_to_pull != null ? !ready_to_pull.equals(task.ready_to_pull) : task.ready_to_pull != null) return false;
-    if (task_type_id != null ? !task_type_id.equals(task.task_type_id) : task.task_type_id != null) return false;
-    if (title != null ? !title.equals(task.title) : task.title != null) return false;
+    if (Integer != null ? !Integer.equals(task.Integer) : task.Integer != null) {
+      return false;
+    }
+    if (blocked != null ? !blocked.equals(task.blocked) : task.blocked != null) {
+      return false;
+    }
+    if (column_id != null ? !column_id.equals(task.column_id) : task.column_id != null) {
+      return false;
+    }
+    if (creator_id != null ? !creator_id.equals(task.creator_id) : task.creator_id != null) {
+      return false;
+    }
+    if (description != null ? !description.equals(task.description) : task.description != null) {
+      return false;
+    }
+    if (estimate_id != null ? !estimate_id.equals(task.estimate_id) : task.estimate_id != null) {
+      return false;
+    }
+    if (moved_at != null ? !moved_at.equals(task.moved_at) : task.moved_at != null) {
+      return false;
+    }
+    if (owner_id != null ? !owner_id.equals(task.owner_id) : task.owner_id != null) {
+      return false;
+    }
+    if (position != null ? !position.equals(task.position) : task.position != null) {
+      return false;
+    }
+    if (ready_to_pull != null ? !ready_to_pull.equals(task.ready_to_pull) : task.ready_to_pull != null) {
+      return false;
+    }
+    if (task_type_id != null ? !task_type_id.equals(task.task_type_id) : task.task_type_id != null) {
+      return false;
+    }
+    if (title != null ? !title.equals(task.title) : task.title != null) {
+      return false;
+    }
 
     return true;
   }
