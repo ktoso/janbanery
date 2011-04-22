@@ -1,6 +1,6 @@
 Janbanery - Java Kanbanery API Connector
 ========================================
-<img src="https://kanbanery.com/images/landing/logo.png?34535" alt="[kanbanery]"/>
+<img src="https://kanbanery.com/images/landing/logo.png?34535" alt="[kanbanery]" style="background:black; float:left; clear:both;"/>
 <a href="https://kanbanery.com/">Kanbanery</a> is a web app for managing your projects Kanban Style (somewhat similiar to SCRUM, but less restrictive and strict).
 Kanbanery has an web interface, as well as a iPad and iPhone version. The RESTful API is open so anyone can write his
 favourite tool to be integrated with it - and that's what I'm doing. This connector will be used in the upcomming Intellij
