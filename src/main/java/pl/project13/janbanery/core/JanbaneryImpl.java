@@ -1,12 +1,12 @@
 package pl.project13.janbanery.core;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 import pl.project13.janbanery.config.AuthMode;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonFactory;
+import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 
@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * Date: 4/20/11
@@ -28,9 +30,7 @@ public class JanbaneryImpl implements Tasks {
   private Gson            gson;
 
   public JanbaneryImpl(Configuration conf) {
-    this.conf = conf;
-    this.gson = GsonFactory.create();
-    this.asyncHttpClient = new AsyncHttpClient();
+    this(conf, new AsyncHttpClient(), GsonFactory.create());
   }
 
   public JanbaneryImpl(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson) {
@@ -58,8 +58,7 @@ public class JanbaneryImpl implements Tasks {
     String responseBody = response.getResponseBody();
     System.out.println(responseBody);
 
-    List<Workspace> workspaces = gson.fromJson(responseBody, new TypeToken<List<Workspace>>() {
-    }.getType());
+    List<Workspace> workspaces = gson.fromJson(responseBody, GsonTypeTokens.LIST_WORKSPACES);
 
     return workspaces;
   }
