@@ -47,7 +47,7 @@ public class JanbaneryFactoryTest {
   public void shouldBeForcedToStayInUserPasswordMode() throws Exception {
     // given
     Properties properties = new Properties();
-    properties.load(new FileInputStream("janbanery.properties"));
+    properties.load(new FileInputStream(TestConstants.VALID_CONF_FILE_LOCATION));
     String user = (String) properties.get("username");
     String password = (String) properties.get("password");
 
