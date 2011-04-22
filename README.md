@@ -1,8 +1,9 @@
 Janbanery - Java Kanbanery API Connector
 ========================================
-<a href="https://kanbanery.com/">
-    <img src="https://kanbanery.com/images/landing/logo.png?34535" alt="[kanbanery]" style="background:black;"/><br/>
-</a>
+
+<div style="background-image:url(https://kanbanery.com/images/landing/logo.png?34535);
+            background-color:black;">
+</div>
 
 <a href="https://kanbanery.com/">Kanbanery</a> is a web app for managing your projects Kanban Style (somewhat similiar to SCRUM, but less restrictive and strict).
 Kanbanery has an web interface, as well as a iPad and iPhone version. The RESTful API is open so anyone can write his
