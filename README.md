@@ -1,6 +1,6 @@
 Janbanery - Java Kanbanery API Connector
 ========================================
-<a href="https://kanbanery.com/">
+<a href="https://kanbanery.com/" style="display:block; background:black;">
 <img src="https://kanbanery.com/images/landing/logo.png?34535" alt="[kanbanery]" style="background:black;"/><br/>
 </a>
 
