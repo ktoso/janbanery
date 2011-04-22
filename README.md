@@ -10,7 +10,7 @@ favourite tool to be integrated with it - and that's what I'm doing. This connec
 IDEA plugin as well as the Android version of the app.
 
 
-If you have any comments, feel free to open issues or contact me <a href="mailto:konrad.malawski@java.pl>via email</a>.
+If you have any comments, feel free to open issues or contact me <a href="mailto:konrad.malawski@java.pl">via email</a>.
 
 Get started
 ===========
@@ -20,4 +20,8 @@ This project will be deployed to the **Sonatype** Maven repository when it's sta
 
 Download the JAR
 ----------------
+Or simply download the jar version of this project.
+You may also consider building it from source by `git clone`-ing this project and running `mvn install`.
 
+Usage
+=====
