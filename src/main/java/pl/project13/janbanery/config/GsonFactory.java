@@ -1,13 +1,11 @@
 package pl.project13.janbanery.config;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.chrono.ISOChronology;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeParser;
-import org.joda.time.format.DateTimeParserBucket;
-import org.joda.time.format.ISODateTimeFormat;
+import org.joda.time.format.*;
 
 import java.lang.reflect.Type;
 import java.text.DateFormat;
@@ -19,6 +17,7 @@ import java.util.Calendar;
  * @author Konrad Malawski
  */
 public class GsonFactory {
+
   public static Gson create() {
     return new GsonBuilder()
         .registerTypeAdapter(DateTime.class, new DateTimeSerializer())
@@ -36,15 +35,18 @@ public class GsonFactory {
     }
   }
 
-  private static class DateTimeDeserializer implements JsonDeserializer<DateTime> {
-    DateTimeFormatter dateTimeFormatter = ISODateTimeFormat.dateTime();
+  public static class DateTimeDeserializer implements JsonDeserializer<DateTime> {
+    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ");
 
     @Override
     public DateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
       String dateString = json.getAsString();
-      DateTime dateTime = dateTimeFormatter.parseDateTime(dateString);
 
-      return dateTime;
+      return deserializeIso8601DateTime(dateString);
+    }
+
+    @VisibleForTesting DateTime deserializeIso8601DateTime(String dateString) {
+      return dateTimeFormatter.parseDateTime(dateString);
     }
   }
 }
