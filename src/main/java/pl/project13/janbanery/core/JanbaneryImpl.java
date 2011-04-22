@@ -3,11 +3,15 @@ package pl.project13.janbanery.core;
 import com.google.gson.Gson;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.AuthMode;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
+import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
@@ -15,14 +19,14 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 /**
  * Date: 4/20/11
  *
  * @author Konrad Malawski
  */
 public class JanbaneryImpl implements Tasks {
+
+  private Logger log = LoggerFactory.getLogger(getClass());
 
   private Configuration conf;
 
@@ -40,8 +44,16 @@ public class JanbaneryImpl implements Tasks {
   }
 
   @Override
-  public List<Task> findAll() {
+  public List<Task> all() {
     return null;
+  }
+
+  @Override public List<Task> forUser(User user) {
+    return null;  //todo implement me
+  }
+
+  @Override public List<Task> withPriority(Priority priority) {
+    return null;  //todo implement me
   }
 
   public AuthMode getAuthMode() {
@@ -55,11 +67,12 @@ public class JanbaneryImpl implements Tasks {
         .execute();
 
     Response response = futureResponse.get();
+    asyncHttpClient.close();
+
     String responseBody = response.getResponseBody();
-    System.out.println(responseBody);
+    log.info("Fetched response: {}", responseBody);
 
     List<Workspace> workspaces = gson.fromJson(responseBody, GsonTypeTokens.LIST_WORKSPACES);
-
     return workspaces;
   }
 }

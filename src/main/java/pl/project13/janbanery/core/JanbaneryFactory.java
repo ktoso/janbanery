@@ -1,6 +1,8 @@
 package pl.project13.janbanery.core;
 
 import com.ning.http.client.AsyncHttpClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.DefaultConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
@@ -12,14 +14,16 @@ import pl.project13.janbanery.config.gson.GsonFactory;
  */
 public class JanbaneryFactory {
 
+  private Logger log = LoggerFactory.getLogger(getClass());
+
   private AsyncHttpClient asyncHttpClient;
 
   public JanbaneryFactory() {
-      asyncHttpClient = new AsyncHttpClient();
+    asyncHttpClient = new AsyncHttpClient();
   }
 
   public JanbaneryFactory(AsyncHttpClient asyncHttpClient) {
-      this.asyncHttpClient = asyncHttpClient;
+    this.asyncHttpClient = asyncHttpClient;
   }
 
   public JanbaneryImpl connectUsing(Configuration configuration) {
@@ -31,18 +35,5 @@ public class JanbaneryFactory {
     return connectUsing(conf);
   }
 
-//  public JanbaneryFactory connectUsingKeyFor(String username, String password) {
-//    DefaultConfiguration conf = new DefaultConfiguration();
-//    return connectUsing(conf);
-//  }
-//
-//  public JanbaneryFactory connectUsingForever(String username, String password) {
-//    DefaultConfiguration conf = new DefaultConfiguration();
-//    return connectUsing(conf);
-//  }
-//
-//  public String obtainApiKeyFor(String username, String password){
-//    asyncHttpClient.
-//  }
 }
 
