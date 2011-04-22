@@ -3,6 +3,7 @@ Janbanery - Java Kanbanery API Connector
 
 <div style="background-image:url(https://kanbanery.com/images/landing/logo.png?34535);
             background-color:black;">
+            &nbsp;
 </div>
 
 <a href="https://kanbanery.com/">Kanbanery</a> is a web app for managing your projects Kanban Style (somewhat similiar to SCRUM, but less restrictive and strict).
