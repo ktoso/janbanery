@@ -74,8 +74,4 @@ public class DefaultConfiguration implements Configuration {
     return new BASE64Encoder().encode(logon);
   }
 
-  @Override
-  public String getApiUrl() {
-    return "https://kanbanery.com/api/v1/user/";
-  }
 }
