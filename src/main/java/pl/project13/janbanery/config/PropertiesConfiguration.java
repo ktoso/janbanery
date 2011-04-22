@@ -1,5 +1,7 @@
 package pl.project13.janbanery.config;
 
+import com.google.common.base.Strings;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,18 +23,43 @@ public class PropertiesConfiguration extends DefaultConfiguration implements Con
   private Properties properties = new Properties();
   private AuthMode   authMode   = API_KEY_MODE;
 
+  /**
+   * Setup the auth mode using the default properties file - {@link PropertiesConfiguration#DEFAULT_PROPS_FILENAME}
+   * If the "apikey" key is present and not empty it will be used, otherwise the fallback
+   * to user/pass mode is triggered. Please note that {@link PropertiesConfiguration} is NOT smart,
+   * it will not try to fetch apiKey when configuring the app from a properties file and finding only user/pass data!
+   */
   public PropertiesConfiguration() throws IOException {
     this(DEFAULT_PROPS_FILENAME);
   }
 
+  /**
+   * Setup the auth mode using the properties file.
+   * If the "apikey" key is present and not empty it will be used, otherwise the fallback
+   * to user/pass mode is triggered. Please note that {@link PropertiesConfiguration} is NOT smart,
+   * it will not try to fetch apiKey when configuring the app from a properties file and finding only user/pass data!
+   */
   public PropertiesConfiguration(String propertiesFilename) throws IOException {
     loadPropertiesFile(propertiesFilename);
 
     setupAuthMode();
   }
 
+  /**
+   * Setup the auth mode using the properties file.
+   * If the "apikey" key is present and not empty it will be used, otherwise the fallback
+   * to user/pass mode is triggered. Please note that {@link PropertiesConfiguration} is NOT smart,
+   * it will not try to fetch apiKey when configuring the app from a properties file and finding only user/pass data!
+   */
   private void setupAuthMode() {
-    getStringProperty()
+    String apiKey = getApiKey();
+    if (!Strings.isNullOrEmpty(apiKey)) {
+      // use the api key
+      forceKeyAuthMode(apiKey);
+    } else {
+      // try to use user / pass mode
+      forceUserPassAuthMode(getStringProperty(P_USERNAME), getStringProperty(P_PASSWORD));
+    }
   }
 
   private void loadPropertiesFile(String propertiesFilename) throws IOException {
