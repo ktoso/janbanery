@@ -7,6 +7,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.Reader;
@@ -20,4 +21,5 @@ public class GsonTypeTokens {
 
   public static final Type LIST_WORKSPACES = new TypeToken<List<Workspace>>() {}.getType();
 
+  public static final Class<User> USER = User.class; // todo hm, should I keep these for the sake of "one style"?
 }

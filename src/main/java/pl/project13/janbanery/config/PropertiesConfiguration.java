@@ -1,5 +1,7 @@
 package pl.project13.janbanery.config;
 
+import com.ning.http.client.AsyncHttpClient;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -40,17 +42,6 @@ public class PropertiesConfiguration implements Configuration {
   }
 
   @Override
-  public void forceAuthMode(AuthMode authMode) {
-    if (isChangeToApiKeyMode(authMode)) {
-      // todo check for api key etc
-      this.authMode = authMode;
-    } else if (isChangeToUserAndPassMode(authMode)) {
-      // todo check username is set etc
-      this.authMode = authMode;
-    }
-  }
-
-  @Override
   public AuthMode getAuthMode() {
     return authMode;
   }
@@ -58,6 +49,11 @@ public class PropertiesConfiguration implements Configuration {
   @Override
   public String getApiUrl() {
     return "https://kanbanery.com/api/v1/user/";
+  }
+
+  @Override
+  public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
+  return null;
   }
 
   private boolean isChangeToUserAndPassMode(AuthMode newMode) {

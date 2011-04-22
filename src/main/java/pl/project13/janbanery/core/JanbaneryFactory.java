@@ -6,6 +6,10 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.DefaultConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
+import pl.project13.janbanery.resources.User;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Date: 4/20/11
@@ -30,9 +34,55 @@ public class JanbaneryFactory {
     return new JanbaneryImpl(configuration, asyncHttpClient, GsonFactory.create());
   }
 
+  /**
+   * The <strong>recommended</strong> method for connecting to Kanbanery.
+   *
+   * @param apiKey your API key for kanbanery, you can find it in your profile settings on kanbanery.com
+   * @return a properly setup Janbanery instance using your API key for authentication
+   */
   public JanbaneryImpl connectUsing(String apiKey) {
     DefaultConfiguration conf = new DefaultConfiguration(apiKey);
     return connectUsing(conf);
+  }
+
+  /**
+   * This method will connect to kanbanery via basic user/pass authentication
+   * <strong>but will then switch to API Key Mode</strong> to increase the security of communication over the wire.
+   *
+   * @param user     your kanbanery username (email)
+   * @param password your kanbanery password for this user
+   * @return an Janbanery instance setup using the API Key auth, which will be fetched during construction
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public JanbaneryImpl connectUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
+    DefaultConfiguration conf = new DefaultConfiguration(user, password);
+    JanbaneryImpl janbanery = new JanbaneryImpl(conf, asyncHttpClient, GsonFactory.create());
+
+    User currentUser = janbanery.user().current();
+    String apiToken = currentUser.getApi_token();
+    conf.forceKeyAuthMode(apiToken);
+
+    return janbanery;
+  }
+
+  /**
+   * This method will connect to kanbanery via basic user/pass authentication
+   * <strong>and will keep using it until forced to switch modes!</strong>. This method is not encouraged,
+   * you should use {@link JanbaneryFactory#connectUsing(String, String)} and allow Janbanery to switch to apiKey mode
+   * as soon as it load's up to increase security over the wire.
+   *
+   * @param user     your kanbanery username (email)
+   * @param password your kanbanery password for this user
+   * @return an Janbanery instance setup using the API Key auth, which will be fetched during construction
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws ExecutionException
+   */
+  public JanbaneryImpl connectAndKeepUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
+    DefaultConfiguration conf = new DefaultConfiguration(user, password);
+    return new JanbaneryImpl(conf, asyncHttpClient, GsonFactory.create());
   }
 
 }

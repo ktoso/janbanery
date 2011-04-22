@@ -1,5 +1,7 @@
 package pl.project13.janbanery.config;
 
+import com.ning.http.client.AsyncHttpClient;
+
 /**
  * Date: 4/20/11
  *
@@ -9,9 +11,13 @@ public interface Configuration {
 
   String getApiKey();
 
-  void forceAuthMode(AuthMode authMode);
-
   AuthMode getAuthMode();
 
   String getApiUrl();
+
+  void forceUserPassAuthMode(String user, String password);
+
+  void forceKeyAuthMode(String apiKey);
+
+  AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder);
 }

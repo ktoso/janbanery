@@ -1,5 +1,8 @@
 package pl.project13.janbanery.config;
 
+import com.ning.http.client.AsyncHttpClient;
+import sun.misc.BASE64Encoder;
+
 import static pl.project13.janbanery.config.AuthMode.API_KEY_MODE;
 import static pl.project13.janbanery.config.AuthMode.USER_AND_PASS_MODE;
 
@@ -10,27 +13,49 @@ import static pl.project13.janbanery.config.AuthMode.USER_AND_PASS_MODE;
  */
 public class DefaultConfiguration implements Configuration {
 
-  private String   apiKey   = "";
-  private AuthMode authMode = USER_AND_PASS_MODE;
+  private AuthMode authMode         = API_KEY_MODE;
+  private String   API_TOKEN_HEADER = "X-Kanbanery-ApiToken";
+  private String   apiKey           = "";
+  private String   encodedLogon     = "";
 
   public DefaultConfiguration(String apiKey) {
+    forceKeyAuthMode(apiKey);
+  }
+
+  public DefaultConfiguration(String user, String password) {
+    forceUserPassAuthMode(user, password);
+  }
+
+  @Override
+  public void forceUserPassAuthMode(String user, String password) {
+    authMode = USER_AND_PASS_MODE;
+    byte[] logon = String.format("%s:%s", user, password).getBytes();
+    this.encodedLogon = new BASE64Encoder().encode(logon);
+  }
+
+  @Override
+  public void forceKeyAuthMode(String apiKey) {
+    authMode = API_KEY_MODE;
     this.apiKey = apiKey;
+  }
+
+  @Override
+  public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
+    switch (authMode) {
+      case USER_AND_PASS_MODE:
+        return requestBuilder.addHeader("Authorization", "Basic " + encodedLogon)
+      break;
+      case API_KEY_MODE:
+        return requestBuilder.addHeader(API_TOKEN_HEADER, getApiKey());
+      break;
+      default:
+        throw new UnsupportedOperationException("Could not authorize request, unknown mode: '" + authMode + "'");
+    }
   }
 
   @Override
   public String getApiKey() {
     return apiKey;
-  }
-
-  @Override
-  public void forceAuthMode(AuthMode authMode) {
-    if (isChangeToApiKeyMode(authMode)) {
-      // todo check for api key etc
-      this.authMode = authMode;
-    } else if (isChangeToUserAndPassMode(authMode)) {
-      // todo check username is set etc
-      this.authMode = authMode;
-    }
   }
 
   @Override
@@ -43,11 +68,4 @@ public class DefaultConfiguration implements Configuration {
     return "https://kanbanery.com/api/v1/user/";
   }
 
-  private boolean isChangeToUserAndPassMode(AuthMode newMode) {
-    return authMode == API_KEY_MODE && newMode == USER_AND_PASS_MODE;
-  }
-
-  private boolean isChangeToApiKeyMode(AuthMode newMode) {
-    return authMode == USER_AND_PASS_MODE && newMode == API_KEY_MODE;
-  }
 }

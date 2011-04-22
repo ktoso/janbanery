@@ -8,6 +8,9 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.test.TestConstants;
 
+import java.io.FileInputStream;
+import java.util.Properties;
+
 import static org.fest.assertions.Assertions.assertThat;
 import static pl.project13.janbanery.config.AuthMode.*;
 
@@ -34,6 +37,22 @@ public class JanbaneryFactoryTest {
 
     // when
     JanbaneryImpl janbanery = janbaneryFactory.connectUsing(configuration);
+
+    // then, should use API key mode
+    AuthMode usedAuthMode = janbanery.getAuthMode();
+    assertThat(usedAuthMode).isEqualTo(API_KEY_MODE);
+  }
+
+  @Test
+  public void shouldBeForcedToStayInUserPasswordMode() throws Exception {
+    // given
+    Properties properties = new Properties();
+    properties.load(new FileInputStream("janbanery.properties"));
+    String user = (String) properties.get("username");
+    String password = (String) properties.get("password");
+
+    // when
+    JanbaneryImpl janbanery = janbaneryFactory.connectUsing(user, password);
 
     // then, should use API key mode
     AuthMode usedAuthMode = janbanery.getAuthMode();

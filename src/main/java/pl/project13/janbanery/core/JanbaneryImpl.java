@@ -24,7 +24,7 @@ import java.util.concurrent.Future;
  *
  * @author Konrad Malawski
  */
-public class JanbaneryImpl implements Tasks {
+public class JanbaneryImpl implements Tasks, Users {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -60,6 +60,10 @@ public class JanbaneryImpl implements Tasks {
     return conf.getAuthMode();
   }
 
+  public Users user() {
+    return this;
+  }
+
   public List<Workspace> findAllWorkspaces() throws IOException, ExecutionException, InterruptedException {
     Future<Response> futureResponse = asyncHttpClient
         .prepareGet(conf.getApiUrl() + "workspaces.json")
@@ -74,5 +78,23 @@ public class JanbaneryImpl implements Tasks {
 
     List<Workspace> workspaces = gson.fromJson(responseBody, GsonTypeTokens.LIST_WORKSPACES);
     return workspaces;
+  }
+
+  @Override
+  public User current() throws IOException, ExecutionException, InterruptedException {
+    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient
+        .prepareGet(conf.getApiUrl() + "workspaces.json");
+    requestBuilder = conf.authorize(requestBuilder);
+
+    Future<Response> futureResponse = requestBuilder.execute();
+
+    Response response = futureResponse.get();
+    asyncHttpClient.close();
+
+    String responseBody = response.getResponseBody();
+    log.info("Fetched response: {}", responseBody);
+
+    User user = gson.fromJson(responseBody, GsonTypeTokens.USER);
+    return user;
   }
 }
