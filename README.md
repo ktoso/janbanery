@@ -25,3 +25,18 @@ You may also consider building it from source by `git clone`-ing this project an
 
 Usage
 =====
+
+Links and resources
+===================
+
+* <a href="https://kanbanery.com">kanbanery.com</a>
+* <a href="http://support.kanbanery.com/entries/506142-api-version-1-2">Full REST API description (v1.2)</a>
+* <a href="http://www.blog.project13.pl">blog.project13.pl</a> - my blog, feel free to comment about this library there
+
+License
+=======
+<img style="float:right; padding:3px; " src="https://github.com/ktoso/maven-git-commit-id-plugin/raw/master/lgplv3-147x51.png" alt="GNU LGPL v3"/><br/>
+I'm releasing this plugin under the **GNU Lesser General Public License 3.0**.
+
+You're free to use it as you wish, the license text is attached in the LICENSE file.
+You may contact me if you want this to be released on a different license, just send me an email <a href="mailto:konrad.malawski@java.pl">konrad.malawski@java.pl</a> :-)
