@@ -35,7 +35,7 @@ Links and resources
 
 License
 =======
-<img style="float:right; padding:3px; " src="https://github.com/ktoso/maven-git-commit-id-plugin/raw/master/lgplv3-147x51.png" alt="GNU LGPL v3"/><br/>
+<img style="float:right; padding:3px; " src="https://github.com/ktoso/janbanery/raw/master/lgplv3-147x51.png" alt="GNU LGPL v3"/><br/>
 I'm releasing this plugin under the **GNU Lesser General Public License 3.0**.
 
 You're free to use it as you wish, the license text is attached in the LICENSE file.
