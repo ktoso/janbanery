@@ -94,7 +94,8 @@ public class JanbaneryImpl implements Tasks, Users {
     String responseBody = response.getResponseBody();
     log.info("Fetched response: {}", responseBody);
 
-    User user = gson.fromJson(responseBody, GsonTypeTokens.USER);
-    return user;
+    List<User> users = gson.fromJson(responseBody, GsonTypeTokens.LIST_USER);
+    assert users.size() == 1;
+    return users.get(0);
   }
 }

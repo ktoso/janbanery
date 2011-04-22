@@ -20,6 +20,7 @@ import java.util.List;
 public class GsonTypeTokens {
 
   public static final Type LIST_WORKSPACES = new TypeToken<List<Workspace>>() {}.getType();
+  public static final Type LIST_USER       = new TypeToken<List<User>>() {}.getType();
 
-  public static final Class<User> USER = User.class; // todo hm, should I keep these for the sake of "one style"?
+  public static final Class<User> USER     = User.class; // todo hm, should I keep these for the sake of "one style"?
 }
