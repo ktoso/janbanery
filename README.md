@@ -1,7 +1,7 @@
 Janbanery - Java Kanbanery API Connector
 ========================================
 <a href="https://kanbanery.com/" style="display:block; background:black;">
-<img src="https://kanbanery.com/images/landing/logo.png?34535" alt="[kanbanery]" style="background:black;"/><br/>
+<img src="https://sckrk.kanbanery.com/images/kanbanery-logo-small.png?1303131477" alt="[kanbanery]" style="background:black;"/><br/>
 </a>
 
 <a href="https://kanbanery.com/">Kanbanery</a> is a web app for managing your projects Kanban Style (somewhat similiar to SCRUM, but less restrictive and strict).
@@ -29,8 +29,8 @@ Usage
 Links and resources
 ===================
 
-* <a href="https://kanbanery.com">kanbanery.com</a>
-* <a href="http://support.kanbanery.com/entries/506142-api-version-1-2">Full REST API description (v1.2)</a>
+* <a href="https://kanbanery.com">Kanbanery.com</a>
+* Full <a href="http://support.kanbanery.com/entries/506142-api-version-1-2">Kanbanery REST API description (v1.2)</a>
 * <a href="http://www.blog.project13.pl">blog.project13.pl</a> - my blog, feel free to comment about this library there
 
 License
