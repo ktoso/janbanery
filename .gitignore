@@ -8,5 +8,4 @@ out
 *tmp
 
 # project files
-**/kanbanery.properties
-**/janbanery.properties
+src/test/resources/janbanery.properties

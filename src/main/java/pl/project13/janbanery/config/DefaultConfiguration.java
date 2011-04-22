@@ -26,11 +26,13 @@ public class DefaultConfiguration implements Configuration {
     forceUserPassAuthMode(user, password);
   }
 
+  public DefaultConfiguration() {
+  }
+
   @Override
   public void forceUserPassAuthMode(String user, String password) {
     authMode = USER_AND_PASS_MODE;
-    byte[] logon = String.format("%s:%s", user, password).getBytes();
-    this.encodedLogon = new BASE64Encoder().encode(logon);
+    this.encodedLogon = encodeUserPassword(user, password);
   }
 
   @Override
@@ -41,13 +43,12 @@ public class DefaultConfiguration implements Configuration {
 
   @Override
   public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
+    // todo could be refactored into this enum hmhm
     switch (authMode) {
       case USER_AND_PASS_MODE:
-        return requestBuilder.addHeader("Authorization", "Basic " + encodedLogon)
-      break;
+        return requestBuilder.addHeader("Authorization", "Basic " + encodedLogon);
       case API_KEY_MODE:
         return requestBuilder.addHeader(API_TOKEN_HEADER, getApiKey());
-      break;
       default:
         throw new UnsupportedOperationException("Could not authorize request, unknown mode: '" + authMode + "'");
     }
@@ -68,4 +69,13 @@ public class DefaultConfiguration implements Configuration {
     return "https://kanbanery.com/api/v1/user/";
   }
 
+  private String encodeUserPassword(String user, String password) {
+    byte[] logon = String.format("%s:%s", user, password).getBytes();
+    return new BASE64Encoder().encode(logon);
+  }
+
+  @Override
+  public String getApiUrl() {
+    return "https://kanbanery.com/api/v1/user/";
+  }
 }

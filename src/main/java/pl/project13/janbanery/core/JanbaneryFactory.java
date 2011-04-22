@@ -60,11 +60,17 @@ public class JanbaneryFactory {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
     JanbaneryImpl janbanery = new JanbaneryImpl(conf, asyncHttpClient, GsonFactory.create());
 
-    User currentUser = janbanery.user().current();
-    String apiToken = currentUser.getApi_token();
-    conf.forceKeyAuthMode(apiToken);
+    // fetch and switch to apiKey mode
+    String apiKey = getCurrentUserApiKey(janbanery);
+    conf.forceKeyAuthMode(apiKey);
 
     return janbanery;
+  }
+
+  private String getCurrentUserApiKey(JanbaneryImpl janbanery) throws IOException, ExecutionException, InterruptedException {
+    User currentUser = janbanery.user().current();
+    String apiToken = currentUser.getApi_token();
+    return apiToken;
   }
 
   /**
