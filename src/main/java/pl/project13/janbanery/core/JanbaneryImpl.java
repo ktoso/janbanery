@@ -6,7 +6,7 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 import pl.project13.janbanery.config.AuthMode;
 import pl.project13.janbanery.config.Configuration;
-import pl.project13.janbanery.config.GsonFactory;
+import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 

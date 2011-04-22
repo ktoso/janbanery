@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -14,9 +16,9 @@ public class Workspace extends KanbaneryResource implements Serializable {
   String              name; // 	Workspace name
   Collection<Project> projects; // Array of Project resources accessible by user
 
-  Date   created_at; // Creation time
-  Date   updated_at; // Last update time
-  String type; // Type of this resource, set to "Workspace". Only for JSON responses. In XML responses node name is "workspace".
+  DateTime created_at; // Creation time
+  DateTime updated_at; // Last update time
+  String   type; // Type of this resource, set to "Workspace". Only for JSON responses. In XML responses node name is "workspace".
 
   public Workspace() {
   }

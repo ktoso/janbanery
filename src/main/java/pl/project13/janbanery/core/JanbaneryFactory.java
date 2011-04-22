@@ -3,7 +3,7 @@ package pl.project13.janbanery.core;
 import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.DefaultConfiguration;
-import pl.project13.janbanery.config.GsonFactory;
+import pl.project13.janbanery.config.gson.GsonFactory;
 
 /**
  * Date: 4/20/11

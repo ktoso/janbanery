@@ -1,7 +1,8 @@
-package pl.project13.janbanery.config;
+package pl.project13.janbanery.config.gson;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
+import pl.project13.janbanery.config.gson.GsonFactory;
 
 import static org.fest.assertions.Assertions.assertThat;
 

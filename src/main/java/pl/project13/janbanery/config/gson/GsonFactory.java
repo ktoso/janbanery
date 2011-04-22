@@ -1,4 +1,4 @@
-package pl.project13.janbanery.config;
+package pl.project13.janbanery.config.gson;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.*;
@@ -27,7 +27,7 @@ public class GsonFactory {
   }
 
   public static class DateTimeSerializer implements JsonSerializer<DateTime> {
-    DateTimeFormatter dateTimeFormatter = ISODateTimeFormat.dateTime();
+    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ");
 
     @Override
     public JsonElement serialize(DateTime src, Type typeOfSrc, JsonSerializationContext context) {

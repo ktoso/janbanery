@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -20,7 +22,7 @@ public class Task extends KanbaneryResource implements Serializable {
   Priority Integer; // no	on create and update	Priority (0, 1 or 2)
   Boolean  ready_to_pull; // 	no	on create and update	If task is ready to be pulled
   Boolean  blocked; // no	 	If task is blocked by other task(s)
-  Date     moved_at; // no	 	When task was moved to current column
+  DateTime moved_at; // no	 	When task was moved to current column
 
   public Task() {
   }
