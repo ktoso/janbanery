@@ -1,4 +1,4 @@
-package pl.project13.janbanery.exceptions.kanbaneryresponses;
+package pl.project13.janbanery.exceptions.kanbanery;
 
 /**
  * If an 500 Internal Server Error would happen anyhow on Kanbanery,

@@ -8,7 +8,8 @@ import pl.project13.janbanery.resources.additions.ReadOnly;
  *
  * @author Konrad Malawski
  */
-public abstract class KanbaneryResource {
+public abstract class KanbaneryResource implements Resource {
+
   @ReadOnly
   protected DateTime createdAt; // Creation time
 
@@ -20,6 +21,8 @@ public abstract class KanbaneryResource {
 
   protected KanbaneryResource() {
   }
+
+  public abstract String getResourceId();
 
   public DateTime getCreatedAt() {
     return createdAt;

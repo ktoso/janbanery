@@ -42,17 +42,17 @@ public class UsersImpl implements Users {
     Future<Response> futureResponse = requestBuilder.execute();
 
     Response response = futureResponse.get();
-    asyncHttpClient.close();
+//    asyncHttpClient.close();
 
     String responseBody = response.getResponseBody();
     log.info("Fetched response: {}", responseBody);
 
     List<User> users = gson.fromJson(responseBody, GsonTypeTokens.LIST_USER);
     assert users.size() == 1;
-    return users.get(0);
+    return users.get(0); // todo this will fail probably, must search via apikey or login!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
-  public Users usingWorkspace(Workspace currentWorkspace) {
+  public Users using(Workspace currentWorkspace) {
     this.currentWorkspace = currentWorkspace;
     return this;
   }

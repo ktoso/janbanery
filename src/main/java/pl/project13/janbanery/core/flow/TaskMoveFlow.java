@@ -56,7 +56,7 @@ public class TaskMoveFlow implements KanbaneryFlow {
     ListenableFuture<Response> futureResponse = requestBuilder.execute();
 
     Response response = futureResponse.get();
-    asyncHttpClient.close();
+//    asyncHttpClient.close();
 
     return this; //todo implement me
   }

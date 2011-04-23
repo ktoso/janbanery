@@ -34,6 +34,11 @@ public class User extends KanbaneryResource implements Serializable {
   public User() {
   }
 
+  @Override
+  public String getResourceId() {
+    return "user";
+  }
+
   public String getApiToken() {
     return apiToken;
   }

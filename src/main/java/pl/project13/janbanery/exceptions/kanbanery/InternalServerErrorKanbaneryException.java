@@ -1,4 +1,4 @@
-package pl.project13.janbanery.exceptions.kanbaneryresponses;
+package pl.project13.janbanery.exceptions.kanbanery;
 
 /**
  * @author Konrad Malawski

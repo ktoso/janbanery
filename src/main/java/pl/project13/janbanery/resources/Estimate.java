@@ -16,6 +16,11 @@ public class Estimate extends KanbaneryResource implements Serializable {
   public Estimate() {
   }
 
+  @Override
+  public String getResourceId() {
+    return "estimates";
+  }
+
   public BigDecimal getValue() {
     return value;
   }

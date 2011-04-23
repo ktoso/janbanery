@@ -8,8 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.core.RestClient;
-import pl.project13.janbanery.core.flow.TaskMoveFlow;
-import pl.project13.janbanery.resources.*;
+import pl.project13.janbanery.resources.Project;
+import pl.project13.janbanery.resources.TaskType;
+import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,7 +21,7 @@ import static java.lang.String.format;
 /**
  * @author Konrad Malawski
  */
-public class TasksImpl implements Tasks {
+public class TaskTypesImpl implements TaskTypes{
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -31,64 +32,31 @@ public class TasksImpl implements Tasks {
   private Workspace currentWorkspace;
   private Project   currentProject;
 
-  public TasksImpl(Configuration conf, Gson gson, AsyncHttpClient asyncHttpClient) {
+  public TaskTypesImpl(Configuration conf, Gson gson, AsyncHttpClient asyncHttpClient) {
     this.conf = conf;
     this.gson = gson;
     this.asyncHttpClient = asyncHttpClient;
   }
 
   @Override
-  public void create(Task task) throws IOException, ExecutionException, InterruptedException {
-    String url = conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "tasks.json"; // todo externalize better, it's a resource url after all
-    log.info("Calling POST on: " + url);
+  public List<TaskType> all() throws ExecutionException, InterruptedException, IOException {
+    String url = conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "task_types.json"; // todo externalize better, it's a resource url after all
+    log.info("Calling GET on: " + url);
 
-    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePost(url);
+    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareGet(url);
     conf.authorize(requestBuilder);
 
     // todo refactor this
-    String taskField = "task[%s]";
-    requestBuilder
-        .addQueryParameter(format(taskField, "title"), task.getTitle())
-        .addQueryParameter(format(taskField, "description"), task.getDescription())
-        .addQueryParameter(format(taskField, "task_type_name"), task.getTaskTypeName())
-        .addQueryParameter(format(taskField, "priority"), task.getPriority().idString());
-
     ListenableFuture<Response> futureResponse = requestBuilder.execute();
     Response response = futureResponse.get();
     String responseBody = response.getResponseBody();
 
     RestClient.verifyResponseCode(response);
 
-    log.info("Got response for creating task: {}", responseBody);
-  }
+    log.info("Got response for creating task: {}", responseBody);  }
 
   @Override
-  public void createInIcebox(Task task) {
-    // todo implement me
-  }
-
-  @Override
-  public TaskMoveFlow move(Task task) {
-    return new TaskMoveFlow(conf, asyncHttpClient, task);
-  }
-
-  @Override
-  public List<Task> all() {
-    return null;  // todo implement me.
-  }
-
-  @Override
-  public List<Task> assignedToMe() {
-    return null;  // todo implement me.
-  }
-
-  @Override
-  public List<Task> assignedTo(User user) {
-    return null;  // todo implement me.
-  }
-
-  @Override
-  public List<Task> withPriority(Priority priority) {
+  public TaskType any() {
     return null;  // todo implement me.
   }
 
@@ -101,7 +69,7 @@ public class TasksImpl implements Tasks {
    * @param currentProject   the project to be used in all consequent requests
    * @return the same instance of {@link TasksImpl} as before, but setup to use the currentWorkspace
    */
-  public TasksImpl using(Workspace currentWorkspace, Project currentProject) {
+  public TaskTypesImpl using(Workspace currentWorkspace, Project currentProject) {
     this.currentWorkspace = currentWorkspace;
     this.currentProject = currentProject;
     return this;

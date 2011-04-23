@@ -28,6 +28,11 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
   public ProjectMembership() {
   }
 
+  @Override
+  public String getResourceId() {
+    return "memberships";
+  }
+
   public String getEmail() {
     return email;
   }

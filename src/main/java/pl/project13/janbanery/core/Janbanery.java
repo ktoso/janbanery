@@ -8,11 +8,11 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.dao.Tasks;
-import pl.project13.janbanery.core.dao.TasksImpl;
-import pl.project13.janbanery.core.dao.Users;
-import pl.project13.janbanery.core.dao.UsersImpl;
+import pl.project13.janbanery.core.dao.*;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
+import pl.project13.janbanery.exceptions.ProjectNotFoundException;
+import pl.project13.janbanery.resources.Project;
+import pl.project13.janbanery.resources.TaskType;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
@@ -33,10 +33,8 @@ public class Janbanery {
   private AsyncHttpClient asyncHttpClient;
   private Gson            gson;
 
-  /**
-   * The workspace on which all calls will be performed
-   */
   private Workspace currentWorkspace;
+  private Project   currentProject;
 
   public Janbanery(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson) {
     this.conf = conf;
@@ -56,7 +54,7 @@ public class Janbanery {
     Future<Response> futureResponse = requestBuilder.execute();
 
     Response response = futureResponse.get();
-    asyncHttpClient.close();
+//    asyncHttpClient.close();
 
     String responseBody = response.getResponseBody();
     log.info("Fetched response: {}", responseBody);
@@ -77,8 +75,10 @@ public class Janbanery {
 
   /**
    * Delegates to {@link Janbanery#workspace(String)} and keeps this workspace as the default one.
-   * From now on, all calls requiring a workspace will use this workspace, you may change the default workspace
-   * at anytime by calling this method again.
+   * Thois method does also setup a default project if there is one. If you want to select the {@link Project}
+   * you'll be working on, please get the return value of this method, and then call {@link Janbanery#using(Project)}.
+   * From now on, all calls requiring a workspace will use this workspace and it's first present project,
+   * you may change the default workspace at anytime by calling this method again.
    *
    * @param name the name of the workspace to be used
    * @return the fetched workspace
@@ -87,17 +87,58 @@ public class Janbanery {
    * @throws InterruptedException
    */
   public Workspace usingWorkspace(String name) throws IOException, ExecutionException, InterruptedException {
-    currentWorkspace = workspace(name);
+    Workspace workspace = workspace(name);
+
+    Project firstProject = workspace.getProjects().get(0);
+    using(firstProject);
+
+    return using(workspace);
+  }
+
+  /**
+   * Setup the used {@link Project} by it's name.
+   *
+   * @param name the name of the project you want to use (it should be from the current {@link Workspace}
+   * @return the now being used project
+   * @throws IOException
+   * @throws ExecutionException
+   * @throws InterruptedException
+   * @throws ProjectNotFoundException will be thrown if no project with such name exists in the current workspace
+   */
+  public Project usingProject(String name) throws IOException, ExecutionException, InterruptedException, ProjectNotFoundException {
+    return this.usingProject(currentWorkspace, name);
+  }
+
+  public Project usingProject(Workspace workspace, String name) throws IOException, ExecutionException, InterruptedException, ProjectNotFoundException {
+    for (Project project : workspace.getProjects()) {
+      if (project.getName().equals(name)) {
+        return using(project);
+      }
+    }
+    throw new ProjectNotFoundException("The workspace '" + workspace.getName() + "' has no project named '" + name + "'.");
+  }
+
+  private Workspace using(Workspace workspace) {
+    currentWorkspace = workspace;
     return currentWorkspace;
+  }
+
+  private Project using(Project project) {
+    currentProject = project;
+    return currentProject;
   }
 
   /* return initially setup instances of dao objects */
 
   public Tasks tasks() {
-    return new TasksImpl(conf, gson, asyncHttpClient).usingWorkspace(currentWorkspace);
+    return new TasksImpl(conf, gson, asyncHttpClient).using(currentWorkspace, currentProject);
+  }
+
+  public TaskTypes taskTypes(){
+    return new TaskTypesImpl(conf, gson, asyncHttpClient).using(currentWorkspace, currentProject);
   }
 
   public Users users() {
-    return new UsersImpl(conf, gson, asyncHttpClient).usingWorkspace(currentWorkspace);
+    return new UsersImpl(conf, gson, asyncHttpClient).using(currentWorkspace);
   }
 }

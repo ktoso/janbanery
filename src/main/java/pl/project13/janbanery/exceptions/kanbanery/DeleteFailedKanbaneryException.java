@@ -1,4 +1,4 @@
-package pl.project13.janbanery.exceptions.kanbaneryresponses;
+package pl.project13.janbanery.exceptions.kanbanery;
 
 /**
  * This exception is mapping an 409 response code from the Kanbanery API.

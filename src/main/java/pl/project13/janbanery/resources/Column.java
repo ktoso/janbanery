@@ -20,6 +20,10 @@ public class Column extends KanbaneryResource implements Serializable {
   public Column() {
   }
 
+  @Override public String getResourceId() {
+    return "columns";
+  }
+
   public String getName() {
     return name;
   }

@@ -20,6 +20,7 @@ import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION
 public class TasksTest {
 
   Tasks     tasks;
+  TaskTypes taskTypes;
   Janbanery janbanery;
 
   @Before
@@ -39,7 +40,6 @@ public class TasksTest {
   public void shouldCreateTaskOnBoard() throws Exception {
     // given
     janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
-    //todo project seems missing
 
     Task bug = new Task.Builder("New Task from Janbanery", "Bug")
         .description("A task I have created using the Janbanery library")
@@ -50,6 +50,7 @@ public class TasksTest {
     janbanery.tasks().create(bug);
 
     // then, should have created the task
+    // todo add assertions
   }
 
 }

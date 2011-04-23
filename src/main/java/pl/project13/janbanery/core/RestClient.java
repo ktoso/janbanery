@@ -5,7 +5,7 @@ import com.ning.http.client.ListenableFuture;
 import com.ning.http.client.Response;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.exceptions.RestClientException;
-import pl.project13.janbanery.exceptions.kanbaneryresponses.*;
+import pl.project13.janbanery.exceptions.kanbanery.*;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -55,7 +55,7 @@ public class RestClient {
     } catch (IOException e) {
       throw new RestClientException("Encountered IOException while executing REST request.", e);
     } finally {
-      asyncHttpClient.close();
+//      asyncHttpClient.close();
     }
 
     verifyResponseCode(response);
@@ -63,7 +63,8 @@ public class RestClient {
     return response;
   }
 
-  private void verifyResponseCode(Response response) throws KanbaneryException {
+  // todo un static me!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  public static void verifyResponseCode(Response response) throws KanbaneryException {
     Integer statusCode = response.getStatusCode();
 
     switch (statusCode) {

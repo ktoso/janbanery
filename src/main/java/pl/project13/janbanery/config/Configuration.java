@@ -19,4 +19,6 @@ public interface Configuration {
   void forceKeyAuthMode(String apiKey);
 
   AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder);
+
+  String getApiUrl(String workspaceName, Integer projectId);
 }

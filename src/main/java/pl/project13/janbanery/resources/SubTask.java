@@ -19,6 +19,11 @@ public class SubTask extends KanbaneryResource implements Serializable {
   public SubTask() {
   }
 
+  @Override
+  public String getResourceId() {
+    return "subtasks";
+  }
+
   public String getBody() {
     return body;
   }

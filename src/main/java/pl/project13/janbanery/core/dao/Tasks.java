@@ -5,13 +5,15 @@ import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public interface Tasks {
 
   // commands
 
-  void create(Task task);
+  void create(Task task) throws IOException, ExecutionException, InterruptedException;
 
   void createInIcebox(Task task);
 

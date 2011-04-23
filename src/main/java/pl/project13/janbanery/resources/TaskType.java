@@ -16,6 +16,11 @@ public class TaskType extends KanbaneryResource implements Serializable {
   public TaskType() {
   }
 
+  @Override
+  public String getResourceId() {
+    return "task_types";
+  }
+
   public String getName() {
     return name;
   }

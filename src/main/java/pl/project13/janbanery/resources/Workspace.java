@@ -3,7 +3,7 @@ package pl.project13.janbanery.resources;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * A Workspace object is the root of all other objects in the project flow in Kanbanery.
@@ -17,11 +17,16 @@ import java.util.Collection;
 @ReadOnly
 public class Workspace extends KanbaneryResource implements Serializable {
 
-  private Integer             id; // Workspace id
-  private String              name; // 	Workspace name
-  private Collection<Project> projects; // Array of Project resources accessible by user
+  private Integer       id; // Workspace id
+  private String        name; // 	Workspace name
+  private List<Project> projects; // Array of Project resources accessible by user
 
   public Workspace() {
+  }
+
+  @Override
+  public String getResourceId() {
+    return "workspaces";
   }
 
   public Integer getId() {
@@ -40,11 +45,11 @@ public class Workspace extends KanbaneryResource implements Serializable {
     this.name = name;
   }
 
-  public Collection<Project> getProjects() {
+  public List<Project> getProjects() {
     return projects;
   }
 
-  public void setProjects(Collection<Project> projects) {
+  public void setProjects(List<Project> projects) {
     this.projects = projects;
   }
 

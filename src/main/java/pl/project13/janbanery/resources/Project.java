@@ -13,9 +13,13 @@ import java.io.Serializable;
 public class Project extends KanbaneryResource implements Serializable {
   private Integer id; // Project id
   private String  name; // Project name
-  private String  url; // Full URL to the project
+//  private String  url; // Full URL to the project
 
   public Project() {
+  }
+
+  @Override public String getResourceId() {
+    return "projects";
   }
 
   public Integer getId() {
@@ -34,14 +38,13 @@ public class Project extends KanbaneryResource implements Serializable {
     this.name = name;
   }
 
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
+//  public String getUrl() {
+//    return url;
+//  }
+//
+//  public void setUrl(String url) {
+//    this.url = url;
+//  }
 
   @Override
   public boolean equals(Object o) {
@@ -69,9 +72,9 @@ public class Project extends KanbaneryResource implements Serializable {
     if (updatedAt != null ? !updatedAt.equals(project.updatedAt) : project.updatedAt != null) {
       return false;
     }
-    if (url != null ? !url.equals(project.url) : project.url != null) {
-      return false;
-    }
+//    if (url != null ? !url.equals(project.url) : project.url != null) {
+//      return false;
+//    }
 
     return true;
   }
@@ -80,7 +83,7 @@ public class Project extends KanbaneryResource implements Serializable {
   public int hashCode() {
     int result = id != null ? id.hashCode() : 0;
     result = 31 * result + (name != null ? name.hashCode() : 0);
-    result = 31 * result + (url != null ? url.hashCode() : 0);
+//    result = 31 * result + (url != null ? url.hashCode() : 0);
     result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
     result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);

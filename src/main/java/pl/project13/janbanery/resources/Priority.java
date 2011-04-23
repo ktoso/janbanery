@@ -23,6 +23,10 @@ public enum Priority {
     return priorityId;
   }
 
+  public String idString() {
+    return String.valueOf(priorityId);
+  }
+
   public static Priority fromPriorityId(Integer id) {
     for (Priority priority : Priority.values()) {
       if (priority.priorityId.equals(id)) {

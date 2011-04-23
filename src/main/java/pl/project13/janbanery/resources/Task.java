@@ -53,6 +53,11 @@ public class Task extends KanbaneryResource implements Serializable {
   public Task() {
   }
 
+  @Override
+  public String getResourceId() {
+    return "tasks";
+  }
+
   public Task(String title, String taskTypeName) {
     this.title = title;
     this.taskTypeName = taskTypeName;
