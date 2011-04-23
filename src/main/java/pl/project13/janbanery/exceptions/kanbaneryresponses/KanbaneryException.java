@@ -1,14 +1,16 @@
 package pl.project13.janbanery.exceptions.kanbaneryresponses;
 
 /**
- * This exception can be thrown if Kanbanery responds in an unexpected way,
- * which we cannot map to any other exception.
+ * If an 500 Internal Server Error would happen anyhow on Kanbanery,
+ * this exception will be thrown. It is advised to wait a minute or two before
+ * issuing any further requests - just an idea though.
  *
  * @author Konrad Malawski
  */
 public class KanbaneryException extends RuntimeException {
 
-  private static final long serialVersionUID = -600128530560346354L;
+  private static final long serialVersionUID  = -600128530560346354L;
+  public static final  int  MAPPED_ERROR_CODE = 500;
 
   public KanbaneryException() {
   }

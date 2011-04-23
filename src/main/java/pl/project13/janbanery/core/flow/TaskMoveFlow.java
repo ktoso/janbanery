@@ -1,9 +1,14 @@
 package pl.project13.janbanery.core.flow;
 
 import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.ListenableFuture;
+import com.ning.http.client.Response;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * This flow enables the API to fluently move tasks around the Kanban board, making it as fun and powerful as possible.
@@ -22,32 +27,36 @@ public class TaskMoveFlow implements KanbaneryFlow {
     this.task = task;
   }
 
-  public TaskMoveFlow toIceBox() {
+  public TaskMoveFlow toIceBox() throws IOException, ExecutionException, InterruptedException {
     return to(TaskLocation.ICEBOX);
   }
 
-  public TaskMoveFlow toNextColumn() {
+  public TaskMoveFlow toNextColumn() throws IOException, ExecutionException, InterruptedException {
     return to(TaskLocation.NEXT);
   }
 
-  public TaskMoveFlow toPreviousColumn() {
+  public TaskMoveFlow toPreviousColumn() throws IOException, ExecutionException, InterruptedException {
     return to(TaskLocation.PREVIOUS);
   }
 
-  public TaskMoveFlow toArchive() {
+  public TaskMoveFlow toArchive() throws IOException, ExecutionException, InterruptedException {
     return to(TaskLocation.ARCHIVE);
   }
 
-  public TaskMoveFlow to(TaskLocation location) {
+  public TaskMoveFlow to(TaskLocation location) throws IOException, ExecutionException, InterruptedException {
 
-    //todo opakować AsyncHttpClient
+    //todo use RestClient instead of AsyncHttpClient, there is too much boiler plate code here
 
-    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePut(conf.getApiUrl() + "tasks.json");
+    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient
+        .preparePut(conf.getApiUrl() + "tasks.json");
     conf.authorize(requestBuilder);
 
     requestBuilder.addParameter("column", location.jsonName());
 
-    requestBuilder.execute()
+    ListenableFuture<Response> futureResponse = requestBuilder.execute();
+
+    Response response = futureResponse.get();
+    asyncHttpClient.close();
 
     return this; //todo implement me
   }
