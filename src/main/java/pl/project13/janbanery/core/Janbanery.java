@@ -24,7 +24,7 @@ import java.util.concurrent.Future;
  *
  * @author Konrad Malawski
  */
-public class JanbaneryImpl implements Tasks, Users {
+public class Janbanery implements Tasks, Users {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -32,11 +32,11 @@ public class JanbaneryImpl implements Tasks, Users {
   private AsyncHttpClient asyncHttpClient;
   private Gson            gson;
 
-  public JanbaneryImpl(Configuration conf) {
+  public Janbanery(Configuration conf) {
     this(conf, new AsyncHttpClient(), GsonFactory.create());
   }
 
-  public JanbaneryImpl(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson) {
+  public Janbanery(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson) {
     this.conf = conf;
     this.asyncHttpClient = asyncHttpClient;
     this.gson = gson;

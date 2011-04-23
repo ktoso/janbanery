@@ -37,7 +37,7 @@ public class JanbaneryFactoryTest {
     configuration = new PropertiesConfiguration(TestConstants.VALID_CONF_FILE_LOCATION);
 
     // when
-    JanbaneryImpl janbanery = janbaneryFactory.connectUsing(configuration);
+    Janbanery janbanery = janbaneryFactory.connectUsing(configuration);
 
     // then, should use API key mode
     AuthMode usedAuthMode = janbanery.getAuthMode();
@@ -53,7 +53,7 @@ public class JanbaneryFactoryTest {
     String password = (String) properties.get("password");
 
     // when
-    JanbaneryImpl janbanery = janbaneryFactory.connectAndKeepUsing(user, password);
+    Janbanery janbanery = janbaneryFactory.connectAndKeepUsing(user, password);
 
     // then, should use API key mode
     AuthMode usedAuthMode = janbanery.getAuthMode();
@@ -69,7 +69,7 @@ public class JanbaneryFactoryTest {
     String password = (String) properties.get("password");
 
     // when
-    JanbaneryImpl janbanery = janbaneryFactory.connectUsing(user, password);
+    Janbanery janbanery = janbaneryFactory.connectUsing(user, password);
 
     // then, should use API key mode
     AuthMode usedAuthMode = janbanery.getAuthMode();

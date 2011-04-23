@@ -30,8 +30,8 @@ public class JanbaneryFactory {
     this.asyncHttpClient = asyncHttpClient;
   }
 
-  public JanbaneryImpl connectUsing(Configuration configuration) {
-    return new JanbaneryImpl(configuration, asyncHttpClient, GsonFactory.create());
+  public Janbanery connectUsing(Configuration configuration) {
+    return new Janbanery(configuration, asyncHttpClient, GsonFactory.create());
   }
 
   /**
@@ -40,7 +40,7 @@ public class JanbaneryFactory {
    * @param apiKey your API key for kanbanery, you can find it in your profile settings on kanbanery.com
    * @return a properly setup Janbanery instance using your API key for authentication
    */
-  public JanbaneryImpl connectUsing(String apiKey) {
+  public Janbanery connectUsing(String apiKey) {
     DefaultConfiguration conf = new DefaultConfiguration(apiKey);
     return connectUsing(conf);
   }
@@ -56,9 +56,9 @@ public class JanbaneryFactory {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public JanbaneryImpl connectUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
+  public Janbanery connectUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
-    JanbaneryImpl janbanery = new JanbaneryImpl(conf, asyncHttpClient, GsonFactory.create());
+    Janbanery janbanery = new Janbanery(conf, asyncHttpClient, GsonFactory.create());
 
     // fetch and switch to apiKey mode
     String apiKey = getCurrentUserApiKey(janbanery);
@@ -67,7 +67,7 @@ public class JanbaneryFactory {
     return janbanery;
   }
 
-  private String getCurrentUserApiKey(JanbaneryImpl janbanery) throws IOException, ExecutionException, InterruptedException {
+  private String getCurrentUserApiKey(Janbanery janbanery) throws IOException, ExecutionException, InterruptedException {
     User currentUser = janbanery.user().current();
     String apiToken = currentUser.getApi_token();
     return apiToken;
@@ -86,9 +86,9 @@ public class JanbaneryFactory {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public JanbaneryImpl connectAndKeepUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
+  public Janbanery connectAndKeepUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
-    return new JanbaneryImpl(conf, asyncHttpClient, GsonFactory.create());
+    return new Janbanery(conf, asyncHttpClient, GsonFactory.create());
   }
 
 }

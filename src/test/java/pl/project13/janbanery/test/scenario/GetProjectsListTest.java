@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.JanbaneryFactory;
-import pl.project13.janbanery.core.JanbaneryImpl;
+import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
 import pl.project13.janbanery.test.TestConstants;
@@ -19,7 +19,7 @@ import static org.fest.assertions.Assertions.assertThat;
  */
 public class GetProjectsListTest {
 
-  JanbaneryImpl janbanery;
+  Janbanery janbanery;
 
   @Before
   public void setUp() throws Exception {
