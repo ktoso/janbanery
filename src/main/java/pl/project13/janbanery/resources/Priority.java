@@ -18,6 +18,10 @@ public enum Priority {
     this.priorityId = priorityId;
   }
 
+  public Integer id() {
+    return priorityId;
+  }
+
   public static Priority fromInteger(Integer id) {
     for (Priority priority : Priority.values()) {
       if (priority.priorityId.equals(id)) {

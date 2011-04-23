@@ -5,6 +5,7 @@ import com.google.gson.*;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import pl.project13.janbanery.resources.Priority;
 
 import java.lang.reflect.Type;
 
@@ -21,6 +22,8 @@ public class GsonFactory {
     return new GsonBuilder()
         .registerTypeAdapter(DateTime.class, new DateTimeSerializer())
         .registerTypeAdapter(DateTime.class, new DateTimeDeserializer())
+        .registerTypeAdapter(Priority.class, new PrioritySerializer())
+        .registerTypeAdapter(Priority.class, new PriorityDeserializer())
         .setPrettyPrinting()
         .create();
   }
@@ -46,6 +49,20 @@ public class GsonFactory {
 
     @VisibleForTesting DateTime deserializeIso8601DateTime(String dateString) {
       return dateTimeFormatter.parseDateTime(dateString);
+    }
+  }
+
+  public static class PrioritySerializer implements JsonSerializer<Priority> {
+    @Override
+    public JsonElement serialize(Priority priority, Type typeOfSrc, JsonSerializationContext context) {
+      return new JsonPrimitive(priority.id());
+    }
+  }
+
+  public static class PriorityDeserializer implements JsonDeserializer<Priority> {
+    @Override
+    public Priority deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+
     }
   }
 }
