@@ -22,7 +22,7 @@ public enum Priority {
     return priorityId;
   }
 
-  public static Priority fromInteger(Integer id) {
+  public static Priority fromPriorityId(Integer id) {
     for (Priority priority : Priority.values()) {
       if (priority.priorityId.equals(id)) {
         return priority;

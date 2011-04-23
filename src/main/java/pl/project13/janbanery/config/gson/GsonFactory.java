@@ -62,7 +62,8 @@ public class GsonFactory {
   public static class PriorityDeserializer implements JsonDeserializer<Priority> {
     @Override
     public Priority deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-
+      int id = json.getAsInt();
+      return Priority.fromPriorityId(id);
     }
   }
 }
