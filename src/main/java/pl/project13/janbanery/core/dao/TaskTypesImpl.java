@@ -7,6 +7,7 @@ import com.ning.http.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
+import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.TaskType;
@@ -16,12 +17,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static java.lang.String.format;
-
 /**
  * @author Konrad Malawski
  */
-public class TaskTypesImpl implements TaskTypes{
+public class TaskTypesImpl implements TaskTypes {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -53,11 +52,16 @@ public class TaskTypesImpl implements TaskTypes{
 
     RestClient.verifyResponseCode(response);
 
-    log.info("Got response for creating task: {}", responseBody);  }
+    log.info("Got response for creating task: {}", responseBody);
+
+    List<TaskType> taskTypes = gson.fromJson(responseBody, GsonTypeTokens.LIST_TASK_TYPE);
+    assert taskTypes != null;
+    return taskTypes;
+  }
 
   @Override
-  public TaskType any() {
-    return null;  // todo implement me.
+  public TaskType any() throws IOException, ExecutionException, InterruptedException {
+    return all().get(0);
   }
 
   /**

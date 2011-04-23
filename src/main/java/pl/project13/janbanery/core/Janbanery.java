@@ -12,7 +12,6 @@ import pl.project13.janbanery.core.dao.*;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.exceptions.ProjectNotFoundException;
 import pl.project13.janbanery.resources.Project;
-import pl.project13.janbanery.resources.TaskType;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
@@ -134,7 +133,7 @@ public class Janbanery {
     return new TasksImpl(conf, gson, asyncHttpClient).using(currentWorkspace, currentProject);
   }
 
-  public TaskTypes taskTypes(){
+  public TaskTypes taskTypes() {
     return new TaskTypesImpl(conf, gson, asyncHttpClient).using(currentWorkspace, currentProject);
   }
 

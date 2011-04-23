@@ -8,16 +8,18 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
-import pl.project13.janbanery.resources.Priority;
-import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.resources.TaskType;
 import pl.project13.janbanery.test.TestConstants;
 
+import java.util.List;
+
+import static org.fest.assertions.Assertions.assertThat;
 import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
 
 /**
  * @author Konrad Malawski
  */
-public class TasksTest {
+public class TaskTypesTest {
 
   Janbanery janbanery;
 
@@ -29,23 +31,33 @@ public class TasksTest {
     AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
     janbanery = new JanbaneryFactory().connectUsing(conf);
+    janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
   }
 
   @Test
-  public void shouldCreateTaskOnBoard() throws Exception {
+  public void shouldFetchAllTaskTypes() throws Exception {
     // given
-    janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
-
-    Task bug = new Task.Builder("New Task from Janbanery", janbanery.taskTypes().any().getName())
-        .description("A task I have created using the Janbanery library")
-        .priority(Priority.MEDIUM)
-        .build();
+    TaskTypes taskTypes = janbanery.taskTypes();
 
     // when
-    janbanery.tasks().create(bug);
+    List<TaskType> allTaskTypes = taskTypes.all();
 
-    // then, should have created the task
-    // todo add assertions
+    // then
+    assertThat(allTaskTypes).isNotNull();
+    assertThat(allTaskTypes).isNotEmpty();
+  }
+
+  @Test
+  public void shouldFetchAnyTaskType() throws Exception {
+    // given
+    TaskTypes taskTypes = janbanery.taskTypes();
+
+    // when
+    TaskType taskType = taskTypes.any();
+
+    // then
+    assertThat(taskType).isNotNull();
+    assertThat(taskType.getName()).isIn("Bug", "Chore", "Story");
   }
 
 }

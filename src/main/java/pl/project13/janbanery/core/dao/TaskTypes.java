@@ -15,5 +15,5 @@ public interface TaskTypes {
 
   List<TaskType> all() throws ExecutionException, InterruptedException, IOException;
 
-  TaskType any();
+  TaskType any() throws IOException, ExecutionException, InterruptedException;
 }
