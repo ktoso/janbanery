@@ -1,9 +1,6 @@
 package pl.project13.janbanery.resources;
 
-import org.joda.time.DateTime;
-
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Date: 4/20/11
@@ -14,8 +11,8 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
 
   String  email; // yes	on create 	User email
   String  permission; // yes	on create and update	One of permission types: [ manager, member, viewer ]
-  Integer project_id; // no	 	Project id
-  Integer user_id; // no	 	User id
+  Integer projectId; // no	 	Project id
+  Integer userId; // no	 	User id
 
   public ProjectMembership() {
   }
@@ -36,20 +33,20 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
     this.permission = permission;
   }
 
-  public Integer getProject_id() {
-    return project_id;
+  public Integer getProjectId() {
+    return projectId;
   }
 
-  public void setProject_id(Integer project_id) {
-    this.project_id = project_id;
+  public void setProjectId(Integer projectId) {
+    this.projectId = projectId;
   }
 
-  public Integer getUser_id() {
-    return user_id;
+  public Integer getUserId() {
+    return userId;
   }
 
-  public void setUser_id(Integer user_id) {
-    this.user_id = user_id;
+  public void setUserId(Integer userId) {
+    this.userId = userId;
   }
 
   @Override
@@ -72,7 +69,7 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
     if (permission != null ? !permission.equals(that.permission) : that.permission != null) {
       return false;
     }
-    if (project_id != null ? !project_id.equals(that.project_id) : that.project_id != null) {
+    if (projectId != null ? !projectId.equals(that.projectId) : that.projectId != null) {
       return false;
     }
     if (type != null ? !type.equals(that.type) : that.type != null) {
@@ -81,7 +78,7 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
     if (updated_at != null ? !updated_at.equals(that.updated_at) : that.updated_at != null) {
       return false;
     }
-    if (user_id != null ? !user_id.equals(that.user_id) : that.user_id != null) {
+    if (userId != null ? !userId.equals(that.userId) : that.userId != null) {
       return false;
     }
 
@@ -92,8 +89,8 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
   public int hashCode() {
     int result = email != null ? email.hashCode() : 0;
     result = 31 * result + (permission != null ? permission.hashCode() : 0);
-    result = 31 * result + (project_id != null ? project_id.hashCode() : 0);
-    result = 31 * result + (user_id != null ? user_id.hashCode() : 0);
+    result = 31 * result + (projectId != null ? projectId.hashCode() : 0);
+    result = 31 * result + (userId != null ? userId.hashCode() : 0);
     result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
     result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);

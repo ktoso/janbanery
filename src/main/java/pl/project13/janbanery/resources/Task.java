@@ -3,7 +3,6 @@ package pl.project13.janbanery.resources;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Date: 4/20/11
@@ -12,19 +11,115 @@ import java.util.Date;
  */
 public class Task extends KanbaneryResource implements Serializable {
   String   title; // yes	on create and update	Title
-  Integer  task_type_id; // yes	on create and update	Task type, ie. "Bug", "Story". Instead of setting this id you can just settask_type_name to "Bug"
-  Integer  column_id; // no	on update	Column
-  Integer  creator_id; // no	 	Who created it
+  Integer  taskTypeId; // yes	on create and update	Task type, ie. "Bug", "Story". Instead of setting this id you can just settask_type_name to "Bug"
+  Integer  columnId; // no	on update	Column
+  Integer  creatorId; // no	 	Who created it
   String   description; // no	on create and update	Description
-  Integer  estimate_id; // no	on create and update	Estimate
-  Integer  owner_id; // no	 	Who is currently assigned to it
+  Integer  estimateId; // no	on create and update	Estimate
+  Integer  ownerId; // no	 	Who is currently assigned to it
   Integer  position; // no	on create and update	Position in column, 1-based
-  Priority Integer; // no	on create and update	Priority (0, 1 or 2)
-  Boolean  ready_to_pull; // 	no	on create and update	If task is ready to be pulled
+  Priority priority; // no	on create and update	Priority (0, 1 or 2)
+  Boolean  readyToPull; // 	no	on create and update	If task is ready to be pulled
   Boolean  blocked; // no	 	If task is blocked by other task(s)
-  DateTime moved_at; // no	 	When task was moved to currentUser column
+  DateTime movedAt; // no	 	When task was moved to currentUser column
 
   public Task() {
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public Integer getTaskTypeId() {
+    return taskTypeId;
+  }
+
+  public void setTaskTypeId(Integer taskTypeId) {
+    this.taskTypeId = taskTypeId;
+  }
+
+  public Integer getColumnId() {
+    return columnId;
+  }
+
+  public void setColumnId(Integer columnId) {
+    this.columnId = columnId;
+  }
+
+  public Integer getCreatorId() {
+    return creatorId;
+  }
+
+  public void setCreatorId(Integer creatorId) {
+    this.creatorId = creatorId;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Integer getEstimateId() {
+    return estimateId;
+  }
+
+  public void setEstimateId(Integer estimateId) {
+    this.estimateId = estimateId;
+  }
+
+  public Integer getOwnerId() {
+    return ownerId;
+  }
+
+  public void setOwnerId(Integer ownerId) {
+    this.ownerId = ownerId;
+  }
+
+  public Integer getPosition() {
+    return position;
+  }
+
+  public void setPosition(Integer position) {
+    this.position = position;
+  }
+
+  public Priority getPriority() {
+    return priority;
+  }
+
+  public void setPriority(Priority priority) {
+    this.priority = priority;
+  }
+
+  public Boolean getReadyToPull() {
+    return readyToPull;
+  }
+
+  public void setReadyToPull(Boolean readyToPull) {
+    this.readyToPull = readyToPull;
+  }
+
+  public Boolean getBlocked() {
+    return blocked;
+  }
+
+  public void setBlocked(Boolean blocked) {
+    this.blocked = blocked;
+  }
+
+  public DateTime getMovedAt() {
+    return movedAt;
+  }
+
+  public void setMovedAt(DateTime movedAt) {
+    this.movedAt = movedAt;
   }
 
   @Override
@@ -41,37 +136,37 @@ public class Task extends KanbaneryResource implements Serializable {
 
     Task task = (Task) o;
 
-    if (Integer != null ? !Integer.equals(task.Integer) : task.Integer != null) {
+    if (priority != null ? !priority.equals(task.priority) : task.priority != null) {
       return false;
     }
     if (blocked != null ? !blocked.equals(task.blocked) : task.blocked != null) {
       return false;
     }
-    if (column_id != null ? !column_id.equals(task.column_id) : task.column_id != null) {
+    if (columnId != null ? !columnId.equals(task.columnId) : task.columnId != null) {
       return false;
     }
-    if (creator_id != null ? !creator_id.equals(task.creator_id) : task.creator_id != null) {
+    if (creatorId != null ? !creatorId.equals(task.creatorId) : task.creatorId != null) {
       return false;
     }
     if (description != null ? !description.equals(task.description) : task.description != null) {
       return false;
     }
-    if (estimate_id != null ? !estimate_id.equals(task.estimate_id) : task.estimate_id != null) {
+    if (estimateId != null ? !estimateId.equals(task.estimateId) : task.estimateId != null) {
       return false;
     }
-    if (moved_at != null ? !moved_at.equals(task.moved_at) : task.moved_at != null) {
+    if (movedAt != null ? !movedAt.equals(task.movedAt) : task.movedAt != null) {
       return false;
     }
-    if (owner_id != null ? !owner_id.equals(task.owner_id) : task.owner_id != null) {
+    if (ownerId != null ? !ownerId.equals(task.ownerId) : task.ownerId != null) {
       return false;
     }
     if (position != null ? !position.equals(task.position) : task.position != null) {
       return false;
     }
-    if (ready_to_pull != null ? !ready_to_pull.equals(task.ready_to_pull) : task.ready_to_pull != null) {
+    if (readyToPull != null ? !readyToPull.equals(task.readyToPull) : task.readyToPull != null) {
       return false;
     }
-    if (task_type_id != null ? !task_type_id.equals(task.task_type_id) : task.task_type_id != null) {
+    if (taskTypeId != null ? !taskTypeId.equals(task.taskTypeId) : task.taskTypeId != null) {
       return false;
     }
     if (title != null ? !title.equals(task.title) : task.title != null) {
@@ -85,17 +180,17 @@ public class Task extends KanbaneryResource implements Serializable {
   public int hashCode() {
     int result = super.hashCode();
     result = 31 * result + (title != null ? title.hashCode() : 0);
-    result = 31 * result + (task_type_id != null ? task_type_id.hashCode() : 0);
-    result = 31 * result + (column_id != null ? column_id.hashCode() : 0);
-    result = 31 * result + (creator_id != null ? creator_id.hashCode() : 0);
+    result = 31 * result + (taskTypeId != null ? taskTypeId.hashCode() : 0);
+    result = 31 * result + (columnId != null ? columnId.hashCode() : 0);
+    result = 31 * result + (creatorId != null ? creatorId.hashCode() : 0);
     result = 31 * result + (description != null ? description.hashCode() : 0);
-    result = 31 * result + (estimate_id != null ? estimate_id.hashCode() : 0);
-    result = 31 * result + (owner_id != null ? owner_id.hashCode() : 0);
+    result = 31 * result + (estimateId != null ? estimateId.hashCode() : 0);
+    result = 31 * result + (ownerId != null ? ownerId.hashCode() : 0);
     result = 31 * result + (position != null ? position.hashCode() : 0);
-    result = 31 * result + (Integer != null ? Integer.hashCode() : 0);
-    result = 31 * result + (ready_to_pull != null ? ready_to_pull.hashCode() : 0);
+    result = 31 * result + (priority != null ? priority.hashCode() : 0);
+    result = 31 * result + (readyToPull != null ? readyToPull.hashCode() : 0);
     result = 31 * result + (blocked != null ? blocked.hashCode() : 0);
-    result = 31 * result + (moved_at != null ? moved_at.hashCode() : 0);
+    result = 31 * result + (movedAt != null ? movedAt.hashCode() : 0);
     return result;
   }
 }

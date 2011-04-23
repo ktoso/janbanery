@@ -1,29 +1,37 @@
 package pl.project13.janbanery.resources;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * Date: 4/20/11
+ * A user object represents an account able to login into Kanbanery, it can have tasks assigned and do things.
+ * Please note that there are Permissions for API access that a user, and thus Janbanery (as it's using a User account internally)
+ * can have, these are:
+ * <p/>
+ * <ul>
+ * <li> project viewer (read only user)</li>
+ * <li>project member</li>
+ * <li>project manager</li>
+ * </ul>
+ * You can change a user's role in a specific project on the "Project members" page.
  *
  * @author Konrad Malawski
  */
 public class User extends KanbaneryResource implements Serializable {
-  String api_token; // User Token
+  String apiToken; // User Token
   User   email; // String	email
-  String first_name; // 	User first name
-  String last_name; // User last name
-  String gravatar_url; // User's avatar (at gravatar.com)
+  String firstName; // 	User first name
+  String lastName; // User last name
+  String gravatarUrl; // User's avatar (at gravatar.com)
 
   public User() {
   }
 
   public String getApiToken() {
-    return api_token;
+    return apiToken;
   }
 
-  public void setApi_token(String api_token) {
-    this.api_token = api_token;
+  public void setApiToken(String apiToken) {
+    this.apiToken = apiToken;
   }
 
   public User getEmail() {
@@ -34,28 +42,28 @@ public class User extends KanbaneryResource implements Serializable {
     this.email = email;
   }
 
-  public String getFirst_name() {
-    return first_name;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setFirst_name(String first_name) {
-    this.first_name = first_name;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
 
-  public String getLast_name() {
-    return last_name;
+  public String getLastName() {
+    return lastName;
   }
 
-  public void setLast_name(String last_name) {
-    this.last_name = last_name;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
-  public String getGravatar_url() {
-    return gravatar_url;
+  public String getGravatarUrl() {
+    return gravatarUrl;
   }
 
-  public void setGravatar_url(String gravatar_url) {
-    this.gravatar_url = gravatar_url;
+  public void setGravatarUrl(String gravatarUrl) {
+    this.gravatarUrl = gravatarUrl;
   }
 
   @Override
@@ -69,7 +77,7 @@ public class User extends KanbaneryResource implements Serializable {
 
     User user = (User) o;
 
-    if (api_token != null ? !api_token.equals(user.api_token) : user.api_token != null) {
+    if (apiToken != null ? !apiToken.equals(user.apiToken) : user.apiToken != null) {
       return false;
     }
     if (created_at != null ? !created_at.equals(user.created_at) : user.created_at != null) {
@@ -78,13 +86,13 @@ public class User extends KanbaneryResource implements Serializable {
     if (email != null ? !email.equals(user.email) : user.email != null) {
       return false;
     }
-    if (first_name != null ? !first_name.equals(user.first_name) : user.first_name != null) {
+    if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) {
       return false;
     }
-    if (gravatar_url != null ? !gravatar_url.equals(user.gravatar_url) : user.gravatar_url != null) {
+    if (gravatarUrl != null ? !gravatarUrl.equals(user.gravatarUrl) : user.gravatarUrl != null) {
       return false;
     }
-    if (last_name != null ? !last_name.equals(user.last_name) : user.last_name != null) {
+    if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) {
       return false;
     }
     if (type != null ? !type.equals(user.type) : user.type != null) {
@@ -99,11 +107,11 @@ public class User extends KanbaneryResource implements Serializable {
 
   @Override
   public int hashCode() {
-    int result = api_token != null ? api_token.hashCode() : 0;
+    int result = apiToken != null ? apiToken.hashCode() : 0;
     result = 31 * result + (email != null ? email.hashCode() : 0);
-    result = 31 * result + (first_name != null ? first_name.hashCode() : 0);
-    result = 31 * result + (last_name != null ? last_name.hashCode() : 0);
-    result = 31 * result + (gravatar_url != null ? gravatar_url.hashCode() : 0);
+    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+    result = 31 * result + (gravatarUrl != null ? gravatarUrl.hashCode() : 0);
     result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
     result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);

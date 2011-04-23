@@ -1,9 +1,6 @@
 package pl.project13.janbanery.resources;
 
-import org.joda.time.DateTime;
-
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Date: 4/20/11
@@ -12,8 +9,8 @@ import java.util.Date;
  */
 public class TaskType extends KanbaneryResource implements Serializable {
   String  name; // Name
-  Integer color_code; // Color code
-  Integer project_id; // Project to which the task type is assigned
+  Integer colorCode; // Color code
+  Integer projectId; // Project to which the task type is assigned
   Integer position; // Position in project's task types list, 1-based
 
   public TaskType() {
@@ -27,20 +24,20 @@ public class TaskType extends KanbaneryResource implements Serializable {
     this.name = name;
   }
 
-  public Integer getColor_code() {
-    return color_code;
+  public Integer getColorCode() {
+    return colorCode;
   }
 
-  public void setColor_code(Integer color_code) {
-    this.color_code = color_code;
+  public void setColorCode(Integer colorCode) {
+    this.colorCode = colorCode;
   }
 
-  public Integer getProject_id() {
-    return project_id;
+  public Integer getProjectId() {
+    return projectId;
   }
 
-  public void setProject_id(Integer project_id) {
-    this.project_id = project_id;
+  public void setProjectId(Integer projectId) {
+    this.projectId = projectId;
   }
 
   public Integer getPosition() {
@@ -62,7 +59,7 @@ public class TaskType extends KanbaneryResource implements Serializable {
 
     TaskType taskType = (TaskType) o;
 
-    if (color_code != null ? !color_code.equals(taskType.color_code) : taskType.color_code != null) {
+    if (colorCode != null ? !colorCode.equals(taskType.colorCode) : taskType.colorCode != null) {
       return false;
     }
     if (created_at != null ? !created_at.equals(taskType.created_at) : taskType.created_at != null) {
@@ -74,7 +71,7 @@ public class TaskType extends KanbaneryResource implements Serializable {
     if (position != null ? !position.equals(taskType.position) : taskType.position != null) {
       return false;
     }
-    if (project_id != null ? !project_id.equals(taskType.project_id) : taskType.project_id != null) {
+    if (projectId != null ? !projectId.equals(taskType.projectId) : taskType.projectId != null) {
       return false;
     }
     if (type != null ? !type.equals(taskType.type) : taskType.type != null) {
@@ -90,8 +87,8 @@ public class TaskType extends KanbaneryResource implements Serializable {
   @Override
   public int hashCode() {
     int result = name != null ? name.hashCode() : 0;
-    result = 31 * result + (color_code != null ? color_code.hashCode() : 0);
-    result = 31 * result + (project_id != null ? project_id.hashCode() : 0);
+    result = 31 * result + (colorCode != null ? colorCode.hashCode() : 0);
+    result = 31 * result + (projectId != null ? projectId.hashCode() : 0);
     result = 31 * result + (position != null ? position.hashCode() : 0);
     result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
     result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
