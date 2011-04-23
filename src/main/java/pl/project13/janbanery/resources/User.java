@@ -18,7 +18,7 @@ public class User extends KanbaneryResource implements Serializable {
   public User() {
   }
 
-  public String getApi_token() {
+  public String getApiToken() {
     return api_token;
   }
 

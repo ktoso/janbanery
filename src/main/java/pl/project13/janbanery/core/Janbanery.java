@@ -10,6 +10,7 @@ import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.resources.Priority;
+import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.Workspace;
@@ -24,13 +25,18 @@ import java.util.concurrent.Future;
  *
  * @author Konrad Malawski
  */
-public class Janbanery implements Tasks, Users {
+public class Janbanery {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private Configuration   conf;
   private AsyncHttpClient asyncHttpClient;
   private Gson            gson;
+
+  /**
+   * The workspace on which all calls will be performed
+   */
+  private String currentWorkspace = "";
 
   public Janbanery(Configuration conf) {
     this(conf, new AsyncHttpClient(), GsonFactory.create());
@@ -42,27 +48,8 @@ public class Janbanery implements Tasks, Users {
     this.gson = gson;
   }
 
-  @Override
-  public List<Task> all() {
-    return null;
-  }
-
-  @Override
-  public List<Task> forUser(User user) {
-    return null;  //todo implement me
-  }
-
-  @Override
-  public List<Task> withPriority(Priority priority) {
-    return null;  //todo implement me
-  }
-
   public AuthMode getAuthMode() {
     return conf.getAuthMode();
-  }
-
-  public Users user() {
-    return this;
   }
 
   public List<Workspace> findAllWorkspaces() throws IOException, ExecutionException, InterruptedException {
@@ -83,8 +70,7 @@ public class Janbanery implements Tasks, Users {
     return workspaces;
   }
 
-  @Override
-  public User current() throws IOException, ExecutionException, InterruptedException {
+  public User currentUser() throws IOException, ExecutionException, InterruptedException {
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient
         .prepareGet(conf.getApiUrl() + "workspaces.json");
     requestBuilder = conf.authorize(requestBuilder);

@@ -1,13 +1,14 @@
 package pl.project13.janbanery.resources;
 
-import org.joda.time.DateTime;
-
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 
 /**
- * Date: 4/20/11
+ * A Workspace object is the root of all other objects in the project flow in Kanbanery.
+ * A workspace has projects which have tasks etc.
+ * <p/>
+ * A default workspace should be chosen while working with Janbanery to
+ * increase smoothness of all API calls inside your code :-)
  *
  * @author Konrad Malawski
  */
@@ -15,10 +16,6 @@ public class Workspace extends KanbaneryResource implements Serializable {
   Integer             id; // Workspace id
   String              name; // 	Workspace name
   Collection<Project> projects; // Array of Project resources accessible by user
-
-  DateTime created_at; // Creation time
-  DateTime updated_at; // Last update time
-  String   type; // Type of this resource, set to "Workspace". Only for JSON responses. In XML responses node name is "workspace".
 
   public Workspace() {
   }
