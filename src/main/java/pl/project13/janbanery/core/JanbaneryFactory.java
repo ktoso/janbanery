@@ -68,9 +68,8 @@ public class JanbaneryFactory {
   }
 
   private String getCurrentUserApiKey(Janbanery janbanery) throws IOException, ExecutionException, InterruptedException {
-    User currentUser = janbanery.currentUser();
-    String apiToken = currentUser.getApiToken();
-    return apiToken;
+    User currentUser = janbanery.users().current();
+    return currentUser.getApiToken();
   }
 
   /**

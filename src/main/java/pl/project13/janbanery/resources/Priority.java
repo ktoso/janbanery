@@ -3,7 +3,8 @@ package pl.project13.janbanery.resources;
 import pl.project13.janbanery.exceptions.NoSuchPriorityException;
 
 /**
- * Date: 4/20/11
+ * Task priorities. Currently kanbanery is only supporting 3 levels of priorities - {0, 1, 2}
+ * with 0 being the LOW and 2 being the HIGH priority.
  *
  * @author Konrad Malawski
  */

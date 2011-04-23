@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import pl.project13.janbanery.resources.additions.ReadOnly;
+
 import java.io.Serializable;
 
 /**
@@ -7,10 +9,11 @@ import java.io.Serializable;
  *
  * @author Konrad Malawski
  */
+@ReadOnly
 public class Project extends KanbaneryResource implements Serializable {
-  private Integer id;//Project id
-  private String  name;//Project name
-  private String  url;//Full URL to the project
+  private Integer id; // Project id
+  private String  name; // Project name
+  private String  url; // Full URL to the project
 
   public Project() {
   }

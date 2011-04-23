@@ -32,7 +32,7 @@ public class GetProjectsListTest {
   @Test
   public void shouldGetAllWorkspaces() throws Exception {
     // when
-    List<Workspace> allWorkspaces = janbanery.findAllWorkspaces();
+    List<Workspace> allWorkspaces = janbanery.workspaces();
 
     // then
     assertThat(allWorkspaces).isNotEmpty();

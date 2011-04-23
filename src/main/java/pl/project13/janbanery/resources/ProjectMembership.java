@@ -1,5 +1,9 @@
 package pl.project13.janbanery.resources;
 
+import pl.project13.janbanery.resources.additions.On;
+import pl.project13.janbanery.resources.additions.Required;
+import pl.project13.janbanery.resources.additions.Settable;
+
 import java.io.Serializable;
 
 /**
@@ -9,10 +13,17 @@ import java.io.Serializable;
  */
 public class ProjectMembership extends KanbaneryResource implements Serializable {
 
-  private String  email; // yes	on create 	User email
-  private String  permission; // yes	on create and update	One of permission types: [ manager, member, viewer ]
-  private Integer projectId; // no	 	Project id
-  private Integer userId; // no	 	User id
+  @Required
+  @Settable(On.Create)
+  private String email;
+
+  @Required
+  @Settable(On.CreateOrUpdate)
+  private Permission permission;
+
+  private Integer projectId;
+
+  private Integer userId;
 
   public ProjectMembership() {
   }
@@ -25,11 +36,11 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
     this.email = email;
   }
 
-  public String getPermission() {
+  public Permission getPermission() {
     return permission;
   }
 
-  public void setPermission(String permission) {
+  public void setPermission(Permission permission) {
     this.permission = permission;
   }
 

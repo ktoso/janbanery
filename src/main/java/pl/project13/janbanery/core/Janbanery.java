@@ -7,12 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.auth.AuthMode;
-import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.resources.Priority;
-import pl.project13.janbanery.resources.Project;
-import pl.project13.janbanery.resources.Task;
-import pl.project13.janbanery.resources.User;
+import pl.project13.janbanery.core.dao.Tasks;
+import pl.project13.janbanery.core.dao.TasksImpl;
+import pl.project13.janbanery.core.dao.Users;
+import pl.project13.janbanery.core.dao.UsersImpl;
+import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
@@ -36,11 +36,7 @@ public class Janbanery {
   /**
    * The workspace on which all calls will be performed
    */
-  private String currentWorkspace = "";
-
-  public Janbanery(Configuration conf) {
-    this(conf, new AsyncHttpClient(), GsonFactory.create());
-  }
+  private Workspace currentWorkspace;
 
   public Janbanery(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson) {
     this.conf = conf;
@@ -52,7 +48,7 @@ public class Janbanery {
     return conf.getAuthMode();
   }
 
-  public List<Workspace> findAllWorkspaces() throws IOException, ExecutionException, InterruptedException {
+  public List<Workspace> workspaces() throws IOException, ExecutionException, InterruptedException {
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient
         .prepareGet(conf.getApiUrl() + "workspaces.json");
     conf.authorize(requestBuilder);
@@ -70,21 +66,38 @@ public class Janbanery {
     return workspaces;
   }
 
-  public User currentUser() throws IOException, ExecutionException, InterruptedException {
-    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient
-        .prepareGet(conf.getApiUrl() + "workspaces.json");
-    requestBuilder = conf.authorize(requestBuilder);
+  public Workspace workspace(String name) throws IOException, ExecutionException, InterruptedException {
+    for (Workspace workspace : workspaces()) {
+      if (workspace.getName().equals(name)) {
+        return workspace;
+      }
+    }
+    throw new EntityNotFoundException("Could not find workspace with name");
+  }
 
-    Future<Response> futureResponse = requestBuilder.execute();
+  /**
+   * Delegates to {@link Janbanery#workspace(String)} and keeps this workspace as the default one.
+   * From now on, all calls requiring a workspace will use this workspace, you may change the default workspace
+   * at anytime by calling this method again.
+   *
+   * @param name the name of the workspace to be used
+   * @return the fetched workspace
+   * @throws IOException
+   * @throws ExecutionException
+   * @throws InterruptedException
+   */
+  public Workspace usingWorkspace(String name) throws IOException, ExecutionException, InterruptedException {
+    currentWorkspace = workspace(name);
+    return currentWorkspace;
+  }
 
-    Response response = futureResponse.get();
-    asyncHttpClient.close();
+  /* return initially setup instances of dao objects */
 
-    String responseBody = response.getResponseBody();
-    log.info("Fetched response: {}", responseBody);
+  public Tasks tasks() {
+    return new TasksImpl(conf, gson, asyncHttpClient).usingWorkspace(currentWorkspace);
+  }
 
-    List<User> users = gson.fromJson(responseBody, GsonTypeTokens.LIST_USER);
-    assert users.size() == 1;
-    return users.get(0);
+  public Users users() {
+    return new UsersImpl(conf, gson, asyncHttpClient).usingWorkspace(currentWorkspace);
   }
 }

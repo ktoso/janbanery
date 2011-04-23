@@ -1,6 +1,7 @@
 package pl.project13.janbanery.resources;
 
 import org.joda.time.DateTime;
+import pl.project13.janbanery.resources.additions.ReadOnly;
 
 /**
  * Date: 4/20/11
@@ -8,8 +9,13 @@ import org.joda.time.DateTime;
  * @author Konrad Malawski
  */
 public abstract class KanbaneryResource {
+  @ReadOnly
   protected DateTime createdAt; // Creation time
+
+  @ReadOnly
   protected DateTime updatedAt; // Last update time
+
+  @ReadOnly
   protected String type; // Type of this resource, set to "User". Only for JSON responses. In XML responses node name is "user".
 
   protected KanbaneryResource() {

@@ -1,5 +1,9 @@
 package pl.project13.janbanery.resources;
 
+import pl.project13.janbanery.resources.additions.On;
+import pl.project13.janbanery.resources.additions.Required;
+import pl.project13.janbanery.resources.additions.Settable;
+
 import java.io.Serializable;
 
 /**
@@ -8,9 +12,15 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class Issue extends KanbaneryResource implements Serializable {
-  private String  url; // yes	on create and update	URL pointing to the issue in an external bug-tracking system
-  private Integer taskId; // no	 	Task
-  private Boolean resolved; // no	on create and update	If it was already resolved
+
+  @Required
+  @Settable(On.CreateOrUpdate)
+  private String url; // URL pointing to the issue in an external bug-tracking system
+
+  private Integer taskId; // Task
+
+  @Settable(On.CreateOrUpdate)
+  private Boolean resolved; // If it was already resolved
 
   public Issue() {
   }

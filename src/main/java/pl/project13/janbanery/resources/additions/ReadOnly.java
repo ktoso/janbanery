@@ -6,14 +6,13 @@ import java.lang.annotation.*;
 
 /**
  * Just a marker annotation to carry the information from the Kanbanery API description right into our resource classes.
- * A field with this annotation should always be set when working with such entities.
+ * Classes or fields annotated with this annotation will not be modifiable by our API, they're exposed as readonly.
  *
  * @author Konrad Malawski
  */
-@Inherited
 @Documented
 @GwtCompatible
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.SOURCE)
-public @interface Required {
+public @interface ReadOnly {
 }

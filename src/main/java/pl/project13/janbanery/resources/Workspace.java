@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import pl.project13.janbanery.resources.additions.ReadOnly;
+
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -12,10 +14,12 @@ import java.util.Collection;
  *
  * @author Konrad Malawski
  */
+@ReadOnly
 public class Workspace extends KanbaneryResource implements Serializable {
-  Integer             id; // Workspace id
-  String              name; // 	Workspace name
-  Collection<Project> projects; // Array of Project resources accessible by user
+
+  private Integer             id; // Workspace id
+  private String              name; // 	Workspace name
+  private Collection<Project> projects; // Array of Project resources accessible by user
 
   public Workspace() {
   }

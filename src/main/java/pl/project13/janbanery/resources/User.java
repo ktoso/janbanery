@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import pl.project13.janbanery.resources.additions.ReadOnly;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * can have, these are:
  * <p/>
  * <ul>
- * <li> project viewer (read only user)</li>
+ * <li>project viewer (read only user)</li>
  * <li>project member</li>
  * <li>project manager</li>
  * </ul>
@@ -16,12 +18,18 @@ import java.io.Serializable;
  *
  * @author Konrad Malawski
  */
+@ReadOnly
 public class User extends KanbaneryResource implements Serializable {
-  String apiToken; // User Token
-  User   email; // String	email
-  String firstName; // 	User first name
-  String lastName; // User last name
-  String gravatarUrl; // User's avatar (at gravatar.com)
+
+  private String apiToken; // User Token
+
+  private User email; // String	email
+
+  private String firstName; // 	User first name
+
+  private String lastName; // User last name
+
+  private String gravatarUrl; // User's avatar (at gravatar.com)
 
   public User() {
   }
