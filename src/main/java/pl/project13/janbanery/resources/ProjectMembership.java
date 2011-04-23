@@ -9,10 +9,10 @@ import java.io.Serializable;
  */
 public class ProjectMembership extends KanbaneryResource implements Serializable {
 
-  String  email; // yes	on create 	User email
-  String  permission; // yes	on create and update	One of permission types: [ manager, member, viewer ]
-  Integer projectId; // no	 	Project id
-  Integer userId; // no	 	User id
+  private String  email; // yes	on create 	User email
+  private String  permission; // yes	on create and update	One of permission types: [ manager, member, viewer ]
+  private Integer projectId; // no	 	Project id
+  private Integer userId; // no	 	User id
 
   public ProjectMembership() {
   }
@@ -60,7 +60,7 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
 
     ProjectMembership that = (ProjectMembership) o;
 
-    if (created_at != null ? !created_at.equals(that.created_at) : that.created_at != null) {
+    if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) {
       return false;
     }
     if (email != null ? !email.equals(that.email) : that.email != null) {
@@ -75,7 +75,7 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
     if (type != null ? !type.equals(that.type) : that.type != null) {
       return false;
     }
-    if (updated_at != null ? !updated_at.equals(that.updated_at) : that.updated_at != null) {
+    if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null) {
       return false;
     }
     if (userId != null ? !userId.equals(that.userId) : that.userId != null) {
@@ -91,8 +91,8 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
     result = 31 * result + (permission != null ? permission.hashCode() : 0);
     result = 31 * result + (projectId != null ? projectId.hashCode() : 0);
     result = 31 * result + (userId != null ? userId.hashCode() : 0);
-    result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
-    result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
+    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }

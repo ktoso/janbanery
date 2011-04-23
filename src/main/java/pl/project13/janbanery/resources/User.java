@@ -80,7 +80,7 @@ public class User extends KanbaneryResource implements Serializable {
     if (apiToken != null ? !apiToken.equals(user.apiToken) : user.apiToken != null) {
       return false;
     }
-    if (created_at != null ? !created_at.equals(user.created_at) : user.created_at != null) {
+    if (createdAt != null ? !createdAt.equals(user.createdAt) : user.createdAt != null) {
       return false;
     }
     if (email != null ? !email.equals(user.email) : user.email != null) {
@@ -98,7 +98,7 @@ public class User extends KanbaneryResource implements Serializable {
     if (type != null ? !type.equals(user.type) : user.type != null) {
       return false;
     }
-    if (updated_at != null ? !updated_at.equals(user.updated_at) : user.updated_at != null) {
+    if (updatedAt != null ? !updatedAt.equals(user.updatedAt) : user.updatedAt != null) {
       return false;
     }
 
@@ -112,8 +112,8 @@ public class User extends KanbaneryResource implements Serializable {
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     result = 31 * result + (gravatarUrl != null ? gravatarUrl.hashCode() : 0);
-    result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
-    result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
+    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }

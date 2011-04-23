@@ -55,7 +55,7 @@ public class Workspace extends KanbaneryResource implements Serializable {
 
     Workspace workspace = (Workspace) o;
 
-    if (created_at != null ? !created_at.equals(workspace.created_at) : workspace.created_at != null) {
+    if (createdAt != null ? !createdAt.equals(workspace.createdAt) : workspace.createdAt != null) {
       return false;
     }
     if (id != null ? !id.equals(workspace.id) : workspace.id != null) {
@@ -70,7 +70,7 @@ public class Workspace extends KanbaneryResource implements Serializable {
     if (type != null ? !type.equals(workspace.type) : workspace.type != null) {
       return false;
     }
-    if (updated_at != null ? !updated_at.equals(workspace.updated_at) : workspace.updated_at != null) {
+    if (updatedAt != null ? !updatedAt.equals(workspace.updatedAt) : workspace.updatedAt != null) {
       return false;
     }
 
@@ -82,8 +82,8 @@ public class Workspace extends KanbaneryResource implements Serializable {
     int result = id != null ? id.hashCode() : 0;
     result = 31 * result + (name != null ? name.hashCode() : 0);
     result = 31 * result + (projects != null ? projects.hashCode() : 0);
-    result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
-    result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
+    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }

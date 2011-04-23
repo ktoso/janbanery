@@ -11,11 +11,11 @@ import java.io.Serializable;
  */
 public class Column extends KanbaneryResource implements Serializable {
   @Required
-  String name; // on create and update	Name
-  Integer projectId; //	Project
-  Boolean fixed; //	If column can be moved
-  Integer capacity; //	on create and update	Capacity (WIP limit)
-  Integer position; //	on create and update	Position on the board, 1-based
+  private String  name; // on create and update	Name
+  private Integer projectId; //	Project
+  private Boolean fixed; //	If column can be moved
+  private Integer capacity; //	on create and update	Capacity (WIP limit)
+  private Integer position; //	on create and update	Position on the board, 1-based
 
   public Column() {
   }

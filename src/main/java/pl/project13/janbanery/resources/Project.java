@@ -8,9 +8,9 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class Project extends KanbaneryResource implements Serializable {
-  Integer id;//Project id
-  String  name;//Project name
-  String  url;//Full URL to the project
+  private Integer id;//Project id
+  private String  name;//Project name
+  private String  url;//Full URL to the project
 
   public Project() {
   }
@@ -51,7 +51,7 @@ public class Project extends KanbaneryResource implements Serializable {
 
     Project project = (Project) o;
 
-    if (created_at != null ? !created_at.equals(project.created_at) : project.created_at != null) {
+    if (createdAt != null ? !createdAt.equals(project.createdAt) : project.createdAt != null) {
       return false;
     }
     if (id != null ? !id.equals(project.id) : project.id != null) {
@@ -63,7 +63,7 @@ public class Project extends KanbaneryResource implements Serializable {
     if (type != null ? !type.equals(project.type) : project.type != null) {
       return false;
     }
-    if (updated_at != null ? !updated_at.equals(project.updated_at) : project.updated_at != null) {
+    if (updatedAt != null ? !updatedAt.equals(project.updatedAt) : project.updatedAt != null) {
       return false;
     }
     if (url != null ? !url.equals(project.url) : project.url != null) {
@@ -78,8 +78,8 @@ public class Project extends KanbaneryResource implements Serializable {
     int result = id != null ? id.hashCode() : 0;
     result = 31 * result + (name != null ? name.hashCode() : 0);
     result = 31 * result + (url != null ? url.hashCode() : 0);
-    result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
-    result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
+    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }

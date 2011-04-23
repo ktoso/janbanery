@@ -1,7 +1,6 @@
 package pl.project13.janbanery.resources;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Date: 4/20/11
@@ -9,9 +8,9 @@ import java.util.Date;
  * @author Konrad Malawski
  */
 public class Issue extends KanbaneryResource implements Serializable {
-  String  url; // yes	on create and update	URL pointing to the issue in an external bug-tracking system
-  Integer task_id; // no	 	Task
-  Boolean resolved; // no	on create and update	If it was already resolved
+  private String  url; // yes	on create and update	URL pointing to the issue in an external bug-tracking system
+  private Integer taskId; // no	 	Task
+  private Boolean resolved; // no	on create and update	If it was already resolved
 
   public Issue() {
   }
@@ -25,12 +24,12 @@ public class Issue extends KanbaneryResource implements Serializable {
     this.url = url;
   }
 
-  public Integer getTask_id() {
-    return task_id;
+  public Integer getTaskId() {
+    return taskId;
   }
 
-  public void setTask_id(Integer task_id) {
-    this.task_id = task_id;
+  public void setTaskId(Integer taskId) {
+    this.taskId = taskId;
   }
 
   public Boolean getResolved() {
@@ -52,19 +51,19 @@ public class Issue extends KanbaneryResource implements Serializable {
 
     Issue issue = (Issue) o;
 
-    if (created_at != null ? !created_at.equals(issue.created_at) : issue.created_at != null) {
+    if (createdAt != null ? !createdAt.equals(issue.createdAt) : issue.createdAt != null) {
       return false;
     }
     if (resolved != null ? !resolved.equals(issue.resolved) : issue.resolved != null) {
       return false;
     }
-    if (task_id != null ? !task_id.equals(issue.task_id) : issue.task_id != null) {
+    if (taskId != null ? !taskId.equals(issue.taskId) : issue.taskId != null) {
       return false;
     }
     if (type != null ? !type.equals(issue.type) : issue.type != null) {
       return false;
     }
-    if (updated_at != null ? !updated_at.equals(issue.updated_at) : issue.updated_at != null) {
+    if (updatedAt != null ? !updatedAt.equals(issue.updatedAt) : issue.updatedAt != null) {
       return false;
     }
     if (url != null ? !url.equals(issue.url) : issue.url != null) {
@@ -77,10 +76,10 @@ public class Issue extends KanbaneryResource implements Serializable {
   @Override
   public int hashCode() {
     int result = url != null ? url.hashCode() : 0;
-    result = 31 * result + (task_id != null ? task_id.hashCode() : 0);
+    result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
     result = 31 * result + (resolved != null ? resolved.hashCode() : 0);
-    result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
-    result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
+    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }

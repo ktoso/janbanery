@@ -2,7 +2,6 @@ package pl.project13.janbanery.resources;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * Date: 4/20/11
@@ -10,9 +9,9 @@ import java.util.Date;
  * @author Konrad Malawski
  */
 public class Estimate extends KanbaneryResource implements Serializable {
-  BigDecimal value; // Numeric value
-  String     label; // Label to display
-  Integer    project_id; // Project to which the task type is assigned
+  private BigDecimal value; // Numeric value
+  private String     label; // Label to display
+  private Integer    project_id; // Project to which the task type is assigned
 
   public Estimate() {
   }
@@ -52,7 +51,7 @@ public class Estimate extends KanbaneryResource implements Serializable {
 
     Estimate estimate = (Estimate) o;
 
-    if (created_at != null ? !created_at.equals(estimate.created_at) : estimate.created_at != null) {
+    if (createdAt != null ? !createdAt.equals(estimate.createdAt) : estimate.createdAt != null) {
       return false;
     }
     if (label != null ? !label.equals(estimate.label) : estimate.label != null) {
@@ -64,7 +63,7 @@ public class Estimate extends KanbaneryResource implements Serializable {
     if (type != null ? !type.equals(estimate.type) : estimate.type != null) {
       return false;
     }
-    if (updated_at != null ? !updated_at.equals(estimate.updated_at) : estimate.updated_at != null) {
+    if (updatedAt != null ? !updatedAt.equals(estimate.updatedAt) : estimate.updatedAt != null) {
       return false;
     }
     if (value != null ? !value.equals(estimate.value) : estimate.value != null) {
@@ -79,8 +78,8 @@ public class Estimate extends KanbaneryResource implements Serializable {
     int result = value != null ? value.hashCode() : 0;
     result = 31 * result + (label != null ? label.hashCode() : 0);
     result = 31 * result + (project_id != null ? project_id.hashCode() : 0);
-    result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
-    result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
+    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }

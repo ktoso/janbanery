@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import pl.project13.janbanery.resources.additions.Required;
+
 import java.io.Serializable;
 
 /**
@@ -8,10 +10,11 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class SubTask extends KanbaneryResource implements Serializable {
-  String  body; // yes	on create and update	Short description
-  Integer taskId; // 	no	 	Task
-  Integer creatorId; // no	 	Who created it
-  Boolean completed; // no	on create and update	If it was completed
+  @Required
+  private String  body; // yes	on create and update	Short description
+  private Integer taskId; // 	no	 	Task
+  private Integer creatorId; // no	 	Who created it
+  private Boolean completed; // no	on create and update	If it was completed
 
   public SubTask() {
   }
@@ -65,7 +68,7 @@ public class SubTask extends KanbaneryResource implements Serializable {
     if (completed != null ? !completed.equals(subTask.completed) : subTask.completed != null) {
       return false;
     }
-    if (created_at != null ? !created_at.equals(subTask.created_at) : subTask.created_at != null) {
+    if (createdAt != null ? !createdAt.equals(subTask.createdAt) : subTask.createdAt != null) {
       return false;
     }
     if (creatorId != null ? !creatorId.equals(subTask.creatorId) : subTask.creatorId != null) {
@@ -77,7 +80,7 @@ public class SubTask extends KanbaneryResource implements Serializable {
     if (type != null ? !type.equals(subTask.type) : subTask.type != null) {
       return false;
     }
-    if (updated_at != null ? !updated_at.equals(subTask.updated_at) : subTask.updated_at != null) {
+    if (updatedAt != null ? !updatedAt.equals(subTask.updatedAt) : subTask.updatedAt != null) {
       return false;
     }
 
@@ -90,8 +93,8 @@ public class SubTask extends KanbaneryResource implements Serializable {
     result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
     result = 31 * result + (creatorId != null ? creatorId.hashCode() : 0);
     result = 31 * result + (completed != null ? completed.hashCode() : 0);
-    result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
-    result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
+    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }

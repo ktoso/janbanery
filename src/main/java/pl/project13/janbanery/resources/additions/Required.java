@@ -17,15 +17,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.SOURCE)
 public @interface Required {
 
-  When value() default When.OnCreateOrUpdate;
+  On value() default On.CreateOrUpdate;
 
-  /**
-   * Describes when the annotated field should be required to be set
-   */
-  public enum When {
-    Always,
-    OnCreate,
-    OnUpdate,
-    OnCreateOrUpdate
-  }
 }

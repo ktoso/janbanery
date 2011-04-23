@@ -62,7 +62,7 @@ public class TaskType extends KanbaneryResource implements Serializable {
     if (colorCode != null ? !colorCode.equals(taskType.colorCode) : taskType.colorCode != null) {
       return false;
     }
-    if (created_at != null ? !created_at.equals(taskType.created_at) : taskType.created_at != null) {
+    if (createdAt != null ? !createdAt.equals(taskType.createdAt) : taskType.createdAt != null) {
       return false;
     }
     if (name != null ? !name.equals(taskType.name) : taskType.name != null) {
@@ -77,7 +77,7 @@ public class TaskType extends KanbaneryResource implements Serializable {
     if (type != null ? !type.equals(taskType.type) : taskType.type != null) {
       return false;
     }
-    if (updated_at != null ? !updated_at.equals(taskType.updated_at) : taskType.updated_at != null) {
+    if (updatedAt != null ? !updatedAt.equals(taskType.updatedAt) : taskType.updatedAt != null) {
       return false;
     }
 
@@ -90,8 +90,8 @@ public class TaskType extends KanbaneryResource implements Serializable {
     result = 31 * result + (colorCode != null ? colorCode.hashCode() : 0);
     result = 31 * result + (projectId != null ? projectId.hashCode() : 0);
     result = 31 * result + (position != null ? position.hashCode() : 0);
-    result = 31 * result + (created_at != null ? created_at.hashCode() : 0);
-    result = 31 * result + (updated_at != null ? updated_at.hashCode() : 0);
+    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }

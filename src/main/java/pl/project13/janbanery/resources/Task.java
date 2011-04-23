@@ -1,8 +1,11 @@
 package pl.project13.janbanery.resources;
 
 import org.joda.time.DateTime;
+import pl.project13.janbanery.resources.additions.Required;
 
 import java.io.Serializable;
+
+import static pl.project13.janbanery.resources.additions.On.*;
 
 /**
  * Date: 4/20/11
@@ -10,18 +13,21 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class Task extends KanbaneryResource implements Serializable {
-  String   title; // yes	on create and update	Title
-  Integer  taskTypeId; // yes	on create and update	Task type, ie. "Bug", "Story". Instead of setting this id you can just settask_type_name to "Bug"
-  Integer  columnId; // no	on update	Column
-  Integer  creatorId; // no	 	Who created it
-  String   description; // no	on create and update	Description
-  Integer  estimateId; // no	on create and update	Estimate
-  Integer  ownerId; // no	 	Who is currently assigned to it
-  Integer  position; // no	on create and update	Position in column, 1-based
-  Priority priority; // no	on create and update	Priority (0, 1 or 2)
-  Boolean  readyToPull; // 	no	on create and update	If task is ready to be pulled
-  Boolean  blocked; // no	 	If task is blocked by other task(s)
-  DateTime movedAt; // no	 	When task was moved to currentUser column
+  @Required
+  private String   title; // Title
+  @Required
+  private Integer  taskTypeId; // Task type, ie. "Bug", "Story". Instead of setting this id you can just settask_type_name to "Bug"
+  @Required(Update)
+  private Integer  columnId; // no	on update	Column
+  private Integer  creatorId; // no	 	Who created it
+  private String   description; // no	on create and update	Description
+  private Integer  estimateId; // no	on create and update	Estimate
+  private Integer  ownerId; // no	 	Who is currently assigned to it
+  private Integer  position; // no	on create and update	Position in column, 1-based
+  private Priority priority; // no	on create and update	Priority (0, 1 or 2)
+  private Boolean  readyToPull; // 	no	on create and update	If task is ready to be pulled
+  private Boolean  blocked; // no	 	If task is blocked by other task(s)
+  private DateTime movedAt; // no	 	On task was moved to currentUser column
 
   public Task() {
   }
