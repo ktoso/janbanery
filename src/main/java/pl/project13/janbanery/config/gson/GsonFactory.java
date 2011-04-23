@@ -3,13 +3,10 @@ package pl.project13.janbanery.config.gson;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.*;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.chrono.ISOChronology;
-import org.joda.time.format.*;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.util.Calendar;
 
 /**
  * Date: 4/21/11
@@ -17,6 +14,8 @@ import java.util.Calendar;
  * @author Konrad Malawski
  */
 public class GsonFactory {
+
+  private static DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ");
 
   public static Gson create() {
     return new GsonBuilder()
@@ -26,8 +25,9 @@ public class GsonFactory {
         .create();
   }
 
+  /* Serializers and Deserializers */
+
   public static class DateTimeSerializer implements JsonSerializer<DateTime> {
-    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ");
 
     @Override
     public JsonElement serialize(DateTime src, Type typeOfSrc, JsonSerializationContext context) {
@@ -36,7 +36,6 @@ public class GsonFactory {
   }
 
   public static class DateTimeDeserializer implements JsonDeserializer<DateTime> {
-    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ");
 
     @Override
     public DateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

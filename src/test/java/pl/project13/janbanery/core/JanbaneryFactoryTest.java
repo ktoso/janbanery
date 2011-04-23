@@ -3,7 +3,7 @@ package pl.project13.janbanery.core;
 import com.ning.http.client.AsyncHttpClient;
 import org.junit.Before;
 import org.junit.Test;
-import pl.project13.janbanery.config.AuthMode;
+import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.test.TestConstants;
@@ -12,7 +12,6 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static pl.project13.janbanery.config.AuthMode.*;
 
 /**
  * @author Konrad Malawski

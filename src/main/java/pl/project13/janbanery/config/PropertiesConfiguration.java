@@ -1,14 +1,14 @@
 package pl.project13.janbanery.config;
 
 import com.google.common.base.Strings;
+import pl.project13.janbanery.config.auth.AuthMode;
+import pl.project13.janbanery.config.auth.NoAuthMode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-
-import static pl.project13.janbanery.config.AuthMode.API_KEY_MODE;
 
 /**
  * @author Konrad Malawski
@@ -21,13 +21,15 @@ public class PropertiesConfiguration extends DefaultConfiguration implements Con
   private static final String P_PASSWORD             = "password";
 
   private Properties properties = new Properties();
-  private AuthMode   authMode   = API_KEY_MODE;
+  private AuthMode   authMode   = new NoAuthMode();
 
   /**
    * Setup the auth mode using the default properties file - {@link PropertiesConfiguration#DEFAULT_PROPS_FILENAME}
    * If the "apikey" key is present and not empty it will be used, otherwise the fallback
    * to user/pass mode is triggered. Please note that {@link PropertiesConfiguration} is NOT smart,
    * it will not try to fetch apiKey when configuring the app from a properties file and finding only user/pass data!
+   *
+   * @throws IOException if the file could not be found or read
    */
   public PropertiesConfiguration() throws IOException {
     this(DEFAULT_PROPS_FILENAME);
@@ -38,6 +40,9 @@ public class PropertiesConfiguration extends DefaultConfiguration implements Con
    * If the "apikey" key is present and not empty it will be used, otherwise the fallback
    * to user/pass mode is triggered. Please note that {@link PropertiesConfiguration} is NOT smart,
    * it will not try to fetch apiKey when configuring the app from a properties file and finding only user/pass data!
+   *
+   * @param propertiesFilename the filename (location) of the configuration properties file
+   * @throws IOException if the file could not be found or read
    */
   public PropertiesConfiguration(String propertiesFilename) throws IOException {
     loadPropertiesFile(propertiesFilename);
@@ -52,13 +57,13 @@ public class PropertiesConfiguration extends DefaultConfiguration implements Con
    * it will not try to fetch apiKey when configuring the app from a properties file and finding only user/pass data!
    */
   private void setupAuthMode() {
-    String apiKey = getApiKey();
-    if (!Strings.isNullOrEmpty(apiKey)) {
-      // use the api key
-      forceKeyAuthMode(apiKey);
-    } else {
-      // try to use user / pass mode
+    String apiKey = getStringProperty(P_APIKEY);
+    if (Strings.isNullOrEmpty(apiKey)) {
+      // try to use the user/pass mode instead
       forceUserPassAuthMode(getStringProperty(P_USERNAME), getStringProperty(P_PASSWORD));
+    } else {
+      // ok the key is present, let's use it
+      forceKeyAuthMode(apiKey);
     }
   }
 
@@ -70,11 +75,6 @@ public class PropertiesConfiguration extends DefaultConfiguration implements Con
     FileReader reader = new FileReader(propsFile);
 
     properties.load(reader);
-  }
-
-  @Override
-  public String getApiKey() {
-    return getStringProperty(P_APIKEY);
   }
 
   @Override

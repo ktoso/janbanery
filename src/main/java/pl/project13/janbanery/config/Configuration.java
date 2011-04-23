@@ -1,6 +1,7 @@
 package pl.project13.janbanery.config;
 
 import com.ning.http.client.AsyncHttpClient;
+import pl.project13.janbanery.config.auth.AuthMode;
 
 /**
  * Date: 4/20/11
@@ -8,8 +9,6 @@ import com.ning.http.client.AsyncHttpClient;
  * @author Konrad Malawski
  */
 public interface Configuration {
-
-  String getApiKey();
 
   AuthMode getAuthMode();
 

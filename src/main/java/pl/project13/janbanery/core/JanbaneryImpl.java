@@ -5,7 +5,7 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.project13.janbanery.config.AuthMode;
+import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
@@ -48,11 +48,13 @@ public class JanbaneryImpl implements Tasks, Users {
     return null;
   }
 
-  @Override public List<Task> forUser(User user) {
+  @Override
+  public List<Task> forUser(User user) {
     return null;  //todo implement me
   }
 
-  @Override public List<Task> withPriority(Priority priority) {
+  @Override
+  public List<Task> withPriority(Priority priority) {
     return null;  //todo implement me
   }
 
