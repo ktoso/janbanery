@@ -1,7 +1,6 @@
 package pl.project13.janbanery.resources;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Date: 4/20/11

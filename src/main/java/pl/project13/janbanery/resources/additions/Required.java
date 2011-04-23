@@ -2,9 +2,7 @@ package pl.project13.janbanery.resources.additions;
 
 import com.google.common.annotations.GwtCompatible;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.*;
 
 /**
  * Just a marker annotation to carry the information from the Kanbanery API description right into our resource classes.
@@ -12,8 +10,22 @@ import java.lang.annotation.RetentionPolicy;
  *
  * @author Konrad Malawski
  */
+@Inherited
 @Documented
 @GwtCompatible
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.SOURCE)
 public @interface Required {
+
+  When value() default When.OnCreateOrUpdate;
+
+  /**
+   * Describes when the annotated field should be required to be set
+   */
+  public enum When {
+    Always,
+    OnCreate,
+    OnUpdate,
+    OnCreateOrUpdate
+  }
 }
