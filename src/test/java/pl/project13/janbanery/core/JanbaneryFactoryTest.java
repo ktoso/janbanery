@@ -3,9 +3,10 @@ package pl.project13.janbanery.core;
 import com.ning.http.client.AsyncHttpClient;
 import org.junit.Before;
 import org.junit.Test;
-import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.PropertiesConfiguration;
+import pl.project13.janbanery.config.auth.ApiKeyAuthMode;
+import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.test.TestConstants;
 
 import java.io.FileInputStream;
@@ -39,7 +40,7 @@ public class JanbaneryFactoryTest {
 
     // then, should use API key mode
     AuthMode usedAuthMode = janbanery.getAuthMode();
-    assertThat(usedAuthMode).isEqualTo(API_KEY_MODE);
+    assertThat(usedAuthMode).isInstanceOf(ApiKeyAuthMode.class);
   }
 
   @Test
@@ -55,7 +56,7 @@ public class JanbaneryFactoryTest {
 
     // then, should use API key mode
     AuthMode usedAuthMode = janbanery.getAuthMode();
-    assertThat(usedAuthMode).isEqualTo(API_KEY_MODE);
+    assertThat(usedAuthMode).isInstanceOf(ApiKeyAuthMode.class);
   }
 
 }

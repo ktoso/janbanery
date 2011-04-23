@@ -13,9 +13,10 @@ import pl.project13.janbanery.config.auth.UserPassAuthMode;
  */
 public class DefaultConfiguration implements Configuration {
 
-  private AuthMode authMode = new NoAuthMode();
+  protected AuthMode authMode = new NoAuthMode();
 
-  public DefaultConfiguration() {
+  protected DefaultConfiguration() {
+    // only for use of subclasses, other usages should create a valid Configuration instance right away
   }
 
   public DefaultConfiguration(String apiKey) {

@@ -5,8 +5,8 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.Configuration;
+import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.resources.Priority;
@@ -28,8 +28,7 @@ public class JanbaneryImpl implements Tasks, Users {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-  private Configuration conf;
-
+  private Configuration   conf;
   private AsyncHttpClient asyncHttpClient;
   private Gson            gson;
 
@@ -67,10 +66,11 @@ public class JanbaneryImpl implements Tasks, Users {
   }
 
   public List<Workspace> findAllWorkspaces() throws IOException, ExecutionException, InterruptedException {
-    Future<Response> futureResponse = asyncHttpClient
-        .prepareGet(conf.getApiUrl() + "workspaces.json")
-        .addHeader("X-Kanbanery-ApiToken", conf.getApiKey())
-        .execute();
+    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient
+        .prepareGet(conf.getApiUrl() + "workspaces.json");
+    conf.authorize(requestBuilder);
+
+    Future<Response> futureResponse = requestBuilder.execute();
 
     Response response = futureResponse.get();
     asyncHttpClient.close();
@@ -79,6 +79,7 @@ public class JanbaneryImpl implements Tasks, Users {
     log.info("Fetched response: {}", responseBody);
 
     List<Workspace> workspaces = gson.fromJson(responseBody, GsonTypeTokens.LIST_WORKSPACES);
+    assert workspaces != null : "Workspaces should not be null here";
     return workspaces;
   }
 

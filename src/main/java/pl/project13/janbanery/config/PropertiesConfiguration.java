@@ -2,7 +2,6 @@ package pl.project13.janbanery.config;
 
 import com.google.common.base.Strings;
 import pl.project13.janbanery.config.auth.AuthMode;
-import pl.project13.janbanery.config.auth.NoAuthMode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +20,6 @@ public class PropertiesConfiguration extends DefaultConfiguration implements Con
   private static final String P_PASSWORD             = "password";
 
   private Properties properties = new Properties();
-  private AuthMode   authMode   = new NoAuthMode();
 
   /**
    * Setup the auth mode using the default properties file - {@link PropertiesConfiguration#DEFAULT_PROPS_FILENAME}
