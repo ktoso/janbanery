@@ -33,7 +33,8 @@ public class TasksImpl implements Tasks {
 
   @Override
   public void create(Task task) {
-    //To change body of implemented methods use File | Settings | File Templates.
+    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePost(conf.getApiUrl() + "tasks.json");
+    conf.authorize(requestBuilder);
   }
 
   @Override
@@ -57,7 +58,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public List<Task> forUser(User user) {
+  public List<Task> assignedTo(User user) {
     return null;  //To change body of implemented methods use File | Settings | File Templates.
   }
 

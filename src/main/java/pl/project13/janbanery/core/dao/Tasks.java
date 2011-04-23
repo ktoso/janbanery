@@ -23,7 +23,7 @@ public interface Tasks {
 
   List<Task> assignedToMe();
 
-  List<Task> forUser(User user);
+  List<Task> assignedTo(User user);
 
   List<Task> withPriority(Priority priority);
 }

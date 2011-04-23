@@ -17,17 +17,20 @@ public class Task extends KanbaneryResource implements Serializable {
   @Required
   private String title; // Title
 
-  @Required
+  @Required(alternativeTo = "taskTypeName")
   private Integer taskTypeId; // Task type, ie. "Bug", "Story". Instead of setting this id you can just settask_type_name to "Bug"
+
+  @Required(alternativeTo = "taskTypeId")
+  private String taskTypeName;
 
   @Required
   @Settable(On.Update)
-  private Integer columnId; // Column
+  private Integer columnId;
 
-  private Integer creatorId; // Who created it
+  private Integer creatorId;
 
   @Settable(On.CreateOrUpdate)
-  private String description; // Description
+  private String description;
 
   @Settable(On.CreateOrUpdate)
   private Integer estimateId; // Estimate
@@ -50,6 +53,16 @@ public class Task extends KanbaneryResource implements Serializable {
   public Task() {
   }
 
+  public Task(String title, String taskTypeName) {
+    this.title = title;
+    this.taskTypeName = taskTypeName;
+  }
+
+  public Task(String title, Integer taskTypeId) {
+    this.title = title;
+    this.taskTypeId = taskTypeId;
+  }
+
   public String getTitle() {
     return title;
   }
@@ -64,6 +77,14 @@ public class Task extends KanbaneryResource implements Serializable {
 
   public void setTaskTypeId(Integer taskTypeId) {
     this.taskTypeId = taskTypeId;
+  }
+
+  public String getTaskTypeName() {
+    return taskTypeName;
+  }
+
+  public void setTaskTypeName(String taskTypeName) {
+    this.taskTypeName = taskTypeName;
   }
 
   public Integer getColumnId() {
@@ -160,9 +181,6 @@ public class Task extends KanbaneryResource implements Serializable {
 
     Task task = (Task) o;
 
-    if (priority != null ? !priority.equals(task.priority) : task.priority != null) {
-      return false;
-    }
     if (blocked != null ? !blocked.equals(task.blocked) : task.blocked != null) {
       return false;
     }
@@ -187,10 +205,16 @@ public class Task extends KanbaneryResource implements Serializable {
     if (position != null ? !position.equals(task.position) : task.position != null) {
       return false;
     }
+    if (priority != task.priority) {
+      return false;
+    }
     if (readyToPull != null ? !readyToPull.equals(task.readyToPull) : task.readyToPull != null) {
       return false;
     }
     if (taskTypeId != null ? !taskTypeId.equals(task.taskTypeId) : task.taskTypeId != null) {
+      return false;
+    }
+    if (taskTypeName != null ? !taskTypeName.equals(task.taskTypeName) : task.taskTypeName != null) {
       return false;
     }
     if (title != null ? !title.equals(task.title) : task.title != null) {
@@ -200,21 +224,47 @@ public class Task extends KanbaneryResource implements Serializable {
     return true;
   }
 
-  @Override
-  public int hashCode() {
-    int result = super.hashCode();
-    result = 31 * result + (title != null ? title.hashCode() : 0);
-    result = 31 * result + (taskTypeId != null ? taskTypeId.hashCode() : 0);
-    result = 31 * result + (columnId != null ? columnId.hashCode() : 0);
-    result = 31 * result + (creatorId != null ? creatorId.hashCode() : 0);
-    result = 31 * result + (description != null ? description.hashCode() : 0);
-    result = 31 * result + (estimateId != null ? estimateId.hashCode() : 0);
-    result = 31 * result + (ownerId != null ? ownerId.hashCode() : 0);
-    result = 31 * result + (position != null ? position.hashCode() : 0);
-    result = 31 * result + (priority != null ? priority.hashCode() : 0);
-    result = 31 * result + (readyToPull != null ? readyToPull.hashCode() : 0);
-    result = 31 * result + (blocked != null ? blocked.hashCode() : 0);
-    result = 31 * result + (movedAt != null ? movedAt.hashCode() : 0);
-    return result;
+  // todo generate this using intellij plugin ;-)
+  public static class Builder {
+    private Task task;
+
+    public Builder(String title, Integer taskTypeId) {
+      this.task = new Task(title, taskTypeId);
+    }
+
+    public Builder(String title, String taskTypeName) {
+      this.task = new Task(title, taskTypeName);
+    }
+
+    public Builder priority(Priority priority) {
+      task.priority = priority;
+      return this;
+    }
+
+    public Builder description(String description) {
+      task.description = description;
+      return this;
+    }
+
+    public Builder estimateId(Integer estimateId) {
+      task.estimateId = estimateId;
+      return this;
+    }
+
+    /**
+     * The position in the column, 1 based.
+     *
+     * @param position the position to be set
+     * @return the same builder instance
+     */
+    public Builder position(Integer position) {
+      task.position = position;
+      return this;
+    }
+
+    public Task build() {
+      return task;
+    }
+
   }
 }

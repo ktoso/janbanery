@@ -16,4 +16,9 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.SOURCE)
 public @interface Required {
+  /**
+   * Optionally instead of this field the field named in this annotation may be set.
+   * For example you can set typeId XOR typeName when creating a task.
+   */
+  String alternativeTo() default "";
 }
