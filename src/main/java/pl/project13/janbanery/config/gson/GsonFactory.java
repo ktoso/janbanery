@@ -24,7 +24,7 @@ public class GsonFactory {
         .registerTypeAdapter(DateTime.class, new DateTimeDeserializer())
         .registerTypeAdapter(Priority.class, new PrioritySerializer())
         .registerTypeAdapter(Priority.class, new PriorityDeserializer())
-        .setPrettyPrinting()
+//        .setPrettyPrinting()
         .create();
   }
 

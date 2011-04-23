@@ -6,33 +6,32 @@ import pl.project13.janbanery.config.gson.GsonFactory;
 
 import java.io.Serializable;
 
-import static org.fest.assertions.Assertions.assertThat;
-
 /**
  * @author Konrad Malawski
  */
-public class PriorityMappingTest {
+public class InvalidIncomingJsonTest {
 
   private Gson gson = GsonFactory.create();
 
-  @Test
-  public void shouldConvertValidPriority() throws Exception {
+  // sadly Gson only throws such an exception, nothing more detailed (details are in reason)
+  @Test(expected = Exception.class)
+  public void shouldThrowDueToNoSuchPriority() throws Exception {
     // given
-    String sampleWithPriorityJson = "{priority : 1}";
-
+    String json = "{priority: 22}";
     // when
-    SampleWithPriority sampleWithPriority = gson.fromJson(sampleWithPriorityJson, SampleWithPriority.class);
+    SampleWithPriority sampleWithPriority = gson.fromJson(json, SampleWithPriority.class);
 
-    // then
-    Priority priority = sampleWithPriority.getPriority();
-    assertThat(priority).isInstanceOf(Priority.class);
-    assertThat(priority).isEqualTo(Priority.LOW);
+    // then, deserializer should throw
   }
 
   private static class SampleWithPriority implements Serializable {
     Priority priority;
 
-    SampleWithPriority() {
+    public SampleWithPriority() {
+    }
+
+    public SampleWithPriority(Priority priority) {
+      this.priority = priority;
     }
 
     public Priority getPriority() {
