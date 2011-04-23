@@ -7,6 +7,7 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.auth.ApiKeyAuthMode;
 import pl.project13.janbanery.config.auth.AuthMode;
+import pl.project13.janbanery.config.auth.UserPassAuthMode;
 import pl.project13.janbanery.test.TestConstants;
 
 import java.io.FileInputStream;
@@ -44,7 +45,23 @@ public class JanbaneryFactoryTest {
   }
 
   @Test
-  public void shouldBeForcedToStayInUserPasswordMode() throws Exception {
+  public void shouldConnectAndKeepUsingUserPassMode() throws Exception {
+    // given
+    Properties properties = new Properties();
+    properties.load(new FileInputStream(TestConstants.VALID_CONF_FILE_LOCATION));
+    String user = (String) properties.get("username");
+    String password = (String) properties.get("password");
+
+    // when
+    JanbaneryImpl janbanery = janbaneryFactory.connectAndKeepUsing(user, password);
+
+    // then, should use API key mode
+    AuthMode usedAuthMode = janbanery.getAuthMode();
+    assertThat(usedAuthMode).isInstanceOf(UserPassAuthMode.class);
+  }
+
+  @Test
+  public void shouldLoginWithUserPassButThenFallbackToApiKeyMode() throws Exception {
     // given
     Properties properties = new Properties();
     properties.load(new FileInputStream(TestConstants.VALID_CONF_FILE_LOCATION));
