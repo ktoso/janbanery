@@ -22,29 +22,51 @@
             <name>Maven Central</name>
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
+        <repository>
+            <id>reflections-repo</id>
+            <name>Reflections Maven2 Repository</name>
+            <url>http://reflections.googlecode.com/svn/repo</url>
+        </repository>
     </repositories>
 
-
     <dependencies>
+        <!-- async http client -->
         <dependency>
             <groupId>com.ning</groupId>
             <artifactId>async-http-client</artifactId>
             <version>1.6.3</version>
         </dependency>
+        <!-- gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>1.7.1</version>
         </dependency>
+        <!-- guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>r09</version>
         </dependency>
+        <!-- joda time -->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>1.6.2</version>
+        </dependency>
+        <!-- reflections -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.5-RC2</version>
+        </dependency>
+        <!-- effectively needed when XmlSerializer is used -->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6</version>
+            <!--<scope>runtime</scope>-->
+            <optional>true</optional>
         </dependency>
 
         <!-- Logging -->
@@ -64,6 +86,7 @@
             <version>0.9.28</version>
         </dependency>
 
+        <!-- test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

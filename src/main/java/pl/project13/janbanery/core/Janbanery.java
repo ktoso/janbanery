@@ -9,6 +9,7 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.dao.*;
+import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.exceptions.ProjectNotFoundException;
 import pl.project13.janbanery.resources.Project;
@@ -34,6 +35,7 @@ public class Janbanery {
 
   private Workspace currentWorkspace;
   private Project   currentProject;
+  private ReflectionsBodyGenerator bodyGenerator = new ReflectionsBodyGenerator();
 
   public Janbanery(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson) {
     this.conf = conf;
@@ -130,7 +132,8 @@ public class Janbanery {
   /* return initially setup instances of dao objects */
 
   public Tasks tasks() {
-    return new TasksImpl(conf, gson, asyncHttpClient).using(currentWorkspace, currentProject);
+    // todo remove the new here, it'll use the rest client
+    return new TasksImpl(conf, gson, asyncHttpClient, bodyGenerator).using(currentWorkspace, currentProject);
   }
 
   public TaskTypes taskTypes() {

@@ -4,6 +4,7 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.ListenableFuture;
 import com.ning.http.client.Response;
 import pl.project13.janbanery.config.Configuration;
+import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.exceptions.RestClientException;
 import pl.project13.janbanery.exceptions.kanbanery.*;
 
@@ -23,12 +24,14 @@ public class RestClient {
 
   // todo replace in place HttpClient calls with this facade
 
-  private Configuration   conf;
-  private AsyncHttpClient asyncHttpClient;
+  private Configuration               conf;
+  private AsyncHttpClient             asyncHttpClient;
+  private FormUrlEncodedBodyGenerator encodedBodyGenerator;
 
-  public RestClient(Configuration conf, AsyncHttpClient asyncHttpClient) {
+  public RestClient(Configuration conf, AsyncHttpClient asyncHttpClient, FormUrlEncodedBodyGenerator encodedBodyGenerator) {
     this.conf = conf;
     this.asyncHttpClient = asyncHttpClient;
+    this.encodedBodyGenerator = encodedBodyGenerator;
   }
 
   public Response doGet(String resource) {

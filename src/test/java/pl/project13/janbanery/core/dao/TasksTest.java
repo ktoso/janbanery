@@ -8,6 +8,7 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
+import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestConstants;

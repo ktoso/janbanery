@@ -9,13 +9,12 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
+import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.resources.*;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
-import static java.lang.String.format;
 
 /**
  * @author Konrad Malawski
@@ -24,17 +23,19 @@ public class TasksImpl implements Tasks {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-  private Configuration   conf;
-  private Gson            gson;
-  private AsyncHttpClient asyncHttpClient;
+  private Configuration               conf;
+  private Gson                        gson;
+  private AsyncHttpClient             asyncHttpClient;
+  private FormUrlEncodedBodyGenerator formUrlEncodedBodyGenerator;
 
   private Workspace currentWorkspace;
   private Project   currentProject;
 
-  public TasksImpl(Configuration conf, Gson gson, AsyncHttpClient asyncHttpClient) {
+  public TasksImpl(Configuration conf, Gson gson, AsyncHttpClient asyncHttpClient, FormUrlEncodedBodyGenerator formUrlEncodedBodyGenerator) {
     this.conf = conf;
     this.gson = gson;
     this.asyncHttpClient = asyncHttpClient;
+    this.formUrlEncodedBodyGenerator = formUrlEncodedBodyGenerator;
   }
 
   @Override
@@ -47,11 +48,7 @@ public class TasksImpl implements Tasks {
 
     // todo refactor this
     String taskField = "task[%s]";
-    requestBuilder
-        .addQueryParameter(format(taskField, "title"), task.getTitle())
-        .addQueryParameter(format(taskField, "description"), task.getDescription())
-        .addQueryParameter(format(taskField, "task_type_name"), task.getTaskTypeName())
-        .addQueryParameter(format(taskField, "priority"), task.getPriority().idString());
+    requestBuilder.setBody(formUrlEncodedBodyGenerator.asString(task));
 
     ListenableFuture<Response> futureResponse = requestBuilder.execute();
     Response response = futureResponse.get();
