@@ -43,10 +43,10 @@ public class ReflectionsBodyGenerator implements FormUrlEncodedBodyGenerator {
     Collection<String> fields = getAllFields(entity);
     log.info("{} has {} fields in total.", resourceId, fields.size());
 
-    Collection<String> fieldsToBeSet = filter(fields, new SettableAndNotNulFieldsPredicate(entity));
+    Collection<String> fieldsToBeSet = filter(fields, new SettableAndNotNulFieldsPredicate<T>(entity));
     log.info("{} has {} fields to be set (not null and @Settable)", resourceId, fieldsToBeSet.size());
 
-    Collection<String> fieldsWithValues = transform(fieldsToBeSet, new FieldNameToArrayNotationWithValueFunction(entity));
+    Collection<String> fieldsWithValues = transform(fieldsToBeSet, new FieldNameToArrayNotationWithValueFunction<T>(entity));
     log.info("Prepared array notation of data for {}", resourceId);
 
     return joinDataParts(fieldsWithValues);

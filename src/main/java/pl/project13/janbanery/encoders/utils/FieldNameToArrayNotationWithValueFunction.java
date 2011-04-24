@@ -19,7 +19,7 @@ public class FieldNameToArrayNotationWithValueFunction<T extends KanbaneryResour
 
   private T entity;
 
-  private ReflectionHelper reflectionHelper;
+  private ReflectionHelper reflectionHelper = new ReflectionHelper();
 
   public FieldNameToArrayNotationWithValueFunction(T entity) {
     this.entity = entity;

@@ -23,6 +23,6 @@ public class ReflectionsBodyGeneratorTest {
     String encodedString = reflectionsBodyGenerator.asString(task);
 
     // then
-    assertThat(encodedString).isEqualTo("tasks[title]=Title&tasks[taskTypeName]"); // todo
+    assertThat(encodedString).isEqualTo("tasks[title]=Title&tasks[task_type_name]=Bug"); // todo
   }
 }

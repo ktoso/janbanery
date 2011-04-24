@@ -4,13 +4,13 @@ import com.google.common.base.Predicate;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
 /**
-* @author Konrad Malawski
-*/
+ * @author Konrad Malawski
+ */
 public class SettableAndNotNulFieldsPredicate<T extends KanbaneryResource> implements Predicate<String> {
 
   private T entity;
 
-  private ReflectionHelper reflectionHelper;
+  private ReflectionHelper reflectionHelper = new ReflectionHelper();
 
   public SettableAndNotNulFieldsPredicate(T entity) {
     this.entity = entity;
@@ -18,13 +18,7 @@ public class SettableAndNotNulFieldsPredicate<T extends KanbaneryResource> imple
 
   @Override
   public boolean apply(String fieldName) {
-    Object fieldValue = null;
-
-    try {
-      fieldValue = reflectionHelper.getFieldValue(entity, fieldName);
-    } catch (NullPointerException ignored) {
-      return false; // ok, we won't include it then
-    }
+    Object fieldValue = reflectionHelper.getFieldValueOrNull(entity, fieldName);
 
     return fieldValue != null;
   }
