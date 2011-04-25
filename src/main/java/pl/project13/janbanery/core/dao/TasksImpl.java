@@ -7,6 +7,7 @@ import com.ning.http.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
+import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
@@ -39,16 +40,16 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public void create(Task task) throws IOException, ExecutionException, InterruptedException {
+  public Task create(Task task) throws IOException, ExecutionException, InterruptedException {
     String url = conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "tasks.json"; // todo externalize better, it's a resource url after all
     log.info("Calling POST on: " + url);
 
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePost(url);
     conf.authorize(requestBuilder);
 
-    // todo refactor this
-    String taskField = "task[%s]";
-    requestBuilder.setBody(formUrlEncodedBodyGenerator.asString(task));
+    String requestBody = formUrlEncodedBodyGenerator.asString(task);
+    log.info("Generated request body is: '{}'", requestBody);
+    requestBuilder.setBody(requestBody);
 
     ListenableFuture<Response> futureResponse = requestBuilder.execute();
     Response response = futureResponse.get();
@@ -57,11 +58,16 @@ public class TasksImpl implements Tasks {
     RestClient.verifyResponseCode(response);
 
     log.info("Got response for creating task: {}", responseBody);
+
+    return gson.fromJson(responseBody, GsonTypeTokens.TASK);
   }
 
   @Override
-  public void createInIcebox(Task task) {
+  public Task createInIcebox(Task task) {
     // todo implement me
+
+    String responseBody = ""; // todo implement me
+    return gson.fromJson(responseBody, GsonTypeTokens.TASK);
   }
 
   @Override

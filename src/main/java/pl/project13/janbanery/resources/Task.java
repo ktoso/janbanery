@@ -2,6 +2,7 @@ package pl.project13.janbanery.resources;
 
 import org.joda.time.DateTime;
 import pl.project13.janbanery.resources.additions.On;
+import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
 
@@ -14,11 +15,14 @@ import java.io.Serializable;
  */
 public class Task extends KanbaneryResource implements Serializable {
 
+  @ReadOnly
+  private Long id;
+
   @Required
   private String title; // Title
 
   @Required(alternativeTo = "taskTypeName")
-  private Integer taskTypeId; // Task type, ie. "Bug", "Story". Instead of setting this id you can just settask_type_name to "Bug"
+  private Long taskTypeId; // Task type, ie. "Bug", "Story". Instead of setting this id you can just settask_type_name to "Bug"
 
   @Required(alternativeTo = "taskTypeId")
   private String taskTypeName;
@@ -50,12 +54,16 @@ public class Task extends KanbaneryResource implements Serializable {
 
   private DateTime movedAt; // On task was moved to currentUser column
 
+  @Override
+  public String getResourceId() {
+    return "task";
+  }
+
   public Task() {
   }
 
-  @Override
-  public String getResourceId() {
-    return "tasks";
+  public Task(String title) {
+    this.title = title;
   }
 
   public Task(String title, String taskTypeName) {
@@ -63,7 +71,7 @@ public class Task extends KanbaneryResource implements Serializable {
     this.taskTypeName = taskTypeName;
   }
 
-  public Task(String title, Integer taskTypeId) {
+  public Task(String title, Long taskTypeId) {
     this.title = title;
     this.taskTypeId = taskTypeId;
   }
@@ -76,11 +84,11 @@ public class Task extends KanbaneryResource implements Serializable {
     this.title = title;
   }
 
-  public Integer getTaskTypeId() {
+  public Long getTaskTypeId() {
     return taskTypeId;
   }
 
-  public void setTaskTypeId(Integer taskTypeId) {
+  public void setTaskTypeId(Long taskTypeId) {
     this.taskTypeId = taskTypeId;
   }
 
@@ -233,12 +241,16 @@ public class Task extends KanbaneryResource implements Serializable {
   public static class Builder {
     private Task task;
 
-    public Builder(String title, Integer taskTypeId) {
+    public Builder(String title, Long taskTypeId) {
       this.task = new Task(title, taskTypeId);
     }
 
     public Builder(String title, String taskTypeName) {
       this.task = new Task(title, taskTypeName);
+    }
+
+    public Builder(String title) {
+      this.task = new Task(title);
     }
 
     public Builder priority(Priority priority) {
@@ -267,9 +279,18 @@ public class Task extends KanbaneryResource implements Serializable {
       return this;
     }
 
+    public Builder taskTypeId(Long taskTypeId) {
+      task.taskTypeId = taskTypeId;
+      return this;
+    }
+
+    public Builder taskType(TaskType taskType) {
+      task.taskTypeId = taskType.getId();
+      return this;
+    }
+
     public Task build() {
       return task;
     }
-
   }
 }

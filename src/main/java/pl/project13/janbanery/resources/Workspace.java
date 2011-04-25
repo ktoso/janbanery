@@ -26,7 +26,7 @@ public class Workspace extends KanbaneryResource implements Serializable {
 
   @Override
   public String getResourceId() {
-    return "workspaces";
+    return "workspace";
   }
 
   public Integer getId() {

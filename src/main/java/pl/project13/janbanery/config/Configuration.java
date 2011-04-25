@@ -20,5 +20,5 @@ public interface Configuration {
 
   AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder);
 
-  String getApiUrl(String workspaceName, Integer projectId);
+  String getApiUrl(String workspaceName, Long projectId);
 }

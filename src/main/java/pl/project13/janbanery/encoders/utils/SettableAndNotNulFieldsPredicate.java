@@ -18,7 +18,7 @@ public class SettableAndNotNulFieldsPredicate<T extends KanbaneryResource> imple
 
   @Override
   public boolean apply(String fieldName) {
-    Object fieldValue = reflectionHelper.getFieldValueOrNull(entity, fieldName);
+    Object fieldValue = reflectionHelper.getFieldValueRepresentationOrNull(entity, fieldName);
 
     return fieldValue != null;
   }

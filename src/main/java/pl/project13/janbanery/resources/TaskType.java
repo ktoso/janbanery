@@ -8,17 +8,28 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class TaskType extends KanbaneryResource implements Serializable {
-  String  name; // Name
-  Integer colorCode; // Color code
-  Integer projectId; // Project to which the task type is assigned
-  Integer position; // Position in project's task types list, 1-based
+  private Long    id;
+  private String  name; // Name
+  private Integer colorCode; // Color code
+  private String  backgroundColor; // background color of label
+  private String  textColor;
+  private Integer projectId; // Project to which the task type is assigned
+  private Integer position; // Position in project's task types list, 1-based
+
+  @Override
+  public String getResourceId() {
+    return "task_type";
+  }
 
   public TaskType() {
   }
 
-  @Override
-  public String getResourceId() {
-    return "task_types";
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -53,6 +64,22 @@ public class TaskType extends KanbaneryResource implements Serializable {
     this.position = position;
   }
 
+  public String getBackgroundColor() {
+    return backgroundColor;
+  }
+
+  public void setBackgroundColor(String backgroundColor) {
+    this.backgroundColor = backgroundColor;
+  }
+
+  public String getTextColor() {
+    return textColor;
+  }
+
+  public void setTextColor(String textColor) {
+    this.textColor = textColor;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -61,13 +88,19 @@ public class TaskType extends KanbaneryResource implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     TaskType taskType = (TaskType) o;
 
+    if (backgroundColor != null ? !backgroundColor.equals(taskType.backgroundColor) : taskType.backgroundColor != null) {
+      return false;
+    }
     if (colorCode != null ? !colorCode.equals(taskType.colorCode) : taskType.colorCode != null) {
       return false;
     }
-    if (createdAt != null ? !createdAt.equals(taskType.createdAt) : taskType.createdAt != null) {
+    if (id != null ? !id.equals(taskType.id) : taskType.id != null) {
       return false;
     }
     if (name != null ? !name.equals(taskType.name) : taskType.name != null) {
@@ -79,10 +112,7 @@ public class TaskType extends KanbaneryResource implements Serializable {
     if (projectId != null ? !projectId.equals(taskType.projectId) : taskType.projectId != null) {
       return false;
     }
-    if (type != null ? !type.equals(taskType.type) : taskType.type != null) {
-      return false;
-    }
-    if (updatedAt != null ? !updatedAt.equals(taskType.updatedAt) : taskType.updatedAt != null) {
+    if (textColor != null ? !textColor.equals(taskType.textColor) : taskType.textColor != null) {
       return false;
     }
 
@@ -91,13 +121,14 @@ public class TaskType extends KanbaneryResource implements Serializable {
 
   @Override
   public int hashCode() {
-    int result = name != null ? name.hashCode() : 0;
+    int result = super.hashCode();
+    result = 31 * result + (id != null ? id.hashCode() : 0);
+    result = 31 * result + (name != null ? name.hashCode() : 0);
     result = 31 * result + (colorCode != null ? colorCode.hashCode() : 0);
+    result = 31 * result + (backgroundColor != null ? backgroundColor.hashCode() : 0);
+    result = 31 * result + (textColor != null ? textColor.hashCode() : 0);
     result = 31 * result + (projectId != null ? projectId.hashCode() : 0);
     result = 31 * result + (position != null ? position.hashCode() : 0);
-    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
-    result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }
 }

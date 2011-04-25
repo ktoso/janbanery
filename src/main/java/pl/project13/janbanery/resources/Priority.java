@@ -8,7 +8,7 @@ import pl.project13.janbanery.exceptions.NoSuchPriorityException;
  *
  * @author Konrad Malawski
  */
-public enum Priority {
+public enum Priority implements KanbaneryEnumResource {
   LOW(0),
   MEDIUM(1),
   HIGH(2);
@@ -23,7 +23,8 @@ public enum Priority {
     return priorityId;
   }
 
-  public String idString() {
+  @Override
+  public String jsonRepresentation() {
     return String.valueOf(priorityId);
   }
 

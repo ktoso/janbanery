@@ -13,9 +13,9 @@ public interface Tasks {
 
   // commands
 
-  void create(Task task) throws IOException, ExecutionException, InterruptedException;
+  Task create(Task task) throws IOException, ExecutionException, InterruptedException;
 
-  void createInIcebox(Task task);
+  Task createInIcebox(Task task);
 
   TaskMoveFlow move(Task task);
 

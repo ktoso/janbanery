@@ -1,10 +1,13 @@
 package pl.project13.janbanery.encoders.utils;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -29,7 +32,17 @@ public class FieldNameToArrayNotationWithValueFunction<T extends KanbaneryResour
   public String apply(String fieldName) {
     String resourceId = entity.getResourceId();
     String underscoredFieldName = camelCaseToUnderscore(fieldName);
-    Object value = reflectionHelper.getFieldValueOrNull(entity, fieldName);
+    Object value = reflectionHelper.getFieldValueRepresentationOrNull(entity, fieldName);
+
+    return asEncodedFieldRepresentation(resourceId, underscoredFieldName, value);
+  }
+
+  private String asEncodedFieldRepresentation(String resourceId, String underscoredFieldName, Object value) {
+    try {
+      value = URLEncoder.encode(value.toString(), Charsets.UTF_8.name());
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
     return String.format(fieldRepresentation, resourceId, underscoredFieldName, value);
   }
 

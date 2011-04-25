@@ -11,8 +11,8 @@ import java.io.Serializable;
  */
 @ReadOnly
 public class Project extends KanbaneryResource implements Serializable {
-  private Integer id; // Project id
-  private String  name; // Project name
+  private Long   id; // Project id
+  private String name; // Project name
 //  private String  url; // Full URL to the project
 
   public Project() {
@@ -22,11 +22,11 @@ public class Project extends KanbaneryResource implements Serializable {
     return "projects";
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

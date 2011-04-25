@@ -8,7 +8,6 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
-import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestConstants;
@@ -37,7 +36,8 @@ public class TasksTest {
     // given
     janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
 
-    Task bug = new Task.Builder("New Task from Janbanery", janbanery.taskTypes().any().getName())
+    Task bug = new Task.Builder("JanbaneryTask")
+        .taskType(janbanery.taskTypes().any())
         .description("A task I have created using the Janbanery library")
         .priority(Priority.MEDIUM)
         .build();

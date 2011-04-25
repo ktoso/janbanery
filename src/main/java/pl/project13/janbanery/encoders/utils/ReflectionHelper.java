@@ -1,6 +1,7 @@
 package pl.project13.janbanery.encoders.utils;
 
 import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
+import pl.project13.janbanery.resources.KanbaneryEnumResource;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
 import java.lang.reflect.Field;
@@ -14,14 +15,20 @@ import java.lang.reflect.Field;
  */
 class ReflectionHelper {
 
-  Object getFieldValue(Object entity, String fieldName) {
+  Object getFieldValueRepresentation(Object entity, String fieldName) {
     Object fieldValue = null;
 
     try {
       Class clazz = entity.getClass();
       Field field = clazz.getDeclaredField(fieldName);
       field.setAccessible(true);
-      fieldValue = field.get(entity);
+
+      if (field.getType().isEnum()) {
+        KanbaneryEnumResource enumResource = (KanbaneryEnumResource) field.get(entity);
+        fieldValue = enumResource.jsonRepresentation();
+      } else {
+        fieldValue = field.get(entity);
+      }
     } catch (IllegalAccessException e) {
       e.printStackTrace();
     } catch (NoSuchFieldException e) {
@@ -31,11 +38,11 @@ class ReflectionHelper {
     return fieldValue;
   }
 
-  public Object getFieldValueOrNull(Object entity, String fieldName) {
+  public Object getFieldValueRepresentationOrNull(Object entity, String fieldName) {
     Object fieldValue = null;
 
     try {
-      fieldValue = getFieldValue(entity, fieldName);
+      fieldValue = getFieldValueRepresentation(entity, fieldName);
     } catch (NullPointerException ignored) {
       // ok, no problem (the value was null seemingly)
     }

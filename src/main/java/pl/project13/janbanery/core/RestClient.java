@@ -57,8 +57,6 @@ public class RestClient {
       throw new RestClientException("Tried to retrieve result from aborted action.", e);
     } catch (IOException e) {
       throw new RestClientException("Encountered IOException while executing REST request.", e);
-    } finally {
-//      asyncHttpClient.close();
     }
 
     verifyResponseCode(response);
@@ -72,15 +70,15 @@ public class RestClient {
 
     switch (statusCode) {
       case DeleteFailedKanbaneryException.MAPPED_ERROR_CODE:
-        throw new DeleteFailedKanbaneryException(response.toString());
+        throw new DeleteFailedKanbaneryException(errorMessageFrom(response));
       case ForbiddenOperationKanbaneryException.MAPPED_ERROR_CODE:
-        throw new ForbiddenOperationKanbaneryException(response.toString());
+        throw new ForbiddenOperationKanbaneryException(errorMessageFrom(response));
       case InternalServerErrorKanbaneryException.MAPPED_ERROR_CODE:
-        throw new InternalServerErrorKanbaneryException(response.toString());
+        throw new InternalServerErrorKanbaneryException(errorMessageFrom(response));
       case InvalidEntityKanbaneryException.MAPPED_ERROR_CODE:
-        throw new InvalidEntityKanbaneryException(response.toString());
+        throw new InvalidEntityKanbaneryException(errorMessageFrom(response));
       case UnauthorizedKanbaneryException.MAPPED_ERROR_CODE:
-        throw new UnauthorizedKanbaneryException(response.toString());
+        throw new UnauthorizedKanbaneryException(errorMessageFrom(response));
     }
 
     if (statusCode > 400) {
@@ -88,5 +86,17 @@ public class RestClient {
     }
 
 
+  }
+
+  private static String errorMessageFrom(Response response) {
+    StringBuilder sb = new StringBuilder().append(response.getStatusCode()).append(" - ").append(response.getStatusText()).append("\n");
+    try {
+      sb.append(response.getResponseBody());
+    } catch (IOException ignored) {
+      // ok, so no response could be fetched
+      sb.append("[EXCEPTION WHILE GETTING RESPONSE BODY]");
+    }
+
+    return sb.toString();
   }
 }

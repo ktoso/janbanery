@@ -8,7 +8,7 @@ import pl.project13.janbanery.exceptions.NoSuchPermissionException;
  *
  * @author Konrad Malawski
  */
-public enum Permission {
+public enum Permission implements KanbaneryEnumResource {
   MANAGER("manager"),
   MEMBER("member"),
   VIEWER("viewer");
@@ -19,7 +19,8 @@ public enum Permission {
     this.jsonName = jsonName;
   }
 
-  public String jsonName() {
+  @Override
+  public String jsonRepresentation() {
     return jsonName;
   }
 
