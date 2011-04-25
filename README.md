@@ -25,6 +25,31 @@ You may also consider building it from source by `git clone`-ing this project an
 
 Usage
 =====
+Logging in
+----------
+
+Queries
+-------
+
+Commands
+--------
+
+Exceptions
+----------
+There are two kinds of exceptions, those who inherit from **KanbaneryException** and those that don't.
+The first kind of exceptions are thrown by Kanbanery (serverside), so for example your Task title may be too long etc,
+these exceptions are mapped back to Janbanery as appropriate exceptions and the response information from the server will
+be passed allong with it so you know how to deal with it, for example:
+
+```
+pl.project13.janbanery.exceptions.kanbanery.InvalidEntityKanbaneryException: 422 - Unprocessable Entity
+{"title":["Title must not be blank"],"task_type_id":["must be set"]}
+	at pl.project13.janbanery.core.RestClient.verifyResponseCode(RestClient.java:79)
+	at pl.project13.janbanery.core.dao.TasksImpl.create(TasksImpl.java:57)
+```
+So they're quite useful - please don't ignore them :-)
+
+The other kind of exceptions are problems with the client side of the API, aby wait timeouts etc...
 
 Links and resources
 ===================
