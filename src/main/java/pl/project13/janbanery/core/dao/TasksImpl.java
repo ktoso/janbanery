@@ -57,7 +57,7 @@ public class TasksImpl implements Tasks {
 
     RestClient.verifyResponseCode(response);
 
-    log.info("Got response for creating task: {}", responseBody);
+    log.debug("Got response for creating task: {}", responseBody);
 
     return gson.fromJson(responseBody, GsonTypeTokens.TASK);
   }
@@ -76,8 +76,21 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public List<Task> all() {
-    return null;  // todo implement me.
+  public List<Task> all() throws IOException, ExecutionException, InterruptedException {
+    String url = conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "tasks.json"; // todo externalize better, it's a resource url after all
+    log.info("Calling GET on: " + url);
+
+    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareGet(url);
+    conf.authorize(requestBuilder);
+
+    ListenableFuture<Response> futureResponse = requestBuilder.execute();
+    Response response = futureResponse.get();
+    String responseBody = response.getResponseBody();
+
+    RestClient.verifyResponseCode(response);
+    log.debug("Got response for all tasks: {}", responseBody);
+
+    return gson.fromJson(responseBody, GsonTypeTokens.LIST_TASK);
   }
 
   @Override

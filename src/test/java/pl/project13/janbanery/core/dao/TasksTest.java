@@ -12,6 +12,9 @@ import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestConstants;
 
+import java.util.List;
+
+import static org.fest.assertions.Assertions.assertThat;
 import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
 
 /**
@@ -43,10 +46,11 @@ public class TasksTest {
         .build();
 
     // when
-    janbanery.tasks().create(bug);
+    Task newTask = janbanery.tasks().create(bug);
 
     // then, should have created the task
-    // todo add assertions
+    List<Task> all = janbanery.tasks().all();
+    assertThat(all).onProperty("id").contains(newTask.getId());
   }
 
 }

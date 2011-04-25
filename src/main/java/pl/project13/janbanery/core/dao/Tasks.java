@@ -21,7 +21,7 @@ public interface Tasks {
 
   // queries
 
-  List<Task> all();
+  List<Task> all() throws IOException, ExecutionException, InterruptedException;
 
   List<Task> assignedToMe();
 

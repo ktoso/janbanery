@@ -31,6 +31,7 @@ public class Task extends KanbaneryResource implements Serializable {
   @Settable(On.Update)
   private Integer columnId;
 
+  @ReadOnly
   private Integer creatorId;
 
   @Settable(On.CreateOrUpdate)
@@ -52,6 +53,7 @@ public class Task extends KanbaneryResource implements Serializable {
 
   private Boolean blocked; // If task is blocked by other task(s)
 
+  @ReadOnly
   private DateTime movedAt; // On task was moved to currentUser column
 
   @Override
@@ -235,6 +237,14 @@ public class Task extends KanbaneryResource implements Serializable {
     }
 
     return true;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   // todo generate this using intellij plugin ;-)

@@ -22,10 +22,11 @@ public class GsonTypeTokens {
   }.getType();
   public static final Type LIST_TASK_TYPE  = new TypeToken<List<TaskType>>() {
   }.getType();
+  public static final Type LIST_TASK       = new TypeToken<List<Task>>() {
+  }.getType();
 
   // simple types
 
-  // todo hm, should I keep these for the sake of "one style"?
   public static final Class<User> USER = User.class;
   public static final Class<Task> TASK = Task.class;
 }
