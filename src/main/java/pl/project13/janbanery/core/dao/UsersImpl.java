@@ -5,12 +5,10 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
-import pl.project13.janbanery.exceptions.UserNotFoundException;
 import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Konrad Malawski
@@ -31,7 +29,7 @@ public class UsersImpl implements Users {
 
   @Override
   public User current() throws IOException {
-    String url = conf.getApiUrl().replace("user/", "user.json"); // todo this sucks
+    String url = conf.getApiUrl() + "user.json"; // todo this sucks
 
     User user = restClient.doGet(url, GsonTypeTokens.USER);
     return user;

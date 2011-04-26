@@ -134,6 +134,19 @@ public class RestClient {
     return (T) gson.fromJson(responseBody, returnType);
   }
 
+  public Response doDelete(String url) {
+    log.info("Calling DELETE on: " + url);
+
+    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareDelete(url);
+    authorize(requestBuilder);
+
+    Response response = execute(requestBuilder);
+
+    verifyResponseCode(response);
+
+    return response;
+  }
+
   private void authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
     conf.authorize(requestBuilder);
   }

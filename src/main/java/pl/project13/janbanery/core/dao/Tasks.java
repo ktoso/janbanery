@@ -19,7 +19,7 @@ public interface Tasks {
 
   TaskFlow create(Task task) throws IOException, ExecutionException, InterruptedException;
 
-  TaskFlow createInIcebox(Task task);
+  TaskFlow createInIcebox(Task task) throws IOException;
 
   // archive---------------------------
 

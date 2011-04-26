@@ -5,7 +5,10 @@ import pl.project13.janbanery.config.auth.ApiKeyAuthMode;
 import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.auth.NoAuthMode;
 import pl.project13.janbanery.config.auth.UserPassAuthMode;
+import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
+
+import static java.lang.String.format;
 
 /**
  * Date: 4/20/11
@@ -47,7 +50,7 @@ public class DefaultConfiguration implements Configuration {
    * {@inheritDoc}
    */
   @Override
-  public boolean isCurrentUser(User user){
+  public boolean isCurrentUser(User user) {
     return authMode.isCurrentUser(user);
   }
 
@@ -58,12 +61,22 @@ public class DefaultConfiguration implements Configuration {
 
   @Override
   public String getApiUrl() {
-    return "https://kanbanery.com/api/v1/user/";
+    return "https://kanbanery.com/api/v1/";
+  }
+
+  @Override
+  public String getApiUrl(String workspaceName) {
+    return format("https://%s.kanbanery.com/api/v1/", workspaceName);
+  }
+
+  @Override
+  public String getApiUrl(String workspaceName, Task task) {
+    return format("https://%s.kanbanery.com/api/v1/tasks/%d.json", workspaceName, task.getId());
   }
 
   @Override
   public String getApiUrl(String workspaceName, Long projectId) {
-    return String.format("https://%s.kanbanery.com/api/v1/projects/%s/", workspaceName, projectId);
+    return format("https://%s.kanbanery.com/api/v1/projects/%s/", workspaceName, projectId);
   }
 
 }

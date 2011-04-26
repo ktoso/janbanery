@@ -2,6 +2,7 @@ package pl.project13.janbanery.config;
 
 import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.config.auth.AuthMode;
+import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
 
 /**
@@ -12,8 +13,6 @@ import pl.project13.janbanery.resources.User;
 public interface Configuration {
 
   AuthMode getAuthMode();
-
-  String getApiUrl();
 
   void forceUserPassAuthMode(String user, String password);
 
@@ -31,4 +30,12 @@ public interface Configuration {
    * @return true if the user is "us", false otherwise
    */
   boolean isCurrentUser(User user);
+
+  // api urls
+
+  String getApiUrl();
+
+  String getApiUrl(String workspaceName);
+
+  String getApiUrl(String workspaceName, Task task);
 }

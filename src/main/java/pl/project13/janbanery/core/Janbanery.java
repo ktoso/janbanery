@@ -49,7 +49,7 @@ public class Janbanery {
 
   public List<Workspace> workspaces() throws IOException, ExecutionException, InterruptedException {
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient
-        .prepareGet(conf.getApiUrl() + "workspaces.json");
+        .prepareGet(conf.getApiUrl() + "user/workspaces.json");
     conf.authorize(requestBuilder);
 
     Future<Response> futureResponse = requestBuilder.execute();

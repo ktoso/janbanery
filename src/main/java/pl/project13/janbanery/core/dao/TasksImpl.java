@@ -56,29 +56,24 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public void delete(Task task) throws IOException, ExecutionException, InterruptedException {
-    // todo implement me.
+  public void delete(Task task) throws IOException {
+    String url = getDeleteUrl(task);
+    restClient.doDelete(url);
   }
 
   @Override
-  public TaskFlow createInIcebox(Task task) {
-    if (1 == 1) {
-      throw new NotYetImplementedException(); // todo implement me
-    }
-
-    String responseBody = ""; // todo implement me
-    Task newTask = gson.fromJson(responseBody, GsonTypeTokens.TASK);
-    return new TaskFlowImpl(this, newTask);
+  public TaskFlow createInIcebox(Task task) throws IOException {
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void archive(Task task) throws IOException, ExecutionException, InterruptedException {
-    // todo implement me.
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void archiveAllInLastColumn() throws IOException {
-    // todo implement me.
+    throw new NotYetImplementedException();
   }
 
   @Override
@@ -168,12 +163,16 @@ public class TasksImpl implements Tasks {
 
   /**
    * The url prepared for most GET requests on this resource,
-   * it looks like: https://WORKSPACE.kanbanery.com/api/v1/projects/PROJECT_ID/archive/tasks.json
+   * it looks like: https://WORKSPACE.kanbanery.com/api/v1/projects/PROJECT_ID/tasks.json
    *
    * @return url string prepared for querying for data
    */
   private String getDefaultGetUrl() {
     return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "tasks.json";
+  }
+
+  private String getDeleteUrl(Task task) {
+    return conf.getApiUrl(currentWorkspace.getName(), task);
   }
 
   // ------------------------- inner predicate classes ------------------------
