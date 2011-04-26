@@ -70,6 +70,7 @@ public class ReflectionsFactory {
 
     String uselessPathPart = "pl/project13/janbanery/resources";
     if (urlForClass.getPath().contains(uselessPathPart)) {
+      log.info("Apply path fix ({} -> ...)", urlForClass.getPath());
       try {
         String path = urlForClass.getPath();
         int from = path.indexOf(uselessPathPart);
