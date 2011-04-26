@@ -3,6 +3,7 @@ package pl.project13.janbanery.core.dao;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskMarkFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
+import pl.project13.janbanery.core.flow.TaskUpdateFlow;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
@@ -42,6 +43,8 @@ public interface Tasks {
   TaskFlow move(Task task, Column column) throws IOException;
 
   // state changes --------------------
+
+  TaskUpdateFlow update(Task task);
 
   TaskFlow update(Task task, Task newValues) throws IOException;
 

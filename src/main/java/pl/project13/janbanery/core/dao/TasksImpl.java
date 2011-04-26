@@ -118,6 +118,14 @@ public class TasksImpl implements Tasks {
    * {@inheritDoc}
    */
   @Override
+  public TaskUpdateFlow update(Task task) {
+    return new TaskUpdateFlowImpl(this, task);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public TaskFlow update(Task task, Task newValues) throws IOException {
     String url = getTaskUrl(task);
 
