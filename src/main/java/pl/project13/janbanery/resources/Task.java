@@ -260,34 +260,35 @@ public class Task extends KanbaneryResource implements Serializable {
     this.id = id;
   }
 
+
   // todo generate this using intellij plugin ;-)
   public static class Builder {
-    private Task task;
+    private Task instance;
 
     public Builder(String title, Long taskTypeId) {
-      this.task = new Task(title, taskTypeId);
+      this.instance = new Task(title, taskTypeId);
     }
 
     public Builder(String title, String taskTypeName) {
-      this.task = new Task(title, taskTypeName);
+      this.instance = new Task(title, taskTypeName);
     }
 
     public Builder(String title) {
-      this.task = new Task(title);
+      this.instance = new Task(title);
     }
 
     public Builder priority(Priority priority) {
-      task.priority = priority;
+      instance.priority = priority;
       return this;
     }
 
     public Builder description(String description) {
-      task.description = description;
+      instance.description = description;
       return this;
     }
 
     public Builder estimateId(Long estimateId) {
-      task.estimateId = estimateId;
+      instance.estimateId = estimateId;
       return this;
     }
 
@@ -298,22 +299,22 @@ public class Task extends KanbaneryResource implements Serializable {
      * @return the same builder instance
      */
     public Builder position(Integer position) {
-      task.position = position;
+      instance.position = position;
       return this;
     }
 
     public Builder taskTypeId(Long taskTypeId) {
-      task.taskTypeId = taskTypeId;
+      instance.taskTypeId = taskTypeId;
       return this;
     }
 
     public Builder taskType(TaskType taskType) {
-      task.taskTypeId = taskType.getId();
+      instance.taskTypeId = taskType.getId();
       return this;
     }
 
     public Task build() {
-      return task;
+      return instance;
     }
   }
 }
