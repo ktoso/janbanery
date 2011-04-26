@@ -1,5 +1,6 @@
 package pl.project13.janbanery.core.dao;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
@@ -8,7 +9,6 @@ import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
-import pl.project13.janbanery.test.TestConstants;
 
 import java.util.List;
 

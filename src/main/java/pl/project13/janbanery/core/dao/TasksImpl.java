@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
-import pl.project13.janbanery.core.flow.TaskFlow;
-import pl.project13.janbanery.core.flow.TaskFlowImpl;
-import pl.project13.janbanery.core.flow.TaskMoveFlow;
-import pl.project13.janbanery.core.flow.TaskMoveFlowImpl;
+import pl.project13.janbanery.core.flow.*;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.exceptions.kanbanery.CanNotDeleteNotEmptyColumnException;
 import pl.project13.janbanery.resources.*;
@@ -55,7 +52,8 @@ public class TasksImpl implements Tasks {
 
   @Override
   public void delete(Task task) throws IOException {
-    String url = getTaskUrl(task.getId());
+    String url = getTaskUrl(task);
+
     restClient.doDelete(url);
   }
 
@@ -76,7 +74,7 @@ public class TasksImpl implements Tasks {
 
   @Override
   public TaskFlow move(Task task, TaskLocation location) throws IOException {
-    String url = getTaskUrl(task.getId());
+    String url = getTaskUrl(task);
     String moveRequest = location.requestBody();
 
     Task movedTask = restClient.doPut(url, moveRequest, GsonTypeTokens.TASK);
@@ -86,32 +84,48 @@ public class TasksImpl implements Tasks {
 
   @Override
   public TaskFlow move(Task task, Column column) throws IOException {
-    String url = getTaskUrl(task.getId());
+    String url = getTaskUrl(task);
     Task requestObject = new Task();
     requestObject.setColumnId(column.getId());
 
     Task movedTask = restClient.doPut(url, requestObject, GsonTypeTokens.TASK);
+
     return new TaskFlowImpl(this, movedTask);
   }
 
   @Override
-  public Task update(Task task, Task newValues) {
-    throw new NotYetImplementedException(); // todo implement me
+  public TaskFlow update(Task task, Task newValues) throws IOException {
+    String url = getTaskUrl(task);
+
+    Task newTask = restClient.doPut(url, newValues, GsonTypeTokens.TASK);
+
+    return new TaskFlowImpl(this, newTask);
   }
 
   @Override
-  public TaskFlow markNotReadyToPull(Task task) {
-    throw new NotYetImplementedException(); // todo
+  public TaskMarkFlow mark(Task task) {
+    return new TaskMarkFlowImpl(this, task);
   }
 
   @Override
-  public TaskFlow markReadyToPull(Task task) {
-    throw new NotYetImplementedException(); // todo
+  public TaskFlow markAsReadyToPull(Task task) throws IOException {
+    Task commandObject = new Task();
+    commandObject.setReadyToPull(true);
+
+    return update(task, commandObject);
   }
 
   @Override
-  // todo port this to *Flow
+  public TaskFlow markAsNotReadyToPull(Task task) throws IOException {
+    Task commandObject = new Task();
+    commandObject.setReadyToPull(false);
+
+    return update(task, commandObject);
+  }
+
+  @Override
   public List<Task> all() throws IOException {
+    // todo port this to *Flow
     String url = getDefaultGetUrl();
 
     Response response = restClient.doGet(url);
@@ -158,13 +172,17 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public List<Task> assignedTo(User user) {
-    throw new NotYetImplementedException(); // todo
+  public List<Task> assignedTo(User user) throws IOException {
+    List<Task> all = all();
+    Collection<Task> filteredTasks = filter(all, new TaskByOwnerPredicate(user));
+    return newArrayList(filteredTasks);
   }
 
   @Override
-  public List<Task> withPriority(Priority priority) {
-    throw new NotYetImplementedException(); // todo
+  public List<Task> withPriority(Priority priority) throws IOException {
+    List<Task> all = all();
+    Collection<Task> filteredTasks = filter(all, new TaskByPriorityPredicate(priority));
+    return newArrayList(filteredTasks);
   }
 
   /**
@@ -198,11 +216,11 @@ public class TasksImpl implements Tasks {
    * <p/>
    * It looks like: https://WORKSPACE.kanbanery.com/api/v1/tasks/TASK_ID.json
    *
+   * @param task the task from which we take the id to work on
    * @return the proper URL for API calls on this task
-   * @param taskId id of the task to be fetched
    */
-  private String getTaskUrl(Long taskId) {
-    return conf.getApiUrl(currentWorkspace.getName(), "tasks", taskId);
+  private String getTaskUrl(Task task) {
+    return conf.getApiUrl(currentWorkspace.getName(), "tasks", task.getId());
   }
 
   /**
@@ -211,8 +229,8 @@ public class TasksImpl implements Tasks {
    * <p/>
    * It looks like: https://WORKSPACE.kanbanery.com/api/v1/tasks/TASK_ID.json
    *
-   * @return the proper URL for API calls on this task
    * @param columnId id of the column of which we want the lasts
+   * @return the proper URL for API calls on this task
    */
   private String getColumnTasksUrl(Long columnId) {
     return conf.getApiUrl(currentWorkspace.getName()) + "columns/" + columnId + "/tasks.json";
@@ -248,4 +266,29 @@ public class TasksImpl implements Tasks {
     }
   }
 
+  private static class TaskByOwnerPredicate implements Predicate<Task> {
+    private Long userId;
+
+    public TaskByOwnerPredicate(User user) {
+      this.userId = user.getId();
+    }
+
+    @Override
+    public boolean apply(Task task) {
+      return task.getOwnerId().equals(userId);
+    }
+  }
+
+  private static class TaskByPriorityPredicate implements Predicate<Task> {
+    private Priority priority;
+
+    public TaskByPriorityPredicate(Priority priority) {
+      this.priority = priority;
+    }
+
+    @Override
+    public boolean apply(Task task) {
+      return task.getPriority() == priority;
+    }
+  }
 }

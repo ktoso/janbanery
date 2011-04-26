@@ -5,13 +5,14 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
+import pl.project13.janbanery.exceptions.EntityNotFoundException;
+import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.TaskType;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author Konrad Malawski
@@ -33,14 +34,30 @@ public class TaskTypesImpl implements TaskTypes {
   }
 
   @Override
-  public List<TaskType> all() throws ExecutionException, InterruptedException, IOException {
+  public TaskType create(TaskType taskType) throws IOException {
+    throw new NotYetImplementedException();  // todo implement me
+  }
+
+  @Override
+  public TaskType update(TaskType taskType, TaskType newValues) throws IOException {
+    throw new NotYetImplementedException();  // todo implement me
+  }
+
+  @Override
+  public List<TaskType> all() throws IOException {
     String url = getDefaultGetUrl();
     return restClient.doGet(url, GsonTypeTokens.LIST_TASK_TYPE);
   }
 
   @Override
-  public TaskType any() throws IOException, ExecutionException, InterruptedException {
-    return all().get(0);
+  public TaskType any() throws IOException {
+    List<TaskType> taskTypes = all();
+
+    if (taskTypes.size() == 0) {
+      throw new EntityNotFoundException("Could not find any task types.");
+    }
+
+    return taskTypes.get(0);
   }
 
   /**

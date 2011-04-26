@@ -4,7 +4,6 @@ import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 /**
  * This flow may be used to perform actions on a fetched or
@@ -25,7 +24,7 @@ public class TaskFlowImpl implements TaskFlow {
    * {@inheritDoc}
    */
   @Override
-  public void delete() throws IOException, ExecutionException, InterruptedException {
+  public void delete() throws IOException {
     tasks.delete(task);
   }
 

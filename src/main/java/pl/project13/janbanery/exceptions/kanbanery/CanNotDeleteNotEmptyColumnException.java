@@ -1,7 +1,5 @@
 package pl.project13.janbanery.exceptions.kanbanery;
 
-import pl.project13.janbanery.exceptions.kanbanery.KanbaneryException;
-
 /**
  * @author Konrad Malawski
  */

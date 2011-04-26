@@ -23,10 +23,10 @@ public class TaskMarkFlowImpl implements TaskMarkFlow {
    */
   @Override
   public TaskFlow asReadyToPull() throws IOException {
-    TaskFlow taskMoveFlow = tasks.markReadyToPull(task);
+    TaskFlow taskMoveFlow = tasks.markAsReadyToPull(task);
     task = taskMoveFlow.get();
 
-    return taskMoveFlow;
+    return new TaskFlowImpl(tasks, task);
   }
 
   /**
@@ -34,10 +34,10 @@ public class TaskMarkFlowImpl implements TaskMarkFlow {
    */
   @Override
   public TaskFlow asNotReadyToPull() throws IOException {
-    TaskFlow taskMoveFlow = tasks.markNotReadyToPull(task);
-    this.task = taskMoveFlow.get();
+    TaskFlow taskMoveFlow = tasks.markAsNotReadyToPull(task);
+    task = taskMoveFlow.get();
 
-    return taskMoveFlow;
+    return new TaskFlowImpl(tasks, task);
   }
 
   @Override

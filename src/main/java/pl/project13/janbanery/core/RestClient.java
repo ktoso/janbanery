@@ -11,7 +11,6 @@ import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.exceptions.RestClientException;
 import pl.project13.janbanery.exceptions.kanbanery.*;
 import pl.project13.janbanery.resources.KanbaneryResource;
-import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

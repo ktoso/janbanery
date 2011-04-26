@@ -26,16 +26,14 @@ public interface TaskFlow extends KanbaneryFlow<Task> {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  void delete() throws IOException, ExecutionException, InterruptedException;
+  void delete() throws IOException;
 
   /**
-   *
    * @return
    */
   TaskMarkFlow mark();
 
   /**
-   *
    * @return
    */
   TaskMoveFlow move();

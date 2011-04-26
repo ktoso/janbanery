@@ -22,9 +22,14 @@ import java.io.Serializable;
 @ReadOnly
 public class User extends KanbaneryResource implements Serializable {
 
+  @ReadOnly
+  private Long id;
+
   @SerializedName("api_token")
+  @ReadOnly
   private String apiToken; // User Token
 
+  @ReadOnly
   private String email; // String	email
 
   @SerializedName("first_name")
@@ -34,6 +39,7 @@ public class User extends KanbaneryResource implements Serializable {
   private String lastName; // User last name
 
   @SerializedName("gravatar_url")
+  @ReadOnly
   private String gravatarUrl; // User's avatar (at gravatar.com)
 
   public User() {
@@ -42,6 +48,14 @@ public class User extends KanbaneryResource implements Serializable {
   @Override
   public String getResourceId() {
     return "user";
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getApiToken() {
@@ -92,13 +106,13 @@ public class User extends KanbaneryResource implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     User user = (User) o;
 
     if (apiToken != null ? !apiToken.equals(user.apiToken) : user.apiToken != null) {
-      return false;
-    }
-    if (createdAt != null ? !createdAt.equals(user.createdAt) : user.createdAt != null) {
       return false;
     }
     if (email != null ? !email.equals(user.email) : user.email != null) {
@@ -110,13 +124,10 @@ public class User extends KanbaneryResource implements Serializable {
     if (gravatarUrl != null ? !gravatarUrl.equals(user.gravatarUrl) : user.gravatarUrl != null) {
       return false;
     }
+    if (id != null ? !id.equals(user.id) : user.id != null) {
+      return false;
+    }
     if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) {
-      return false;
-    }
-    if (type != null ? !type.equals(user.type) : user.type != null) {
-      return false;
-    }
-    if (updatedAt != null ? !updatedAt.equals(user.updatedAt) : user.updatedAt != null) {
       return false;
     }
 
@@ -125,14 +136,13 @@ public class User extends KanbaneryResource implements Serializable {
 
   @Override
   public int hashCode() {
-    int result = apiToken != null ? apiToken.hashCode() : 0;
+    int result = super.hashCode();
+    result = 31 * result + (id != null ? id.hashCode() : 0);
+    result = 31 * result + (apiToken != null ? apiToken.hashCode() : 0);
     result = 31 * result + (email != null ? email.hashCode() : 0);
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     result = 31 * result + (gravatarUrl != null ? gravatarUrl.hashCode() : 0);
-    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
-    result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }
 }

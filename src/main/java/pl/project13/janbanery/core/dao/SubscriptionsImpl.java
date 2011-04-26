@@ -15,7 +15,7 @@ public class SubscriptionsImpl implements Subscriptions {
   private Configuration conf;
   private RestClient    restClient;
 
-  private Workspace     currentWorkspace;
+  private Workspace currentWorkspace;
 
   public SubscriptionsImpl(Configuration conf, RestClient restClient) {
     this.conf = conf;
@@ -27,8 +27,6 @@ public class SubscriptionsImpl implements Subscriptions {
    */
   @Override
   public Boolean exists(Task task) {
-
-
     throw new NotYetImplementedException(); // todo
   }
 

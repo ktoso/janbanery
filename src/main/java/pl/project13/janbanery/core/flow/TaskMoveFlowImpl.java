@@ -6,10 +6,8 @@ import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnExcept
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
-import sun.reflect.generics.tree.ReturnType;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 /**
  * This flow enables the API to fluently move tasks around the Kanban board, making it as fun and powerful as possible.
@@ -46,7 +44,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow toNextColumn() throws IOException{
+  public TaskMoveFlow toNextColumn() throws IOException {
     TaskMoveFlow moveFlow;
     try {
       moveFlow = to(TaskLocation.NEXT);
@@ -62,7 +60,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow toPreviousColumn() throws IOException{
+  public TaskMoveFlow toPreviousColumn() throws IOException {
     return to(TaskLocation.PREVIOUS);
   }
 
@@ -70,7 +68,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow toArchive() throws IOException{
+  public TaskMoveFlow toArchive() throws IOException {
     return to(TaskLocation.ARCHIVE);
   }
 
@@ -78,7 +76,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow to(TaskLocation location) throws IOException{
+  public TaskMoveFlow to(TaskLocation location) throws IOException {
     TaskFlow move = tasks.move(task, location);
 
     task = move.get();

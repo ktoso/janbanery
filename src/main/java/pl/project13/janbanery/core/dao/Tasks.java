@@ -1,6 +1,7 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.TaskFlow;
+import pl.project13.janbanery.core.flow.TaskMarkFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Priority;
@@ -10,7 +11,6 @@ import pl.project13.janbanery.resources.additions.TaskLocation;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author Konrad Malawski
@@ -43,11 +43,13 @@ public interface Tasks {
 
   // state changes --------------------
 
-  Task update(Task task, Task newValues);
+  TaskFlow update(Task task, Task newValues) throws IOException;
 
-  TaskFlow markNotReadyToPull(Task task); // todo remove this from the TaskMovementFlow
+  TaskMarkFlow mark(Task task);
 
-  TaskFlow markReadyToPull(Task task); // todo remove this from the TaskMovementFlow
+  TaskFlow markAsReadyToPull(Task task) throws IOException;
+
+  TaskFlow markAsNotReadyToPull(Task task) throws IOException;
 
   // queries ------------------------------------------------------------------
 
@@ -64,8 +66,8 @@ public interface Tasks {
 
   List<Task> assignedToMe();
 
-  List<Task> assignedTo(User user);
+  List<Task> assignedTo(User user) throws IOException;
 
-  List<Task> withPriority(Priority priority);
+  List<Task> withPriority(Priority priority) throws IOException;
 
 }

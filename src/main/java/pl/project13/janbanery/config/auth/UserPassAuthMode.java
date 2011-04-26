@@ -16,8 +16,8 @@ public class UserPassAuthMode implements AuthMode {
    * Creates an instance of UserPassAuthMode using the given username and password,
    * these will be encrypted right away using an BaseEncoder.
    *
-   * @param userEmail     username to be used in this plain auth method
-   * @param password password for this userEmail
+   * @param userEmail username to be used in this plain auth method
+   * @param password  password for this userEmail
    */
   public UserPassAuthMode(String userEmail, String password) {
     this.userEmail = userEmail;

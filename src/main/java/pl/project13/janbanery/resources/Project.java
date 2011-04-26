@@ -12,7 +12,7 @@ import java.io.Serializable;
 @ReadOnly
 public class Project extends KanbaneryResource implements Serializable {
 
-  private Long   id; // Project id
+  private Long id; // Project id
 
   private String name; // Project name
 

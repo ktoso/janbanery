@@ -17,7 +17,7 @@ public class SubTask extends KanbaneryResource implements Serializable {
 
   @Required
   @Settable(On.CreateOrUpdate)
-  private String  body; // Short description
+  private String body; // Short description
 
   @SerializedName("task_id")
   private Integer taskId; // 	Task

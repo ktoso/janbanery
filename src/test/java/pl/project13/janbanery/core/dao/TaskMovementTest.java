@@ -122,7 +122,7 @@ public class TaskMovementTest {
     assertThat(tasksInIceBox).contains(taskInIceBox);
 
     // cleanup
-    janbanery.tasks().delete(taskInIceBox);
+    janbanery.iceBox().delete(taskInIceBox);
   }
 
   private TaskFlow createSampleTask() throws IOException, ExecutionException, InterruptedException {

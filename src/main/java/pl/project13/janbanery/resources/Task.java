@@ -44,10 +44,10 @@ public class Task extends KanbaneryResource implements Serializable {
 
   @Settable(On.CreateOrUpdate)
   @SerializedName("estimate_id")
-  private Integer estimateId; // Estimate
+  private Long estimateId; // Estimate
 
   @SerializedName("owner_id")
-  private Integer ownerId; // Who is currently assigned to it
+  private Long ownerId; // Who is currently assigned to it
 
   @Settable(On.CreateOrUpdate)
   private Integer position; // Position in column, 1-based
@@ -135,19 +135,19 @@ public class Task extends KanbaneryResource implements Serializable {
     this.description = description;
   }
 
-  public Integer getEstimateId() {
+  public Long getEstimateId() {
     return estimateId;
   }
 
-  public void setEstimateId(Integer estimateId) {
+  public void setEstimateId(Long estimateId) {
     this.estimateId = estimateId;
   }
 
-  public Integer getOwnerId() {
+  public Long getOwnerId() {
     return ownerId;
   }
 
-  public void setOwnerId(Integer ownerId) {
+  public void setOwnerId(Long ownerId) {
     this.ownerId = ownerId;
   }
 
@@ -168,6 +168,10 @@ public class Task extends KanbaneryResource implements Serializable {
   }
 
   public Boolean getReadyToPull() {
+    return readyToPull;
+  }
+
+  public Boolean isReadyToPull() {
     return readyToPull;
   }
 
@@ -282,7 +286,7 @@ public class Task extends KanbaneryResource implements Serializable {
       return this;
     }
 
-    public Builder estimateId(Integer estimateId) {
+    public Builder estimateId(Long estimateId) {
       task.estimateId = estimateId;
       return this;
     }

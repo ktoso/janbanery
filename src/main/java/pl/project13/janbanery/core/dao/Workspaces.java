@@ -20,8 +20,8 @@ public interface Workspaces {
   List<Workspace> all() throws IOException;
 
   /**
-   * @return
    * @param name
+   * @return
    * @throws java.io.IOException
    * @throws WorkspaceNotFoundException
    */

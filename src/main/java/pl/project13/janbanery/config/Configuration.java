@@ -2,7 +2,6 @@ package pl.project13.janbanery.config;
 
 import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.config.auth.AuthMode;
-import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
 
 /**

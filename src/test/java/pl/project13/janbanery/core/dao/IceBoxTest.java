@@ -9,6 +9,7 @@ import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.test.TestEntityHelper;
 
 import java.util.List;
 
@@ -34,21 +35,13 @@ public class IceBoxTest {
 
   @After
   public void tearDown() throws Exception {
-    List<Task> tasks = janbanery.tasks().byTitle(TASK_TITLE);
-    if (tasks.size() > 0) {
-      Task task = tasks.get(0);
-      janbanery.tasks().delete(task);
-    }
+    TestEntityHelper.deleteTestTask(janbanery);
   }
 
   @Test
   public void shouldMoveToBoard() throws Exception {
     // given
-    Task story = new Task.Builder(TASK_TITLE)
-        .taskType(janbanery.taskTypes().any())
-        .description("A task I have created using the Janbanery library")
-        .priority(Priority.LOW)
-        .build();
+    Task story = TestEntityHelper.createTestTask(janbanery);
 
     // when
     Task movedTask = iceBox.create(story).moveToBoard().get();
@@ -71,10 +64,9 @@ public class IceBoxTest {
 
     // when
     Task task = iceBox.create(story).get();
-
-    // then
     iceBox.delete(task);
 
+    // then
     assertThat(janbanery.tasks().all()).excludes(task);
   }
 }

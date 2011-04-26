@@ -37,7 +37,7 @@ public class IceBoxFlowImpl implements IceBoxFlow {
 
   @Override
   public IceBoxFlow update(Task newValues) throws IOException {
-    Task updatedTask = tasks.update(task, newValues);
+    Task updatedTask = tasks.update(task, newValues).get();
     return new IceBoxFlowImpl(tasks, iceBox, updatedTask);
   }
 
