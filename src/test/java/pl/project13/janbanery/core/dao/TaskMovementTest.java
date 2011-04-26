@@ -8,6 +8,7 @@ import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
+import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInFirstColumnException;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 
@@ -65,6 +66,24 @@ public class TaskMovementTest {
     Task after = move.toNextColumn()
                      .toPreviousColumn()
                      .get();
+
+    // then
+    assertThat(after).isNotEqualTo(prev); // it has changed (moved_at etc)
+    assertThat(after.getColumnId()).isEqualTo(prev.getColumnId()); // it's the same column
+
+    // cleanup
+    taskFlow.delete();
+  }
+
+  @Test(expected = TaskAlreadyInFirstColumnException.class)
+  public void shouldRemainInPlaceWhenMovingLeftFromFirstColumn() throws Exception {
+    // given
+    TaskFlow taskFlow = createSampleTask();
+    TaskMoveFlow move = taskFlow.move();
+    Task prev = move.get();
+
+    // when
+    Task after = move.toPreviousColumn().get();
 
     // then
     assertThat(after).isNotEqualTo(prev); // it has changed (moved_at etc)

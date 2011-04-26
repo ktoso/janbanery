@@ -26,4 +26,24 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
   public InvalidEntityKanbaneryException(Throwable cause) {
     super(cause);
   }
+
+  /**
+   * May be used as "Exception factory" to determine the "best" exception to be thrown
+   * for such JSON response. For example we may throw "TaskAlreadyInFirstColumnException"
+   * if the JSON contains a message informing us about this.
+   *
+   * @param response the JSON server response, containing a error messages
+   * @return the "best" exception to be thrown for such an response JSON, based on it's error messages
+   */
+  public static KanbaneryException mostSpecializedException(String response) {
+    if (response == null || "".equals(response)) {
+      return new InvalidEntityKanbaneryException(response);
+    } else if (TaskAlreadyInFirstColumnException.isBestExceptionFor(response)) {
+      return new TaskAlreadyInFirstColumnException(response);
+    } else if (TaskAlreadyInLastColumnException.isBestExceptionFor(response)) {
+      return new TaskAlreadyInLastColumnException(response);
+    } else {
+      return new InvalidEntityKanbaneryException(response);
+    }
+  }
 }

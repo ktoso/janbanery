@@ -54,7 +54,7 @@ public class RestClient {
       case InternalServerErrorKanbaneryException.MAPPED_ERROR_CODE:
         throw new InternalServerErrorKanbaneryException(errorMessageFrom(response));
       case InvalidEntityKanbaneryException.MAPPED_ERROR_CODE:
-        throw new InvalidEntityKanbaneryException(errorMessageFrom(response));
+        throw InvalidEntityKanbaneryException.mostSpecializedException(errorMessageFrom(response));
       case UnauthorizedKanbaneryException.MAPPED_ERROR_CODE:
         throw new UnauthorizedKanbaneryException(errorMessageFrom(response));
     }
