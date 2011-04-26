@@ -1,13 +1,11 @@
 package pl.project13.janbanery.core.dao;
 
-import com.google.gson.Gson;
-import com.ning.http.client.AsyncHttpClient;
 import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
-import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
+import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestConstants;
@@ -26,11 +24,7 @@ public class TasksTest {
 
   @Before
   public void setUp() throws Exception {
-    // dependencies
     PropertiesConfiguration conf = new PropertiesConfiguration(VALID_CONF_FILE_LOCATION);
-    Gson gson = GsonFactory.create();
-    AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-
     janbanery = new JanbaneryFactory().connectUsing(conf);
   }
 
@@ -39,18 +33,31 @@ public class TasksTest {
     // given
     janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
 
-    Task bug = new Task.Builder("JanbaneryTask")
+    Task bug = new Task.Builder(TestConstants.TASK_TITLE)
         .taskType(janbanery.taskTypes().any())
         .description("A task I have created using the Janbanery library")
         .priority(Priority.MEDIUM)
         .build();
 
     // when
-    Task newTask = janbanery.tasks().create(bug);
+    TaskFlow taskFlow = janbanery.tasks().create(bug);
+    Task newTask = taskFlow.get();
 
     // then, should have created the task
     List<Task> all = janbanery.tasks().all();
     assertThat(all).onProperty("id").contains(newTask.getId());
   }
 
+  @Test
+  public void shouldDeleteTask() throws Exception {
+    // given
+    janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
+    List<Task> tasks = janbanery.tasks().byTitle(TestConstants.TASK_TITLE);
+
+    // when
+    janbanery.tasks().move()
+
+    // then
+
+  }
 }

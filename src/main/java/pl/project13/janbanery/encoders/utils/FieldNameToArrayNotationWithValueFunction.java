@@ -20,9 +20,9 @@ public class FieldNameToArrayNotationWithValueFunction<T extends KanbaneryResour
 
   private final String fieldRepresentation = "%s[%s]=%s";
 
-  private T entity;
+  private final T entity;
 
-  private ReflectionHelper reflectionHelper = new ReflectionHelper();
+  private final ReflectionHelper reflectionHelper = new ReflectionHelper();
 
   public FieldNameToArrayNotationWithValueFunction(T entity) {
     this.entity = entity;

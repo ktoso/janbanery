@@ -12,7 +12,7 @@ public class ApiKeyAuthMode implements AuthMode {
 
   public final String API_TOKEN_HEADER = "X-Kanbanery-ApiToken";
 
-  private String authData;
+  private final String authData;
 
   public ApiKeyAuthMode(String authData) {
     this.authData = authData;

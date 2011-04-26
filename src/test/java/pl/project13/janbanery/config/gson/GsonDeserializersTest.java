@@ -11,7 +11,7 @@ import static org.fest.assertions.Assertions.assertThat;
  */
 public class GsonDeserializersTest {
 
-  GsonFactory.DateTimeDeserializer dateTimeDeserializer = new GsonFactory.DateTimeDeserializer();
+  final GsonFactory.DateTimeDeserializer dateTimeDeserializer = new GsonFactory.DateTimeDeserializer();
 
   @Test
   public void shouldParseIso8601DateTime() throws Exception {

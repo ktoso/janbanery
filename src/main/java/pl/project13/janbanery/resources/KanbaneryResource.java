@@ -22,6 +22,13 @@ public abstract class KanbaneryResource implements Resource {
   protected KanbaneryResource() {
   }
 
+  /**
+   * Defines how the resource is named in the API POST/PUT calls.
+   * For example for an Task entity it will be "task" but may vary for other entities and not be so straight forward.
+   * It will be used to create a "task[field]=value&[...]" notation of the object.
+   *
+   * @return the resource identifier of this resource (in API call urls)
+   */
   public abstract String getResourceId();
 
   public DateTime getCreatedAt() {

@@ -60,7 +60,7 @@ public class Janbanery {
     String responseBody = response.getResponseBody();
     log.info("Fetched response: {}", responseBody);
 
-    List<Workspace> workspaces = gson.fromJson(responseBody, GsonTypeTokens.LIST_WORKSPACES);
+    List<Workspace> workspaces = gson.fromJson(responseBody, GsonTypeTokens.LIST_WORKSPACE);
     assert workspaces != null : "Workspaces should not be null here";
     return workspaces;
   }
@@ -76,7 +76,7 @@ public class Janbanery {
 
   /**
    * Delegates to {@link Janbanery#workspace(String)} and keeps this workspace as the default one.
-   * Thois method does also setup a default project if there is one. If you want to select the {@link Project}
+   * This method does also setup a default project if there is one. If you want to select the {@link Project}
    * you'll be working on, please get the return value of this method, and then call {@link Janbanery#using(Project)}.
    * From now on, all calls requiring a workspace will use this workspace and it's first present project,
    * you may change the default workspace at anytime by calling this method again.
@@ -132,8 +132,9 @@ public class Janbanery {
   /* return initially setup instances of dao objects */
 
   public Tasks tasks() {
-    // todo remove the new here, it'll use the rest client
-    return new TasksImpl(conf, gson, asyncHttpClient, bodyGenerator).using(currentWorkspace, currentProject);
+    RestClient restClient = new RestClient(conf, asyncHttpClient, bodyGenerator);
+    TasksImpl tasks = new TasksImpl(conf, restClient, gson);
+    return tasks.using(currentWorkspace, currentProject);
   }
 
   public TaskTypes taskTypes() {

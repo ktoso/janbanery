@@ -9,4 +9,5 @@ public class TestConstants {
   public static final String EXISTING_WORKSPACE = "janbanery";
   public static final String EXISTING_PROJECT   = "janbaneryProject";
 
+  public static final String TASK_TITLE = "Janbanery Test Task";
 }

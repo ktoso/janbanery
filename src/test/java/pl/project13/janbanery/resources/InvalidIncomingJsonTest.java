@@ -19,11 +19,14 @@ public class InvalidIncomingJsonTest {
     // given
     String json = "{priority: 22}";
     // when
-    SampleWithPriority sampleWithPriority = gson.fromJson(json, SampleWithPriority.class);
+    gson.fromJson(json, SampleWithPriority.class);
 
     // then, deserializer should throw
   }
 
+  /**
+   * Class only used for easy serialization/deserialization testing
+   */
   private static class SampleWithPriority implements Serializable {
     Priority priority;
 

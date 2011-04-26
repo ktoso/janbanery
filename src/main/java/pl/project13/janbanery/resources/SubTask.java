@@ -1,6 +1,9 @@
 package pl.project13.janbanery.resources;
 
+import pl.project13.janbanery.resources.additions.On;
+import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
+import pl.project13.janbanery.resources.additions.Settable;
 
 import java.io.Serializable;
 
@@ -10,18 +13,25 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class SubTask extends KanbaneryResource implements Serializable {
+
   @Required
-  private String  body; // yes	on create and update	Short description
-  private Integer taskId; // 	no	 	Task
-  private Integer creatorId; // no	 	Who created it
-  private Boolean completed; // no	on create and update	If it was completed
+  @Settable(On.CreateOrUpdate)
+  private String  body; // Short description
+
+  private Integer taskId; // 	Task
+
+  @ReadOnly
+  private Integer creatorId; // Who created it
+
+  @Settable(On.CreateOrUpdate)
+  private Boolean completed; // If it was completed
 
   public SubTask() {
   }
 
   @Override
   public String getResourceId() {
-    return "subtasks";
+    return "subtask";
   }
 
   public String getBody() {
