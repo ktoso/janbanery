@@ -70,12 +70,11 @@ public class IceBoxTest {
         .build();
 
     // when
-    Task movedTask = iceBox.create(story).;
+    Task task = iceBox.create(story).get();
 
     // then
-    Column firstColumn = janbanery.columns().first();
-    List<Task> tasksInFirstColumn = janbanery.tasks().allIn(firstColumn);
+    iceBox.delete(task);
 
-    assertThat(tasksInFirstColumn).contains(movedTask);
+    assertThat(janbanery.tasks().all()).excludes(task);
   }
 }
