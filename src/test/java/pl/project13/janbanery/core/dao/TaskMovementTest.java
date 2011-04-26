@@ -102,6 +102,18 @@ public class TaskMovementTest {
     // then, should have thrown
   }
 
+  @Test
+  public void shouldMoveToIceBox() throws Exception {
+    // given
+    TaskFlow taskFlow = createSampleTask();
+    TaskMoveFlow taskMoveFlow = taskFlow.move().toIceBox();
+
+    // when
+
+    // then
+
+  }
+
   private TaskFlow createSampleTask() throws IOException, ExecutionException, InterruptedException {
     Task story = new Task.Builder(TASK_TITLE)
         .taskType(janbanery.taskTypes().any())

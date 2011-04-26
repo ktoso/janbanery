@@ -11,7 +11,12 @@ import java.util.concurrent.ExecutionException;
  */
 public interface TaskMoveFlow extends KanbaneryFlow<Task> {
 
-  TaskMoveFlow toIceBox() throws IOException, ExecutionException, InterruptedException;
+  /**
+   *
+   * @return
+   * @throws IOException
+   */
+  TaskMoveFlow toIceBox() throws IOException;
 
   TaskMoveFlow toNextColumn() throws IOException, ExecutionException, InterruptedException;
 

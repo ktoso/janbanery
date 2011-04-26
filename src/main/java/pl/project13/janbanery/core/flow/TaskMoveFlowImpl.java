@@ -28,7 +28,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow toIceBox() throws IOException, ExecutionException, InterruptedException {
+  public TaskMoveFlow toIceBox() throws IOException {
     return to(TaskLocation.ICEBOX);
   }
 
@@ -36,7 +36,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow toBoard() throws IOException, ExecutionException, InterruptedException {
+  public TaskMoveFlow toBoard() throws IOException {
     return to(TaskLocation.BOARD);
   }
 
@@ -44,7 +44,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow toNextColumn() throws IOException, ExecutionException, InterruptedException {
+  public TaskMoveFlow toNextColumn() throws IOException{
     TaskMoveFlow moveFlow;
     try {
       moveFlow = to(TaskLocation.NEXT);
@@ -60,7 +60,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow toPreviousColumn() throws IOException, ExecutionException, InterruptedException {
+  public TaskMoveFlow toPreviousColumn() throws IOException{
     return to(TaskLocation.PREVIOUS);
   }
 
@@ -68,7 +68,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow toArchive() throws IOException, ExecutionException, InterruptedException {
+  public TaskMoveFlow toArchive() throws IOException{
     return to(TaskLocation.ARCHIVE);
   }
 
@@ -76,7 +76,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow to(TaskLocation location) throws IOException, ExecutionException, InterruptedException {
+  public TaskMoveFlow to(TaskLocation location) throws IOException{
     TaskFlow move = tasks.move(task, location);
 
     task = move.get();
