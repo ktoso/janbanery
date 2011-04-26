@@ -9,6 +9,7 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.*;
+import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.exceptions.kanbanery.CanNotDeleteNotEmptyColumnException;
 import pl.project13.janbanery.resources.*;
@@ -192,7 +193,10 @@ public class TasksImpl implements Tasks {
    */
   @Override
   public Task byId(Long taskId) throws IOException {
-    String url = getDefaultGetUrl();
+    Task task = new Task();
+    task.setId(taskId);
+    String url = getTaskUrl(task);
+
     Response response = restClient.doGet(url);
     String responseBody = response.getResponseBody();
 
