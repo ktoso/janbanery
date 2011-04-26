@@ -136,7 +136,6 @@ public class TaskUpdateFlowTest {
     assertThat(foundTask.getTaskTypeId()).isEqualTo(newValue.getId());
   }
 
-  @Ignore("Dont run this one for now")
   @Test
   public void testEstimate() throws Exception {
     // given

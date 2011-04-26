@@ -23,6 +23,8 @@ public class GsonTypeTokens {
   }.getType();
   public static final Type LIST_COLUMN    = new TypeToken<List<Column>>() {
   }.getType();
+  public static final Type LIST_ESTIMATE  = new TypeToken<List<Estimate>>() {
+  }.getType();
 
 
   // simple types
@@ -31,4 +33,5 @@ public class GsonTypeTokens {
   public static final Class<Task>             TASK              = Task.class;
   public static final Class<TaskSubscription> TASK_SUBSCRIPTION = TaskSubscription.class;
   public static final Class<Column>           COLUMN            = Column.class;
+  public static final Class<Estimate>         ESTIMATE          = Estimate.class;
 }
