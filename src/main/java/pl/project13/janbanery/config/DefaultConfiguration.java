@@ -74,6 +74,14 @@ public class DefaultConfiguration implements Configuration {
     return format("https://%s.kanbanery.com/api/v1/tasks/%d.json", workspaceName, task.getId());
   }
 
+  /**
+   * Returns URL setup with workspace and projectId to start calling the API on it.
+   * The URL looks like: https://janbanery.kanbanery.com/api/v1/projects/34242/
+   *
+   * @param workspaceName the workspace name to use for the url
+   * @param projectId the project id to use for the url
+   * @return the properly set up url to begin calling Kanbanery API on it
+   */
   @Override
   public String getApiUrl(String workspaceName, Long projectId) {
     return format("https://%s.kanbanery.com/api/v1/projects/%s/", workspaceName, projectId);
