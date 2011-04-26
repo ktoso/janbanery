@@ -1,5 +1,6 @@
 package pl.project13.janbanery.test;
 
+import org.junit.Ignore;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
@@ -12,6 +13,7 @@ import static pl.project13.janbanery.test.TestConstants.TASK_TITLE;
 /**
  * @author Konrad Malawski
  */
+@Ignore("It's just an util class")
 public class TestEntityHelper {
 
   public static Task createTestTask(Janbanery janbanery) throws IOException {

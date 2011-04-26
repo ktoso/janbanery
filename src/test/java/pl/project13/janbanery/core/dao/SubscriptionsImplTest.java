@@ -1,5 +1,6 @@
 package pl.project13.janbanery.core.dao;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
@@ -26,6 +27,11 @@ public class SubscriptionsImplTest {
     PropertiesConfiguration conf = new PropertiesConfiguration(VALID_CONF_FILE_LOCATION);
     janbanery = new JanbaneryFactory().connectUsing(conf);
     janbanery.usingWorkspace(EXISTING_WORKSPACE);
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    TestEntityHelper.deleteTestTask(janbanery);
   }
 
   @Test

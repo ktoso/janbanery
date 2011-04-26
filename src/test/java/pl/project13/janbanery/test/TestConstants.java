@@ -1,8 +1,11 @@
 package pl.project13.janbanery.test;
 
+import org.junit.Ignore;
+
 /**
  * @author Konrad Malawski
  */
+@Ignore("It's just an util class")
 public class TestConstants {
   public static final String VALID_CONF_FILE_LOCATION = "src/test/resources/janbanery.properties";
 
