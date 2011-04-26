@@ -40,4 +40,9 @@ public class IceBoxFlowImpl implements IceBoxFlow {
     Task updatedTask = tasks.update(task, newValues);
     return new IceBoxFlowImpl(tasks, iceBox, updatedTask);
   }
+
+  @Override
+  public Task get() {
+    return task;
+  }
 }

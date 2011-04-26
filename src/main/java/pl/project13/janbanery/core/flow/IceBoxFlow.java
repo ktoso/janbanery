@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * @author Konrad Malawski
  */
-public interface IceBoxFlow {
+public interface IceBoxFlow extends KanbaneryFlow<Task> {
   /**
    * Move this task to the kanban board of your project.
    *
