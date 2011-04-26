@@ -1,6 +1,8 @@
 package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.Tasks;
+import pl.project13.janbanery.exceptions.kanbanery.InternalServerErrorKanbaneryException;
+import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 
@@ -43,7 +45,15 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    */
   @Override
   public TaskMoveFlow toNextColumn() throws IOException, ExecutionException, InterruptedException {
-    return to(TaskLocation.NEXT);
+    TaskMoveFlow moveFlow = null;
+    try {
+      moveFlow = to(TaskLocation.NEXT);
+    } catch (InternalServerErrorKanbaneryException e) { // fixme this is a bug workaround
+      // kanbanery does handle "ArrayIndexOutOfBounds" right for movement to the left,
+      // but for movement to the right it fails and throws a 500 Internal Server Error...
+      throw new TaskAlreadyInLastColumnException("{position: 'task is already in last column'}"); // todo this is a kanbanery bug workaround
+    }
+    return moveFlow;
   }
 
   /**

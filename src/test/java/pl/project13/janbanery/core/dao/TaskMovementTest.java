@@ -2,6 +2,7 @@ package pl.project13.janbanery.core.dao;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
@@ -50,9 +51,6 @@ public class TaskMovementTest {
     // then
     assertThat(after).isNotEqualTo(prev); // it has changed (moved_at etc)
     assertThat(after.getColumnId()).isNotEqualTo(prev.getColumnId()); // it moved
-
-    // cleanup
-    taskFlow.delete();
   }
 
   @Test
@@ -70,27 +68,40 @@ public class TaskMovementTest {
     // then
     assertThat(after).isNotEqualTo(prev); // it has changed (moved_at etc)
     assertThat(after.getColumnId()).isEqualTo(prev.getColumnId()); // it's the same column
-
-    // cleanup
-    taskFlow.delete();
   }
 
   @Test(expected = TaskAlreadyInFirstColumnException.class)
-  public void shouldRemainInPlaceWhenMovingLeftFromFirstColumn() throws Exception {
+  public void shouldThrowWhenForcedToMoveLeftWhenOnFirstColumn() throws Exception {
+    // given
+    TaskFlow taskFlow = createSampleTask();
+    TaskMoveFlow move = taskFlow.move();
+    Task prev = move.get();
+
+
+    // when
+    move.toPreviousColumn();
+
+    // then, should have thrown
+  }
+
+  @Ignore("Kanbanery fails in such situations with an 500 Internal Server Error, it's a bug on their end IMO")
+  @Test(expected = TaskAlreadyInFirstColumnException.class)
+  public void shouldThrowWhenForcedToMoveRightWhenOnLastColumn() throws Exception {
     // given
     TaskFlow taskFlow = createSampleTask();
     TaskMoveFlow move = taskFlow.move();
     Task prev = move.get();
 
     // when
-    Task after = move.toPreviousColumn().get();
+    move.toNextColumn();
+    move.toNextColumn();
+    move.toNextColumn();
+    move.toNextColumn(); //fail here
+    move.toNextColumn();
+    move.toNextColumn();
+    // hopefully already "outside of range" already ;-)
 
-    // then
-    assertThat(after).isNotEqualTo(prev); // it has changed (moved_at etc)
-    assertThat(after.getColumnId()).isEqualTo(prev.getColumnId()); // it's the same column
-
-    // cleanup
-    taskFlow.delete();
+    // then, should have thrown
   }
 
   private TaskFlow createSampleTask() throws IOException, ExecutionException, InterruptedException {
