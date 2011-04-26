@@ -120,7 +120,8 @@ public class Janbanery {
 
   public Users users() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
-    return new UsersImpl(conf, restClient).using(currentWorkspace);
+    final UsersImpl users = new UsersImpl(conf, restClient);
+    return users.using(currentWorkspace, currentProject);
   }
 
   public Subscriptions subscriptions() {
@@ -136,5 +137,10 @@ public class Janbanery {
   public Columns columns() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
     return new ColumnsImpl(conf, restClient).using(currentWorkspace, currentProject);
+  }
+
+  public Estimates estimates() {
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    return new EstimatesImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 }

@@ -9,6 +9,7 @@ import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.test.TestEntityHelper;
 
 import java.util.List;
 
@@ -62,5 +63,19 @@ public class TasksTest {
 
     assertThat(afterDelete.size()).isEqualTo(beforeDelete.size() - 1);
     assertThat(afterDelete).onProperty("id").excludes(deletedTaskId);
+  }
+
+  @Test
+  public void shouldFindByTaskId() throws Exception {
+    // given
+    Task testTask = TestEntityHelper.createTestTask(janbanery);
+    Task createdTask = janbanery.tasks().create(testTask).get();
+    Long createdTaskId = createdTask.getId();
+
+    // when
+    Task foundTask = janbanery.tasks().byId(createdTaskId);
+
+    // then
+    assertThat(foundTask.getId()).isEqualTo(createdTaskId);
   }
 }

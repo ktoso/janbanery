@@ -65,12 +65,20 @@ public class Task extends KanbaneryResource implements Serializable {
   @SerializedName("moved_at")
   private DateTime movedAt; // On task was moved to currentUser column
 
+  public Task() {
+  }
+
   @Override
   public String getResourceId() {
     return "task";
   }
 
-  public Task() {
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public Task(String title) {
@@ -224,6 +232,9 @@ public class Task extends KanbaneryResource implements Serializable {
     if (estimateId != null ? !estimateId.equals(task.estimateId) : task.estimateId != null) {
       return false;
     }
+    if (id != null ? !id.equals(task.id) : task.id != null) {
+      return false;
+    }
     if (movedAt != null ? !movedAt.equals(task.movedAt) : task.movedAt != null) {
       return false;
     }
@@ -251,15 +262,6 @@ public class Task extends KanbaneryResource implements Serializable {
 
     return true;
   }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
 
   // todo generate this using intellij plugin ;-)
   public static class Builder {

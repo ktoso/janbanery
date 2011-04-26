@@ -41,7 +41,6 @@ public class TaskMarkFlowImplTest {
     // when
     task = janbanery.tasks().mark(task).asReadyToPull().get();
 
-
     // then
     assertThat(task.isReadyToPull()).isTrue();
   }

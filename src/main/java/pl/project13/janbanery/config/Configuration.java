@@ -19,6 +19,14 @@ public interface Configuration {
 
   AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder);
 
+  /**
+   * Returns URL setup with workspace and projectId to start calling the API on it.
+   * The URL looks like: https://janbanery.kanbanery.com/api/v1/projects/34242/
+   *
+   * @param workspaceName the workspace name to use for the url
+   * @param projectId     the project id to use for the url
+   * @return the properly set up url to begin calling Kanbanery API on it
+   */
   String getApiUrl(String workspaceName, Long projectId);
 
   /**
