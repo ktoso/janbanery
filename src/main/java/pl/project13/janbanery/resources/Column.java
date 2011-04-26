@@ -15,6 +15,9 @@ import java.io.Serializable;
  */
 public class Column extends KanbaneryResource implements Serializable {
 
+  @ReadOnly
+  private Long id;
+
   @Required
   @Settable(On.CreateOrUpdate)
   private String name; // on create and update	Name
@@ -38,6 +41,14 @@ public class Column extends KanbaneryResource implements Serializable {
   @Override
   public String getResourceId() {
     return "column";
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -100,6 +111,9 @@ public class Column extends KanbaneryResource implements Serializable {
     if (fixed != null ? !fixed.equals(column.fixed) : column.fixed != null) {
       return false;
     }
+    if (id != null ? !id.equals(column.id) : column.id != null) {
+      return false;
+    }
     if (name != null ? !name.equals(column.name) : column.name != null) {
       return false;
     }
@@ -116,6 +130,7 @@ public class Column extends KanbaneryResource implements Serializable {
   @Override
   public int hashCode() {
     int result = super.hashCode();
+    result = 31 * result + (id != null ? id.hashCode() : 0);
     result = 31 * result + (name != null ? name.hashCode() : 0);
     result = 31 * result + (projectId != null ? projectId.hashCode() : 0);
     result = 31 * result + (fixed != null ? fixed.hashCode() : 0);
@@ -123,5 +138,4 @@ public class Column extends KanbaneryResource implements Serializable {
     result = 31 * result + (position != null ? position.hashCode() : 0);
     return result;
   }
-
 }
