@@ -45,7 +45,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    */
   @Override
   public TaskMoveFlow toNextColumn() throws IOException, ExecutionException, InterruptedException {
-    TaskMoveFlow moveFlow = null;
+    TaskMoveFlow moveFlow;
     try {
       moveFlow = to(TaskLocation.NEXT);
     } catch (InternalServerErrorKanbaneryException e) { // fixme this is a bug workaround

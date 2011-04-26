@@ -2,7 +2,6 @@ package pl.project13.janbanery.core.dao;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
@@ -10,6 +9,7 @@ import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInFirstColumnException;
+import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 
@@ -84,8 +84,7 @@ public class TaskMovementTest {
     // then, should have thrown
   }
 
-  @Ignore("Kanbanery fails in such situations with an 500 Internal Server Error, it's a bug on their end IMO")
-  @Test(expected = TaskAlreadyInFirstColumnException.class)
+  @Test(expected = TaskAlreadyInLastColumnException.class)
   public void shouldThrowWhenForcedToMoveRightWhenOnLastColumn() throws Exception {
     // given
     TaskFlow taskFlow = createSampleTask();
@@ -99,7 +98,6 @@ public class TaskMovementTest {
     move.toNextColumn(); //fail here
     move.toNextColumn();
     move.toNextColumn();
-    // hopefully already "outside of range" already ;-)
 
     // then, should have thrown
   }
