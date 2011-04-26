@@ -1,5 +1,6 @@
 package pl.project13.janbanery.resources;
 
+import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.Required;
 
 import java.io.Serializable;
@@ -10,11 +11,17 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class Column extends KanbaneryResource implements Serializable {
+
   @Required
   private String  name; // on create and update	Name
-  private Integer project_id; //	Project
+
+  @SerializedName("project_id")
+  private Integer projectId; //	Project
+
   private Boolean fixed; //	If column can be moved
+
   private Integer capacity; //	on create and update	Capacity (WIP limit)
+
   private Integer position; //	on create and update	Position on the board, 1-based
 
   public Column() {
@@ -33,11 +40,11 @@ public class Column extends KanbaneryResource implements Serializable {
   }
 
   public Integer getProjectId() {
-    return project_id;
+    return projectId;
   }
 
   public void setProjectId(Integer projectId) {
-    this.project_id = projectId;
+    this.projectId = projectId;
   }
 
   public Boolean getFixed() {
@@ -90,7 +97,7 @@ public class Column extends KanbaneryResource implements Serializable {
     if (position != null ? !position.equals(column.position) : column.position != null) {
       return false;
     }
-    if (project_id != null ? !project_id.equals(column.project_id) : column.project_id != null) {
+    if (projectId != null ? !projectId.equals(column.projectId) : column.projectId != null) {
       return false;
     }
 
@@ -101,7 +108,7 @@ public class Column extends KanbaneryResource implements Serializable {
   public int hashCode() {
     int result = super.hashCode();
     result = 31 * result + (name != null ? name.hashCode() : 0);
-    result = 31 * result + (project_id != null ? project_id.hashCode() : 0);
+    result = 31 * result + (projectId != null ? projectId.hashCode() : 0);
     result = 31 * result + (fixed != null ? fixed.hashCode() : 0);
     result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
     result = 31 * result + (position != null ? position.hashCode() : 0);

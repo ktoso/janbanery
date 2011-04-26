@@ -1,5 +1,6 @@
 package pl.project13.janbanery.resources;
 
+import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.On;
 import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
@@ -17,6 +18,7 @@ public class Issue extends KanbaneryResource implements Serializable {
   @Settable(On.CreateOrUpdate)
   private String url; // URL pointing to the issue in an external bug-tracking system
 
+  @SerializedName("task_id")
   private Integer taskId; // Task
 
   @Settable(On.CreateOrUpdate)

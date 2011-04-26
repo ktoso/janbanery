@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -9,9 +11,13 @@ import java.math.BigDecimal;
  * @author Konrad Malawski
  */
 public class Estimate extends KanbaneryResource implements Serializable {
+
   private BigDecimal value; // Numeric value
-  private String     label; // Label to display
-  private Integer    project_id; // Project to which the task type is assigned
+
+  private String label; // Label to display
+
+  @SerializedName("project_id")
+  private Integer projectId; // Project to which the task type is assigned
 
   public Estimate() {
   }
@@ -37,12 +43,12 @@ public class Estimate extends KanbaneryResource implements Serializable {
     this.label = label;
   }
 
-  public Integer getProject_id() {
-    return project_id;
+  public Integer getProjectId() {
+    return projectId;
   }
 
-  public void setProject_id(Integer project_id) {
-    this.project_id = project_id;
+  public void setProjectId(Integer project_id) {
+    this.projectId = project_id;
   }
 
   @Override
@@ -62,7 +68,7 @@ public class Estimate extends KanbaneryResource implements Serializable {
     if (label != null ? !label.equals(estimate.label) : estimate.label != null) {
       return false;
     }
-    if (project_id != null ? !project_id.equals(estimate.project_id) : estimate.project_id != null) {
+    if (projectId != null ? !projectId.equals(estimate.projectId) : estimate.projectId != null) {
       return false;
     }
     if (type != null ? !type.equals(estimate.type) : estimate.type != null) {
@@ -82,7 +88,7 @@ public class Estimate extends KanbaneryResource implements Serializable {
   public int hashCode() {
     int result = value != null ? value.hashCode() : 0;
     result = 31 * result + (label != null ? label.hashCode() : 0);
-    result = 31 * result + (project_id != null ? project_id.hashCode() : 0);
+    result = 31 * result + (projectId != null ? projectId.hashCode() : 0);
     result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
     result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);

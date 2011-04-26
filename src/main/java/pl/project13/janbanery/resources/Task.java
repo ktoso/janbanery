@@ -1,5 +1,6 @@
 package pl.project13.janbanery.resources;
 
+import com.google.gson.annotations.SerializedName;
 import org.joda.time.DateTime;
 import pl.project13.janbanery.resources.additions.On;
 import pl.project13.janbanery.resources.additions.ReadOnly;
@@ -22,24 +23,30 @@ public class Task extends KanbaneryResource implements Serializable {
   private String title; // Title
 
   @Required(alternativeTo = "taskTypeName")
+  @SerializedName("task_type_id")
   private Long taskTypeId; // Task type, ie. "Bug", "Story". Instead of setting this id you can just settask_type_name to "Bug"
 
   @Required(alternativeTo = "taskTypeId")
+  @SerializedName("task_type_name")
   private String taskTypeName;
 
   @Required
   @Settable(On.Update)
+  @SerializedName("column_id")
   private Integer columnId;
 
   @ReadOnly
+  @SerializedName("creator_id")
   private Integer creatorId;
 
   @Settable(On.CreateOrUpdate)
   private String description;
 
   @Settable(On.CreateOrUpdate)
+  @SerializedName("estimate_id")
   private Integer estimateId; // Estimate
 
+  @SerializedName("owner_id")
   private Integer ownerId; // Who is currently assigned to it
 
   @Settable(On.CreateOrUpdate)
@@ -49,11 +56,13 @@ public class Task extends KanbaneryResource implements Serializable {
   private Priority priority; // Priority (0, 1 or 2)
 
   @Settable(On.CreateOrUpdate)
+  @SerializedName("ready_to_pull")
   private Boolean readyToPull; // If task is ready to be pulled
 
   private Boolean blocked; // If task is blocked by other task(s)
 
   @ReadOnly
+  @SerializedName("moved_at")
   private DateTime movedAt; // On task was moved to currentUser column
 
   @Override

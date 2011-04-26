@@ -18,7 +18,9 @@ import java.util.List;
 public class Workspace extends KanbaneryResource implements Serializable {
 
   private Integer       id; // Workspace id
+
   private String        name; // 	Workspace name
+
   private List<Project> projects; // Array of Project resources accessible by user
 
   public Workspace() {

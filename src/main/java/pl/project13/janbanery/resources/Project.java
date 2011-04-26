@@ -11,8 +11,11 @@ import java.io.Serializable;
  */
 @ReadOnly
 public class Project extends KanbaneryResource implements Serializable {
+
   private Long   id; // Project id
+
   private String name; // Project name
+
 //  private String  url; // Full URL to the project
 
   public Project() {

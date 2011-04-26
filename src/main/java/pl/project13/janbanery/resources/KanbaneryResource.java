@@ -1,5 +1,6 @@
 package pl.project13.janbanery.resources;
 
+import com.google.gson.annotations.SerializedName;
 import org.joda.time.DateTime;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 
@@ -11,9 +12,11 @@ import pl.project13.janbanery.resources.additions.ReadOnly;
 public abstract class KanbaneryResource implements Resource {
 
   @ReadOnly
+  @SerializedName("created_at")
   protected DateTime createdAt; // Creation time
 
   @ReadOnly
+  @SerializedName("updated_at")
   protected DateTime updatedAt; // Last update time
 
   @ReadOnly
