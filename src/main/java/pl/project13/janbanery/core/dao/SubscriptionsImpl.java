@@ -27,6 +27,8 @@ public class SubscriptionsImpl implements Subscriptions {
    */
   @Override
   public Boolean exists(Task task) {
+
+
     throw new NotYetImplementedException(); // todo
   }
 

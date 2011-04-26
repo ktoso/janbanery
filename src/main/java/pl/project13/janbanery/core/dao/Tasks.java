@@ -35,11 +35,13 @@ public interface Tasks {
 
   TaskMoveFlow move(Task task);
 
-  TaskFlow move(Task task, TaskLocation location);
+  TaskFlow move(Task task, TaskLocation location) throws IOException;
 
-  TaskMoveFlow markNotReadyToPull(Task task);
+  // state changes --------------------
 
-  TaskMoveFlow markReadyToPull(Task task);
+  TaskFlow markNotReadyToPull(Task task); // todo remove this from the TaskMovementFlow
+
+  TaskFlow markReadyToPull(Task task); // todo remove this from the TaskMovementFlow
 
   // queries ------------------------------------------------------------------
 

@@ -31,6 +31,10 @@ public class ReflectionsBodyGenerator implements FormUrlEncodedBodyGenerator {
     reflections = new ReflectionsFactory().create();
   }
 
+  public ReflectionsBodyGenerator(Reflections reflections) {
+    this.reflections = reflections;
+  }
+
   @Override
   public <T extends KanbaneryResource> String asString(T entity) {
     String resourceId = entity.getResourceId();

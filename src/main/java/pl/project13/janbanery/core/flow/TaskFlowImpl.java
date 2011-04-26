@@ -25,15 +25,32 @@ public class TaskFlowImpl implements TaskFlow {
    * {@inheritDoc}
    */
   @Override
-  public Task get() {
-    return task;
+  public void delete() throws IOException, ExecutionException, InterruptedException {
+    tasks.delete(task);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void delete() throws IOException, ExecutionException, InterruptedException {
-    tasks.delete(task);
+  public TaskMoveFlow move() {
+    return new TaskMoveFlowImpl(tasks, task);
+  }
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public TaskMarkFlow mark() {
+    return new TaskMarkFlowImpl(tasks, task);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Task get() {
+    return task;
   }
 }

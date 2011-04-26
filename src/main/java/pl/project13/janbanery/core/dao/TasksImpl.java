@@ -12,6 +12,7 @@ import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskFlowImpl;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlowImpl;
+import pl.project13.janbanery.exceptions.kanbanery.CanNotDeleteNotEmptyColumnException;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.resources.additions.TaskLocation;
@@ -49,7 +50,7 @@ public class TasksImpl implements Tasks {
     String url = getDefaultGetUrl();
     log.info("Calling POST on: " + url);
 
-    String responseBody = restClient.doPost(task, url, this);
+    String responseBody = restClient.doPost(task, url);
 
     Task newTask = gson.fromJson(responseBody, GsonTypeTokens.TASK);
     return new TaskFlowImpl(this, newTask);
@@ -57,7 +58,7 @@ public class TasksImpl implements Tasks {
 
   @Override
   public void delete(Task task) throws IOException {
-    String url = getDeleteUrl(task);
+    String url = getTaskUrl(task);
     restClient.doDelete(url);
   }
 
@@ -72,7 +73,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public void archiveAllInLastColumn() throws IOException {
+  public void archiveAllInLastColumn() throws IOException, CanNotDeleteNotEmptyColumnException {
     throw new NotYetImplementedException(); // todo
   }
 
@@ -82,17 +83,22 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TaskFlow move(Task task, TaskLocation location) {
+  public TaskFlow move(Task task, TaskLocation location) throws IOException {
+    String url = getTaskUrl(task);
+    String moveRequest = location.requestBody();
+
+    Task movedTask = restClient.doPut(url, moveRequest, GsonTypeTokens.TASK);
+
+    return new TaskFlowImpl(this, movedTask);
+  }
+
+  @Override
+  public TaskFlow markNotReadyToPull(Task task) {
     throw new NotYetImplementedException(); // todo
   }
 
   @Override
-  public TaskMoveFlow markNotReadyToPull(Task task) {
-    throw new NotYetImplementedException(); // todo
-  }
-
-  @Override
-  public TaskMoveFlow markReadyToPull(Task task) {
+  public TaskFlow markReadyToPull(Task task) {
     throw new NotYetImplementedException(); // todo
   }
 
@@ -163,7 +169,7 @@ public class TasksImpl implements Tasks {
 
   /**
    * The url prepared for most GET requests on this resource,
-   * it looks like: https://WORKSPACE.kanbanery.com/api/v1/projects/PROJECT_ID/tasks.json
+   * It looks like: https://WORKSPACE.kanbanery.com/api/v1/projects/PROJECT_ID/tasks.json
    *
    * @return url string prepared for querying for data
    */
@@ -171,7 +177,16 @@ public class TasksImpl implements Tasks {
     return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "tasks.json";
   }
 
-  private String getDeleteUrl(Task task) {
+  /**
+   * Returns a proper url to call API calls for this task on -
+   * for PUT/DELETE calls.
+   * <p/>
+   * It looks like: https://WORKSPACE.kanbanery.com/api/v1/tasks/TASK_ID.json
+   *
+   * @param task the task for which to generate the url
+   * @return the proper URL for API calls on this task
+   */
+  private String getTaskUrl(Task task) {
     return conf.getApiUrl(currentWorkspace.getName(), task);
   }
 

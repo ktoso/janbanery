@@ -7,7 +7,6 @@ import com.ning.http.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
-import pl.project13.janbanery.core.dao.TasksImpl;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.exceptions.RestClientException;
 import pl.project13.janbanery.exceptions.kanbanery.*;
@@ -77,16 +76,15 @@ public class RestClient {
     return sb.toString();
   }
 
-  public String doPost(Task task, String url, TasksImpl tasks) throws IOException, InterruptedException, ExecutionException {
+  public String doPost(Task task, String url) throws IOException, InterruptedException, ExecutionException {
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePost(url);
     authorize(requestBuilder);
 
     String requestBody = encodedBodyGenerator.asString(task);
     log.info("Generated request body is: '{}'", requestBody);
-    requestBuilder.setBody(requestBody);
+    setFormUrlEncodedBody(requestBuilder, requestBody);
 
-    ListenableFuture<Response> futureResponse = requestBuilder.execute();
-    Response response = futureResponse.get();
+    Response response = execute(requestBuilder);
     String responseBody = response.getResponseBody();
 
     verifyResponseCode(response);
@@ -147,11 +145,52 @@ public class RestClient {
     return response;
   }
 
+  public Response doPut(String url, String requestBody) {
+    log.info("Calling PUT on: '" + url + "', with data: " + requestBody);
+
+    AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePut(url);
+    authorize(requestBuilder);
+
+    setFormUrlEncodedBody(requestBuilder, requestBody);
+
+    Response response = execute(requestBuilder);
+
+    verifyResponseCode(response);
+
+    return response;
+  }
+
+  @SuppressWarnings({"unchecked"})
+  public <T> T doPut(String url, String requestBody, Class<?> returnType) throws IOException {
+    Response response = doPut(url, requestBody);
+    String responseBody = response.getResponseBody();
+    return (T) gson.fromJson(responseBody, returnType);
+  }
+
+  @SuppressWarnings({"unchecked"})
+  public <T> T doPut(String url, String requestBody, Type returnType) throws IOException {
+    Response response = doPut(url, requestBody);
+    String responseBody = response.getResponseBody();
+    return (T) gson.fromJson(responseBody, returnType);
+  }
+
   private void authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
     conf.authorize(requestBuilder);
   }
 
-  private Response execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
+  private void setFormUrlEncodedBody(AsyncHttpClient.BoundRequestBuilder requestBuilder, String requestBody) {
+    requestBuilder.setBody(requestBody);
+    requestBuilder.setHeader("Content-Type", "application/x-www-form-urlencoded");
+  }
+
+  /**
+   * Execute and throw RestClientException exceptions if the request could not be executed.
+   *
+   * @param requestBuilder the request to be executed()
+   * @return return the response fetched from the server
+   * @throws RestClientException if the response could not be fetched
+   */
+  private Response execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) throws RestClientException {
     Response response;
 
     try {

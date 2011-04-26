@@ -1,8 +1,5 @@
 package pl.project13.janbanery.core.flow;
 
-import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.ListenableFuture;
-import com.ning.http.client.Response;
 import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
@@ -18,49 +15,69 @@ import java.util.concurrent.ExecutionException;
 public class TaskMoveFlowImpl implements TaskMoveFlow {
 
   private Tasks tasks;
-
-  private Task task;
+  private Task  task;
 
   public TaskMoveFlowImpl(Tasks tasks, Task task) {
     this.tasks = tasks;
     this.task = task;
   }
 
-  @Override
-  public TaskMoveFlow readyToPull() throws IOException, ExecutionException, InterruptedException {
-    return tasks.markReadyToPull(task);
-  }
-
-  @Override
-  public TaskMoveFlow notReadyToPull() throws IOException, ExecutionException, InterruptedException {
-    return tasks.markNotReadyToPull(task);
-  }
-
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public TaskMoveFlow toIceBox() throws IOException, ExecutionException, InterruptedException {
     return to(TaskLocation.ICEBOX);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public TaskMoveFlow toBoard() throws IOException, ExecutionException, InterruptedException {
+    return to(TaskLocation.BOARD);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public TaskMoveFlow toNextColumn() throws IOException, ExecutionException, InterruptedException {
     return to(TaskLocation.NEXT);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public TaskMoveFlow toPreviousColumn() throws IOException, ExecutionException, InterruptedException {
     return to(TaskLocation.PREVIOUS);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public TaskMoveFlow toArchive() throws IOException, ExecutionException, InterruptedException {
     return to(TaskLocation.ARCHIVE);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public TaskMoveFlow to(TaskLocation location) throws IOException, ExecutionException, InterruptedException {
-    tasks.move(task, location);
+    TaskFlow move = tasks.move(task, location);
+
+    task = move.get();
     return this;
   }
 
-
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Task get() {
+    return task;
+  }
 }

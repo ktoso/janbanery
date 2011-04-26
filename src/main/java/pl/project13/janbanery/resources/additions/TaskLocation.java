@@ -4,18 +4,20 @@ package pl.project13.janbanery.resources.additions;
  * @author Konrad Malawski
  */
 public enum TaskLocation {
-  NEXT("tasks[next]"),
-  PREVIOUS("tasks[previous]"),
-  ARCHIVE("tasks[archive]"),
-  ICEBOX("tasks[icebox]");
+  NEXT("next_column"),
+  PREVIOUS("prev_column"),
 
-  private String jsonName;
+  BOARD("board"),
+  ICEBOX("icebox"),
+  ARCHIVE("archive");
 
-  TaskLocation(String jsonName) {
-    this.jsonName = jsonName;
+  private String requestBody;
+
+  TaskLocation(String requestBody) {
+    this.requestBody = requestBody;
   }
 
-  public String jsonName() {
-    return jsonName;
+  public String requestBody() {
+    return String.format("task[location]=%s", requestBody);
   }
 }

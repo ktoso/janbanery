@@ -13,7 +13,7 @@ import pl.project13.janbanery.test.TestConstants;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
+import static pl.project13.janbanery.test.TestConstants.*;
 
 /**
  * @author Konrad Malawski
@@ -26,14 +26,13 @@ public class TasksTest {
   public void setUp() throws Exception {
     PropertiesConfiguration conf = new PropertiesConfiguration(VALID_CONF_FILE_LOCATION);
     janbanery = new JanbaneryFactory().connectUsing(conf);
+    janbanery.usingWorkspace(EXISTING_WORKSPACE);
   }
 
   @Test
   public void shouldCreateTaskOnBoard() throws Exception {
     // given
-    janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
-
-    Task bug = new Task.Builder(TestConstants.TASK_TITLE)
+    Task bug = new Task.Builder(TASK_TITLE)
         .taskType(janbanery.taskTypes().any())
         .description("A task I have created using the Janbanery library")
         .priority(Priority.MEDIUM)
@@ -51,9 +50,7 @@ public class TasksTest {
   @Test
   public void shouldDeleteTask() throws Exception {
     // given
-    janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
-
-    List<Task> beforeDelete = janbanery.tasks().byTitle(TestConstants.TASK_TITLE);
+    List<Task> beforeDelete = janbanery.tasks().byTitle(TASK_TITLE);
     Task task = beforeDelete.get(0);
     Long deletedTaskId = task.getId();
 
@@ -61,7 +58,7 @@ public class TasksTest {
     janbanery.tasks().delete(task);
 
     // then
-    List<Task> afterDelete = janbanery.tasks().byTitle(TestConstants.TASK_TITLE);
+    List<Task> afterDelete = janbanery.tasks().byTitle(TASK_TITLE);
 
     assertThat(afterDelete.size()).isEqualTo(beforeDelete.size() - 1);
     assertThat(afterDelete).onProperty("id").excludes(deletedTaskId);

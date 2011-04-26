@@ -1,7 +1,10 @@
 package pl.project13.janbanery.resources;
 
 import com.google.gson.annotations.SerializedName;
+import pl.project13.janbanery.resources.additions.On;
+import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
+import pl.project13.janbanery.resources.additions.Settable;
 
 import java.io.Serializable;
 
@@ -13,22 +16,28 @@ import java.io.Serializable;
 public class Column extends KanbaneryResource implements Serializable {
 
   @Required
-  private String  name; // on create and update	Name
+  @Settable(On.CreateOrUpdate)
+  private String name; // on create and update	Name
 
   @SerializedName("project_id")
+  @ReadOnly
   private Integer projectId; //	Project
 
+  @ReadOnly
   private Boolean fixed; //	If column can be moved
 
-  private Integer capacity; //	on create and update	Capacity (WIP limit)
+  @Settable(On.CreateOrUpdate)
+  private Integer capacity; //	Capacity (WIP limit)
 
-  private Integer position; //	on create and update	Position on the board, 1-based
+  @Settable(On.CreateOrUpdate)
+  private Integer position; //	Position on the board, 1-based
 
   public Column() {
   }
 
-  @Override public String getResourceId() {
-    return "columns";
+  @Override
+  public String getResourceId() {
+    return "column";
   }
 
   public String getName() {

@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author Konrad Malawski
  */
-public interface TaskFlow extends KanbaneryFlow {
+public interface TaskFlow extends KanbaneryFlow<Task> {
 
   /**
    * Get the task passed into this flow.
@@ -27,4 +27,16 @@ public interface TaskFlow extends KanbaneryFlow {
    * @throws InterruptedException
    */
   void delete() throws IOException, ExecutionException, InterruptedException;
+
+  /**
+   *
+   * @return
+   */
+  TaskMarkFlow mark();
+
+  /**
+   *
+   * @return
+   */
+  TaskMoveFlow move();
 }
