@@ -3,7 +3,7 @@ package pl.project13.janbanery.exceptions.kanbanery;
 /**
  * @author Konrad Malawski
  */
-public class TaskAlreadyInFirstColumnException extends InvalidEntityKanbaneryException {
+public class TaskAlreadyInFirstColumnException extends InvalidEntityKanbaneryException implements TaskMovementException {
 
   private static final long serialVersionUID = 124950722383696241L;
 
