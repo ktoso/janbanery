@@ -85,9 +85,9 @@ public class ReflectionsFactory {
   private void printScanPaths(List<URL> clazzUrls) {
     log.info("----------------- will scan classes in -----------------------");
     for (URL clazzUrl : clazzUrls) {
-      System.out.println(clazzUrl);
+      log.info(clazzUrl.toString());
     }
-    System.out.println("--------------------------------------------------------------");
+    log.info("--------------------------------------------------------------");
   }
 
   private ArrayList<Vfs.UrlType> findVfsUrlTypes(ArrayList<URL> clazzUrls) {
