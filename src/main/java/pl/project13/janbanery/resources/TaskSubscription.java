@@ -25,6 +25,10 @@ public class TaskSubscription extends KanbaneryResource {
   public TaskSubscription() {
   }
 
+  public TaskSubscription(Long taskId) {
+    this.taskId = taskId;
+  }
+
   /**
    * {@inheritDoc}
    */

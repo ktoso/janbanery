@@ -75,7 +75,7 @@ public class Janbanery {
    * @throws IOException
    * @throws ExecutionException
    * @throws InterruptedException
-   * @throws ProjectNotFoundException will be thrown if no project with such name exists in the current workspace
+   * @throws ProjectNotFoundException will be thrown if no project with such name isSubscribedTo in the current workspace
    */
   public Project usingProject(String name) throws IOException, ExecutionException, InterruptedException, ProjectNotFoundException {
     return this.usingProject(currentWorkspace, name);

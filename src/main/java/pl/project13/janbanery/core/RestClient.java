@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
+import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
 import pl.project13.janbanery.exceptions.RestClientException;
 import pl.project13.janbanery.exceptions.kanbanery.*;
 import pl.project13.janbanery.resources.KanbaneryResource;
@@ -57,6 +58,8 @@ public class RestClient {
         throw InvalidEntityKanbaneryException.mostSpecializedException(errorMessageFrom(response));
       case UnauthorizedKanbaneryException.MAPPED_ERROR_CODE:
         throw new UnauthorizedKanbaneryException(errorMessageFrom(response));
+      case NotFoundKanbaneryException.MAPPED_ERROR_CODE:
+        throw new NotFoundKanbaneryException(errorMessageFrom(response));
     }
 
     if (statusCode > 400) {

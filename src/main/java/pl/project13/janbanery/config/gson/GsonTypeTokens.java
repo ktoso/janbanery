@@ -27,7 +27,8 @@ public class GsonTypeTokens {
 
   // simple types
 
-  public static final Class<User>   USER   = User.class;
-  public static final Class<Task>   TASK   = Task.class;
-  public static final Class<Column> COLUMN = Column.class;
+  public static final Class<User>             USER              = User.class;
+  public static final Class<Task>             TASK              = Task.class;
+  public static final Class<TaskSubscription> TASK_SUBSCRIPTION = TaskSubscription.class;
+  public static final Class<Column>           COLUMN            = Column.class;
 }
