@@ -7,6 +7,8 @@ import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.IceBoxFlow;
 import pl.project13.janbanery.core.flow.IceBoxFlowImpl;
+import pl.project13.janbanery.core.flow.TaskUpdateFlow;
+import pl.project13.janbanery.core.flow.TaskUpdateFlowImpl;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
@@ -53,6 +55,11 @@ public class IceBoxImpl implements IceBox {
     String url = getDefaultUrl();
 
     return restClient.doGet(url, GsonTypeTokens.LIST_TASK);
+  }
+
+  @Override
+  public TaskUpdateFlow update(Task task) {
+    return new TaskUpdateFlowImpl(tasks, task);
   }
 
   private String getDefaultUrl() {
