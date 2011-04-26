@@ -132,13 +132,13 @@ public class Janbanery {
   /* return initially setup instances of dao objects */
 
   public Tasks tasks() {
-    RestClient restClient = new RestClient(conf, asyncHttpClient, bodyGenerator);
-    TasksImpl tasks = new TasksImpl(conf, restClient, gson);
-    return tasks.using(currentWorkspace, currentProject);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    return new TasksImpl(conf, restClient, gson).using(currentWorkspace, currentProject);
   }
 
   public TaskTypes taskTypes() {
-    return new TaskTypesImpl(conf, gson, asyncHttpClient).using(currentWorkspace, currentProject);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    return new TaskTypesImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public Users users() {

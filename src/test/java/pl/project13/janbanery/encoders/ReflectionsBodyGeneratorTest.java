@@ -23,6 +23,9 @@ public class ReflectionsBodyGeneratorTest {
     String encodedString = reflectionsBodyGenerator.asString(task);
 
     // then
-    assertThat(encodedString).isEqualTo("tasks[title]=Title&tasks[task_type_name]=Bug"); // todo
+    // (order of this items may vary, that's why contains() and not isEqualTo())
+    assertThat(encodedString).contains("task[title]=Title");
+    assertThat(encodedString).contains("&");
+    assertThat(encodedString).contains("task[task_type_name]=Bug");
   }
 }

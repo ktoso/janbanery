@@ -52,12 +52,18 @@ public class TasksTest {
   public void shouldDeleteTask() throws Exception {
     // given
     janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
-    List<Task> tasks = janbanery.tasks().byTitle(TestConstants.TASK_TITLE);
+
+    List<Task> beforeDelete = janbanery.tasks().byTitle(TestConstants.TASK_TITLE);
+    Task task = beforeDelete.get(0);
+    Long deletedTaskId = task.getId();
 
     // when
-    janbanery.tasks().move()
+    janbanery.tasks().delete(task);
 
     // then
+    List<Task> afterDelete = janbanery.tasks().byTitle(TestConstants.TASK_TITLE);
 
+    assertThat(afterDelete.size()).isEqualTo(beforeDelete.size() - 1);
+    assertThat(afterDelete).onProperty("id").excludes(deletedTaskId);
   }
 }

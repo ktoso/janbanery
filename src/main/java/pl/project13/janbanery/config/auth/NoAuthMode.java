@@ -1,6 +1,7 @@
 package pl.project13.janbanery.config.auth;
 
 import com.ning.http.client.AsyncHttpClient;
+import pl.project13.janbanery.resources.User;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -18,5 +19,10 @@ public class NoAuthMode implements AuthMode {
   public String encodeUserPassword(String user, String password) {
     byte[] logon = String.format("%s:%s", user, password).getBytes();
     return new BASE64Encoder().encode(logon);
+  }
+
+  @Override
+  public boolean isCurrentUser(User user) {
+    return false;
   }
 }

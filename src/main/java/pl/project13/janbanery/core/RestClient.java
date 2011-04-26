@@ -126,11 +126,12 @@ public class RestClient {
    * @return the KanbaneryResource created by parsing the retrieved json
    * @throws IOException if the response body could not be fetched
    */
+  @SuppressWarnings("unchecked")
   public <T> T doGet(String url, Type returnType) throws IOException {
     Response response = doGet(url);
     String responseBody = response.getResponseBody();
 
-    return gson.fromJson(responseBody, returnType);
+    return (T) gson.fromJson(responseBody, returnType);
   }
 
   private void authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {

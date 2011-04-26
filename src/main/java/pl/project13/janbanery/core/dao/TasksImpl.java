@@ -61,7 +61,7 @@ public class TasksImpl implements Tasks {
 
   @Override
   public TaskFlow createInIcebox(Task task) {
-    // todo implement me
+    throw new NotYetImplementedException(); // todo implement me
 
     String responseBody = ""; // todo implement me
     Task newTask = gson.fromJson(responseBody, GsonTypeTokens.TASK);

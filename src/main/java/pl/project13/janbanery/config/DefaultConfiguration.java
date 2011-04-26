@@ -5,6 +5,7 @@ import pl.project13.janbanery.config.auth.ApiKeyAuthMode;
 import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.auth.NoAuthMode;
 import pl.project13.janbanery.config.auth.UserPassAuthMode;
+import pl.project13.janbanery.resources.User;
 
 /**
  * Date: 4/20/11
@@ -40,6 +41,14 @@ public class DefaultConfiguration implements Configuration {
   @Override
   public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
     return authMode.authorize(requestBuilder);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isCurrentUser(User user){
+    return authMode.isCurrentUser(user);
   }
 
   @Override
