@@ -1,6 +1,7 @@
 package pl.project13.janbanery.resources;
 
 import com.google.gson.annotations.SerializedName;
+import pl.project13.janbanery.resources.additions.ReadOnly;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -11,6 +12,9 @@ import java.math.BigDecimal;
  * @author Konrad Malawski
  */
 public class Estimate extends KanbaneryResource implements Serializable {
+
+  @ReadOnly
+  private Long    id;
 
   private BigDecimal value; // Numeric value
 
@@ -25,6 +29,14 @@ public class Estimate extends KanbaneryResource implements Serializable {
   @Override
   public String getResourceId() {
     return "estimates";
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public BigDecimal getValue() {
