@@ -142,6 +142,7 @@ public class Janbanery {
   }
 
   public Users users() {
-    return new UsersImpl(conf, gson, asyncHttpClient).using(currentWorkspace);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    return new UsersImpl(conf, restClient).using(currentWorkspace);
   }
 }

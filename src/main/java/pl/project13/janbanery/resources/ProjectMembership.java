@@ -1,5 +1,6 @@
 package pl.project13.janbanery.resources;
 
+import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.On;
 import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
@@ -21,8 +22,10 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
   @Settable(On.CreateOrUpdate)
   private Permission permission;
 
+  @SerializedName("project_id")
   private Integer projectId;
 
+  @SerializedName("user_id")
   private Integer userId;
 
   public ProjectMembership() {

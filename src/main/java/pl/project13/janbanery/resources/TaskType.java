@@ -1,5 +1,7 @@
 package pl.project13.janbanery.resources;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -8,12 +10,22 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class TaskType extends KanbaneryResource implements Serializable {
-  private Long    id;
-  private String  name; // Name
+  private Long id;
+
+  private String name; // Name
+
+  @SerializedName("color_code")
   private Integer colorCode; // Color code
-  private String  backgroundColor; // background color of label
-  private String  textColor;
+
+  @SerializedName("background_color")
+  private String backgroundColor; // background color of label
+
+  @SerializedName("text_color")
+  private String textColor;
+
+  @SerializedName("project_id")
   private Integer projectId; // Project to which the task type is assigned
+
   private Integer position; // Position in project's task types list, 1-based
 
   @Override

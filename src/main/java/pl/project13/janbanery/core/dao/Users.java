@@ -9,5 +9,12 @@ import java.util.concurrent.ExecutionException;
  * @author Konrad Malawski
  */
 public interface Users {
-  User current() throws IOException, ExecutionException, InterruptedException;
+  /**
+   * Fetches the currently being used user.
+   * The "me" user, one might say.
+   *
+   * @return the currently being used user for all API calls
+   * @throws IOException if the response body could not be fetched
+   */
+  User current() throws IOException;
 }

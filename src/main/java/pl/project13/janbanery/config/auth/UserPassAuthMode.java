@@ -1,6 +1,7 @@
 package pl.project13.janbanery.config.auth;
 
 import com.ning.http.client.AsyncHttpClient;
+import pl.project13.janbanery.resources.User;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -8,21 +9,19 @@ import sun.misc.BASE64Encoder;
  */
 public class UserPassAuthMode implements AuthMode {
 
+  private String userEmail;
   private String authData;
-
-  public UserPassAuthMode(String authData) {
-    this.authData = authData;
-  }
 
   /**
    * Creates an instance of UserPassAuthMode using the given username and password,
    * these will be encrypted right away using an BaseEncoder.
    *
-   * @param user     username to be used in this plain auth method
-   * @param password password for this user
+   * @param userEmail     username to be used in this plain auth method
+   * @param password password for this userEmail
    */
-  public UserPassAuthMode(String user, String password) {
-    this.authData = encodeUserPassword(user, password);
+  public UserPassAuthMode(String userEmail, String password) {
+    this.userEmail = userEmail;
+    this.authData = encodeUserPassword(userEmail, password);
   }
 
   @Override
@@ -33,5 +32,10 @@ public class UserPassAuthMode implements AuthMode {
   public String encodeUserPassword(String user, String password) {
     byte[] logon = String.format("%s:%s", user, password).getBytes();
     return new BASE64Encoder().encode(logon);
+  }
+
+  @Override
+  public boolean isCurrentUser(User user) {
+    return userEmail.equals(user.getEmail());
   }
 }

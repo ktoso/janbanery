@@ -12,6 +12,7 @@ import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskFlowImpl;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlowImpl;
+import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 
@@ -20,7 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static com.google.common.collect.Collections2.*;
+import static com.google.common.collect.Collections2.filter;
 import static com.google.common.collect.Lists.newArrayList;
 
 /**
@@ -61,7 +62,9 @@ public class TasksImpl implements Tasks {
 
   @Override
   public TaskFlow createInIcebox(Task task) {
-    throw new NotYetImplementedException(); // todo implement me
+    if (1 == 1) {
+      throw new NotYetImplementedException(); // todo implement me
+    }
 
     String responseBody = ""; // todo implement me
     Task newTask = gson.fromJson(responseBody, GsonTypeTokens.TASK);
@@ -126,8 +129,8 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-    public List<Task> byTitleIgnoreCase(String taskTitle) throws IOException {
-      List<Task> tasks = all();
+  public List<Task> byTitleIgnoreCase(String taskTitle) throws IOException {
+    List<Task> tasks = all();
     Collection<Task> filteredTasks = filter(tasks, new TaskByTitleIgnoreCasePredicate(taskTitle));
     return newArrayList(filteredTasks);
   }
@@ -188,6 +191,7 @@ public class TasksImpl implements Tasks {
       return taskTitle.equals(input.getTitle());
     }
   }
+
   private static class TaskByTitleIgnoreCasePredicate implements Predicate<Task> {
 
     private String taskTitle;

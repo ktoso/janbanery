@@ -1,5 +1,6 @@
 package pl.project13.janbanery.resources;
 
+import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 
 import java.io.Serializable;
@@ -21,14 +22,18 @@ import java.io.Serializable;
 @ReadOnly
 public class User extends KanbaneryResource implements Serializable {
 
+  @SerializedName("api_token")
   private String apiToken; // User Token
 
-  private User email; // String	email
+  private String email; // String	email
 
+  @SerializedName("first_name")
   private String firstName; // 	User first name
 
+  @SerializedName("last_name")
   private String lastName; // User last name
 
+  @SerializedName("gravatar_url")
   private String gravatarUrl; // User's avatar (at gravatar.com)
 
   public User() {
@@ -47,11 +52,11 @@ public class User extends KanbaneryResource implements Serializable {
     this.apiToken = apiToken;
   }
 
-  public User getEmail() {
+  public String getEmail() {
     return email;
   }
 
-  public void setEmail(User email) {
+  public void setEmail(String email) {
     this.email = email;
   }
 

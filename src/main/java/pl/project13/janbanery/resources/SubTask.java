@@ -1,5 +1,6 @@
 package pl.project13.janbanery.resources;
 
+import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.On;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
@@ -18,9 +19,11 @@ public class SubTask extends KanbaneryResource implements Serializable {
   @Settable(On.CreateOrUpdate)
   private String  body; // Short description
 
+  @SerializedName("task_id")
   private Integer taskId; // 	Task
 
   @ReadOnly
+  @SerializedName("creator_id")
   private Integer creatorId; // Who created it
 
   @Settable(On.CreateOrUpdate)
