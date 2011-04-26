@@ -107,6 +107,12 @@ public class Janbanery {
     return new TasksImpl(conf, restClient, gson).using(currentWorkspace, currentProject);
   }
 
+  public IceBox iceBox() {
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    Tasks tasks = tasks();
+    return new IceBoxImpl(tasks, conf, restClient).using(currentWorkspace, currentProject); // todo seems weird...
+  }
+
   public TaskTypes taskTypes() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
     return new TaskTypesImpl(conf, restClient).using(currentWorkspace, currentProject);
@@ -125,5 +131,10 @@ public class Janbanery {
   public Workspaces workspaces() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
     return new WorkspacesImpl(conf, restClient);
+  }
+
+  public Columns columns() {
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    return new ColumnsImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 }

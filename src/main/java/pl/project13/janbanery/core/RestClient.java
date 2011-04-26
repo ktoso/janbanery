@@ -10,6 +10,7 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.exceptions.RestClientException;
 import pl.project13.janbanery.exceptions.kanbanery.*;
+import pl.project13.janbanery.resources.KanbaneryResource;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
@@ -76,21 +77,31 @@ public class RestClient {
     return sb.toString();
   }
 
-  public String doPost(Task task, String url) throws IOException, InterruptedException, ExecutionException {
+  public Response doPost(String url, KanbaneryResource resource) throws IOException {
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePost(url);
     authorize(requestBuilder);
 
-    String requestBody = encodedBodyGenerator.asString(task);
+    String requestBody = encodedBodyGenerator.asString(resource);
     log.info("Generated request body is: '{}'", requestBody);
     setFormUrlEncodedBody(requestBuilder, requestBody);
 
     Response response = execute(requestBuilder);
-    String responseBody = response.getResponseBody();
 
     verifyResponseCode(response);
 
-    log.debug("Got response for creating task: {}", responseBody);
-    return responseBody;
+    if (log.isDebugEnabled()) {
+      log.debug("Got response for creating resource: {}", response.getResponseBody());
+    }
+
+    return response;
+  }
+
+  @SuppressWarnings("unchecked")
+  public <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) throws IOException {
+    Response response = doPost(url, resource);
+    String responseBody = response.getResponseBody();
+
+    return (T) gson.fromJson(responseBody, returnType);
   }
 
   /**
@@ -174,6 +185,14 @@ public class RestClient {
     return (T) gson.fromJson(responseBody, returnType);
   }
 
+  @SuppressWarnings("unchecked")
+  public <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) throws IOException {
+    String requestBody = encodedBodyGenerator.asString(requestObject);
+    Response response = doPut(url, requestBody);
+    String responseBody = response.getResponseBody();
+    return (T) gson.fromJson(responseBody, returnType);
+  }
+
   private void authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
     conf.authorize(requestBuilder);
   }
@@ -182,6 +201,7 @@ public class RestClient {
     requestBuilder.setBody(requestBody);
     requestBuilder.setHeader("Content-Type", "application/x-www-form-urlencoded");
   }
+
 
   /**
    * Execute and throw RestClientException exceptions if the request could not be executed.

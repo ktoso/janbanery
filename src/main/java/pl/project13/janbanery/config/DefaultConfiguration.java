@@ -5,7 +5,6 @@ import pl.project13.janbanery.config.auth.ApiKeyAuthMode;
 import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.auth.NoAuthMode;
 import pl.project13.janbanery.config.auth.UserPassAuthMode;
-import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
 
 import static java.lang.String.format;
@@ -70,8 +69,13 @@ public class DefaultConfiguration implements Configuration {
   }
 
   @Override
-  public String getApiUrl(String workspaceName, Task task) {
-    return format("https://%s.kanbanery.com/api/v1/tasks/%d.json", workspaceName, task.getId());
+  public String getApiUrl(String workspaceName, String resourcesId, Long id) {
+    return format("https://%s.kanbanery.com/api/v1/%s/%d.json", workspaceName, resourcesId, id);
+  }
+
+  @Override
+  public String getApiUrl(String workspaceName, Long projectId, String resourceDotJson) {
+    return format("https://%s.kanbanery.com/api/v1/projects/%s/%s.json", workspaceName, projectId, resourceDotJson);
   }
 
   /**
@@ -79,7 +83,7 @@ public class DefaultConfiguration implements Configuration {
    * The URL looks like: https://janbanery.kanbanery.com/api/v1/projects/34242/
    *
    * @param workspaceName the workspace name to use for the url
-   * @param projectId the project id to use for the url
+   * @param projectId     the project id to use for the url
    * @return the properly set up url to begin calling Kanbanery API on it
    */
   @Override

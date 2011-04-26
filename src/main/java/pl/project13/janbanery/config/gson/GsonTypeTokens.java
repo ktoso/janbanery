@@ -1,10 +1,7 @@
 package pl.project13.janbanery.config.gson;
 
 import com.google.gson.reflect.TypeToken;
-import pl.project13.janbanery.resources.Task;
-import pl.project13.janbanery.resources.TaskType;
-import pl.project13.janbanery.resources.User;
-import pl.project13.janbanery.resources.Workspace;
+import pl.project13.janbanery.resources.*;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -24,9 +21,13 @@ public class GsonTypeTokens {
   }.getType();
   public static final Type LIST_TASK      = new TypeToken<List<Task>>() {
   }.getType();
+  public static final Type LIST_COLUMN    = new TypeToken<List<Column>>() {
+  }.getType();
+
 
   // simple types
 
-  public static final Class<User> USER = User.class;
-  public static final Class<Task> TASK = Task.class;
+  public static final Class<User>   USER   = User.class;
+  public static final Class<Task>   TASK   = Task.class;
+  public static final Class<Column> COLUMN = Column.class;
 }

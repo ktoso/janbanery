@@ -3,8 +3,10 @@ package pl.project13.janbanery.core.flow;
 import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.exceptions.kanbanery.InternalServerErrorKanbaneryException;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
+import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
+import sun.reflect.generics.tree.ReturnType;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -78,6 +80,14 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
   @Override
   public TaskMoveFlow to(TaskLocation location) throws IOException{
     TaskFlow move = tasks.move(task, location);
+
+    task = move.get();
+    return this;
+  }
+
+  @Override
+  public TaskMoveFlow to(Column column) throws IOException {
+    TaskFlow move = tasks.move(task, column);
 
     task = move.get();
     return this;

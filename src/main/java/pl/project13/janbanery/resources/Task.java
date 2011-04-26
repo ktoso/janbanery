@@ -33,11 +33,11 @@ public class Task extends KanbaneryResource implements Serializable {
   @Required
   @Settable(On.Update)
   @SerializedName("column_id")
-  private Integer columnId;
+  private Long columnId;
 
   @ReadOnly
   @SerializedName("creator_id")
-  private Integer creatorId;
+  private Long creatorId;
 
   @Settable(On.CreateOrUpdate)
   private String description;
@@ -111,19 +111,19 @@ public class Task extends KanbaneryResource implements Serializable {
     this.taskTypeName = taskTypeName;
   }
 
-  public Integer getColumnId() {
+  public Long getColumnId() {
     return columnId;
   }
 
-  public void setColumnId(Integer columnId) {
+  public void setColumnId(Long columnId) {
     this.columnId = columnId;
   }
 
-  public Integer getCreatorId() {
+  public Long getCreatorId() {
     return creatorId;
   }
 
-  public void setCreatorId(Integer creatorId) {
+  public void setCreatorId(Long creatorId) {
     this.creatorId = creatorId;
   }
 

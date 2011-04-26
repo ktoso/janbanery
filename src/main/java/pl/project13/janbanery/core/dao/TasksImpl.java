@@ -12,15 +12,14 @@ import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskFlowImpl;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlowImpl;
-import pl.project13.janbanery.exceptions.kanbanery.CanNotDeleteNotEmptyColumnException;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
+import pl.project13.janbanery.exceptions.kanbanery.CanNotDeleteNotEmptyColumnException;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import static com.google.common.collect.Collections2.filter;
 import static com.google.common.collect.Lists.newArrayList;
@@ -46,29 +45,22 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TaskFlow create(Task task) throws IOException, ExecutionException, InterruptedException {
+  public TaskFlow create(Task task) throws IOException {
     String url = getDefaultGetUrl();
-    log.info("Calling POST on: " + url);
 
-    String responseBody = restClient.doPost(task, url);
+    Task newTask = restClient.doPost(url, task, GsonTypeTokens.TASK);
 
-    Task newTask = gson.fromJson(responseBody, GsonTypeTokens.TASK);
     return new TaskFlowImpl(this, newTask);
   }
 
   @Override
   public void delete(Task task) throws IOException {
-    String url = getTaskUrl(task);
+    String url = getTaskUrl(task.getId());
     restClient.doDelete(url);
   }
 
   @Override
-  public TaskFlow createInIcebox(Task task) throws IOException {
-    throw new NotYetImplementedException(); // todo
-  }
-
-  @Override
-  public void archive(Task task) throws IOException, ExecutionException, InterruptedException {
+  public void archive(Task task) throws IOException {
     throw new NotYetImplementedException(); // todo
   }
 
@@ -84,12 +76,27 @@ public class TasksImpl implements Tasks {
 
   @Override
   public TaskFlow move(Task task, TaskLocation location) throws IOException {
-    String url = getTaskUrl(task);
+    String url = getTaskUrl(task.getId());
     String moveRequest = location.requestBody();
 
     Task movedTask = restClient.doPut(url, moveRequest, GsonTypeTokens.TASK);
 
     return new TaskFlowImpl(this, movedTask);
+  }
+
+  @Override
+  public TaskFlow move(Task task, Column column) throws IOException {
+    String url = getTaskUrl(task.getId());
+    Task requestObject = new Task();
+    requestObject.setColumnId(column.getId());
+
+    Task movedTask = restClient.doPut(url, requestObject, GsonTypeTokens.TASK);
+    return new TaskFlowImpl(this, movedTask);
+  }
+
+  @Override
+  public Task update(Task task, Task newValues) {
+    throw new NotYetImplementedException(); // todo implement me
   }
 
   @Override
@@ -111,6 +118,15 @@ public class TasksImpl implements Tasks {
     String responseBody = response.getResponseBody();
 
     return gson.fromJson(responseBody, GsonTypeTokens.LIST_TASK);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Task> allIn(Column column) throws IOException {
+    String url = getColumnTasksUrl(column.getId());
+    return restClient.doGet(url, GsonTypeTokens.LIST_TASK);
   }
 
   @Override
@@ -135,7 +151,6 @@ public class TasksImpl implements Tasks {
     Collection<Task> filteredTasks = filter(tasks, new TaskByTitleIgnoreCasePredicate(taskTitle));
     return newArrayList(filteredTasks);
   }
-
 
   @Override
   public List<Task> assignedToMe() {
@@ -183,11 +198,24 @@ public class TasksImpl implements Tasks {
    * <p/>
    * It looks like: https://WORKSPACE.kanbanery.com/api/v1/tasks/TASK_ID.json
    *
-   * @param task the task for which to generate the url
    * @return the proper URL for API calls on this task
+   * @param taskId id of the task to be fetched
    */
-  private String getTaskUrl(Task task) {
-    return conf.getApiUrl(currentWorkspace.getName(), task);
+  private String getTaskUrl(Long taskId) {
+    return conf.getApiUrl(currentWorkspace.getName(), "tasks", taskId);
+  }
+
+  /**
+   * Returns a proper url to call API calls for this task on -
+   * for PUT/DELETE calls.
+   * <p/>
+   * It looks like: https://WORKSPACE.kanbanery.com/api/v1/tasks/TASK_ID.json
+   *
+   * @return the proper URL for API calls on this task
+   * @param columnId id of the column of which we want the lasts
+   */
+  private String getColumnTasksUrl(Long columnId) {
+    return conf.getApiUrl(currentWorkspace.getName()) + "columns/" + columnId + "/tasks.json";
   }
 
   // ------------------------- inner predicate classes ------------------------

@@ -14,6 +14,7 @@ import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -34,8 +35,12 @@ public class TaskMovementTest {
 
   @After
   public void tearDown() throws Exception {
-    Task task = janbanery.tasks().byTitle(TASK_TITLE).get(0);
-    janbanery.tasks().delete(task);
+    List<Task> tasks = janbanery.tasks().byTitle(TASK_TITLE);
+
+    if (tasks.size() > 0) {
+      Task task = tasks.get(0);
+      janbanery.tasks().delete(task);
+    }
   }
 
   @Test
@@ -106,12 +111,18 @@ public class TaskMovementTest {
   public void shouldMoveToIceBox() throws Exception {
     // given
     TaskFlow taskFlow = createSampleTask();
-    TaskMoveFlow taskMoveFlow = taskFlow.move().toIceBox();
 
     // when
+    TaskMoveFlow taskMoveFlow = taskFlow.move().toIceBox();
 
     // then
+    Task taskInIceBox = taskMoveFlow.get();
+    List<Task> tasksInIceBox = janbanery.iceBox().all();
 
+    assertThat(tasksInIceBox).contains(taskInIceBox);
+
+    // cleanup
+    janbanery.tasks().delete(taskInIceBox);
   }
 
   private TaskFlow createSampleTask() throws IOException, ExecutionException, InterruptedException {
