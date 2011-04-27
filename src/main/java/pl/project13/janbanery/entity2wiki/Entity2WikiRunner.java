@@ -97,10 +97,12 @@ public class Entity2WikiRunner {
   }
 
   private String class2Wiki(Class<?> clazz) throws NoSuchFieldException {
+    StringBuilder out = new StringBuilder();
+
     String className = clazz.getName();
 
     // header
-    StringBuilder out = new StringBuilder("### ").append(clazz.getSimpleName()).append(N);
+    classHeader(clazz, out);
 
     // class comment
     out.append(javaDoc(className)).append(N);
@@ -119,6 +121,11 @@ public class Entity2WikiRunner {
     }
 
     return out.toString();
+  }
+
+  private void classHeader(Class<?> clazz, StringBuilder out) {
+    String name = clazz.getSimpleName();
+    out.append("### ").append("<a href=\"#").append(name).append("\" name=\"").append(name).append("\">").append(name).append("</a>").append(N);
   }
 
   private String javaDoc(String clazz) {
