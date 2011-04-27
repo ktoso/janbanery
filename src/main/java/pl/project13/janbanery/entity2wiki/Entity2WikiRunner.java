@@ -1,6 +1,5 @@
 package pl.project13.janbanery.entity2wiki;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
@@ -98,12 +97,18 @@ public class Entity2WikiRunner {
   }
 
   private String class2Wiki(Class<?> clazz) throws NoSuchFieldException {
+    String className = clazz.getName();
+
+    // header
     StringBuilder out = new StringBuilder("### ").append(clazz.getSimpleName()).append(N);
+
+    // class comment
+    out.append(javaDoc(className)).append(N);
 
     out.append(N);
 
+    // field descriptions
     for (Field field : clazz.getDeclaredFields()) {
-      String className = clazz.getName();
       String fieldName = field.getName();
 
       out.append("* ")
@@ -116,14 +121,21 @@ public class Entity2WikiRunner {
     return out.toString();
   }
 
+  private String javaDoc(String clazz) {
+    JavaClass javaClass = javaDocBuilder.getClassByName(clazz);
+    return javaClass.getComment();
+  }
+
   private String javaDoc(String clazz, String field) {
     JavaClass javaClass = javaDocBuilder.getClassByName(clazz);
     JavaField[] fields = javaClass.getFields();
+
     for (JavaField javaField : fields) {
       if (javaField.getName().equals(field)) {
         return javaField.getComment();
       }
     }
+
     return "";
   }
 
