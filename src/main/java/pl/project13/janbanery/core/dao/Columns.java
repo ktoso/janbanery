@@ -1,5 +1,6 @@
 package pl.project13.janbanery.core.dao;
 
+import pl.project13.janbanery.core.flow.ColumnUpdateFlow;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
@@ -11,7 +12,7 @@ import java.util.List;
  * @author Konrad Malawski
  */
 public interface Columns {
-  Columns using(Workspace currentWorkspace, Project currentProject);
+
 
   List<Column> all() throws IOException;
 
@@ -20,6 +21,10 @@ public interface Columns {
   Column last() throws IOException;
 
   Column byId(Long id) throws IOException;
+
+  // commands -----------------------------------------------------------------
+
+  ColumnUpdateFlow update(Column column);
 
   Column update(Column column, Column newValues);
 

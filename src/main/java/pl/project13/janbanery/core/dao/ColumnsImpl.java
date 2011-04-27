@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
+import pl.project13.janbanery.core.flow.ColumnUpdateFlow;
+import pl.project13.janbanery.core.flow.ColumnUpdateFlowImpl;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.Column;
@@ -85,6 +87,11 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
+  public ColumnUpdateFlow update(Column column) {
+    return new ColumnUpdateFlowImpl(this, column);
+  }
+
+  @Override
   public Column update(Column column, Column newValues) {
     return update(column.getId(), newValues);
   }
@@ -102,7 +109,6 @@ public class ColumnsImpl implements Columns {
     return conf.getApiUrl(currentWorkspace.getName(), "columns", columnId);
   }
 
-  @Override
   public Columns using(Workspace currentWorkspace, Project currentProject) {
     this.currentWorkspace = currentWorkspace;
     this.currentProject = currentProject;
