@@ -9,6 +9,7 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.auth.AuthMode;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.dao.*;
+import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.exceptions.ProjectNotFoundException;
@@ -35,12 +36,14 @@ public class Janbanery {
 
   private Workspace currentWorkspace;
   private Project   currentProject;
-  private ReflectionsBodyGenerator bodyGenerator = new ReflectionsBodyGenerator();
 
-  public Janbanery(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson) {
+  private FormUrlEncodedBodyGenerator bodyGenerator;
+
+  public Janbanery(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson, ReflectionsBodyGenerator bodyGenerator) {
     this.conf = conf;
     this.asyncHttpClient = asyncHttpClient;
     this.gson = gson;
+    this.bodyGenerator = bodyGenerator;
   }
 
   public AuthMode getAuthMode() {
@@ -144,5 +147,9 @@ public class Janbanery {
   public Users users() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
     return new UsersImpl(conf, restClient).using(currentWorkspace);
+  }
+
+  public Subscriptions subscriptions(){
+
   }
 }

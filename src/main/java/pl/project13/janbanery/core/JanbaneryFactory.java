@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.DefaultConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
+import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
 import pl.project13.janbanery.resources.User;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class JanbaneryFactory {
   }
 
   public Janbanery connectUsing(Configuration configuration) {
-    return new Janbanery(configuration, asyncHttpClient, GsonFactory.create());
+    return new Janbanery(configuration, asyncHttpClient, GsonFactory.create(), new ReflectionsBodyGenerator());
   }
 
   /**
@@ -58,7 +59,7 @@ public class JanbaneryFactory {
    */
   public Janbanery connectUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
-    Janbanery janbanery = new Janbanery(conf, asyncHttpClient, GsonFactory.create());
+    Janbanery janbanery = new Janbanery(conf, asyncHttpClient, GsonFactory.create(), new ReflectionsBodyGenerator());
 
     // fetch and switch to apiKey mode
     String apiKey = getCurrentUserApiKey(janbanery);
@@ -87,7 +88,7 @@ public class JanbaneryFactory {
    */
   public Janbanery connectAndKeepUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
-    return new Janbanery(conf, asyncHttpClient, GsonFactory.create());
+    return new Janbanery(conf, asyncHttpClient, GsonFactory.create(), new ReflectionsBodyGenerator());
   }
 
 }
