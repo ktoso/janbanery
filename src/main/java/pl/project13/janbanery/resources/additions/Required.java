@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 @Documented
 @GwtCompatible
 @Target(ElementType.FIELD)
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Required {
   /**
    * Optionally instead of this field the field named in this annotation may be set.

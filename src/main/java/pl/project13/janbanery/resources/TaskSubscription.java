@@ -4,20 +4,26 @@ import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 
 /**
- * <p>
+ * A task subscription is when you get notified about a tasks status.
+ * <p/>
  * Notice:
  * None of this entities properties are directly settable.
  * When creating a subscription, task_id is taken from the URL and user_id is the id of API_TOKEN owner.
- * </p>
  *
  * @author Konrad Malawski
  */
 public class TaskSubscription extends KanbaneryResource {
 
+  /**
+   * Id of the subscribed task
+   */
   @ReadOnly
   @SerializedName("task_id")
   Long taskId;
 
+  /**
+   * Id of the user who subscribed to the {@link #taskId} task
+   */
   @ReadOnly
   @SerializedName("user_id")
   Long userId;

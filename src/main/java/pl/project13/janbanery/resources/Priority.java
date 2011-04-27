@@ -9,8 +9,19 @@ import pl.project13.janbanery.exceptions.NoSuchPriorityException;
  * @author Konrad Malawski
  */
 public enum Priority implements KanbaneryEnumResource {
+  /**
+   * Low priority. "No stars".
+   */
   LOW(0),
+
+  /**
+   * Medium priority. "One star".
+   */
   MEDIUM(1),
+
+  /**
+   * High priority. "Two stars".
+   */
   HIGH(2);
 
   private Integer priorityId;

@@ -2,6 +2,7 @@ package pl.project13.janbanery.resources;
 
 import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.ReadOnly;
+import pl.project13.janbanery.resources.additions.Settable;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,15 +14,28 @@ import java.math.BigDecimal;
  */
 public class Estimate extends KanbaneryResource implements Serializable {
 
+  /**
+   * Estimate id
+   */
   @ReadOnly
   private Long    id;
 
-  private BigDecimal value; // Numeric value
+  /**
+   * Numeric value, describing this estimate
+   */
+  private BigDecimal value;
 
-  private String label; // Label to display
+  /**
+   * Label to display on kanban board
+   */
+  private String label;
 
+  /**
+   * Project to which the task type is assigned
+   */
+  @ReadOnly
   @SerializedName("project_id")
-  private Integer projectId; // Project to which the task type is assigned
+  private Integer projectId;
 
   public Estimate() {
   }

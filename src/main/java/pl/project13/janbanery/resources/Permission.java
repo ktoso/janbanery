@@ -9,8 +9,19 @@ import pl.project13.janbanery.exceptions.NoSuchPermissionException;
  * @author Konrad Malawski
  */
 public enum Permission implements KanbaneryEnumResource {
+  /**
+   * A manager role (can do anything)
+   */
   MANAGER("manager"),
+
+  /**
+   * A member role (can do less than anything...?)
+   */
   MEMBER("member"),
+
+  /**
+   * A viewer, readonly role. It can not change or create resources.
+   */
   VIEWER("viewer");
 
   private String jsonName;

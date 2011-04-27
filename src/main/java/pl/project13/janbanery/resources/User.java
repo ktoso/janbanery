@@ -22,25 +22,43 @@ import java.io.Serializable;
 @ReadOnly
 public class User extends KanbaneryResource implements Serializable {
 
+  /**
+   * The user's id
+   */
   @ReadOnly
   private Long id;
 
+  /**
+   * The user's API token
+   */
   @SerializedName("api_token")
   @ReadOnly
-  private String apiToken; // User Token
+  private String apiToken;
 
+  /**
+   * The user's email
+   */
   @ReadOnly
-  private String email; // String	email
+  private String email;
 
+  /**
+   * The user's first name
+   */
   @SerializedName("first_name")
-  private String firstName; // 	User first name
+  private String firstName;
 
+  /**
+   * The user's last name
+   */
   @SerializedName("last_name")
-  private String lastName; // User last name
+  private String lastName;
 
+  /**
+   * User's avatar URL (at gravatar.com), determined from his email address
+   */
   @SerializedName("gravatar_url")
   @ReadOnly
-  private String gravatarUrl; // User's avatar (at gravatar.com)
+  private String gravatarUrl;
 
   public User() {
   }

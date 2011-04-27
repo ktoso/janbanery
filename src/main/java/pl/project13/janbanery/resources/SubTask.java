@@ -9,25 +9,38 @@ import pl.project13.janbanery.resources.additions.Settable;
 import java.io.Serializable;
 
 /**
- * Date: 4/20/11
+ * A @{link Task} may contain @{link SubTask}s. A {@link SubTask} is a small chunk of text which may be marked as done.
+ * It can be used as super simple to-do list etc.
  *
  * @author Konrad Malawski
  */
 public class SubTask extends KanbaneryResource implements Serializable {
 
+  /**
+   * Short description of the subtask
+   */
   @Required
   @Settable(On.CreateOrUpdate)
-  private String body; // Short description
+  private String body;
 
+  /**
+   * If of the "parent task"
+   */
   @SerializedName("task_id")
-  private Integer taskId; // 	Task
+  private Integer taskId;
 
+  /**
+   * Id of the user who created this {@link SubTask}
+   */
   @ReadOnly
   @SerializedName("creator_id")
-  private Integer creatorId; // Who created it
+  private Integer creatorId;
 
+  /**
+   * True if it is completed, false otherwise
+   */
   @Settable(On.CreateOrUpdate)
-  private Boolean completed; // If it was completed
+  private Boolean completed;
 
   public SubTask() {
   }

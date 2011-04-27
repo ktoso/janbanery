@@ -15,25 +15,43 @@ import java.io.Serializable;
  */
 public class Column extends KanbaneryResource implements Serializable {
 
+  /**
+   * Entity id
+   */
   @ReadOnly
   private Long id;
 
+  /**
+   * Column name
+   */
   @Required
   @Settable(On.CreateOrUpdate)
-  private String name; // on create and update	Name
+  private String name;
 
+  /**
+   * The id of the Project containing this Column
+   */
   @SerializedName("project_id")
   @ReadOnly
-  private Integer projectId; //	Project
+  private Integer projectId;
 
+  /**
+   * True if Column can NOT can be moved, false otherwise
+   */
   @ReadOnly
-  private Boolean fixed; //	If column can be moved
+  private Boolean fixed;
 
+  /**
+   * The Columns Capacity, AKA "Work In Progress Limit"
+   */
   @Settable(On.CreateOrUpdate)
-  private Integer capacity; //	Capacity (WIP limit)
+  private Integer capacity;
 
+  /**
+   * Position on the board, 1-based
+   */
   @Settable(On.CreateOrUpdate)
-  private Integer position; //	Position on the board, 1-based
+  private Integer position;
 
   public Column() {
   }

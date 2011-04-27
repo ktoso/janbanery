@@ -17,11 +17,23 @@ import java.util.List;
 @ReadOnly
 public class Workspace extends KanbaneryResource implements Serializable {
 
-  private Integer id; // Workspace id
+  /**
+   * Workspace id
+   */
+  @ReadOnly
+  private Integer id;
 
-  private String name; // 	Workspace name
+  /**
+   * Workspace name
+   */
+  @ReadOnly
+  private String name;
 
-  private List<Project> projects; // Array of Project resources accessible by user
+  /**
+   * List of {@link Project} resources accessible by the current {@link User}
+   */
+  @ReadOnly
+  private List<Project> projects;
 
   public Workspace() {
   }

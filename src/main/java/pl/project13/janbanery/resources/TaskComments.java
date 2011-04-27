@@ -6,17 +6,28 @@ import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
 
 /**
+ * A {@link Task} can have comments, these are just small chunks of text.
+ *
  * @author Konrad Malawski
  */
 public class TaskComments extends KanbaneryResource {
 
+  /**
+   * The content of the {@link TaskComments}
+   */
   @Required
   @Settable(On.Create)
   String body;
 
+  /**
+   * Id of the task that this comment is about
+   */
   @SerializedName("task_id")
   Integer taskId;
 
+  /**
+   * Id of the creator of this comment
+   */
   @SerializedName("author_id")
   Integer authorId;
 

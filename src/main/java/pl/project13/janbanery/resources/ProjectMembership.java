@@ -8,23 +8,35 @@ import pl.project13.janbanery.resources.additions.Settable;
 import java.io.Serializable;
 
 /**
- * Date: 4/20/11
+ * Describes if an user is part of a project and if yes, what role he has in it.
  *
  * @author Konrad Malawski
  */
 public class ProjectMembership extends KanbaneryResource implements Serializable {
 
+  /**
+   * User email (weird?)
+   */
   @Required
   @Settable(On.Create)
   private String email;
 
+  /**
+   * What kind of permissions he has
+   */
   @Required
   @Settable(On.CreateOrUpdate)
   private Permission permission;
 
+  /**
+   * Id of the project we're talking about here
+   */
   @SerializedName("project_id")
   private Integer projectId;
 
+  /**
+   * The id of the user we're checking here
+   */
   @SerializedName("user_id")
   private Integer userId;
 

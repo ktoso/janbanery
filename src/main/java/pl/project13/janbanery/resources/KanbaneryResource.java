@@ -11,16 +11,28 @@ import pl.project13.janbanery.resources.additions.ReadOnly;
  */
 public abstract class KanbaneryResource implements Resource {
 
+  /**
+   * Creation time
+   */
   @ReadOnly
   @SerializedName("created_at")
-  protected DateTime createdAt; // Creation time
+  protected DateTime createdAt;
 
+  /**
+   * Last update time
+   */
   @ReadOnly
   @SerializedName("updated_at")
-  protected DateTime updatedAt; // Last update time
+  protected DateTime updatedAt;
 
+  /**
+   * It's not really useful for Janbanery apps (hey, we're Java, we got types!), but may be used for debugging etc...
+   *
+   * Type of this resource, set to "User". Only for JSON responses.
+   * In XML responses node name is "user".
+   */
   @ReadOnly
-  protected String type; // Type of this resource, set to "User". Only for JSON responses. In XML responses node name is "user".
+  protected String type;
 
   protected KanbaneryResource() {
   }

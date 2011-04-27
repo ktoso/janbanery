@@ -14,15 +14,24 @@ import java.io.Serializable;
  */
 public class Issue extends KanbaneryResource implements Serializable {
 
+  /**
+   * URL pointing to the issue in an external bug-tracking system
+   */
   @Required
   @Settable(On.CreateOrUpdate)
-  private String url; // URL pointing to the issue in an external bug-tracking system
+  private String url;
 
+  /**
+   * Task related to this issue
+   */
   @SerializedName("task_id")
-  private Integer taskId; // Task
+  private Integer taskId;
 
+  /**
+   * True if this issue was already resolved, false otherwise
+   */
   @Settable(On.CreateOrUpdate)
-  private Boolean resolved; // If it was already resolved
+  private Boolean resolved;
 
   public Issue() {
   }

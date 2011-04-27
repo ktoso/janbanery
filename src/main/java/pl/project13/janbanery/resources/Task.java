@@ -16,54 +16,100 @@ import java.io.Serializable;
  */
 public class Task extends KanbaneryResource implements Serializable {
 
+  /**
+   * Id of this task
+   */
   @ReadOnly
   private Long id;
 
+  /**
+   * The tasks title
+   */
   @Required
-  private String title; // Title
+  private String title;
 
+  /**
+   * The task's type, ie. "Bug", "Story", here an ID has to be given.
+   * Instead of setting this id you can just set task_type_name to "Bug".
+   */
   @Required(alternativeTo = "taskTypeName")
   @SerializedName("task_type_id")
-  private Long taskTypeId; // Task type, ie. "Bug", "Story". Instead of setting this id you can just settask_type_name to "Bug"
+  private Long taskTypeId;
 
+  /**
+   * The task's type, ie. "Bug", "Story".
+   * Instead of setting this name you can set task_type_id to 1337.
+   */
   @Required(alternativeTo = "taskTypeId")
   @SerializedName("task_type_name")
   private String taskTypeName;
 
+  /**
+   * The {@link Column} in which this {@link Task} currently is.
+   */
   @Required
   @Settable(On.Update)
   @SerializedName("column_id")
   private Long columnId;
 
+  /**
+   * Id of the user who created this task.
+   */
   @ReadOnly
   @SerializedName("creator_id")
   private Long creatorId;
 
+  /**
+   * A short description of the task.
+   */
   @Settable(On.CreateOrUpdate)
   private String description;
 
+  /**
+   * The estimate - ie. "how much work is this task?"
+   */
   @Settable(On.CreateOrUpdate)
   @SerializedName("estimate_id")
-  private Long estimateId; // Estimate
+  private Long estimateId;
 
+  /**
+   * Who is currently assigned to it
+   */
   @SerializedName("owner_id")
-  private Long ownerId; // Who is currently assigned to it
+  private Long ownerId;
 
+  /**
+   * Position in column.
+   * 1-based and counting from the top.
+   */
   @Settable(On.CreateOrUpdate)
-  private Integer position; // Position in column, 1-based
+  private Integer position;
 
+  /**
+   * Priority  of this task.
+   * It's represented by a number of stars on the Kanban board (0, 1 or 2).
+   */
   @Settable(On.CreateOrUpdate)
-  private Priority priority; // Priority (0, 1 or 2)
+  private Priority priority;
 
+  /**
+   * True if task is ready to be pulled, false otherwise
+   */
   @Settable(On.CreateOrUpdate)
   @SerializedName("ready_to_pull")
-  private Boolean readyToPull; // If task is ready to be pulled
+  private Boolean readyToPull;
 
-  private Boolean blocked; // If task is blocked by other task(s)
+  /**
+   * True if task is blocked by other task(s), false otherwise
+   */
+  private Boolean blocked;
 
+  /**
+   * This date is being updated when it is moved around the Kanban Board.
+   */
   @ReadOnly
   @SerializedName("moved_at")
-  private DateTime movedAt; // On task was moved to currentUser column
+  private DateTime movedAt;
 
   public Task() {
   }

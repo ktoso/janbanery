@@ -13,6 +13,6 @@ import java.lang.annotation.*;
 @Documented
 @GwtCompatible
 @Target({ElementType.FIELD, ElementType.TYPE})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface ReadOnly {
 }

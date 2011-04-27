@@ -5,28 +5,52 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 /**
- * Date: 4/20/11
+ * A {@link Task} can have a {@link TaskType}, which may determine how important or what about it is.
+ * For example "Story", "Bug", "Feature" are popular TaskTypes.
  *
  * @author Konrad Malawski
  */
 public class TaskType extends KanbaneryResource implements Serializable {
+
+  /**
+   * Id of this entity
+   */
   private Long id;
 
-  private String name; // Name
+  /**
+   * Display name of this {@link TaskType}
+   */
+  private String name;
 
+  /**
+   * Color code
+   */
   @SerializedName("color_code")
-  private Integer colorCode; // Color code
+  private Integer colorCode;
 
+  /**
+   * Background color of label displayed by Kanbanery
+   */
   @SerializedName("background_color")
-  private String backgroundColor; // background color of label
+  private String backgroundColor;
 
+  /**
+   * Color of the text on the taskTypes label displayed by Kanbanery
+   */
   @SerializedName("text_color")
   private String textColor;
 
+  /**
+   * Project to which the task type is assigned
+   */
   @SerializedName("project_id")
-  private Integer projectId; // Project to which the task type is assigned
+  private Integer projectId;
 
-  private Integer position; // Position in project's task types list, 1-based
+  /**
+   * Position in project's task types list.
+   * 1-based.
+   */
+  private Integer position;
 
   @Override
   public String getResourceId() {

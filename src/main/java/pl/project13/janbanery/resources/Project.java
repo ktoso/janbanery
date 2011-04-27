@@ -5,18 +5,29 @@ import pl.project13.janbanery.resources.additions.ReadOnly;
 import java.io.Serializable;
 
 /**
- * Date: 4/20/11
+ * A project is the Home for all Tasks etc.
  *
  * @author Konrad Malawski
  */
 @ReadOnly
 public class Project extends KanbaneryResource implements Serializable {
 
-  private Long id; // Project id
+  /**
+   * Project id
+   */
+  @ReadOnly
+  private Long id;
 
-  private String name; // Project name
+  /**
+   * Project name
+   */
+  @ReadOnly
+  private String name;
 
-//  private String  url; // Full URL to the project
+//  /**
+//   * Full URL to the project
+//   */
+//  private String  url;
 
   public Project() {
   }
