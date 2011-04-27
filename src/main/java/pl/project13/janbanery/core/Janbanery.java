@@ -150,6 +150,7 @@ public class Janbanery {
   }
 
   public Subscriptions subscriptions(){
-
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    return new SubscriptionsImpl(conf, restClient).using(currentWorkspace);
   }
 }

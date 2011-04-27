@@ -46,7 +46,7 @@ public class TasksImpl implements Tasks {
 
   @Override
   public TaskFlow create(Task task) throws IOException, ExecutionException, InterruptedException {
-    String url = getDefaultGetUrl(); // todo externalize better, it's a resource url after all
+    String url = getDefaultGetUrl();
     log.info("Calling POST on: " + url);
 
     String responseBody = restClient.doPost(task, url, this);
