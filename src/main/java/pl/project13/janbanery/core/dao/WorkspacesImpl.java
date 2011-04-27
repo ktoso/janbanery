@@ -3,7 +3,7 @@ package pl.project13.janbanery.core.dao;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
-import pl.project13.janbanery.exceptions.EntityNotFoundException;
+import pl.project13.janbanery.exceptions.WorkspaceNotFoundException;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
@@ -35,14 +35,14 @@ public class WorkspacesImpl implements Workspaces {
    * {@inheritDoc}
    */
   @Override
-  public Workspace byName(String name) throws IOException {
+  public Workspace byName(String name) throws IOException, WorkspaceNotFoundException {
     List<Workspace> allWorkspaces = all();
     for (Workspace workspace : allWorkspaces) {
       if (workspace.getName().equals(name)) {
         return workspace;
       }
     }
-    throw new EntityNotFoundException("Could not find workspace with name");
+    throw new WorkspaceNotFoundException("Could not find workspace named '" + name + "'");
   }
 
 }

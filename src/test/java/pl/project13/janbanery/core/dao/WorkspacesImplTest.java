@@ -8,6 +8,7 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
+import pl.project13.janbanery.exceptions.WorkspaceNotFoundException;
 import pl.project13.janbanery.resources.Workspace;
 import pl.project13.janbanery.test.TestConstants;
 
@@ -51,6 +52,20 @@ public class WorkspacesImplTest {
   public void shouldFindByName() throws Exception {
     // given
     String givenWorkspaceName = TestConstants.EXISTING_WORKSPACE;
+
+    // when
+    Workspace workspace = workspaces.byName(givenWorkspaceName);
+
+    // then
+    assertThat(workspace).isNotNull();
+    assertThat(workspace.getId()).isPositive();
+    assertThat(workspace.getName()).isEqualTo(givenWorkspaceName);
+  }
+
+  @Test(expected = WorkspaceNotFoundException.class)
+  public void shouldNotFindFictionalWorkspace() throws Exception {
+    // given
+    String givenWorkspaceName = "no such workspace exists in kanbanery";
 
     // when
     Workspace workspace = workspaces.byName(givenWorkspaceName);
