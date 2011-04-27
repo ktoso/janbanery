@@ -5,7 +5,8 @@ out
 
 # exclude these files
 *.class
-*tmp
+*.tmp
+*.swp
 
 # project files
 src/test/resources/janbanery.properties
