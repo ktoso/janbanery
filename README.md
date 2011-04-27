@@ -67,6 +67,7 @@ Janbanery janbanery = new JanbaneryFactory().connectUsing(apiKey);
 ```
 
 This would be the easiest method, but there's more. You may log in using your username and password, if you want to allow users of your app to easily log in this is the way to go.
+
 ```java
 Janbanery janbanery = new JanbaneryFactory().connectUsing(username, password);
 ```
