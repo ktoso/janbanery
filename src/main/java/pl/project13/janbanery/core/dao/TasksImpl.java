@@ -63,17 +63,17 @@ public class TasksImpl implements Tasks {
 
   @Override
   public TaskFlow createInIcebox(Task task) throws IOException {
-    throw new NotYetImplementedException();
+    throw new NotYetImplementedException(); // todo
   }
 
   @Override
   public void archive(Task task) throws IOException, ExecutionException, InterruptedException {
-    throw new NotYetImplementedException();
+    throw new NotYetImplementedException(); // todo
   }
 
   @Override
   public void archiveAllInLastColumn() throws IOException {
-    throw new NotYetImplementedException();
+    throw new NotYetImplementedException(); // todo
   }
 
   @Override
@@ -83,17 +83,17 @@ public class TasksImpl implements Tasks {
 
   @Override
   public TaskFlow move(Task task, TaskLocation location) {
-    return null; // todo implement me
+    throw new NotYetImplementedException(); // todo
   }
 
   @Override
   public TaskMoveFlow markNotReadyToPull(Task task) {
-    return null;  // todo implement me.
+    throw new NotYetImplementedException(); // todo
   }
 
   @Override
   public TaskMoveFlow markReadyToPull(Task task) {
-    return null;  // todo implement me.
+    throw new NotYetImplementedException(); // todo
   }
 
   @Override
@@ -133,17 +133,17 @@ public class TasksImpl implements Tasks {
 
   @Override
   public List<Task> assignedToMe() {
-    return null;  // todo implement me.
+    throw new NotYetImplementedException(); // todo
   }
 
   @Override
   public List<Task> assignedTo(User user) {
-    return null;  // todo implement me.
+    throw new NotYetImplementedException(); // todo
   }
 
   @Override
   public List<Task> withPriority(Priority priority) {
-    return null;  // todo implement me.
+    throw new NotYetImplementedException(); // todo
   }
 
   /**
