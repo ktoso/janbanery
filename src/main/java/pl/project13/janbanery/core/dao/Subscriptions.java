@@ -10,10 +10,14 @@ import java.io.IOException;
  */
 public interface Subscriptions {
 
-  Boolean isSubscribedTo(Task task) throws IOException;
+  // commands -----------------------------------------------------------------
 
   TaskSubscription subscribe(Task task) throws IOException;
 
   void unsubscribe(Task task);
+
+  // queries ------------------------------------------------------------------
+
+  Boolean isSubscribedTo(Task task) throws IOException;
 
 }
