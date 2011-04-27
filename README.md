@@ -16,17 +16,93 @@ Get started
 ===========
 Maven
 -----
-This project will be deployed to the **Sonatype** Maven repository when it's status reaches *BETA*.
+Janbanery is deployed to the OSS **Sonatype** Maven repository. To use it, just add the following repository to your `pom.xml`:
+
+Use this repository for **STABLE** releases. 
+By STABLE I mean the full API is covered, all methods are documented and the API will not have breaking changes with minor revision number updates.
+
+```
+<repository>
+    <id>sonatype-releases</id>
+    <name>Sonatype Releases</name>
+    <url>https://oss.sonatype.org/content/repositories/releases/</url>
+</repository>
+```
+
+Use the following repository for access to **SNAPSHOTS** these are very frequently updated and are "bleeding edge", so you may cut yourself 
+when trusting that the API won't change. But as it's updated quicker, there are by far more features in it.
+
+```
+<repository>
+    <id>sonatype-snapshots</id>
+    <name>Sonatype Snapshots</name>
+    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+</repository>
+```
 
 Download the JAR
 ----------------
 Or simply download the jar version of this project.
-You may also consider building it from source by `git clone`-ing this project and running `mvn install`.
+
+Clone or Fork me!
+-----------------
+You may also want to *fork* or just do a clone *clone* this repository, to compile it from source and maybe add some patches to it.
+To do so, first just get the source (by `git clone` for example) and run `mvn install`.
+
+Be sure to let me know via **pull requests** and **opening issues** that you found some kind of bug, would like to add a new feature etc.
+Be sure the Kanbanery API does allow it though - not all Entities can be created via the API for example.
 
 Usage
 =====
 Logging in
 ----------
+*Easy as goo pie.* To start coding with **Janbanery**, I've prepared a nice factory for you, here's how you may use it:
+
+You can connect to Kanbanery using your API key which can be found **on your account settings page** ( the url is https://kanbanery.com/users/YOUR_USER_ID/api ).
+
+```java
+String mySecretApiKey = "abcabcabcabcabcabcabcabcabc";
+
+Janbanery janbanery = new JanbaneryFactory().connectUsing(apiKey);
+```
+
+This would be the easiest method, but there's more. You may log in using your username and password, if you want to allow users of your app to easily log in this is the way to go.
+```java
+Janbanery janbanery = new JanbaneryFactory().connectUsing(username, password);
+```
+
+Notice that the above call **will fetch the API KEY for this user and all consequent calls will use the more secure API KEY method instead of sending the password around in the internet!** :-)
+If you really want to keep using username/pass authentification though, here's how:
+
+```java
+Janbanery janbanery = new JanbaneryFactory().connectAndKeepUsing(user, password);
+```
+
+Also, since Janbanery has quite some dependencies inside, the factory allows you to mock any thing out or replace it with your implementation simply by:
+
+```java
+AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+JanbaneryFactory janbaneryFactory = new JanbaneryFactory(asyncHttpClient);
+```
+
+That's all nice and cool, but the above methods would require you to search by hand for your passwords or even worse, keep them in your sourcefiles.
+That's why I prepared a **PropertiesConfiguration** class for you, you may use it like this:
+
+```java
+Configuration configuration = new PropertiesConfiguration();
+Janbanery janbanery = janbaneryFactory.connectUsing(configuration);
+```
+
+This method will seach your resources for a file named *janbanery.properties*, which should look like this:
+
+```
+apikey=fghfghfghfghfghfghfghfghfghfghfghfgh
+username=example@example.com
+password=example
+```
+
+And when found it will determine if it should user the user/pass method or apikey. If both of these are set, the API key method will be used, if no API KEY is set, the username/password properties will be used.
+You may also pass the path to the properties file explicitely in the constructor of PropertiesConfiguration().
 
 Queries
 -------
