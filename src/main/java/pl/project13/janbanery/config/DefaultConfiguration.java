@@ -79,6 +79,11 @@ public class DefaultConfiguration implements Configuration {
   }
 
   @Override
+  public String getApiUrl(String workspaceName, Long projectId, String resource, String resourceDotJson) {
+    return format("https://%s.kanbanery.com/api/v1/projects/%d/%s/%s.json", workspaceName, projectId, resource, resourceDotJson);
+  }
+
+  @Override
   public String getApiUrl(String workspaceName, Long projectId) {
     return format("https://%s.kanbanery.com/api/v1/projects/%s/", workspaceName, projectId);
   }

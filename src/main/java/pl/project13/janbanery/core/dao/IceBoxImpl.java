@@ -3,7 +3,6 @@ package pl.project13.janbanery.core.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
-import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.IceBoxFlow;
@@ -24,7 +23,7 @@ public class IceBoxImpl implements IceBox {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-  private Tasks         tasks;
+  private Tasks   tasks;
   private Columns columns;
 
   private Configuration conf;
@@ -40,6 +39,9 @@ public class IceBoxImpl implements IceBox {
     this.restClient = restClient;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public IceBoxFlow create(Task task) throws IOException {
     String url = getDefaultUrl();
@@ -49,11 +51,17 @@ public class IceBoxImpl implements IceBox {
     return new IceBoxFlowImpl(tasks, this, newTask);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void delete(Task task) throws IOException {
     tasks.delete(task);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<Task> all() throws IOException {
     String url = getDefaultUrl();
@@ -61,9 +69,20 @@ public class IceBoxImpl implements IceBox {
     return restClient.doGet(url, GsonTypeTokens.LIST_TASK);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean contains(Task task) throws IOException {
+    return all().contains(task);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public TaskUpdateFlow update(Task task) {
-    return new TaskUpdateFlowImpl(tasks,columns, task);
+    return new TaskUpdateFlowImpl(tasks, columns, task);
   }
 
   private String getDefaultUrl() {

@@ -1,5 +1,6 @@
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.kanbanery.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
@@ -25,8 +26,9 @@ public interface TaskMoveFlow extends KanbaneryFlow<Task> {
    *
    * @return a TaskMoveFlow instance to allow further task operations
    * @throws IOException if unable to fetch the server response
+   * @throws CanOnlyIceBoxTaskFromFirstColumnException if the task is NOT in the first column
    */
-  TaskMoveFlow toIceBox() throws IOException;
+  TaskMoveFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException;
 
   /**
    * Move this task to the project's <strong>archive</strong>.

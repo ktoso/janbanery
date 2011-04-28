@@ -2,6 +2,7 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.core.dao.Tasks;
+import pl.project13.janbanery.exceptions.kanbanery.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.InternalServerErrorKanbaneryException;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
 import pl.project13.janbanery.resources.Column;
@@ -31,7 +32,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskMoveFlow toIceBox() throws IOException {
+  public TaskMoveFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException {
     return to(TaskLocation.ICEBOX);
   }
 
@@ -97,6 +98,9 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
     return this;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public TaskMoveFlow to(Column column) throws IOException {
     TaskFlow move = tasks.move(task, column);

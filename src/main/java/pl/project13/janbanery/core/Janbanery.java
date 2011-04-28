@@ -142,4 +142,9 @@ public class Janbanery {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
     return new EstimatesImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
+
+  public Archive archive() {
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    return new ArchiveImpl(tasks(), conf, restClient).using(currentWorkspace, currentProject);
+  }
 }

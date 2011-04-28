@@ -46,6 +46,8 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
       return new PositionExceedsNumberOfTasksInColumnException(response);
     } else if(CanOnlyIceBoxTaskFromFirstColumnException.isBestExceptionFor(response)){
       return new CanOnlyIceBoxTaskFromFirstColumnException(response);
+    }else if(CanOnlyArchiveFromLastColumn.isBestExceptionFor(response)){
+      return new CanOnlyArchiveFromLastColumn(response);
     }else {
       return new InvalidEntityKanbaneryException(response);
     }

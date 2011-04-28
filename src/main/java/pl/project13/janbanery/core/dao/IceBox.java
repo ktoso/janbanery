@@ -22,6 +22,8 @@ public interface IceBox {
 
   List<Task> all() throws IOException;
 
+  boolean contains(Task task) throws IOException;
+
   // other flows --------------------------------------------------------------
 
   TaskUpdateFlow update(Task task); // todo make this a limited version of TaskUpdateFlow

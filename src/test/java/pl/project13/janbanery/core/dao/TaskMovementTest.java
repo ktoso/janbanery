@@ -8,6 +8,7 @@ import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
+import pl.project13.janbanery.exceptions.kanbanery.CanOnlyArchiveFromLastColumn;
 import pl.project13.janbanery.exceptions.kanbanery.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
@@ -152,6 +153,32 @@ public class TaskMovementTest {
 
     // when
     taskFlow.move().toNextColumn().toIceBox();
+
+    // then, should have thrown
+  }
+
+  @Test
+  public void shouldArchiveProperlyFromLastColumn() throws Exception {
+    // given
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
+
+    // when
+    taskFlow = taskFlow.move().toLastColumn()
+                       .toArchive()
+                       .asTaskFlow();
+
+    // then
+    Task task = taskFlow.get();
+    assertThat(task.isArchivedIn(janbanery.archive())).isTrue();
+  }
+
+  @Test(expected = CanOnlyArchiveFromLastColumn.class)
+  public void shouldNotArchiveIfNotInLastColumn() throws Exception {
+    // given
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
+
+    // when
+    taskFlow.move().toArchive();
 
     // then, should have thrown
   }

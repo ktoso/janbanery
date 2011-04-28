@@ -2,11 +2,15 @@ package pl.project13.janbanery.resources;
 
 import com.google.gson.annotations.SerializedName;
 import org.joda.time.DateTime;
+import pl.project13.janbanery.core.dao.Archive;
+import pl.project13.janbanery.core.dao.IceBox;
+import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.additions.On;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -248,6 +252,45 @@ public class Task extends KanbaneryResource implements Serializable {
 
   public void setMovedAt(DateTime movedAt) {
     this.movedAt = movedAt;
+  }
+
+  /**
+   * Try as best as you can to guess if this task is in the archive.
+   * The kanbanery API does not provide this information directly.
+   * <p/>
+   * To do a REAL check if this task is archived use the {@link #isArchivedIn(Archive)} method.
+   *
+   * @return true if this {@link Task} is in the Archive, false otherwise
+   */
+  public boolean isArchived() {
+    return id != null && columnId != null && position == null;
+  }
+
+  /**
+   * This method gives you 100% accurate feedback about whether this task is in the archive or not.
+   * <p/>
+   * If you need a fast, but heuristic, implementation of such a check use the {@link #isArchived()} method.
+   *
+   * @param archive an {@link Archive} instance we use to query Kanbanery about this tasks status
+   * @return true if this {@link Task} is in the Archive, false otherwise
+   * @throws IOException if unable to query Kanbanery about this tasks status
+   */
+  public boolean isArchivedIn(Archive archive) throws IOException {
+    return archive.contains(this);
+  }
+
+  /**
+   * todo implement me
+   */
+  public boolean isIceBoxed() {
+    throw new NotYetImplementedException();
+  }
+
+  /**
+   * todo implement me
+   */
+  public boolean isIceBoxed(IceBox iceBox) throws IOException {
+    return iceBox.contains(this);
   }
 
   @Override

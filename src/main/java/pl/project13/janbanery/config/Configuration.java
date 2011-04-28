@@ -47,4 +47,6 @@ public interface Configuration {
   String getApiUrl(String workspaceName, String resourcesId, Long id);
 
   String getApiUrl(String workspaceName, Long projectId, String resourceDotJson);
+
+  String getApiUrl(String workspaceName, Long projectId, String resource, String resourceDotJson);
 }
