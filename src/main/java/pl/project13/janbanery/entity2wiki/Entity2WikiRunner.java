@@ -1,5 +1,6 @@
 package pl.project13.janbanery.entity2wiki;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Multimap;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
@@ -37,7 +38,6 @@ public class Entity2WikiRunner {
 
   public Entity2WikiRunner(Collection<Class<?>> classes, String sourceRootLocation) {
     this.classes = classes;
-
     javaDocBuilder.addSourceTree(new File(sourceRootLocation));
   }
 
@@ -66,19 +66,20 @@ public class Entity2WikiRunner {
 
   @SuppressWarnings({"unchecked"})
   private static List<Class<?>> allResources() {
-    return newArrayList(Column.class,
-                        Estimate.class,
-                        Issue.class,
-                        Permission.class,
-                        Project.class,
-                        ProjectMembership.class,
-                        SubTask.class,
-                        Task.class,
-                        TaskComments.class,
-                        TaskSubscription.class,
-                        TaskType.class,
-                        User.class,
-                        Workspace.class);
+    List<Class<?>> classes = newArrayList();
+    classes.add(Column.class);
+    classes.add(Estimate.class);
+    classes.add(Issue.class);
+    classes.add(Project.class);
+    classes.add(ProjectMembership.class);
+    classes.add(SubTask.class);
+    classes.add(Task.class);
+    classes.add(TaskComments.class);
+    classes.add(TaskSubscription.class);
+    classes.add(TaskType.class);
+    classes.add(User.class);
+    classes.add(Workspace.class);
+    return classes;
   }
 
   private static List<Class<?>> enums() {
@@ -130,7 +131,7 @@ public class Entity2WikiRunner {
 
   private String javaDoc(String clazz) {
     JavaClass javaClass = javaDocBuilder.getClassByName(clazz);
-    return javaClass.getComment();
+    return markdownize(javaClass.getComment());
   }
 
   private String javaDoc(String clazz, String field) {
@@ -139,11 +140,18 @@ public class Entity2WikiRunner {
 
     for (JavaField javaField : fields) {
       if (javaField.getName().equals(field)) {
-        return javaField.getComment();
+        return markdownize(javaField.getComment());
       }
     }
 
     return "";
+  }
+
+  @VisibleForTesting String markdownize(String comment) {
+    if (comment == null) {
+      return "";
+    }
+    return comment.replaceAll("\\{@link ([a-zA-Z0-9]+)\\}", "<a href=\"#\1\">\1</a>");
   }
 
 }
