@@ -8,6 +8,7 @@ import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
+import pl.project13.janbanery.exceptions.kanbanery.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
 import pl.project13.janbanery.resources.Column;
@@ -142,5 +143,16 @@ public class TaskMovementTest {
     List<Task> tasksInIceBox = janbanery.iceBox().all();
 
     assertThat(tasksInIceBox).contains(taskInIceBox);
+  }
+
+  @Test(expected = CanOnlyIceBoxTaskFromFirstColumnException.class)
+  public void shouldNotMoveToIceBoxFromNotFirstColumn() throws Exception {
+    // given
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
+
+    // when
+    taskFlow.move().toNextColumn().toIceBox();
+
+    // then, should have thrown
   }
 }
