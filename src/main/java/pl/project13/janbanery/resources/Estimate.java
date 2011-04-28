@@ -2,13 +2,15 @@ package pl.project13.janbanery.resources;
 
 import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.ReadOnly;
-import pl.project13.janbanery.resources.additions.Settable;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * Date: 4/20/11
+ * An estimate describes "how much work" a task is.
+ * You should not treat Estimates as "hours" as such estimates are always off,
+ * instead try to think of them as T-Shirt sizes (S, M, L, XL) or fruits (Orange, Coconut, Watermelon).
+ * Numeric values are also ok if you really want numbers :-)
  *
  * @author Konrad Malawski
  */
@@ -18,7 +20,7 @@ public class Estimate extends KanbaneryResource implements Serializable {
    * Estimate id
    */
   @ReadOnly
-  private Long    id;
+  private Long id;
 
   /**
    * Numeric value, describing this estimate

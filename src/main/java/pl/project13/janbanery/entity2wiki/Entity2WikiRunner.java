@@ -1,13 +1,9 @@
 package pl.project13.janbanery.entity2wiki;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Multimap;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaField;
-import org.reflections.Reflections;
-import org.reflections.scanners.TypeElementsScanner;
-import pl.project13.janbanery.config.reflections.ReflectionsFactory;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 
@@ -28,11 +24,10 @@ import static com.google.common.collect.Lists.newArrayList;
  */
 public class Entity2WikiRunner {
 
-  private JavaDocBuilder           javaDocBuilder = new JavaDocBuilder();
-  private Reflections              reflections    = new ReflectionsFactory().create();
-  private Multimap<String, String> typeElements   = reflections.getStore().get(TypeElementsScanner.class);
+  private JavaDocBuilder javaDocBuilder = new JavaDocBuilder();
 
   private Collection<Class<?>> classes;
+
   private final String N = "\n";
   private final String B = "**";
 
@@ -126,7 +121,11 @@ public class Entity2WikiRunner {
 
   private void classHeader(Class<?> clazz, StringBuilder out) {
     String name = clazz.getSimpleName();
-    out.append("### ").append("<a href=\"#").append(name).append("\" name=\"").append(name).append("\">").append(name).append("</a>").append(N);
+    out.append("### ").append(hashLink(name)).append(N);
+  }
+
+  private String hashLink(String name) {
+    return String.format("<a href=\"#%s\" name=\"%s\">%s</a>", name, name, name);
   }
 
   private String javaDoc(String clazz) {
@@ -151,7 +150,10 @@ public class Entity2WikiRunner {
     if (comment == null) {
       return "";
     }
-    return comment.replaceAll("\\{@link (\\w)\\}", "<a href=\"#$1\">$1</a>");
+
+    comment = comment.replaceAll("\\{@link (\\w+)\\}", "<a href=\"#$1\">$1</a>");
+
+    return comment;
   }
 
 }

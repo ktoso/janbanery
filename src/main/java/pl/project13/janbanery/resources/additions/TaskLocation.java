@@ -1,6 +1,11 @@
 package pl.project13.janbanery.resources.additions;
 
+import pl.project13.janbanery.resources.Task;
+
 /**
+ * A helper class to specify a {@link Task}s location in Kanbanery.
+ * NEXT and PREVIOUS are only used when performing updates.
+ *
  * @author Konrad Malawski
  */
 public enum TaskLocation {

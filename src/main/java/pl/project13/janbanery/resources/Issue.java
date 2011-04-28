@@ -8,7 +8,7 @@ import pl.project13.janbanery.resources.additions.Settable;
 import java.io.Serializable;
 
 /**
- * Date: 4/20/11
+ * An issue describes an externally tracked issue (or bug for example) that corresponds to the linked {@link Task}
  *
  * @author Konrad Malawski
  */

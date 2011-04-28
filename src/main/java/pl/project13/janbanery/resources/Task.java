@@ -10,7 +10,8 @@ import pl.project13.janbanery.resources.additions.Settable;
 import java.io.Serializable;
 
 /**
- * Date: 4/20/11
+ * A task is the most important thing in Kanbanery, it specifies some chunk of work.
+ * It can be assigned, subscribed to and move though columns etc.
  *
  * @author Konrad Malawski
  */

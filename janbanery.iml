@@ -30,6 +30,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.easytesting:fest-assert:1.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.easytesting:fest-util:1.1.6" level="project" />
     <orderEntry type="library" name="Maven: qdox:qdox:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jgit:org.eclipse.jgit:0.10.1" level="project" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch:0.1.41" level="project" />
   </component>
 </module>
 
