@@ -109,10 +109,11 @@ public class TasksImpl implements Tasks {
   @Override
   public TaskFlow move(Task task, Column column) throws IOException {
     String url = getTaskUrl(task);
-    Task requestObject = new Task();
-    requestObject.setColumnId(column.getId());
+    Task commandObject = new Task();
+    commandObject.setColumnId(column.getId());
+    commandObject.setPosition(1); // or else it will throw an exception...
 
-    Task movedTask = restClient.doPut(url, requestObject, GsonTypeTokens.TASK);
+    Task movedTask = restClient.doPut(url, commandObject, GsonTypeTokens.TASK);
 
     return new TaskFlowImpl(this, columns, movedTask);
   }

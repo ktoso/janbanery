@@ -8,19 +8,19 @@ import pl.project13.janbanery.resources.Column;
  *
  * @author Konrad Malawski
  */
-public class ColumnTaskCapacityReachedException extends InvalidEntityKanbaneryException {
+public class PositionExceedsNumberOfTasksInColumnException extends InvalidEntityKanbaneryException {
 
   private static final long serialVersionUID = -6848225663205864947L;
 
-  public ColumnTaskCapacityReachedException(String message) {
+  public PositionExceedsNumberOfTasksInColumnException(String message) {
     super(message);
   }
 
-  public ColumnTaskCapacityReachedException(String message, Throwable cause) {
+  public PositionExceedsNumberOfTasksInColumnException(String message, Throwable cause) {
     super(message, cause);
   }
 
-  public ColumnTaskCapacityReachedException(Throwable cause) {
+  public PositionExceedsNumberOfTasksInColumnException(Throwable cause) {
     super(cause);
   }
 

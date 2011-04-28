@@ -7,12 +7,10 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
-import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -90,12 +88,15 @@ public class TasksTest {
   public void shouldArchiveTaskFromLastColumn() throws Exception {
     // given
     TaskFlow taskFlow = janbanery.tasks().create(TestEntityHelper.createTestTask(janbanery));
-    taskFlow.move().toLastColumn();
+    Task taskInLastColumn = taskFlow.move().toLastColumn().get();
 
     // when
+    janbanery.tasks().archive(taskInLastColumn); // todo maybe not void?
 
     // then
+    Task taskMovedToArchive = janbanery.tasks().byId(taskInLastColumn.getId());
 
+    assertThat(taskMovedToArchive.getColumnId()).isNull(); // archive has no column
   }
 
   @Test
