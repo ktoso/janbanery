@@ -159,9 +159,9 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jgit</groupId>
+            <groupId>com.madgag</groupId>
             <artifactId>org.eclipse.jgit</artifactId>
-            <version>0.10.1</version>
+            <version>0.11.99.4-UNOFFICIAL-ROBERTO-RELEASE</version>
         </dependency>
         <!-- END OF OPTIONAL DEPENDENCIES-->
     </dependencies>

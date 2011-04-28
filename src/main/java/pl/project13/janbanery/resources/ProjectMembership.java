@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 /**
  * Describes if an user is part of a project and if yes, what role he has in it.
+ * Please note that there are only 3 levels of Membership currently in Kanbanery, as defined in {@link Permission}.
  *
  * @author Konrad Malawski
  */

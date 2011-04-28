@@ -5,11 +5,10 @@ import com.google.common.base.Predicate;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaField;
-import pl.project13.janbanery.resources.*;
-import pl.project13.janbanery.resources.additions.TaskLocation;
 
 import java.io.File;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
@@ -43,8 +42,8 @@ public class Entity2WikiRunner {
     PrintStream out = System.out;
     File sourceRootLocation = new File(args[0]);
 
-    List<Class<?>> enums = enums();
-    List<Class<?>> classes = allResources();
+    List<Class<?>> enums = DocumentedClasses.enums();
+    List<Class<?>> classes = DocumentedClasses.resources();
 
 
     Entity2WikiRunner entity2Wiki = new Entity2WikiRunner(sourceRootLocation);
@@ -55,20 +54,6 @@ public class Entity2WikiRunner {
     entity2Wiki.withClasses(enums).writeSection(out, "Enums");
   }
 
-  private void writeSection(PrintStream out, String title) throws NoSuchFieldException {
-    writeSection(out, title, null);
-  }
-
-  private void writeSection(PrintStream out, String title, Predicate filter) throws NoSuchFieldException {
-    out.println(format("## %s", title));
-
-    Collection<Class<?>> classesToPrint = classes;
-    if (filter != null) {
-      classesToPrint = filter(classes, filter);
-    }
-    writeWikiTextTo(classesToPrint, out);
-  }
-
   private static void validateArgs(String[] args) {
     if (args.length != 1) {
       System.out.println("1st and only parameter MUST be the PATH to the source root of the classes to be scanned :-)");
@@ -76,30 +61,18 @@ public class Entity2WikiRunner {
     }
   }
 
-  @SuppressWarnings({"unchecked"})
-  private static List<Class<?>> allResources() {
-    List<Class<?>> classes = newArrayList();
-    classes.add(Column.class);
-    classes.add(Estimate.class);
-    classes.add(Issue.class);
-    classes.add(Project.class);
-    classes.add(ProjectMembership.class);
-    classes.add(SubTask.class);
-    classes.add(Task.class);
-    classes.add(TaskComments.class);
-    classes.add(TaskSubscription.class);
-    classes.add(TaskType.class);
-    classes.add(User.class);
-    classes.add(Workspace.class);
-    return classes;
+  public void writeSection(PrintStream out, String title) throws NoSuchFieldException {
+    writeSection(out, title, null);
   }
 
-  private static List<Class<?>> enums() {
-    List<Class<?>> enums = newArrayList();
-    enums.add(Priority.class);
-    enums.add(Permission.class);
-    enums.add(TaskLocation.class);
-    return enums;
+  public void writeSection(PrintStream out, String title, Predicate filter) throws NoSuchFieldException {
+    out.println(format("## %s", title));
+
+    Collection<Class<?>> classesToPrint = classes;
+    if (filter != null) {
+      classesToPrint = filter(classes, filter);
+    }
+    writeWikiTextTo(classesToPrint, out);
   }
 
   private void writeWikiTextTo(Collection<Class<?>> classesToParse, PrintStream out) throws NoSuchFieldException {
