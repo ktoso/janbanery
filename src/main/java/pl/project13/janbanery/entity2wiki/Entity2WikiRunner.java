@@ -92,11 +92,12 @@ public class Entity2WikiRunner {
 
     // class comment
     out.append(javaDoc(className)).append(N);
-
     out.append(N);
 
     // field descriptions
     out.append(strong("Fields summary: ")).append(N);
+    out.append(N);
+
     for (Field field : clazz.getDeclaredFields()) {
       String fieldName = field.getName();
 
@@ -113,6 +114,7 @@ public class Entity2WikiRunner {
   private void classHeader(Class<?> clazz, StringBuilder out) {
     String name = clazz.getSimpleName();
     out.append("### ").append(hashLink(name)).append(N);
+    out.append(N);
   }
 
   private String javaDoc(String fullClassName) {
@@ -134,7 +136,7 @@ public class Entity2WikiRunner {
   }
 
   private String strong(String string) {
-    return format("**%s**", string);
+    return format("**%s**", string.trim());
   }
 
   private String hashLink(String name) {

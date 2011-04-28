@@ -280,14 +280,26 @@ public class Task extends KanbaneryResource implements Serializable {
   }
 
   /**
-   * todo implement me
+   * // todo implement me
+   * Try as best as you can to guess if this task is in the IceBox.
+   * The kanbanery API does not provide this information directly.
+   * <p/>
+   * To do a REAL check if this task is archived use the {@link #isIceBoxed(IceBox)} method.
+   *
+   * @return true if this {@link Task} is in the IceBox, false otherwise
    */
   public boolean isIceBoxed() {
     throw new NotYetImplementedException();
   }
 
   /**
-   * todo implement me
+   * This method gives you 100% accurate feedback about whether this task is in the IceBox or not.
+   * <p/>
+   * If you need a fast, but heuristic, implementation of such a check use the {@link #isIceBoxed()} ()} method.
+   *
+   * @param iceBox an IceBox instance we use to query Kanbanery about this tasks status
+   * @return true if this {@link Task} is in the IceBox, false otherwise
+   * @throws IOException if unable to query Kanbanery about this tasks status
    */
   public boolean isIceBoxed(IceBox iceBox) throws IOException {
     return iceBox.contains(this);
