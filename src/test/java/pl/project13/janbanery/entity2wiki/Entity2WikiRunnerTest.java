@@ -1,9 +1,9 @@
 package pl.project13.janbanery.entity2wiki;
 
-import com.google.common.collect.Lists;
 import org.junit.Test;
 
-import static com.google.common.collect.Lists.newArrayList;
+import java.io.File;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
@@ -11,7 +11,7 @@ import static org.fest.assertions.Assertions.assertThat;
  */
 public class Entity2WikiRunnerTest {
 
-  Entity2WikiRunner entity2WikiRunner = new Entity2WikiRunner(Lists.<Class<?>>newArrayList(), "");
+  Entity2WikiRunner entity2WikiRunner = new Entity2WikiRunner(new File(""));
 
   @Test
   public void testName() throws Exception {

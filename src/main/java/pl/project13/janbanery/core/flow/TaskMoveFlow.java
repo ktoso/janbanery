@@ -45,4 +45,8 @@ public interface TaskMoveFlow extends KanbaneryFlow<Task> {
    * @throws IOException if unable to fetch the server response
    */
   TaskMoveFlow toBoard() throws IOException;
+
+  TaskMoveFlow toLastColumn() throws IOException;
+
+  TaskFlow asTaskFlow();
 }

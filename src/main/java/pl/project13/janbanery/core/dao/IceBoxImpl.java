@@ -3,6 +3,7 @@ package pl.project13.janbanery.core.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
+import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.IceBoxFlow;
@@ -24,14 +25,17 @@ public class IceBoxImpl implements IceBox {
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private Tasks         tasks;
+  private Columns columns;
+
   private Configuration conf;
   private RestClient    restClient;
 
   private Workspace currentWorkspace;
   private Project   currentProject;
 
-  public IceBoxImpl(Tasks tasks, Configuration conf, RestClient restClient) {
+  public IceBoxImpl(Tasks tasks, Columns columns, Configuration conf, RestClient restClient) {
     this.tasks = tasks;
+    this.columns = columns;
     this.conf = conf;
     this.restClient = restClient;
   }
@@ -59,7 +63,7 @@ public class IceBoxImpl implements IceBox {
 
   @Override
   public TaskUpdateFlow update(Task task) {
-    return new TaskUpdateFlowImpl(tasks, task);
+    return new TaskUpdateFlowImpl(tasks,columns, task);
   }
 
   private String getDefaultUrl() {

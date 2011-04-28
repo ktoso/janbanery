@@ -10,15 +10,14 @@ import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
-import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.test.TestEntityHelper;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static pl.project13.janbanery.test.TestConstants.*;
+import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
+import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
 
 /**
  * @author Konrad Malawski
@@ -35,18 +34,13 @@ public class TaskMovementTest {
 
   @After
   public void tearDown() throws Exception {
-    List<Task> tasks = janbanery.tasks().byTitle(TASK_TITLE);
-
-    if (tasks.size() > 0) {
-      Task task = tasks.get(0);
-      janbanery.tasks().delete(task);
-    }
+    TestEntityHelper.deleteTestTask(janbanery);
   }
 
   @Test
   public void shouldMoveTaskToNextColumn() throws Exception {
     // given
-    TaskFlow taskFlow = createSampleTask();
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
     TaskMoveFlow move = taskFlow.move();
     Task prev = move.get();
 
@@ -61,7 +55,7 @@ public class TaskMovementTest {
   @Test
   public void shouldMoveTaskNextAndPrevToRemainInSameColumn() throws Exception {
     // given
-    TaskFlow taskFlow = createSampleTask();
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
     TaskMoveFlow move = taskFlow.move();
     Task prev = move.get();
 
@@ -78,10 +72,9 @@ public class TaskMovementTest {
   @Test(expected = TaskAlreadyInFirstColumnException.class)
   public void shouldThrowWhenForcedToMoveLeftWhenOnFirstColumn() throws Exception {
     // given
-    TaskFlow taskFlow = createSampleTask();
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
     TaskMoveFlow move = taskFlow.move();
     Task prev = move.get();
-
 
     // when
     move.toPreviousColumn();
@@ -92,7 +85,7 @@ public class TaskMovementTest {
   @Test(expected = TaskAlreadyInLastColumnException.class)
   public void shouldThrowWhenForcedToMoveRightWhenOnLastColumn() throws Exception {
     // given
-    TaskFlow taskFlow = createSampleTask();
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
     TaskMoveFlow move = taskFlow.move();
     Task prev = move.get();
 
@@ -108,9 +101,35 @@ public class TaskMovementTest {
   }
 
   @Test
+  public void shouldMoveToLastColumn() throws Exception {
+    // given
+    TaskFlow jumpFlow = TestEntityHelper.createTestTaskFlow(janbanery);
+    TaskFlow manualFlow = TestEntityHelper.createTestTaskFlow(janbanery);
+
+    // when
+    jumpFlow = jumpFlow.move().toLastColumn().asTaskFlow();
+
+    try {
+      //noinspection InfiniteLoopStatement
+      while (true) {
+        manualFlow = manualFlow.move().toNextColumn().asTaskFlow();
+      }
+    } catch (TaskAlreadyInLastColumnException ignore) {
+      // that's ok
+    }
+
+    // then
+    Long jumpedToColumnId = jumpFlow.get().getColumnId();
+    Long manuallyMovedToColumnId = manualFlow.get().getColumnId();
+
+    assertThat(jumpedToColumnId).isEqualTo(manuallyMovedToColumnId);
+    assertThat(jumpedToColumnId.).isEqualTo(manuallyMovedToColumnId);
+  }
+
+  @Test
   public void shouldMoveToIceBox() throws Exception {
     // given
-    TaskFlow taskFlow = createSampleTask();
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
 
     // when
     TaskMoveFlow taskMoveFlow = taskFlow.move().toIceBox();
@@ -120,18 +139,5 @@ public class TaskMovementTest {
     List<Task> tasksInIceBox = janbanery.iceBox().all();
 
     assertThat(tasksInIceBox).contains(taskInIceBox);
-
-    // cleanup
-    janbanery.iceBox().delete(taskInIceBox);
-  }
-
-  private TaskFlow createSampleTask() throws IOException, ExecutionException, InterruptedException {
-    Task story = new Task.Builder(TASK_TITLE)
-        .taskType(janbanery.taskTypes().any())
-        .description("A task I have created using the Janbanery library")
-        .priority(Priority.MEDIUM)
-        .build();
-
-    return janbanery.tasks().create(story);
   }
 }

@@ -1,6 +1,9 @@
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.core.dao.Columns;
+import pl.project13.janbanery.core.dao.ColumnsImpl;
 import pl.project13.janbanery.core.dao.Tasks;
+import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
@@ -10,11 +13,13 @@ import java.io.IOException;
  */
 public class TaskMarkFlowImpl implements TaskMarkFlow {
 
+  private Columns columns;
   private Tasks tasks;
   private Task  task;
 
-  public TaskMarkFlowImpl(Tasks tasks, Task task) {
+  public TaskMarkFlowImpl(Tasks tasks, Columns columns, Task task) {
     this.tasks = tasks;
+    this.columns = columns;
     this.task = task;
   }
 
@@ -26,7 +31,7 @@ public class TaskMarkFlowImpl implements TaskMarkFlow {
     TaskFlow taskMoveFlow = tasks.markAsReadyToPull(task);
     task = taskMoveFlow.get();
 
-    return new TaskFlowImpl(tasks, task);
+    return new TaskFlowImpl(tasks, columns, task);
   }
 
   /**
@@ -37,7 +42,7 @@ public class TaskMarkFlowImpl implements TaskMarkFlow {
     TaskFlow taskMoveFlow = tasks.markAsNotReadyToPull(task);
     task = taskMoveFlow.get();
 
-    return new TaskFlowImpl(tasks, task);
+    return new TaskFlowImpl(tasks, columns, task);
   }
 
   @Override

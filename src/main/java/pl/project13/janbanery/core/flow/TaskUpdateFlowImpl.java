@@ -2,6 +2,7 @@ package pl.project13.janbanery.core.flow;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.*;
 
@@ -14,11 +15,13 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-  private Tasks tasks;
-  private Task  task;
+  private Tasks   tasks;
+  private Columns columns;
+  private Task    task;
 
-  public TaskUpdateFlowImpl(Tasks tasks, Task task) {
+  public TaskUpdateFlowImpl(Tasks tasks, Columns columns, Task task) {
     this.tasks = tasks;
+    this.columns = columns;
     this.task = task;
   }
 
@@ -118,7 +121,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
    */
   @Override
   public TaskMoveFlow move() {
-    return new TaskMoveFlowImpl(tasks, task);
+    return new TaskMoveFlowImpl(tasks, columns, task);
   }
 
   /**
@@ -126,7 +129,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
    */
   @Override
   public TaskMarkFlow mark() {
-    return new TaskMarkFlowImpl(tasks, task);
+    return new TaskMarkFlowImpl(tasks, columns, task);
   }
 
   /**

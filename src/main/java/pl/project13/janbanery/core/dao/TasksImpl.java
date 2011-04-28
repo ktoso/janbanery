@@ -9,7 +9,6 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.*;
-import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.exceptions.kanbanery.CanNotDeleteNotEmptyColumnException;
 import pl.project13.janbanery.resources.*;
@@ -33,13 +32,16 @@ public class TasksImpl implements Tasks {
   private RestClient    restClient;
   private Gson          gson;
 
+  private Columns columns;
+
   private Workspace currentWorkspace;
   private Project   currentProject;
 
-  public TasksImpl(Configuration conf, RestClient restClient, Gson gson) {
+  public TasksImpl(Columns columns, Configuration conf, RestClient restClient, Gson gson) {
     this.conf = conf;
     this.restClient = restClient;
     this.gson = gson;
+    this.columns = columns;
   }
 
   /**
@@ -51,7 +53,7 @@ public class TasksImpl implements Tasks {
 
     Task newTask = restClient.doPost(url, task, GsonTypeTokens.TASK);
 
-    return new TaskFlowImpl(this, newTask);
+    return new TaskFlowImpl(this, columns, newTask);
   }
 
   /**
@@ -85,7 +87,7 @@ public class TasksImpl implements Tasks {
    */
   @Override
   public TaskMoveFlow move(Task task) {
-    return new TaskMoveFlowImpl(this, task);
+    return new TaskMoveFlowImpl(this, columns, task);
   }
 
   /**
@@ -98,7 +100,7 @@ public class TasksImpl implements Tasks {
 
     Task movedTask = restClient.doPut(url, moveRequest, GsonTypeTokens.TASK);
 
-    return new TaskFlowImpl(this, movedTask);
+    return new TaskFlowImpl(this, columns, movedTask);
   }
 
   /**
@@ -112,7 +114,7 @@ public class TasksImpl implements Tasks {
 
     Task movedTask = restClient.doPut(url, requestObject, GsonTypeTokens.TASK);
 
-    return new TaskFlowImpl(this, movedTask);
+    return new TaskFlowImpl(this, columns, movedTask);
   }
 
   /**
@@ -120,7 +122,7 @@ public class TasksImpl implements Tasks {
    */
   @Override
   public TaskUpdateFlow update(Task task) {
-    return new TaskUpdateFlowImpl(this, task);
+    return new TaskUpdateFlowImpl(this, columns, task);
   }
 
   /**
@@ -132,7 +134,7 @@ public class TasksImpl implements Tasks {
 
     Task newTask = restClient.doPut(url, newValues, GsonTypeTokens.TASK);
 
-    return new TaskFlowImpl(this, newTask);
+    return new TaskFlowImpl(this, columns, newTask);
   }
 
   /**
@@ -140,7 +142,7 @@ public class TasksImpl implements Tasks {
    */
   @Override
   public TaskMarkFlow mark(Task task) {
-    return new TaskMarkFlowImpl(this, task);
+    return new TaskMarkFlowImpl(this, columns, task);
   }
 
   /**

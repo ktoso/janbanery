@@ -1,5 +1,6 @@
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.exceptions.kanbanery.InternalServerErrorKanbaneryException;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
@@ -16,10 +17,12 @@ import java.io.IOException;
  */
 public class TaskMoveFlowImpl implements TaskMoveFlow {
 
-  private Tasks tasks;
-  private Task  task;
+  private Columns columns;
+  private Tasks   tasks;
+  private Task    task;
 
-  public TaskMoveFlowImpl(Tasks tasks, Task task) {
+  public TaskMoveFlowImpl(Tasks tasks, Columns columns, Task task) {
+    this.columns = columns;
     this.tasks = tasks;
     this.task = task;
   }
@@ -38,6 +41,17 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
   @Override
   public TaskMoveFlow toBoard() throws IOException {
     return to(TaskLocation.BOARD);
+  }
+
+  @Override
+  public TaskMoveFlow toLastColumn() throws IOException {
+    Column last = columns.last();
+    return to(last);
+  }
+
+  @Override
+  public TaskFlow asTaskFlow() {
+    return new TaskFlowImpl(tasks, columns, task);
   }
 
   /**
