@@ -151,7 +151,7 @@ public class Entity2WikiRunner {
     if (comment == null) {
       return "";
     }
-    return comment.replaceAll("\\{@link ([a-zA-Z0-9]+)\\}", "<a href=\"#\1\">\1</a>");
+    return comment.replaceAll("\\{@link (\\w)\\}", "<a href=\"#$1\">$1</a>");
   }
 
 }
