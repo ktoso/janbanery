@@ -1,6 +1,7 @@
 package pl.project13.janbanery.entity2wiki;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Predicate;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaField;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import static com.google.common.collect.Collections2.filter;
 import static com.google.common.collect.Lists.newArrayList;
+import static java.lang.String.format;
 
 /**
  * Simple sub project which is able to create valid GitHub Wiki (GitHub Favoured Markdown)
@@ -24,39 +26,54 @@ import static com.google.common.collect.Lists.newArrayList;
  */
 public class Entity2WikiRunner {
 
-  private JavaDocBuilder javaDocBuilder = new JavaDocBuilder();
-
+  private JavaDocBuilder       javaDocBuilder;
   private Collection<Class<?>> classes;
 
   private final String N = "\n";
   private final String B = "**";
 
-  public Entity2WikiRunner(Collection<Class<?>> classes, String sourceRootLocation) {
-    this.classes = classes;
-    javaDocBuilder.addSourceTree(new File(sourceRootLocation));
+  public Entity2WikiRunner(File sourceRootLocation) {
+    javaDocBuilder = new JavaDocBuilder();
+    javaDocBuilder.addSourceTree(sourceRootLocation);
   }
 
   public static void main(String... args) throws NoSuchFieldException {
-    if (args.length != 1) {
-      System.out.println("1st and only parameter MUST be the PATH to the source root of the classes to be scanned :-)");
-      System.exit(1);
-    }
+    validateArgs(args);
 
-    String sourceRootLocation = args[0];
+    PrintStream out = System.out;
+    File sourceRootLocation = new File(args[0]);
 
     List<Class<?>> enums = enums();
     List<Class<?>> classes = allResources();
 
-    System.out.println("## Entities\n");
-    Collection<Class<?>> settableClasses = filter(classes, new NotReadOnlyClassPredicate());
-    new Entity2WikiRunner(settableClasses, sourceRootLocation).writeWikiTextTo(System.out);
 
-    System.out.println("## ReadOnly Entities\n");
-    Collection<Class<?>> readOnlyClasses = filter(classes, new ReadOnlyClassPredicate());
-    new Entity2WikiRunner(readOnlyClasses, sourceRootLocation).writeWikiTextTo(System.out);
+    Entity2WikiRunner entity2Wiki = new Entity2WikiRunner(sourceRootLocation);
 
-    System.out.println("## Enums\n");
-    new Entity2WikiRunner(enums, sourceRootLocation).writeWikiTextTo(System.out);
+    entity2Wiki.withClasses(classes).writeSection(out, "Entities", new NotReadOnlyClassPredicate());
+    entity2Wiki.withClasses(classes).writeSection(out, "ReadOnly Entities", new ReadOnlyClassPredicate());
+
+    entity2Wiki.withClasses(enums).writeSection(out, "Enums");
+  }
+
+  private void writeSection(PrintStream out, String title) throws NoSuchFieldException {
+    writeSection(out, title, null);
+  }
+
+  private void writeSection(PrintStream out, String title, Predicate filter) throws NoSuchFieldException {
+    out.println(format("## %s", title));
+
+    Collection<Class<?>> classesToPrint = classes;
+    if (filter != null) {
+      classesToPrint = filter(classes, filter);
+    }
+    writeWikiTextTo(classesToPrint, out);
+  }
+
+  private static void validateArgs(String[] args) {
+    if (args.length != 1) {
+      System.out.println("1st and only parameter MUST be the PATH to the source root of the classes to be scanned :-)");
+      System.exit(1);
+    }
   }
 
   @SuppressWarnings({"unchecked"})
@@ -85,8 +102,8 @@ public class Entity2WikiRunner {
     return enums;
   }
 
-  private void writeWikiTextTo(PrintStream out) throws NoSuchFieldException {
-    for (Class<?> clazz : classes) {
+  private void writeWikiTextTo(Collection<Class<?>> classesToParse, PrintStream out) throws NoSuchFieldException {
+    for (Class<?> clazz : classesToParse) {
       String wikiParagraphAboutClass = class2Wiki(clazz);
       out.println(wikiParagraphAboutClass);
     }
@@ -106,12 +123,13 @@ public class Entity2WikiRunner {
     out.append(N);
 
     // field descriptions
+    out.append(strong("Fields summary: ")).append(N);
     for (Field field : clazz.getDeclaredFields()) {
       String fieldName = field.getName();
 
       out.append("* ")
          .append(field.getType().getSimpleName()).append(" ")
-         .append(B).append(fieldName).append(B)
+         .append(strong(fieldName))
          .append(" - ").append(javaDoc(className, fieldName))
          .append(N);
     }
@@ -124,17 +142,13 @@ public class Entity2WikiRunner {
     out.append("### ").append(hashLink(name)).append(N);
   }
 
-  private String hashLink(String name) {
-    return String.format("<a href=\"#%s\" name=\"%s\">%s</a>", name, name, name);
-  }
-
-  private String javaDoc(String clazz) {
-    JavaClass javaClass = javaDocBuilder.getClassByName(clazz);
+  private String javaDoc(String fullClassName) {
+    JavaClass javaClass = javaDocBuilder.getClassByName(fullClassName);
     return markdownize(javaClass.getComment());
   }
 
-  private String javaDoc(String clazz, String field) {
-    JavaClass javaClass = javaDocBuilder.getClassByName(clazz);
+  private String javaDoc(String fullClassName, String field) {
+    JavaClass javaClass = javaDocBuilder.getClassByName(fullClassName);
     JavaField[] fields = javaClass.getFields();
 
     for (JavaField javaField : fields) {
@@ -144,6 +158,14 @@ public class Entity2WikiRunner {
     }
 
     return "";
+  }
+
+  private String strong(String string) {
+    return format("**%s**", string);
+  }
+
+  private String hashLink(String name) {
+    return format("<a href=\"#%s\" name=\"%s\">%s</a>", name, name, name);
   }
 
   @VisibleForTesting String markdownize(String comment) {
@@ -156,4 +178,8 @@ public class Entity2WikiRunner {
     return comment;
   }
 
+  public Entity2WikiRunner withClasses(Collection<Class<?>> classes) {
+    this.classes = classes;
+    return this;
+  }
 }
