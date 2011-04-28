@@ -87,6 +87,30 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
+  public Column nextTo(Column column) throws IOException, EntityNotFoundException {
+    Integer desiredPosition = column.getPosition() + 1;
+
+    return onPosition(desiredPosition);
+  }
+
+  @Override
+  public Column previousTo(Column column) throws IOException, EntityNotFoundException {
+    Integer desiredPosition = column.getPosition() - 1;
+
+    return onPosition(desiredPosition);
+  }
+
+  @Override
+  public Column onPosition(Integer desiredPosition) throws IOException, EntityNotFoundException {
+    for (Column maybeNextColumn : all()) {
+      if (maybeNextColumn.getPosition().equals(desiredPosition)) {
+        return maybeNextColumn;
+      }
+    }
+    throw new EntityNotFoundException("Could not find Column with position = " + desiredPosition + ", on this project board.");
+  }
+
+  @Override
   public ColumnUpdateFlow update(Column column) {
     return new ColumnUpdateFlowImpl(this, column);
   }

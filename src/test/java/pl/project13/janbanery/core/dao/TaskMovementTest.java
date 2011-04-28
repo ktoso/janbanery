@@ -10,6 +10,7 @@ import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.TaskAlreadyInLastColumnException;
+import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
 
@@ -123,7 +124,9 @@ public class TaskMovementTest {
     Long manuallyMovedToColumnId = manualFlow.get().getColumnId();
 
     assertThat(jumpedToColumnId).isEqualTo(manuallyMovedToColumnId);
-    assertThat(jumpedToColumnId.).isEqualTo(manuallyMovedToColumnId);
+
+    Column jumpedToColumn = janbanery.columns().byId(jumpedToColumnId);
+    assertThat(jumpedToColumn).isEqualTo(janbanery.columns().last());
   }
 
   @Test
