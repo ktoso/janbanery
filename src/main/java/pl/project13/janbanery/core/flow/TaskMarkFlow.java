@@ -29,11 +29,11 @@ public interface TaskMarkFlow extends KanbaneryFlow<Task> {
    * @return
    * @throws IOException
    */
-  public TaskFlow asReadyToPull() throws IOException;
+  TaskFlow asReadyToPull() throws IOException;
 
   /**
    * @return
    * @throws IOException
    */
-  public TaskFlow asNotReadyToPull() throws IOException;
+  TaskFlow asNotReadyToPull() throws IOException;
 }
