@@ -1,4 +1,23 @@
+/*
+ * Copyright 2011 Konrad Malawski <konrad.malawski@project13.pl>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.project13.janbanery.exceptions.kanbanery;
+
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyArchiveFromLastColumn;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.PositionExceedsNumberOfTasksInColumnException;
 
 /**
  * This exception is mapping an 422 response code from the Kanbanery API.
@@ -42,13 +61,13 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
       return new TaskAlreadyInFirstColumnException(response);
     } else if (TaskAlreadyInLastColumnException.isBestExceptionFor(response)) {
       return new TaskAlreadyInLastColumnException(response);
-    } else if(PositionExceedsNumberOfTasksInColumnException.isBestExceptionFor(response)){
+    } else if (PositionExceedsNumberOfTasksInColumnException.isBestExceptionFor(response)) {
       return new PositionExceedsNumberOfTasksInColumnException(response);
-    } else if(CanOnlyIceBoxTaskFromFirstColumnException.isBestExceptionFor(response)){
+    } else if (CanOnlyIceBoxTaskFromFirstColumnException.isBestExceptionFor(response)) {
       return new CanOnlyIceBoxTaskFromFirstColumnException(response);
-    }else if(CanOnlyArchiveFromLastColumn.isBestExceptionFor(response)){
+    } else if (CanOnlyArchiveFromLastColumn.isBestExceptionFor(response)) {
       return new CanOnlyArchiveFromLastColumn(response);
-    }else {
+    } else {
       return new InvalidEntityKanbaneryException(response);
     }
   }
