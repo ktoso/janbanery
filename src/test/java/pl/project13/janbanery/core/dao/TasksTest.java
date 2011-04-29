@@ -23,7 +23,7 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
-import pl.project13.janbanery.exceptions.kanbanery.CanNotDeleteNotEmptyColumnException;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyArchiveFromLastColumnException;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestConstants;
@@ -117,8 +117,7 @@ public class TasksTest {
     assertThat(taskMovedToArchive.isArchived()).isTrue();
   }
 
-  @Test
-//  @Test(expected = CanNotArchiveTaskFromNotLastColumnException.class)
+  @Test(expected = CanOnlyArchiveFromLastColumnException.class)
   public void shouldNotArchiveTaskFromNotLastColumn() throws Exception {
     // given
     TaskFlow taskFlow = janbanery.tasks().create(TestEntityHelper.createTestTask(janbanery));
