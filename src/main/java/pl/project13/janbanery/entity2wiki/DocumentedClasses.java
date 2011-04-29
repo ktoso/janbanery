@@ -28,6 +28,9 @@ import static com.google.common.collect.Lists.newArrayList;
  */
 public class DocumentedClasses {
 
+  private DocumentedClasses() {
+  }
+
   public static List<Class<?>> resources() {
     List<Class<?>> classes = newArrayList();
     classes.add(Column.class);

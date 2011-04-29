@@ -61,7 +61,7 @@ public class ReflectionsFactory {
     List<URL> clazzUrls = newArrayList(getBaseScanUrl());
 
     // this is a bugfix for running in "plain maven", not an IDE, weird I know...
-//    ArrayList<Vfs.UrlType> defaultUrlTypes = findVfsUrlTypes(clazzUrls);
+//    List<Vfs.UrlType> defaultUrlTypes = findVfsUrlTypes(clazzUrls);
 //    for (Vfs.UrlType defaultUrlType : defaultUrlTypes) {
 //      Vfs.addDefaultURLTypes(defaultUrlType);
 //    }
@@ -107,8 +107,8 @@ public class ReflectionsFactory {
     log.info("--------------------------------------------------------------");
   }
 
-  private ArrayList<Vfs.UrlType> findVfsUrlTypes(ArrayList<URL> clazzUrls) {
-    ArrayList<Vfs.UrlType> defaultUrlTypesList = newArrayList();
+  private List<Vfs.UrlType> findVfsUrlTypes(List<URL> clazzUrls) {
+    List<Vfs.UrlType> defaultUrlTypesList = newArrayList();
     for (URL clazzUrl : clazzUrls) {
       List<Vfs.UrlType> defaultUrlTypes = Vfs.getDefaultUrlTypes();
       for (Vfs.UrlType defaultUrlType : defaultUrlTypes) {

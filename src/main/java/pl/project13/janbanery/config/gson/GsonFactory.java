@@ -34,6 +34,9 @@ public class GsonFactory {
 
   private static final DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ");
 
+  private GsonFactory() {
+  }
+
   public static Gson create() {
     return new GsonBuilder()
         .registerTypeAdapter(DateTime.class, new DateTimeSerializer())
