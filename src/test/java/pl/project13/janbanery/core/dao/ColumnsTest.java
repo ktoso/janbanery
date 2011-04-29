@@ -16,6 +16,7 @@
 
 package pl.project13.janbanery.core.dao;
 
+import com.sun.corba.se.spi.ior.iiop.GIOPVersion;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,7 @@ import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.NotFixedColumnCannotBeFirstException;
 import pl.project13.janbanery.resources.Column;
+import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -66,7 +68,7 @@ public class ColumnsTest {
   public void shouldCreateBeforeColumn() throws Exception {
     // given
     Column firstColumn = janbanery.columns().first();
-    Column secondColumn = janbanery.columns().nextTo(firstColumn);
+    Column secondColumn = janbanery.columns().after(firstColumn);
 
     Column newColumnData = TestEntityHelper.createTestColumn();
 
@@ -95,6 +97,20 @@ public class ColumnsTest {
     // then
     assertThat(newColumn.getName()).isEqualTo(newColumnData.getName());
     assertThat(newColumn.getPosition()).isEqualTo(2);
+  }
+
+  @Test
+  public void testAfterBeforeRelations() throws Exception {
+    // given
+    Columns getColumn = janbanery.columns();
+
+    // when
+    Column first = getColumn.onPosition(1);
+    Column second = getColumn.onPosition(2);
+
+    // then
+    assertThat(getColumn.after(first)).isEqualTo(second);
+    assertThat(getColumn.before(second)).isEqualTo(first);
   }
 
   @Test(expected = NotFoundKanbaneryException.class)

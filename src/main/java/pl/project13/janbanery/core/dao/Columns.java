@@ -54,9 +54,9 @@ public interface Columns {
 
   Column byId(Long id) throws IOException;
 
-  Column nextTo(Column column) throws IOException, EntityNotFoundException;
+  Column after(Column column) throws IOException, EntityNotFoundException;
 
-  Column previousTo(Column column) throws IOException, EntityNotFoundException;
+  Column before(Column column) throws IOException, EntityNotFoundException;
 
   Column onPosition(Integer desiredPosition) throws IOException, EntityNotFoundException;
 

@@ -135,14 +135,14 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
-  public Column nextTo(Column column) throws IOException, EntityNotFoundException {
+  public Column after(Column column) throws IOException, EntityNotFoundException {
     Integer desiredPosition = column.getPosition() + 1;
 
     return onPosition(desiredPosition);
   }
 
   @Override
-  public Column previousTo(Column column) throws IOException, EntityNotFoundException {
+  public Column before(Column column) throws IOException, EntityNotFoundException {
     Integer desiredPosition = column.getPosition() - 1;
 
     return onPosition(desiredPosition);
