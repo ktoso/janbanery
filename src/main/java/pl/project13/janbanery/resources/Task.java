@@ -349,7 +349,6 @@ public class Task extends KanbaneryResource implements Serializable {
     return true;
   }
 
-  // todo generate this using intellij plugin ;-)
   public static class Builder {
     private Task instance;
 
