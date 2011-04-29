@@ -18,7 +18,6 @@ package pl.project13.janbanery.config.auth;
 
 import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.resources.User;
-import sun.misc.BASE64Encoder;
 
 /**
  * @author Konrad Malawski
@@ -47,7 +46,7 @@ public class UserPassAuthMode implements AuthMode {
 
   public String encodeUserPassword(String user, String password) {
     byte[] logon = String.format("%s:%s", user, password).getBytes();
-    return new BASE64Encoder().encode(logon);
+    return String.valueOf(Base64Coder.encode(logon));
   }
 
   @Override

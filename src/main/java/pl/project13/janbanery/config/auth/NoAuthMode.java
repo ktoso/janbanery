@@ -18,7 +18,6 @@ package pl.project13.janbanery.config.auth;
 
 import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.resources.User;
-import sun.misc.BASE64Encoder;
 
 /**
  * Just a stub class used for in between when there is no auth method setup yet.
@@ -34,7 +33,7 @@ public class NoAuthMode implements AuthMode {
 
   public String encodeUserPassword(String user, String password) {
     byte[] logon = String.format("%s:%s", user, password).getBytes();
-    return new BASE64Encoder().encode(logon);
+    return String.valueOf(Base64Coder.encode(logon));
   }
 
   @Override
