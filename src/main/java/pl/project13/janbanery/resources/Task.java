@@ -392,9 +392,7 @@ public class Task extends KanbaneryResource implements Serializable {
     }
 
     public Builder taskTypeId(Long taskTypeId) {
-
-
-  ance.taskTypeId = taskTypeId;
+      instance.taskTypeId = taskTypeId;
       return this;
     }
 
