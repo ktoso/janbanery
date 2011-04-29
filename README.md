@@ -137,8 +137,8 @@ Links and resources
 
 License
 =======
-<img style="float:right; padding:3px; " src="https://github.com/ktoso/janbanery/raw/master/lgplv3-147x51.png" alt="GNU LGPL v3"/><br/>
-I'm releasing this plugin under the **GNU Lesser General Public License 3.0**.
+<img style="float:right; padding:3px; " src="https://github.com/ktoso/janbanery/raw/master/feather-small.gif" alt="Apache License 2.0"/><br/>
+I'm releasing this library under the **Apache License 2.0**.
 
 You're free to use it as you wish, the license text is attached in the LICENSE file.
 You may contact me if you want this to be released on a different license, just send me an email <a href="mailto:konrad.malawski@java.pl">konrad.malawski@java.pl</a> :-)
