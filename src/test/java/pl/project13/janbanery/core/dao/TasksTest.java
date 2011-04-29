@@ -23,6 +23,7 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
+import pl.project13.janbanery.exceptions.kanbanery.CanNotDeleteNotEmptyColumnException;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestConstants;
@@ -108,17 +109,25 @@ public class TasksTest {
     Task taskInLastColumn = taskFlow.move().toLastColumn().get();
 
     // when
-    janbanery.tasks().archive(taskInLastColumn); // todo maybe not void?
+    janbanery.tasks().move(taskInLastColumn).toArchive();
 
     // then
     Task taskMovedToArchive = janbanery.tasks().byId(taskInLastColumn.getId());
 
-    assertThat(taskMovedToArchive.getColumnId()).isNull(); // archive has no column
+    assertThat(taskMovedToArchive.isArchived()).isTrue();
   }
 
   @Test
+//  @Test(expected = CanNotArchiveTaskFromNotLastColumnException.class)
   public void shouldNotArchiveTaskFromNotLastColumn() throws Exception {
+    // given
+    TaskFlow taskFlow = janbanery.tasks().create(TestEntityHelper.createTestTask(janbanery));
+    Task taskInLastColumn = taskFlow.get();
 
+    // when
+    janbanery.tasks().move(taskInLastColumn).toArchive();
+
+    // then, should have thrown
   }
 
 }

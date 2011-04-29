@@ -185,8 +185,7 @@ public class TaskMovementTest {
 
     // then
     Task task = taskFlow.get();
-    boolean isArchived = task.isArchivedIn(janbanery.archive());
-    assertThat(isArchived).isTrue();
+    assertThat(task.isArchived()).isTrue();
   }
 
   @Test(expected = CanOnlyArchiveFromLastColumn.class)
