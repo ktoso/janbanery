@@ -38,6 +38,6 @@ public class CanOnlyArchiveFromLastColumn extends InvalidEntityKanbaneryExceptio
 
 
   public static boolean isBestExceptionFor(String response) {
-    return response.contains("blalalal");//todo
+    return response.contains("tasks can be archived only from last column");
   }
 }

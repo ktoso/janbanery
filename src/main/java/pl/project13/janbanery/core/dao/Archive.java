@@ -28,5 +28,14 @@ public interface Archive {
 
   List<Task> all() throws IOException;
 
+  /**
+   * @param task
+   * @return
+   * @throws IOException
+   * @example <pre>
+   *                Task myTask = janbanery.tasks().byId(someId);
+   *                myTask.isArchived(janbanery.archive());
+   *          </pre>
+   */
   boolean contains(Task task) throws IOException;
 }

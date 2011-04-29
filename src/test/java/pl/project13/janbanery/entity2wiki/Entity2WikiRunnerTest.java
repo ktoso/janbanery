@@ -33,6 +33,6 @@ public class Entity2WikiRunnerTest {
   public void testName() throws Exception {
     String markdownized = entity2WikiRunner.markdownize("{@link SomeClass}");
 
-    assertThat(markdownized).isEqualTo("<a href=\"#Clazz\">Clazz</a>");
+    assertThat(markdownized).isEqualTo("<a href=\"#SomeClass\">SomeClass</a>");
   }
 }
