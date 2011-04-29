@@ -21,7 +21,7 @@ import com.ning.http.client.AsyncHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
-import pl.project13.janbanery.config.auth.AuthMode;
+import pl.project13.janbanery.config.auth.AuthProvider;
 import pl.project13.janbanery.core.dao.*;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
@@ -57,8 +57,8 @@ public class Janbanery {
     this.bodyGenerator = bodyGenerator;
   }
 
-  public AuthMode getAuthMode() {
-    return conf.getAuthMode();
+  public AuthProvider getAuthMode() {
+    return conf.getAuthProvider();
   }
 
   /**

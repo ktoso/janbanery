@@ -20,23 +20,28 @@ import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.resources.User;
 
 /**
- * The safe and best method to use for API calls
- *
  * @author Konrad Malawski
  */
-public class ApiKeyAuthMode implements AuthMode {
+public class UserPassAuthProvider implements AuthProvider {
 
-  public final String API_TOKEN_HEADER = "X-Kanbanery-ApiToken";
+  private String userEmail;
+  private String authData;
 
-  private final String authData;
-
-  public ApiKeyAuthMode(String authData) {
-    this.authData = authData;
+  /**
+   * Creates an instance of UserPassAuthProvider using the given username and password,
+   * these will be encrypted right away using an BaseEncoder.
+   *
+   * @param userEmail username to be used in this plain auth method
+   * @param password  password for this userEmail
+   */
+  public UserPassAuthProvider(String userEmail, String password) {
+    this.userEmail = userEmail;
+    this.authData = encodeUserPassword(userEmail, password);
   }
 
   @Override
   public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
-    return requestBuilder.addHeader(API_TOKEN_HEADER, authData);
+    return requestBuilder.addHeader("Authorization", "Basic " + authData);
   }
 
   public String encodeUserPassword(String user, String password) {
@@ -44,14 +49,8 @@ public class ApiKeyAuthMode implements AuthMode {
     return String.valueOf(Base64Coder.encode(logon));
   }
 
-  /**
-   * Matches the passed in user against the currently used API KEY
-   *
-   * @param user user to be checked if it's "me"
-   * @return true if the user is "us", false otherwise
-   */
   @Override
   public boolean isCurrentUser(User user) {
-    return authData.equals(user.getApiToken());
+    return userEmail.equals(user.getEmail());
   }
 }

@@ -21,9 +21,9 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.PropertiesConfiguration;
-import pl.project13.janbanery.config.auth.ApiKeyAuthMode;
-import pl.project13.janbanery.config.auth.AuthMode;
-import pl.project13.janbanery.config.auth.UserPassAuthMode;
+import pl.project13.janbanery.config.auth.ApiKeyAuthProvider;
+import pl.project13.janbanery.config.auth.AuthProvider;
+import pl.project13.janbanery.config.auth.UserPassAuthProvider;
 import pl.project13.janbanery.test.TestConstants;
 
 import java.io.FileInputStream;
@@ -56,8 +56,8 @@ public class JanbaneryFactoryTest {
     Janbanery janbanery = janbaneryFactory.connectUsing(configuration);
 
     // then, should use API key mode
-    AuthMode usedAuthMode = janbanery.getAuthMode();
-    assertThat(usedAuthMode).isInstanceOf(ApiKeyAuthMode.class);
+    AuthProvider usedAuthProvider = janbanery.getAuthMode();
+    assertThat(usedAuthProvider).isInstanceOf(ApiKeyAuthProvider.class);
   }
 
   @Test
@@ -71,8 +71,8 @@ public class JanbaneryFactoryTest {
     Janbanery janbanery = janbaneryFactory.connectUsing(apiKey);
 
     // then, should use API key mode
-    AuthMode usedAuthMode = janbanery.getAuthMode();
-    assertThat(usedAuthMode).isInstanceOf(ApiKeyAuthMode.class);
+    AuthProvider usedAuthProvider = janbanery.getAuthMode();
+    assertThat(usedAuthProvider).isInstanceOf(ApiKeyAuthProvider.class);
   }
 
   @Test
@@ -87,8 +87,8 @@ public class JanbaneryFactoryTest {
     Janbanery janbanery = janbaneryFactory.connectAndKeepUsing(user, password);
 
     // then, should use API key mode
-    AuthMode usedAuthMode = janbanery.getAuthMode();
-    assertThat(usedAuthMode).isInstanceOf(UserPassAuthMode.class);
+    AuthProvider usedAuthProvider = janbanery.getAuthMode();
+    assertThat(usedAuthProvider).isInstanceOf(UserPassAuthProvider.class);
   }
 
   @Test
@@ -103,8 +103,8 @@ public class JanbaneryFactoryTest {
     Janbanery janbanery = janbaneryFactory.connectUsing(user, password);
 
     // then, should use API key mode
-    AuthMode usedAuthMode = janbanery.getAuthMode();
-    assertThat(usedAuthMode).isInstanceOf(ApiKeyAuthMode.class);
+    AuthProvider usedAuthProvider = janbanery.getAuthMode();
+    assertThat(usedAuthProvider).isInstanceOf(ApiKeyAuthProvider.class);
   }
 
 }

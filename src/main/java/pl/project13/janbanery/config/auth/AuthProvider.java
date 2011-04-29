@@ -20,24 +20,22 @@ import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.resources.User;
 
 /**
- * Just a stub class used for in between when there is no auth method setup yet.
- * Will most probably exist only for a few seconds to be replaced with a real AuthMode implementation.
+ * Common interface for all methods allowing authorization into the Kanbanery API.
+ * For example, via API Key or plain user/password method.
  *
  * @author Konrad Malawski
  */
-public class NoAuthMode implements AuthMode {
-  @Override
-  public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
-    throw new UnsupportedOperationException("No authorization method was setup. Can not connect to kanbanery without using any auth method.");
-  }
+public interface AuthProvider {
 
-  public String encodeUserPassword(String user, String password) {
-    byte[] logon = String.format("%s:%s", user, password).getBytes();
-    return String.valueOf(Base64Coder.encode(logon));
-  }
+  AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder);
 
-  @Override
-  public boolean isCurrentUser(User user) {
-    return false;
-  }
+  String encodeUserPassword(String user, String password);
+
+  /**
+   * Identify if the passed in user is the "current" user.
+   *
+   * @param user user to check if it's "us"
+   * @return true if the user is "us", false otherwise
+   */
+  boolean isCurrentUser(User user);
 }

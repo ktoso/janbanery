@@ -20,28 +20,15 @@ import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.resources.User;
 
 /**
+ * Just a stub class used for in between when there is no auth method setup yet.
+ * Will most probably exist only for a few seconds to be replaced with a real AuthProvider implementation.
+ *
  * @author Konrad Malawski
  */
-public class UserPassAuthMode implements AuthMode {
-
-  private String userEmail;
-  private String authData;
-
-  /**
-   * Creates an instance of UserPassAuthMode using the given username and password,
-   * these will be encrypted right away using an BaseEncoder.
-   *
-   * @param userEmail username to be used in this plain auth method
-   * @param password  password for this userEmail
-   */
-  public UserPassAuthMode(String userEmail, String password) {
-    this.userEmail = userEmail;
-    this.authData = encodeUserPassword(userEmail, password);
-  }
-
+public class NoAuthProvider implements AuthProvider {
   @Override
   public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
-    return requestBuilder.addHeader("Authorization", "Basic " + authData);
+    throw new UnsupportedOperationException("No authorization method was setup. Can not connect to kanbanery without using any auth method.");
   }
 
   public String encodeUserPassword(String user, String password) {
@@ -51,6 +38,6 @@ public class UserPassAuthMode implements AuthMode {
 
   @Override
   public boolean isCurrentUser(User user) {
-    return userEmail.equals(user.getEmail());
+    return false;
   }
 }

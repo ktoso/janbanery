@@ -17,10 +17,9 @@
 package pl.project13.janbanery.config;
 
 import com.ning.http.client.AsyncHttpClient;
-import pl.project13.janbanery.config.auth.ApiKeyAuthMode;
-import pl.project13.janbanery.config.auth.AuthMode;
-import pl.project13.janbanery.config.auth.NoAuthMode;
-import pl.project13.janbanery.config.auth.UserPassAuthMode;
+import pl.project13.janbanery.config.auth.*;
+import pl.project13.janbanery.config.auth.ApiKeyAuthProvider;
+import pl.project13.janbanery.config.auth.AuthProvider;
 import pl.project13.janbanery.resources.User;
 
 import static java.lang.String.format;
@@ -32,7 +31,7 @@ import static java.lang.String.format;
  */
 public class DefaultConfiguration implements Configuration {
 
-  protected AuthMode authMode = new NoAuthMode();
+  protected AuthProvider authProvider = new NoAuthProvider();
 
   protected DefaultConfiguration() {
     // only for use of subclasses, other usages should create a valid Configuration instance right away
@@ -48,17 +47,17 @@ public class DefaultConfiguration implements Configuration {
 
   @Override
   public void forceUserPassAuthMode(String user, String password) {
-    authMode = new UserPassAuthMode(user, password);
+    authProvider = new UserPassAuthProvider(user, password);
   }
 
   @Override
   public void forceKeyAuthMode(String apiKey) {
-    authMode = new ApiKeyAuthMode(apiKey);
+    authProvider = new ApiKeyAuthProvider(apiKey);
   }
 
   @Override
   public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
-    return authMode.authorize(requestBuilder);
+    return authProvider.authorize(requestBuilder);
   }
 
   /**
@@ -66,12 +65,12 @@ public class DefaultConfiguration implements Configuration {
    */
   @Override
   public boolean isCurrentUser(User user) {
-    return authMode.isCurrentUser(user);
+    return authProvider.isCurrentUser(user);
   }
 
   @Override
-  public AuthMode getAuthMode() {
-    return authMode;
+  public AuthProvider getAuthProvider() {
+    return authProvider;
   }
 
   @Override

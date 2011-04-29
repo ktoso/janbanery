@@ -17,7 +17,7 @@
 package pl.project13.janbanery.config;
 
 import com.google.common.base.Strings;
-import pl.project13.janbanery.config.auth.AuthMode;
+import pl.project13.janbanery.config.auth.AuthProvider;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -92,8 +92,8 @@ public class PropertiesConfiguration extends DefaultConfiguration implements Con
   }
 
   @Override
-  public AuthMode getAuthMode() {
-    return authMode;
+  public AuthProvider getAuthProvider() {
+    return authProvider;
   }
 
   private boolean doesNotExist(File propsFile) {
