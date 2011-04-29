@@ -79,10 +79,10 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
     TaskMoveFlow moveFlow;
     try {
       moveFlow = to(TaskLocation.NEXT);
-    } catch (InternalServerErrorKanbaneryException e) { // fixme this is a bug workaround
+    } catch (InternalServerErrorKanbaneryException e) { // this is a bug workaround
       // kanbanery does handle "ArrayIndexOutOfBounds" right for movement to the left,
       // but for movement to the right it fails and throws a 500 Internal Server Error...
-      throw new TaskAlreadyInLastColumnException("{position: 'task is already in last column'}", e); // todo this is a kanbanery bug workaround
+      throw new TaskAlreadyInLastColumnException("{position: 'task is already in last column'}", e); // this is a kanbanery bug workaround
     }
     return moveFlow;
   }
