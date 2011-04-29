@@ -19,14 +19,12 @@ package pl.project13.janbanery.resources;
 import com.google.gson.annotations.SerializedName;
 import org.joda.time.DateTime;
 import pl.project13.janbanery.core.dao.Archive;
-import pl.project13.janbanery.core.dao.IceBox;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.additions.On;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 /**

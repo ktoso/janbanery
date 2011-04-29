@@ -31,7 +31,6 @@ import pl.project13.janbanery.resources.KanbaneryResource;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;

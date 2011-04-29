@@ -17,7 +17,6 @@
 package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.Columns;
-import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.Column;
 
 import java.io.IOException;

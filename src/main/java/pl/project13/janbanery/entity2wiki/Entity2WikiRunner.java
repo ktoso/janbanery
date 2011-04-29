@@ -24,13 +24,11 @@ import com.thoughtworks.qdox.model.JavaField;
 
 import java.io.File;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
 
 import static com.google.common.collect.Collections2.filter;
-import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.String.format;
 
 /**

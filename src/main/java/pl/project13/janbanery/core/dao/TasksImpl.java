@@ -26,7 +26,6 @@ import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.*;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
-import pl.project13.janbanery.exceptions.kanbanery.CanNotDeleteNotEmptyColumnException;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 

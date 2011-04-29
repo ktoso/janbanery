@@ -18,7 +18,6 @@ package pl.project13.janbanery.resources;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.annotations.SerializedName;
-import com.ning.http.client.Response;
 import pl.project13.janbanery.resources.additions.On;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;

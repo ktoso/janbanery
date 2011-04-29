@@ -19,7 +19,6 @@ package pl.project13.janbanery.core.dao;
 import pl.project13.janbanery.core.flow.ColumnCreateFlow;
 import pl.project13.janbanery.core.flow.ColumnMoveFlow;
 import pl.project13.janbanery.core.flow.ColumnUpdateFlow;
-import pl.project13.janbanery.core.flow.ColumnUpdateFlowImpl;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Column;
 

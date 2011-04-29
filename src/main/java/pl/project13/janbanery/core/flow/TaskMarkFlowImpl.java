@@ -17,9 +17,7 @@
 package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.Columns;
-import pl.project13.janbanery.core.dao.ColumnsImpl;
 import pl.project13.janbanery.core.dao.Tasks;
-import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
