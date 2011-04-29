@@ -56,14 +56,13 @@ public class ArchiveImpl implements Archive {
   /**
    * {@inheritDoc}
    */
-  @Override public boolean contains(Task task) throws IOException {
-    String url = getArchiveUrl();
-
+  @Override
+  public boolean contains(Task task) throws IOException {
     return all().contains(task);
   }
 
   private String getArchiveUrl() {
-    return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId(), "archive");
+    return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId(), "archive", "tasks");
   }
 
   public Archive using(Workspace currentWorkspace, Project currentProject) {
