@@ -26,6 +26,7 @@ import java.io.IOException;
  * @author Konrad Malawski
  */
 public class ColumnUpdateFlowImpl implements ColumnUpdateFlow {
+
   private Columns columns;
   private Column  column;
 

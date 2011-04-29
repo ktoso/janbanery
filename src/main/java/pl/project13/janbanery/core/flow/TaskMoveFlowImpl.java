@@ -18,7 +18,7 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.core.dao.Tasks;
-import pl.project13.janbanery.exceptions.kanbanery.CanOnlyIceBoxTaskFromFirstColumnException;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.InternalServerErrorKanbaneryException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.TaskAlreadyInLastColumnException;
 import pl.project13.janbanery.resources.Column;

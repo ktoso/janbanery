@@ -119,48 +119,48 @@ public class Janbanery {
   /* return initially setup instances of dao objects */
 
   public Tasks tasks() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new TasksImpl(columns(), conf, restClient, gson).using(currentWorkspace, currentProject);
   }
 
   public IceBox iceBox() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
-    return new IceBoxImpl(tasks(), columns(), conf, restClient).using(currentWorkspace, currentProject); // todo seems weird...
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
+    return new IceBoxImpl(tasks(), columns(), conf, restClient).using(currentWorkspace, currentProject);
+  }
+
+  public Archive archive() {
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator); // todo improve this to be mockable
+    return new ArchiveImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public TaskTypes taskTypes() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new TaskTypesImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public Users users() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
-    final UsersImpl users = new UsersImpl(conf, restClient);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
+    UsersImpl users = new UsersImpl(conf, restClient);
     return users.using(currentWorkspace, currentProject);
   }
 
   public Subscriptions subscriptions() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new SubscriptionsImpl(conf, restClient).using(currentWorkspace);
   }
 
   public Workspaces workspaces() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new WorkspacesImpl(conf, restClient);
   }
 
   public Columns columns() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new ColumnsImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public Estimates estimates() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new EstimatesImpl(conf, restClient).using(currentWorkspace, currentProject);
-  }
-
-  public Archive archive() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
-    return new ArchiveImpl(tasks(), conf, restClient).using(currentWorkspace, currentProject);
   }
 }

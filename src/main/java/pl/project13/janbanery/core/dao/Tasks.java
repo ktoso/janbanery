@@ -42,8 +42,6 @@ public interface Tasks {
 
   // archive---------------------------
 
-  void archive(Task task) throws IOException;
-
   void archiveAllInLastColumn() throws IOException;
 
   // deletes --------------------------

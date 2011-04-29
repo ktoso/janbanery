@@ -16,10 +16,11 @@
 
 package pl.project13.janbanery.core.dao;
 
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
+import pl.project13.janbanery.core.flow.ArchiveFlow;
+import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
@@ -31,16 +32,20 @@ import java.util.List;
  * @author Konrad Malawski
  */
 public class ArchiveImpl implements Archive {
-  private Tasks         tasks;
+
   private Configuration conf;
   private RestClient    restClient;
   private Workspace     currentWorkspace;
   private Project       currentProject;
 
-  public ArchiveImpl(Tasks tasks, Configuration conf, RestClient restClient) {
-    this.tasks = tasks;
+  public ArchiveImpl(Configuration conf, RestClient restClient) {
     this.conf = conf;
     this.restClient = restClient;
+  }
+
+  @Override
+  public void delete(Task task) throws IOException {
+    throw new NotYetImplementedException(); // todo implement me
   }
 
   /**

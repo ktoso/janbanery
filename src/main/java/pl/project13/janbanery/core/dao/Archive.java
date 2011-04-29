@@ -26,6 +26,14 @@ import java.util.List;
  */
 public interface Archive {
 
+  // commands -----------------------------------------------------------------
+
+  // no create command is available for the archive - it makes no sense to start with a task in the archive
+
+  // no delete command is available for the archive - just keep tha tasks there!
+
+  // queries ------------------------------------------------------------------
+
   List<Task> all() throws IOException;
 
   /**

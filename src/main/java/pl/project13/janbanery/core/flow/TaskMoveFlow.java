@@ -16,7 +16,7 @@
 
 package pl.project13.janbanery.core.flow;
 
-import pl.project13.janbanery.exceptions.kanbanery.CanOnlyIceBoxTaskFromFirstColumnException;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;

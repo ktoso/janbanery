@@ -86,15 +86,7 @@ public class TasksImpl implements Tasks {
    * {@inheritDoc}
    */
   @Override
-  public void archive(Task task) throws IOException {
-    throw new NotYetImplementedException(); // todo
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void archiveAllInLastColumn() throws IOException, CanNotDeleteNotEmptyColumnException {
+  public void archiveAllInLastColumn() throws IOException {
     throw new NotYetImplementedException(); // todo
   }
 

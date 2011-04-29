@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.exceptions.kanbanery;
+package pl.project13.janbanery.exceptions.kanbanery.invalidentity;
+
+import pl.project13.janbanery.exceptions.kanbanery.InvalidEntityKanbaneryException;
 
 /**
  * @author Konrad Malawski

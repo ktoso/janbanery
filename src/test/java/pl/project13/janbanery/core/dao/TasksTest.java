@@ -25,6 +25,7 @@ import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.test.TestConstants;
 import pl.project13.janbanery.test.TestEntityHelper;
 
 import java.util.List;
@@ -72,8 +73,8 @@ public class TasksTest {
   @Test
   public void shouldDeleteTask() throws Exception {
     // given
-    List<Task> beforeDelete = janbanery.tasks().byTitle(TASK_TITLE);
-    Task task = beforeDelete.get(0);
+    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
+    List<Task> beforeDelete = janbanery.tasks().byTitle(TestConstants.TASK_TITLE);
     Long deletedTaskId = task.getId();
 
     // when
