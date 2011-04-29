@@ -68,8 +68,9 @@ public class TestEntityHelper {
     try {
       List<Column> columns = janbanery.columns().byName(TASK_TITLE);
       if (columns.size() > 0) {
-        Column column = columns.get(0);
-        janbanery.columns().delete(column);
+        for (Column column : columns) {
+          janbanery.columns().delete(column);
+        }
       }
     } catch (EntityNotFoundException ignore) {
       // that's ok

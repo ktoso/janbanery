@@ -273,8 +273,6 @@ public class Task extends KanbaneryResource implements Serializable {
   /**
    * Try as best as you can to guess if this task is in the archive.
    * The kanbanery API does not provide this information directly.
-   * <p/>
-   * To do a REAL check if this task is archived use the {@link #isArchived(Archive)} method.
    *
    * @return true if this {@link Task} is in the Archive, false otherwise
    */
@@ -396,7 +394,9 @@ public class Task extends KanbaneryResource implements Serializable {
     }
 
     public Builder taskTypeId(Long taskTypeId) {
-      instance.taskTypeId = taskTypeId;
+
+
+  ance.taskTypeId = taskTypeId;
       return this;
     }
 
