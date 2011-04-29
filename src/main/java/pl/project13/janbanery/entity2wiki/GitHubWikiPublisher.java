@@ -3,24 +3,25 @@ package pl.project13.janbanery.entity2wiki;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.Files;
-import org.eclipse.jgit.api.CreateBranchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.*;
 import org.eclipse.jgit.errors.UnmergedPathException;
 import org.eclipse.jgit.lib.ObjectId;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.List;
 
 /**
  * @author Konrad Malawski
  */
 public class GitHubWikiPublisher {
+
+  Logger log = LoggerFactory.getLogger(getClass());
 
   Git git;
 
@@ -63,24 +64,30 @@ public class GitHubWikiPublisher {
   }
 
   private void cloneRepository(String wikiRepositoryUrl) {
+    log.info("Cloning repository: {}", wikiRepositoryUrl);
     File tempDir = Files.createTempDir();
 
     git = Git.cloneRepository()
              .setDirectory(tempDir)
              .setURI(wikiRepositoryUrl)
              .call();
+
+    log.info("Done cloning repository.");
   }
 
   private void checkoutRemoteMaster() throws IOException, RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException {
+    log.info("Checking out remotes/origin/master -> master branch");
     ObjectId masterObjectId = git.getRepository().getRef("remotes/origin/master").getObjectId();
     RevWalk walk = new RevWalk(git.getRepository());
     RevCommit commit = walk.parseCommit(masterObjectId);
 
     git.checkout()
        .setCreateBranch(true)
-        .setStartPoint(commit)
+       .setStartPoint(commit)
        .setName("master")
        .call();
+
+    log.info("Done checking out branch.");
   }
 
   public void pushToWiki(String pageName, String contents) throws IOException,
@@ -90,21 +97,39 @@ public class GitHubWikiPublisher {
     addNewContent(pageName, contents);
     commitNewContent();
     pushNewContent();
+    cleanupWorkDir();
+
+    log.info("Done pushing new contents to github wiki.");
+  }
+
+  private void cleanupWorkDir() throws IOException {
+    log.info("Cleaning up work directory...");
+
+    File workTree = git.getRepository().getWorkTree();
+    Files.deleteRecursively(workTree);
   }
 
   private void pushNewContent() throws InvalidRemoteException {
+    log.info("Pushing changes to remote...");
+
     git.push().call();
   }
 
   private void commitNewContent() throws NoHeadException, NoMessageException, UnmergedPathException, ConcurrentRefUpdateException, WrongRepositoryStateException {
+    log.info("Committing new data...");
+
+    String name = "Git Hub Wiki Publisher";
+    String email = "konrad.malawski@java.pl";
     git.commit()
-       .setAuthor("Git Hub Wiki Publisher", "konrad.malawski@java.pl")
-       .setCommitter("Git Hub Wiki Publisher", "konrad.malawski@java.pl")
+       .setAuthor(name, email)
+       .setCommitter(name, email)
        .setMessage("Automatic documentation update")
        .call();
   }
 
   private void addNewContent(String pageName, String contents) throws IOException, NoFilepatternException {
+    log.info("Adding new content to files...");
+
     File workTree = git.getRepository().getWorkTree();
     String fileName = pageName + ".md";
     File pageFile = new File(workTree, fileName);
@@ -113,6 +138,7 @@ public class GitHubWikiPublisher {
 
     Files.write(contents, pageFile, Charsets.UTF_8);
 
+    log.info("Running git add {}", fileName);
     git.add().addFilepattern(fileName).call();
   }
 
