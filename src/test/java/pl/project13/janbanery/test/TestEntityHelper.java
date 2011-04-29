@@ -27,6 +27,7 @@ import pl.project13.janbanery.resources.Task;
 import java.io.IOException;
 import java.util.List;
 
+import static pl.project13.janbanery.test.TestConstants.COLUMN_NAME;
 import static pl.project13.janbanery.test.TestConstants.TASK_TITLE;
 
 /**
@@ -61,12 +62,12 @@ public class TestEntityHelper {
   }
 
   public static Column createTestColumn() {
-    return new Column.Builder(TestConstants.COLUMN_NAME).build();
+    return new Column.Builder(COLUMN_NAME).build();
   }
 
   public static void deleteTestColumn(Janbanery janbanery) throws IOException {
     try {
-      List<Column> columns = janbanery.columns().byName(TASK_TITLE);
+      List<Column> columns = janbanery.columns().byName(COLUMN_NAME);
       if (columns.size() > 0) {
         for (Column column : columns) {
           janbanery.columns().delete(column);
