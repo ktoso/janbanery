@@ -14,21 +14,24 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.test;
+package pl.project13.janbanery.core.flow;
 
-import org.junit.Ignore;
+import pl.project13.janbanery.core.dao.Columns;
+import pl.project13.janbanery.resources.Column;
+
+import java.io.IOException;
 
 /**
  * @author Konrad Malawski
  */
-@Ignore("It's just an util class")
-public class TestConstants {
-  public static final String VALID_CONF_FILE_LOCATION = "src/test/resources/janbanery.properties";
+public interface ColumnCreateFlow {
 
-  public static final String EXISTING_WORKSPACE = "janbanery";
-  public static final String EXISTING_PROJECT   = "janbaneryProject";
+  // commands -----------------------------------------------------------------
 
-  public static final String TASK_TITLE = "Janbanery Test Task";
+  Column after(Column column) throws IOException;
 
-  public static final String COLUMN_NAME = "Janbanery Test Column";
+  Column before(Column column) throws IOException;
+
+  Column onPosition(Integer position) throws IOException;
+
 }

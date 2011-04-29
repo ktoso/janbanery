@@ -28,7 +28,8 @@ import java.io.IOException;
 public class ColumnUpdateFlowImpl implements ColumnUpdateFlow {
 
   private Columns columns;
-  private Column  column;
+
+  private Column column;
 
   public ColumnUpdateFlowImpl(Columns columns, Column column) {
     this.columns = columns;

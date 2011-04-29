@@ -16,7 +16,9 @@
 
 package pl.project13.janbanery.resources;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.annotations.SerializedName;
+import com.ning.http.client.Response;
 import pl.project13.janbanery.resources.additions.On;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
@@ -171,5 +173,45 @@ public class Column extends KanbaneryResource implements Serializable {
     result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
     result = 31 * result + (position != null ? position.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("Column");
+    sb.append("{id=").append(id);
+    sb.append(", name='").append(name).append('\'');
+    sb.append(", projectId=").append(projectId);
+    sb.append(", capacity=").append(capacity);
+    sb.append(", position=").append(position);
+    sb.append(", fixed=").append(fixed);
+    sb.append('}');
+    return sb.toString();
+  }
+
+
+  public static class Builder {
+    private Column instance;
+
+    public Builder(String columnName) {
+      instance = new Column();
+      instance.name = columnName;
+    }
+
+    public Builder capacity(Integer capacity) {
+      instance.capacity = capacity;
+      return this;
+    }
+
+    public Builder position(Integer position) {
+      instance.position = position;
+      return this;
+    }
+
+    public Column build() {
+      Preconditions.checkNotNull(instance.name, "Attribute: name");
+
+      return instance;
+    }
   }
 }

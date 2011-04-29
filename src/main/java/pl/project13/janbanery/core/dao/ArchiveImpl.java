@@ -19,8 +19,6 @@ package pl.project13.janbanery.core.dao;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
-import pl.project13.janbanery.core.flow.ArchiveFlow;
-import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
@@ -35,8 +33,9 @@ public class ArchiveImpl implements Archive {
 
   private Configuration conf;
   private RestClient    restClient;
-  private Workspace     currentWorkspace;
-  private Project       currentProject;
+
+  private Workspace currentWorkspace;
+  private Project   currentProject;
 
   public ArchiveImpl(Configuration conf, RestClient restClient) {
     this.conf = conf;

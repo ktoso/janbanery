@@ -19,6 +19,8 @@ package pl.project13.janbanery.test;
 import org.junit.Ignore;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.flow.TaskFlow;
+import pl.project13.janbanery.exceptions.EntityNotFoundException;
+import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 
@@ -57,4 +59,21 @@ public class TestEntityHelper {
         .build();
     return janbanery.tasks().create(build);
   }
+
+  public static Column createTestColumn() {
+    return new Column.Builder(TestConstants.COLUMN_NAME).build();
+  }
+
+  public static void deleteTestColumn(Janbanery janbanery) throws IOException {
+    try {
+      List<Column> columns = janbanery.columns().byName(TASK_TITLE);
+      if (columns.size() > 0) {
+        Column column = columns.get(0);
+        janbanery.columns().delete(column);
+      }
+    } catch (EntityNotFoundException ignore) {
+      // that's ok
+    }
+  }
+
 }

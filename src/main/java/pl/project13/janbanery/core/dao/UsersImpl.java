@@ -66,7 +66,7 @@ public class UsersImpl implements Users {
     return restClient.doGet(url, GsonTypeTokens.LIST_USER);
   }
 
-  @Override
+  @Override // todo does this even work????
   public User nobody() throws IOException {
     List<User> users = all();
     for (User user : users) {
@@ -82,7 +82,7 @@ public class UsersImpl implements Users {
     return conf.getApiUrl() + "user.json";
   }
 
-  public String getProjectUsersUrl() {
+  private String getProjectUsersUrl() {
     return getProjectUsersUrl(currentProject);
   }
 

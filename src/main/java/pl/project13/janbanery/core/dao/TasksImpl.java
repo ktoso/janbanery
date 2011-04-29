@@ -86,14 +86,6 @@ public class TasksImpl implements Tasks {
    * {@inheritDoc}
    */
   @Override
-  public void archiveAllInLastColumn() throws IOException {
-    throw new NotYetImplementedException(); // todo
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public TaskMoveFlow move(Task task) {
     return new TaskMoveFlowImpl(this, columns, task);
   }
@@ -197,6 +189,11 @@ public class TasksImpl implements Tasks {
   public List<Task> allIn(Column column) throws IOException {
     String url = getColumnTasksUrl(column.getId());
     return restClient.doGet(url, GsonTypeTokens.LIST_TASK);
+  }
+
+  @Override
+  public Task refresh(Task task) throws IOException {
+    return byId(task.getId());
   }
 
   /**

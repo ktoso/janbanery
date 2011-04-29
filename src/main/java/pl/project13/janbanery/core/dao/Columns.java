@@ -16,6 +16,7 @@
 
 package pl.project13.janbanery.core.dao;
 
+import pl.project13.janbanery.core.flow.ColumnCreateFlow;
 import pl.project13.janbanery.core.flow.ColumnUpdateFlow;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Column;
@@ -27,6 +28,18 @@ import java.util.List;
  * @author Konrad Malawski
  */
 public interface Columns {
+
+  // commands -----------------------------------------------------------------
+
+  ColumnCreateFlow create(Column column);
+
+  ColumnUpdateFlow update(Column column);
+
+  Column update(Column column, Column newValues);
+
+  Column update(Long columnId, Column newValues);
+
+  void delete(Column column);
 
   // queries ------------------------------------------------------------------
 
@@ -44,14 +57,8 @@ public interface Columns {
 
   Column onPosition(Integer desiredPosition) throws IOException, EntityNotFoundException;
 
-  // commands -----------------------------------------------------------------
+  Column refresh(Column column) throws IOException;
 
-  ColumnUpdateFlow update(Column column);
-
-  Column update(Column column, Column newValues);
-
-  Column update(Long columnId, Column newValues);
-
-  Column create(Column column) throws IOException;
+  List<Column> byName(String name) throws IOException;
 
 }

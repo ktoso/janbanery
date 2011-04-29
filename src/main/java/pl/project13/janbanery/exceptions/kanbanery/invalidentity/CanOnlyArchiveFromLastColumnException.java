@@ -21,18 +21,18 @@ import pl.project13.janbanery.exceptions.kanbanery.InvalidEntityKanbaneryExcepti
 /**
  * @author Konrad Malawski
  */
-public class CanOnlyArchiveFromLastColumn extends InvalidEntityKanbaneryException {
+public class CanOnlyArchiveFromLastColumnException extends InvalidEntityKanbaneryException {
   private static final long serialVersionUID = 6904587027128051151L;
 
-  public CanOnlyArchiveFromLastColumn(String message) {
+  public CanOnlyArchiveFromLastColumnException(String message) {
     super(message);
   }
 
-  public CanOnlyArchiveFromLastColumn(String message, Throwable cause) {
+  public CanOnlyArchiveFromLastColumnException(String message, Throwable cause) {
     super(message, cause);
   }
 
-  public CanOnlyArchiveFromLastColumn(Throwable cause) {
+  public CanOnlyArchiveFromLastColumnException(Throwable cause) {
     super(cause);
   }
 

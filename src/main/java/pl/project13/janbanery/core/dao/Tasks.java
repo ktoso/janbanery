@@ -40,10 +40,6 @@ public interface Tasks {
 
   TaskFlow create(Task task) throws IOException;
 
-  // archive---------------------------
-
-  void archiveAllInLastColumn() throws IOException;
-
   // deletes --------------------------
 
   void delete(Task task) throws IOException;
@@ -87,4 +83,5 @@ public interface Tasks {
 
   List<Task> withPriority(Priority priority) throws IOException;
 
+  Task refresh(Task task) throws IOException;
 }

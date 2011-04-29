@@ -64,8 +64,10 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
       return new PositionExceedsNumberOfTasksInColumnException(response);
     } else if (CanOnlyIceBoxTaskFromFirstColumnException.isBestExceptionFor(response)) {
       return new CanOnlyIceBoxTaskFromFirstColumnException(response);
-    } else if (CanOnlyArchiveFromLastColumn.isBestExceptionFor(response)) {
-      return new CanOnlyArchiveFromLastColumn(response);
+    } else if (CanOnlyArchiveFromLastColumnException.isBestExceptionFor(response)) {
+      return new CanOnlyArchiveFromLastColumnException(response);
+    } else if (NotFixedColumnCannotBeFirstException.isBestExceptionFor(response)) {
+      return new NotFixedColumnCannotBeFirstException(response);
     } else {
       return new InvalidEntityKanbaneryException(response);
     }

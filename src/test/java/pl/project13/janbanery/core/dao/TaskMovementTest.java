@@ -24,7 +24,7 @@ import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.core.flow.TaskMoveFlow;
-import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyArchiveFromLastColumn;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyArchiveFromLastColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.TaskAlreadyInFirstColumnException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.TaskAlreadyInLastColumnException;
@@ -42,6 +42,7 @@ import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION
  * @author Konrad Malawski
  */
 public class TaskMovementTest {
+
   Janbanery janbanery;
 
   @Before
@@ -188,7 +189,7 @@ public class TaskMovementTest {
     assertThat(task.isArchived()).isTrue();
   }
 
-  @Test(expected = CanOnlyArchiveFromLastColumn.class)
+  @Test(expected = CanOnlyArchiveFromLastColumnException.class)
   public void shouldNotArchiveIfNotInLastColumn() throws Exception {
     // given
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);

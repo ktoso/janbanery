@@ -29,7 +29,8 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static pl.project13.janbanery.test.TestConstants.*;
+import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
+import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
 
 /**
  * @author Konrad Malawski
@@ -67,7 +68,8 @@ public class TaskMarkFlowImplTest {
     Task task = createTestTask();
 
     // when
-    task = janbanery.tasks().mark(task).asNotReadyToPull().get();
+    TaskMarkFlow markFlow = janbanery.tasks().mark(task);
+    task = markFlow.asNotReadyToPull().get();
 
     // then
     assertThat(task.isReadyToPull()).isFalse();
@@ -76,5 +78,18 @@ public class TaskMarkFlowImplTest {
   private Task createTestTask() throws IOException, ExecutionException, InterruptedException {
     Task task = TestEntityHelper.createTestTask(janbanery);
     return janbanery.tasks().create(task).get();
+  }
+
+  @Test
+  public void testMarkFlowGet() throws Exception {
+    // given
+    Task task = createTestTask();
+
+    // when
+    TaskMarkFlow markFlow = janbanery.tasks().mark(task);
+    Task taskFromMarkFlow = markFlow.get();
+
+    // then
+    assertThat(taskFromMarkFlow).isEqualTo(task);
   }
 }
