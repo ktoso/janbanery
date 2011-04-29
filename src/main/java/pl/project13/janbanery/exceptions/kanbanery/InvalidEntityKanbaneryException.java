@@ -18,6 +18,8 @@ package pl.project13.janbanery.exceptions.kanbanery;
 
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyArchiveFromLastColumn;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.PositionExceedsNumberOfTasksInColumnException;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.TaskAlreadyInFirstColumnException;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.TaskAlreadyInLastColumnException;
 
 /**
  * This exception is mapping an 422 response code from the Kanbanery API.

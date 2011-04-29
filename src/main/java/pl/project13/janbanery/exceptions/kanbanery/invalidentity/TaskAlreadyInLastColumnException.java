@@ -14,28 +14,31 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.exceptions;
+package pl.project13.janbanery.exceptions.kanbanery.invalidentity;
+
+import pl.project13.janbanery.exceptions.kanbanery.InvalidEntityKanbaneryException;
+import pl.project13.janbanery.exceptions.kanbanery.TaskMovementException;
 
 /**
  * @author Konrad Malawski
  */
-public class WorkspaceNotFoundException extends EntityNotFoundException {
-  private static final long serialVersionUID = 5852726515015604743L;
+public class TaskAlreadyInLastColumnException extends InvalidEntityKanbaneryException implements TaskMovementException {
 
-  public WorkspaceNotFoundException() {
-    super();
-  }
+  private static final long serialVersionUID = -4279952997167094945L;
 
-  public WorkspaceNotFoundException(String message) {
+  public TaskAlreadyInLastColumnException(String message) {
     super(message);
   }
 
-  public WorkspaceNotFoundException(String message, Throwable cause) {
+  public TaskAlreadyInLastColumnException(String message, Throwable cause) {
     super(message, cause);
   }
 
-  public WorkspaceNotFoundException(Throwable cause) {
+  public TaskAlreadyInLastColumnException(Throwable cause) {
     super(cause);
   }
 
+  public static boolean isBestExceptionFor(String response) {
+    return response.contains("task is already in last column");
+  }
 }
