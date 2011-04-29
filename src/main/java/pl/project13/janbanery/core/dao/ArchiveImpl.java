@@ -43,11 +43,6 @@ public class ArchiveImpl implements Archive {
     this.restClient = restClient;
   }
 
-  @Override
-  public void delete(Task task) throws IOException {
-    throw new NotYetImplementedException(); // todo implement me
-  }
-
   /**
    * {@inheritDoc}
    */
