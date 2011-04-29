@@ -32,7 +32,5 @@ public interface Estimates {
   // queries ------------------------------------------------------------------
   List<Estimate> all() throws IOException;
 
-  List<Estimate> allIn(Project project) throws IOException;
-
   Estimate byId(Long id) throws IOException;
 }

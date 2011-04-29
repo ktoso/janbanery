@@ -55,15 +55,6 @@ public class EstimatesImpl implements Estimates {
    * {@inheritDoc}
    */
   @Override
-  public List<Estimate> allIn(Project project) throws IOException {
-    String url = getDefaultUrl(project);
-    return restClient.doGet(url, GsonTypeTokens.LIST_ESTIMATE);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public Estimate byId(Long id) throws IOException {
     String url = getEstimateUrl(id);
     return restClient.doGet(url, GsonTypeTokens.ESTIMATE);
