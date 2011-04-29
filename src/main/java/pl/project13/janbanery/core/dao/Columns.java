@@ -17,6 +17,7 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.ColumnCreateFlow;
+import pl.project13.janbanery.core.flow.ColumnMoveFlow;
 import pl.project13.janbanery.core.flow.ColumnUpdateFlow;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Column;
@@ -40,6 +41,8 @@ public interface Columns {
   Column update(Long columnId, Column newValues);
 
   void delete(Column column);
+
+  ColumnMoveFlow move(Column column);
 
   // queries ------------------------------------------------------------------
 

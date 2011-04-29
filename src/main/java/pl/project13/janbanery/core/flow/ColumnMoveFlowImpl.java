@@ -16,21 +16,20 @@
 
 package pl.project13.janbanery.core.flow;
 
-import pl.project13.janbanery.core.dao.ColumnsImpl;
+import pl.project13.janbanery.core.dao.Columns;
+import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.Column;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
  */
-public class ColumnCreateFlowImpl implements ColumnCreateFlow {
+public class ColumnMoveFlowImpl implements ColumnMoveFlow {
 
-  private ColumnsImpl columns;
+  private Columns columns;
 
   private Column column;
 
-  public ColumnCreateFlowImpl(ColumnsImpl columns, Column column) {
+  public ColumnMoveFlowImpl(Columns columns, Column column) {
     this.columns = columns;
     this.column = column;
   }
@@ -39,47 +38,31 @@ public class ColumnCreateFlowImpl implements ColumnCreateFlow {
    * {@inheritDoc}
    */
   @Override
-  public Column after(Column thatColumn) throws IOException {
-    Integer newPosition = thatColumn.getPosition() + 1;
-    return onPosition(newPosition);
+  public ColumnMoveFlow before(Column thatColumn) {
+    throw new NotYetImplementedException();  // todo implement me.
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Column afterFirst() throws IOException {
-    return after(columns.first());
+  public ColumnMoveFlow after(Column thatColumn) {
+    throw new NotYetImplementedException();  // todo implement me.
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Column before(Column thatColumn) throws IOException {
-    Integer newPosition = thatColumn.getPosition();
-    return onPosition(newPosition);
+  public ColumnMoveFlow toPosition(Integer thatColumn) {
+    throw new NotYetImplementedException();  // todo implement me.
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Column beforeLast() throws IOException {
-    return before(columns.last());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Column onPosition(Integer position) throws IOException {
-    column.setPosition(position);
-
-    return call();
-  }
-
-  public Column call() throws IOException {
-    return columns.doCreate(column);
+  public Column get() {
+    return column;
   }
 }

@@ -87,10 +87,67 @@ public class ColumnsTest {
     Column newColumnData = TestEntityHelper.createTestColumn();
 
     // when
-    Column newColumn = janbanery.columns().create(newColumnData).after(firstColumn);
+    Column newColumn = janbanery.columns()
+                                .create(newColumnData)
+                                .after(firstColumn);
 
     // then
     assertThat(newColumn.getName()).isEqualTo(newColumnData.getName());
     assertThat(newColumn.getPosition()).isEqualTo(2);
   }
+
+  @Test
+  public void shouldMoveColumnBeforeOtherColumn() throws Exception {
+    // given
+    Column firstColumn = janbanery.columns().first();
+    Column lastColumn = janbanery.columns().last();
+
+    Column newColumnData = TestEntityHelper.createTestColumn();
+    Column newColumn = janbanery.columns()
+                                .create(newColumnData)
+                                .after(firstColumn);
+
+    // when
+    newColumn = janbanery.columns()
+                         .move(newColumn)
+                         .before(lastColumn)
+                         .get();
+
+    // then
+    lastColumn = janbanery.columns().refresh(lastColumn);
+
+    assertThat(newColumn.getPosition()).isEqualTo(lastColumn.getPosition() - 1);
+  }
+
+  @Test
+  public void shouldMoveColumnAfterOtherColumn() throws Exception {
+    // given
+    Column firstColumn = janbanery.columns().first();
+    Column newColumnData = TestEntityHelper.createTestColumn();
+    Column newColumn = janbanery.columns()
+                                .create(newColumnData)
+                                .after(firstColumn);
+
+    // when
+    newColumn = janbanery.columns().move(newColumn).after(firstColumn).get();
+
+    // then
+    assertThat(newColumn.getPosition()).isEqualTo(2);
+  }
+
+  @Test
+  public void shouldMoveColumnToPosition() throws Exception {
+    // given
+    Column newColumnData = TestEntityHelper.createTestColumn();
+    Column newColumn = janbanery.columns()
+                                .create(newColumnData)
+                                .afterFirst();
+
+    // when
+    newColumn = janbanery.columns().move(newColumn).toPosition(3).get();
+
+    // then
+    assertThat(newColumn.getPosition()).isEqualTo(2);
+  }
+
 }

@@ -16,7 +16,6 @@
 
 package pl.project13.janbanery.core.flow;
 
-import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.resources.Column;
 
 import java.io.IOException;
@@ -30,8 +29,33 @@ public interface ColumnCreateFlow {
 
   Column after(Column column) throws IOException;
 
+  /**
+   * Shorthand for creating a column after the first column.
+   * <p/>
+   * Is equivalent to:
+   * <code>
+   * after(columns.first())
+   * </code>
+   *
+   * @return the newly created column
+   * @throws IOException if unable to fetch the servers response
+   */
+  Column afterFirst() throws IOException;
+
   Column before(Column column) throws IOException;
 
-  Column onPosition(Integer position) throws IOException;
+  /**
+   * Shorthand for creating a column before the last column.
+   * <p/>
+   * Is equivalent to:
+   * <code>
+   * before(columns.last())
+   * </code>
+   *
+   * @return the newly created column
+   * @throws IOException if unable to fetch the servers response
+   */
+  Column beforeLast() throws IOException;
 
+  Column onPosition(Integer position) throws IOException;
 }
