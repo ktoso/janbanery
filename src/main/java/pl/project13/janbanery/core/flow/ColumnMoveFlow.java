@@ -18,14 +18,16 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.resources.Column;
 
+import java.io.IOException;
+
 /**
  * @author Konrad Malawski
  */
 public interface ColumnMoveFlow extends KanbaneryFlow<Column> {
 
-  ColumnMoveFlow before(Column thatColumn);
+  ColumnMoveFlow before(Column thatColumn) throws IOException;
 
-  ColumnMoveFlow after(Column thatColumn);
+  ColumnMoveFlow after(Column thatColumn) throws IOException;
 
-  ColumnMoveFlow toPosition(Integer thatColumn);
+  ColumnMoveFlow toPosition(Integer position) throws IOException;
 }

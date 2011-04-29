@@ -22,6 +22,7 @@ import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
+import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.NotFixedColumnCannotBeFirstException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.test.TestEntityHelper;
@@ -96,6 +97,20 @@ public class ColumnsTest {
     assertThat(newColumn.getPosition()).isEqualTo(2);
   }
 
+  @Test(expected = NotFoundKanbaneryException.class)
+  public void shouldDeleteColumn() throws Exception {
+    // given
+    Column newColumnData = TestEntityHelper.createTestColumn();
+    Column newColumn = janbanery.columns().create(newColumnData).afterFirst();
+
+    // when
+    janbanery.columns().delete(newColumn);
+
+    janbanery.columns().byId(newColumn.getId());
+
+    // then, should have thrown
+  }
+
   @Test
   public void shouldMoveColumnBeforeOtherColumn() throws Exception {
     // given
@@ -147,7 +162,7 @@ public class ColumnsTest {
     newColumn = janbanery.columns().move(newColumn).toPosition(3).get();
 
     // then
-    assertThat(newColumn.getPosition()).isEqualTo(2);
+    assertThat(newColumn.getPosition()).isEqualTo(3);
   }
 
 }

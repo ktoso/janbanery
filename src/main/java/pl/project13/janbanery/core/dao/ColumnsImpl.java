@@ -22,12 +22,8 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
-import pl.project13.janbanery.core.flow.ColumnCreateFlow;
-import pl.project13.janbanery.core.flow.ColumnCreateFlowImpl;
-import pl.project13.janbanery.core.flow.ColumnUpdateFlow;
-import pl.project13.janbanery.core.flow.ColumnUpdateFlowImpl;
+import pl.project13.janbanery.core.flow.*;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
-import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
@@ -168,13 +164,17 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
-  public Column update(Column column, Column newValues) {
+  public ColumnUpdateFlow update(Column column, Column newValues) throws IOException {
     return update(column.getId(), newValues);
   }
 
   @Override
-  public Column update(Long columnId, Column newValues) {
-    throw new NotYetImplementedException(); // todo implement me
+  public ColumnUpdateFlow update(Long columnId, Column newValues) throws IOException {
+    String url = getColumnUrl(columnId);
+
+    Column column = restClient.doPut(url, newValues, GsonTypeTokens.COLUMN);
+
+    return new ColumnUpdateFlowImpl(this, column);
   }
 
   @Override
@@ -182,6 +182,11 @@ public class ColumnsImpl implements Columns {
     String url = getColumnUrl(column.getId());
 
     restClient.doDelete(url);
+  }
+
+  @Override
+  public ColumnMoveFlow move(Column column) {
+    return new ColumnMoveFlowImpl(this, column);
   }
 
   private String getDefaultUrl() {

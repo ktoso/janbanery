@@ -19,6 +19,7 @@ package pl.project13.janbanery.core.dao;
 import pl.project13.janbanery.core.flow.ColumnCreateFlow;
 import pl.project13.janbanery.core.flow.ColumnMoveFlow;
 import pl.project13.janbanery.core.flow.ColumnUpdateFlow;
+import pl.project13.janbanery.core.flow.ColumnUpdateFlowImpl;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Column;
 
@@ -36,9 +37,9 @@ public interface Columns {
 
   ColumnUpdateFlow update(Column column);
 
-  Column update(Column column, Column newValues);
+  ColumnUpdateFlow update(Column column, Column newValues) throws IOException;
 
-  Column update(Long columnId, Column newValues);
+  ColumnUpdateFlow update(Long columnId, Column newValues) throws IOException;
 
   void delete(Column column);
 

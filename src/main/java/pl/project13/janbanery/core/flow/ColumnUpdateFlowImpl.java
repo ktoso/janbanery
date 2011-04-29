@@ -43,9 +43,7 @@ public class ColumnUpdateFlowImpl implements ColumnUpdateFlow {
     Column commandObject = new Column();
     commandObject.setName(name);
 
-    column = columns.update(column, commandObject);
-
-    return this;
+    return columns.update(column, commandObject);
   }
 
   @Override
@@ -55,9 +53,7 @@ public class ColumnUpdateFlowImpl implements ColumnUpdateFlow {
     Column commandObject = new Column();
     commandObject.setCapacity(capacity);
 
-    column = columns.update(column, commandObject);
-
-    return this;
+    return columns.update(column, commandObject);
   }
 
   @Override
@@ -67,9 +63,7 @@ public class ColumnUpdateFlowImpl implements ColumnUpdateFlow {
     Column commandObject = new Column();
     commandObject.setPosition(position);
 
-    column = columns.update(column, commandObject);
-
-    return this;
+    return columns.update(column, commandObject);
   }
 
   @Override
