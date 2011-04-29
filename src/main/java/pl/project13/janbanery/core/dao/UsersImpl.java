@@ -61,7 +61,7 @@ public class UsersImpl implements Users {
   }
 
   @Override
-  public List<User> allInProject(Project project) throws IOException {
+  public List<User> inProject(Project project) throws IOException {
     String url = getProjectUsersUrl(project);
     return restClient.doGet(url, GsonTypeTokens.LIST_USER);
   }
@@ -87,7 +87,7 @@ public class UsersImpl implements Users {
   }
 
   private String getProjectUsersUrl(Project project) {
-    return conf.getApiUrl(currentWorkspace.getName(), project.getId(), "users.json");
+    return conf.getApiUrl(currentWorkspace.getName(), project.getId(), "users");
   }
 
   public Users using(Workspace currentWorkspace, Project currentProject) {

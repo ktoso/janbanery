@@ -163,4 +163,8 @@ public class Janbanery {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new EstimatesImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
+
+  public Projects projects() {
+    return new ProjectsImpl(workspaces());
+  }
 }
