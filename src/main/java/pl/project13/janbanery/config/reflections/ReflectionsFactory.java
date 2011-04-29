@@ -56,17 +56,14 @@ public class ReflectionsFactory {
         .include(allIn(resourcesPackage))
         .exclude(allIn(resourcesPackage, "additions"));
 
-    // fixme start bugfix hacking -----------------------------------------
-    List<URL> clazzUrls = newArrayList(getBaseScanUrl());
+    // start bugfix hacking -----------------------------------------
 
     // this is a bugfix for running in "plain maven", not an IDE, weird I know...
-//    List<Vfs.UrlType> defaultUrlTypes = findVfsUrlTypes(clazzUrls);
-//    for (Vfs.UrlType defaultUrlType : defaultUrlTypes) {
-//      Vfs.addDefaultURLTypes(defaultUrlType);
-//    }
-    // fixme end of bugfix hacking ----------------------------------------
-
+    List<URL> clazzUrls = newArrayList(getBaseScanUrl());
     printScanPaths(clazzUrls);
+
+    // end of bugfix hacking ----------------------------------------
+
 
     ConfigurationBuilder configuration = new ConfigurationBuilder()
         .filterInputsBy(filterKanbaneryResources)
