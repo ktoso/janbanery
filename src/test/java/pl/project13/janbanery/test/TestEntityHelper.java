@@ -22,6 +22,7 @@ import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Priority;
+import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
@@ -78,4 +79,9 @@ public class TestEntityHelper {
     }
   }
 
+  public static SubTask createTestSubTask() {
+    SubTask subTask = new SubTask();
+    subTask.setBody("Some random subTask body");
+    return subTask;
+  }
 }
