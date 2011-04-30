@@ -14,29 +14,40 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.dao;
+package pl.project13.janbanery.core.flow;
 
-import pl.project13.janbanery.resources.Project;
+import pl.project13.janbanery.core.dao.Tasks;
+import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Konrad Malawski
  */
-public interface Users {
-  /**
-   * Fetches the currently being used user.
-   * The "me" user, one might say.
-   *
-   * @return the currently being used user for all API calls
-   * @throws IOException if the response body could not be fetched
-   */
-  User current() throws IOException;
+public class TaskAssignmentFlowImpl implements TaskAssignmentFlow {
 
-  List<User> all() throws IOException;
+  private Tasks tasks;
 
-  List<User> inProject(Project project) throws IOException;
+  private Task task;
 
+  public TaskAssignmentFlowImpl(Tasks tasks, Task task) {
+    this.tasks = tasks;
+    this.task = task;
+  }
+
+  @Override
+  public TaskFlow to(User user) throws IOException {
+    return tasks.assign(task, user);
+  }
+
+  @Override
+  public TaskFlow toNobody() throws IOException {
+    return tasks.assign(task, null);
+  }
+
+  @Override
+  public Task get() {
+    return task;
+  }
 }

@@ -121,6 +121,33 @@ public class TasksImpl implements Tasks {
    * {@inheritDoc}
    */
   @Override
+  public TaskAssignmentFlow assign(Task task) {
+    return new TaskAssignmentFlowImpl(this, task);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public TaskFlow assign(Task task, User user) throws IOException {
+    String url = getTaskUrl(task);
+    String command = task.getResourceId() + "[owner_id]=%s";
+
+    if (user == null) {
+      command = String.format(command, "");
+    } else {
+      command = String.format(command, user.getId());
+    }
+
+    Task assignedTask = restClient.doPut(url, command, GsonTypeTokens.TASK);
+
+    return new TaskFlowImpl(this, columns, assignedTask);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public TaskUpdateFlow update(Task task) {
     return new TaskUpdateFlowImpl(this, columns, task);
   }

@@ -55,6 +55,10 @@ public class TaskFlowImpl implements TaskFlow {
     return new TaskMoveFlowImpl(tasks, columns, task);
   }
 
+  @Override
+  public TaskAssignmentFlow assign() {
+    return new TaskAssignmentFlowImpl(tasks, task);
+  }
 
   /**
    * {@inheritDoc}

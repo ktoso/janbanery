@@ -53,4 +53,6 @@ public interface TaskFlow extends KanbaneryFlow<Task> {
    * @return
    */
   TaskMoveFlow move();
+
+  TaskAssignmentFlow assign();
 }

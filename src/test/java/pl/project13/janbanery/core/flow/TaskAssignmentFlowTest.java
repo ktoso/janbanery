@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.dao;
+package pl.project13.janbanery.core.flow;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
-import pl.project13.janbanery.core.flow.TaskFlow;
-import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.test.TestEntityHelper;
-
-import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
@@ -36,7 +33,7 @@ import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION
 /**
  * @author Konrad Malawski
  */
-public class UsersTest {
+public class TaskAssignmentFlowTest {
 
   Janbanery janbanery;
 
@@ -47,36 +44,50 @@ public class UsersTest {
     janbanery.usingWorkspace(EXISTING_WORKSPACE);
   }
 
-  @Test
-  public void testCurrent() throws Exception {
-    // when
-    User me = janbanery.users().current();
-
-    // then
-    assertThat(me.getFirstName()).isEqualTo("Konrad");
+  @After
+  public void tearDown() throws Exception {
+    TestEntityHelper.deleteTestTask(janbanery);
   }
 
   @Test
-  public void testAll() throws Exception {
-    // when
-    List<User> all = janbanery.users().all();
-
-    // then
-    assertThat(all).isNotEmpty();
-  }
-
-  @Test
-  public void testAllInProject() throws Exception {
+  public void shouldAssignToMe() throws Exception {
     // given
-    Project project = janbanery.projects().all().get(0);
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
     User me = janbanery.users().current();
 
     // when
-    List<User> usersInProject = janbanery.users().inProject(project);
+    Task assignedTask = taskFlow.assign().to(me).get();
 
     // then
-    assertThat(usersInProject).isNotEmpty();
-    assertThat(usersInProject).onProperty("id").contains(me.getId());
+    assertThat(assignedTask.getOwnerId()).isEqualTo(me.getId());
   }
 
+  @Test
+  public void shouldAssignToNobody() throws Exception {
+    // given
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
+    User me = janbanery.users().current();
+
+    // when
+    Task assignedTask = taskFlow.assign().toNobody()
+                                .get();
+
+    // then
+    assertThat(assignedTask.getOwnerId()).isNull();
+  }
+
+  @Test
+  public void shouldReassignToNobody() throws Exception {
+    // given
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
+    User me = janbanery.users().current();
+
+    // when
+    Task assignedTask = taskFlow.assign().to(me)
+                                .assign().toNobody()
+                                .get();
+
+    // then
+    assertThat(assignedTask.getOwnerId()).isNull();
+  }
 }

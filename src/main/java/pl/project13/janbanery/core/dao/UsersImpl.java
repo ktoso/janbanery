@@ -66,18 +66,6 @@ public class UsersImpl implements Users {
     return restClient.doGet(url, GsonTypeTokens.LIST_USER);
   }
 
-  @Override // todo does this even work????
-  public User nobody() throws IOException {
-    List<User> users = all();
-    for (User user : users) {
-      if (user.getFirstName().equals("nobody")) {
-        return user;
-      }
-    }
-
-    throw new EntityNotFoundException("Could not find 'nobody user'");
-  }
-
   private String getMyUserUrl() {
     return conf.getApiUrl() + "user.json";
   }

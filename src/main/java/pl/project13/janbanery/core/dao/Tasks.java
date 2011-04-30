@@ -16,10 +16,7 @@
 
 package pl.project13.janbanery.core.dao;
 
-import pl.project13.janbanery.core.flow.TaskFlow;
-import pl.project13.janbanery.core.flow.TaskMarkFlow;
-import pl.project13.janbanery.core.flow.TaskMoveFlow;
-import pl.project13.janbanery.core.flow.TaskUpdateFlow;
+import pl.project13.janbanery.core.flow.*;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
@@ -51,6 +48,10 @@ public interface Tasks {
   TaskFlow move(Task task, TaskLocation location) throws IOException;
 
   TaskFlow move(Task task, Column column) throws IOException;
+
+  // task assignment ------------------
+
+  TaskAssignmentFlow assign(Task task);
 
   // state changes --------------------
 
@@ -84,4 +85,6 @@ public interface Tasks {
   List<Task> withPriority(Priority priority) throws IOException;
 
   Task refresh(Task task) throws IOException;
+
+  TaskFlow assign(Task task, User user) throws IOException;
 }
