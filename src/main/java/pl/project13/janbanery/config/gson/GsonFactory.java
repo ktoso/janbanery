@@ -24,6 +24,7 @@ import org.joda.time.format.DateTimeFormatter;
 import pl.project13.janbanery.resources.Priority;
 
 import java.lang.reflect.Type;
+import java.util.Date;
 
 /**
  * Date: 4/21/11
@@ -32,6 +33,7 @@ import java.lang.reflect.Type;
  */
 public class GsonFactory {
 
+  private static final DateTimeFormatter dateFormatter     = DateTimeFormat.forPattern("yyyy-MM-dd");
   private static final DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ");
 
   private GsonFactory() {
@@ -41,6 +43,8 @@ public class GsonFactory {
     return new GsonBuilder()
         .registerTypeAdapter(DateTime.class, new DateTimeSerializer())
         .registerTypeAdapter(DateTime.class, new DateTimeDeserializer())
+        .registerTypeAdapter(Date.class, new DateSerializer())
+        .registerTypeAdapter(Date.class, new DateDeserializer())
         .registerTypeAdapter(Priority.class, new PrioritySerializer())
         .registerTypeAdapter(Priority.class, new PriorityDeserializer())
 //        .setPrettyPrinting()
@@ -83,6 +87,24 @@ public class GsonFactory {
     public Priority deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
       int id = json.getAsInt();
       return Priority.fromPriorityId(id);
+    }
+  }
+
+  public static class DateSerializer implements JsonSerializer<Date> {
+
+    @Override
+    public JsonElement serialize(Date date, Type typeOfSrc, JsonSerializationContext context) {
+      DateTime dateTime = new DateTime(date);
+      return new JsonPrimitive(dateFormatter.print(dateTime));
+    }
+  }
+
+  private static class DateDeserializer implements JsonDeserializer<Date> {
+    @Override
+    public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+      String dateString = json.getAsString();
+      DateTime dateTime = dateFormatter.parseDateTime(dateString);
+      return dateTime.toDate();
     }
   }
 }

@@ -25,6 +25,7 @@ import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * A task is the most important thing in Kanbanery, it specifies some chunk of work.
@@ -121,7 +122,7 @@ public class Task extends KanbaneryResource implements Serializable {
    * When this task should be finished
    */
   @Settable(On.CreateOrUpdate)
-  private DateTime deadline;
+  private Date deadline;
 
   /**
    * True if task is blocked by other task(s), false otherwise
@@ -273,33 +274,12 @@ public class Task extends KanbaneryResource implements Serializable {
     this.movedAt = movedAt;
   }
 
-  public void setDeadline(DateTime deadline) {
+  public void setDeadline(Date deadline) {
     this.deadline = deadline;
   }
 
-  public DateTime getDeadline() {
+  public Date getDeadline() {
     return deadline;
-  }
-
-  /**
-   * Try as best as you can to guess if this task is in the archive.
-   * The kanbanery API does not provide this information directly.
-   *
-   * @return true if this {@link Task} is in the Archive, false otherwise
-   */
-  public boolean isArchived() {
-    return id != null && columnId != null && position == null;
-  }
-
-  /**
-   * // todo implement me
-   * Try as best as you can to guess if this task is in the IceBox.
-   * The kanbanery API does not provide this information directly.
-   *
-   * @return true if this {@link Task} is in the IceBox, false otherwise
-   */
-  public boolean isIceBoxed() {
-    throw new NotYetImplementedException();
   }
 
   @Override
@@ -365,7 +345,28 @@ public class Task extends KanbaneryResource implements Serializable {
     return true;
   }
 
-  public static class Builder {
+  /**
+   * Try as best as you can to guess if this task is in the archive.
+   * The kanbanery API does not provide this information directly.
+   *
+   * @return true if this {@link Task} is in the Archive, false otherwise
+   */
+  public boolean isArchived() {
+    return id != null && columnId != null && position == null;
+  }
+
+  /**
+   * // todo implement me
+   * Try as best as you can to guess if this task is in the IceBox.
+   * The kanbanery API does not provide this information directly.
+   *
+   * @return true if this {@link Task} is in the IceBox, false otherwise
+   */
+  public boolean isIceBoxed() {
+    throw new NotYetImplementedException();
+  }
+
+  public static class Builder{
     private Task instance;
 
     public Builder(String title, Long taskTypeId) {
@@ -385,7 +386,7 @@ public class Task extends KanbaneryResource implements Serializable {
       return this;
     }
 
-    public Builder deadline(DateTime deadline) {
+    public Builder deadline(Date deadline) {
       instance.deadline = deadline;
       return this;
     }
@@ -412,7 +413,7 @@ public class Task extends KanbaneryResource implements Serializable {
     }
 
     public Builder taskTypeId(Long taskTypeId) {
-      instance.typeId = taskTypeId;
+      instance.taskTypeId = taskTypeId;
       return this;
     }
 

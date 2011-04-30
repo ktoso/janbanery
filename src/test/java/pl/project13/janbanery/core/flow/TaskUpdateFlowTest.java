@@ -16,9 +16,9 @@
 
 package pl.project13.janbanery.core.flow;
 
+import org.joda.time.DateTime;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
@@ -29,6 +29,7 @@ import pl.project13.janbanery.test.TestEntityHelper;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -73,6 +74,24 @@ public class TaskUpdateFlowTest {
 
     assertThat(updatedTask).isEqualTo(foundTask);
     assertThat(foundTask.getTitle()).isEqualTo(newValue);
+  }
+
+  @Test
+  @SuppressWarnings({"deprecation"})
+  public void testDeadline() throws Exception {
+    // given
+    Date newValue = new DateTime().plusDays(2).toDate();
+
+    // when
+    Task updatedTask = tasks.update(task).deadline(newValue).get();
+
+    // then
+    Task foundTask = tasks.byId(updatedTask.getId());
+
+    assertThat(updatedTask).isEqualTo(foundTask);
+    assertThat(foundTask.getDeadline().getYear()).isEqualTo(newValue.getYear());
+    assertThat(foundTask.getDeadline().getMonth()).isEqualTo(newValue.getMonth());
+    assertThat(foundTask.getDeadline().getDay()).isEqualTo(newValue.getDay());
   }
 
   @Test

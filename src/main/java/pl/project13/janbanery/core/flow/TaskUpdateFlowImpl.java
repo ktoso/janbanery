@@ -16,7 +16,6 @@
 
 package pl.project13.janbanery.core.flow;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.core.dao.Columns;
@@ -24,6 +23,7 @@ import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.*;
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author Konrad Malawski
@@ -98,7 +98,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
    * {@inheritDoc}
    */
   @Override
-  public TaskUpdateFlow deadline(DateTime deadline) throws IOException {
+  public TaskUpdateFlow deadline(Date deadline) throws IOException {
     Task commandObject = new Task();
     commandObject.setDeadline(deadline);
 
