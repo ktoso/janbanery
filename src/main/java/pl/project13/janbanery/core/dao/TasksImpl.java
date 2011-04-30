@@ -59,9 +59,6 @@ public class TasksImpl implements Tasks {
     this.columns = columns;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskFlow create(Task task) throws IOException {
     String url = getDefaultGetUrl();
@@ -71,9 +68,6 @@ public class TasksImpl implements Tasks {
     return new TaskFlowImpl(this, columns, newTask);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void delete(Task task) throws IOException {
     String url = getTaskUrl(task);
@@ -81,17 +75,11 @@ public class TasksImpl implements Tasks {
     restClient.doDelete(url);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMoveFlow move(Task task) {
     return new TaskMoveFlowImpl(this, columns, task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskFlow move(Task task, TaskLocation location) throws IOException {
     String url = getTaskUrl(task);
@@ -102,9 +90,6 @@ public class TasksImpl implements Tasks {
     return new TaskFlowImpl(this, columns, movedTask);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskFlow move(Task task, Column column) throws IOException {
     String url = getTaskUrl(task);
@@ -117,17 +102,11 @@ public class TasksImpl implements Tasks {
     return new TaskFlowImpl(this, columns, movedTask);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskAssignmentFlow assign(Task task) {
     return new TaskAssignmentFlowImpl(this, task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskFlow assign(Task task, User user) throws IOException {
     String url = getTaskUrl(task);
@@ -144,17 +123,11 @@ public class TasksImpl implements Tasks {
     return new TaskFlowImpl(this, columns, assignedTask);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskUpdateFlow update(Task task) {
     return new TaskUpdateFlowImpl(this, columns, task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskFlow update(Task task, Task newValues) throws IOException {
     String url = getTaskUrl(task);
@@ -164,17 +137,11 @@ public class TasksImpl implements Tasks {
     return new TaskFlowImpl(this, columns, newTask);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMarkFlow mark(Task task) {
     return new TaskMarkFlowImpl(this, columns, task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskFlow markAsReadyToPull(Task task) throws IOException {
     Task commandObject = new Task();
@@ -183,9 +150,6 @@ public class TasksImpl implements Tasks {
     return update(task, commandObject);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskFlow markAsNotReadyToPull(Task task) throws IOException {
     Task commandObject = new Task();
@@ -194,9 +158,6 @@ public class TasksImpl implements Tasks {
     return update(task, commandObject);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Task> all() throws IOException {
     // todo port this to *Flow
@@ -208,9 +169,6 @@ public class TasksImpl implements Tasks {
     return gson.fromJson(responseBody, GsonTypeTokens.LIST_TASK);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Task> allIn(Column column) throws IOException {
     String url = getColumnTasksUrl(column.getId());
@@ -222,9 +180,6 @@ public class TasksImpl implements Tasks {
     return byId(task.getId());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Task byId(Long taskId) throws IOException {
     Task task = new Task();
@@ -237,9 +192,6 @@ public class TasksImpl implements Tasks {
     return gson.fromJson(responseBody, GsonTypeTokens.TASK);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Task> byTitle(String taskTitle) throws IOException {
     List<Task> tasks = all();
@@ -247,9 +199,6 @@ public class TasksImpl implements Tasks {
     return newArrayList(filteredTasks);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Task> byTitleIgnoreCase(String taskTitle) throws IOException {
     List<Task> tasks = all();
@@ -257,17 +206,11 @@ public class TasksImpl implements Tasks {
     return newArrayList(filteredTasks);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Task> assignedToMe() {
     throw new NotYetImplementedException(); // todo
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Task> assignedTo(User user) throws IOException {
     List<Task> all = all();
@@ -275,9 +218,6 @@ public class TasksImpl implements Tasks {
     return newArrayList(filteredTasks);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Task> withPriority(Priority priority) throws IOException {
     List<Task> all = all();
@@ -307,7 +247,7 @@ public class TasksImpl implements Tasks {
    * @return url string prepared for querying for data
    */
   private String getDefaultGetUrl() {
-    return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "tasks.json";
+    return conf.getApiUrl(currentWorkspace, currentProject.getId()) + "tasks.json";
   }
 
   /**
@@ -320,7 +260,7 @@ public class TasksImpl implements Tasks {
    * @return the proper URL for API calls on this task
    */
   private String getTaskUrl(Task task) {
-    return conf.getApiUrl(currentWorkspace.getName(), "tasks", task.getId());
+    return conf.getApiUrl(currentWorkspace, "tasks", task.getId());
   }
 
   /**
@@ -333,7 +273,7 @@ public class TasksImpl implements Tasks {
    * @return the proper URL for API calls on this task
    */
   private String getColumnTasksUrl(Long columnId) {
-    return conf.getApiUrl(currentWorkspace.getName()) + "columns/" + columnId + "/tasks.json";
+    return conf.getApiUrl(currentWorkspace) + "columns/" + columnId + "/tasks.json";
   }
 
   // ------------------------- inner predicate classes ------------------------

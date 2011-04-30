@@ -35,43 +35,28 @@ public class ColumnCreateFlowImpl implements ColumnCreateFlow {
     this.column = column;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Column after(Column thatColumn) throws IOException {
     Integer newPosition = thatColumn.getPosition() + 1;
     return onPosition(newPosition);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Column afterFirst() throws IOException {
     return after(columns.first());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Column before(Column thatColumn) throws IOException {
     Integer newPosition = thatColumn.getPosition();
     return onPosition(newPosition);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Column beforeLast() throws IOException {
     return before(columns.last());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Column onPosition(Integer position) throws IOException {
     column.setPosition(position);

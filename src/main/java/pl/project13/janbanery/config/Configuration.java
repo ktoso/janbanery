@@ -19,6 +19,7 @@ package pl.project13.janbanery.config;
 import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.config.auth.AuthProvider;
 import pl.project13.janbanery.resources.User;
+import pl.project13.janbanery.resources.Workspace;
 
 /**
  * Date: 4/20/11
@@ -39,11 +40,11 @@ public interface Configuration {
    * Returns URL setup with workspace and projectId to start calling the API on it.
    * The URL looks like: https://janbanery.kanbanery.com/api/v1/projects/34242/
    *
-   * @param workspaceName the workspace name to use for the url
-   * @param projectId     the project id to use for the url
+   * @param workspace the workspace to use for the url
+   * @param projectId the project id to use for the url
    * @return the properly set up url to begin calling Kanbanery API on it
    */
-  String getApiUrl(String workspaceName, Long projectId);
+  String getApiUrl(Workspace workspace, Long projectId);
 
   /**
    * Checks if the passed in user is the user currently being used by Janbanery,
@@ -58,11 +59,13 @@ public interface Configuration {
 
   String getApiUrl();
 
-  String getApiUrl(String workspaceName);
+  String getApiUrl(Workspace workspace);
 
-  String getApiUrl(String workspaceName, String resourcesId, Long id);
+  String getApiUrl(Workspace workspace, String resourcesId, Long id);
 
-  String getApiUrl(String workspaceName, Long projectId, String resourceDotJson);
+  String getApiUrl(Workspace workspace, Long projectId, String resourceDotJson);
 
-  String getApiUrl(String workspaceName, Long projectId, String resource, String resourceDotJson);
+  String getApiUrl(Workspace workspace, Long projectId, String resource, String resourceDotJson);
+
+  String getApiUrl(Workspace workspace, String resourcesId, Long resourceId, String resourceDotJson);
 }

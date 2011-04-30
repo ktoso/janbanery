@@ -39,17 +39,11 @@ public class TaskFlowImpl implements TaskFlow {
     this.task = task;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void delete() throws IOException {
     tasks.delete(task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMoveFlow move() {
     return new TaskMoveFlowImpl(tasks, columns, task);
@@ -60,17 +54,11 @@ public class TaskFlowImpl implements TaskFlow {
     return new TaskAssignmentFlowImpl(tasks, task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMarkFlow mark() {
     return new TaskMarkFlowImpl(tasks, columns, task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Task get() {
     return task;

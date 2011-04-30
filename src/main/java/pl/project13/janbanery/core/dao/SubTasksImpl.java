@@ -19,7 +19,10 @@ package pl.project13.janbanery.core.dao;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
-import pl.project13.janbanery.exceptions.WorkspaceNotFoundException;
+import pl.project13.janbanery.core.flow.SubTaskFlow;
+import pl.project13.janbanery.resources.Project;
+import pl.project13.janbanery.resources.SubTask;
+import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
@@ -28,31 +31,48 @@ import java.util.List;
 /**
  * @author Konrad Malawski
  */
-public class WorkspacesImpl implements Workspaces {
-
+public class SubTasksImpl implements SubTasks {
+  private Tasks         tasks;
   private Configuration conf;
   private RestClient    restClient;
 
-  public WorkspacesImpl(Configuration conf, RestClient restClient) {
+  private Workspace currentWorkspace;
+  private Project   currentProject;
+
+  private Task task;
+
+  public SubTasksImpl(Tasks tasks, Task task, Configuration conf, RestClient restClient) {
+    this.tasks = tasks;
+    this.task = task;
     this.conf = conf;
     this.restClient = restClient;
   }
 
   @Override
-  public List<Workspace> all() throws IOException {
-    String url = conf.getApiUrl() + "user/workspaces.json";
-    return restClient.doGet(url, GsonTypeTokens.LIST_WORKSPACE);
+  public SubTaskFlow create() {
+    return null;  // todo implement me.
   }
 
   @Override
-  public Workspace byName(String name) throws IOException, WorkspaceNotFoundException {
-    List<Workspace> allWorkspaces = all();
-    for (Workspace workspace : allWorkspaces) {
-      if (workspace.getName().equals(name)) {
-        return workspace;
-      }
-    }
-    throw new WorkspaceNotFoundException("Could not find workspace named '" + name + "'");
+  public void delete() {
+
   }
 
+  @Override
+  public List<SubTask> all() throws IOException {
+    String url = getSubTasksUrl(task);
+
+    return restClient.doGet(url, GsonTypeTokens.LIST_SUB_TASK);
+  }
+
+  private String getSubTasksUrl(Task task) {
+    return conf.getApiUrl(currentWorkspace, "tasks", task.getId(), "subtasks");
+  }
+
+  public SubTasks using(Workspace currentWorkspace, Project currentProject) {
+    this.currentWorkspace = currentWorkspace;
+    this.currentProject = currentProject;
+
+    return this;
+  }
 }

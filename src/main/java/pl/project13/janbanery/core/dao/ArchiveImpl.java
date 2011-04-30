@@ -42,9 +42,6 @@ public class ArchiveImpl implements Archive {
     this.restClient = restClient;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Task> all() throws IOException {
     String url = getArchiveUrl();
@@ -53,16 +50,13 @@ public class ArchiveImpl implements Archive {
   }
 
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean contains(Task task) throws IOException {
     return all().contains(task);
   }
 
   private String getArchiveUrl() {
-    return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId(), "archive", "tasks");
+    return conf.getApiUrl(currentWorkspace, currentProject.getId(), "archive", "tasks");
   }
 
   public Archive using(Workspace currentWorkspace, Project currentProject) {

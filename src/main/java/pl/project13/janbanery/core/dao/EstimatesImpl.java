@@ -42,18 +42,12 @@ public class EstimatesImpl implements Estimates {
     this.restClient = restClient;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Estimate> all() throws IOException {
     String url = getDefaultUrl();
     return restClient.doGet(url, GsonTypeTokens.LIST_ESTIMATE);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Estimate byId(Long id) throws IOException {
     String url = getEstimateUrl(id);
@@ -61,7 +55,7 @@ public class EstimatesImpl implements Estimates {
   }
 
   private String getEstimateUrl(Long id) {
-    return conf.getApiUrl(currentWorkspace.getName(), "estimates", id);
+    return conf.getApiUrl(currentWorkspace, "estimates", id);
   }
 
   private String getDefaultUrl() {
@@ -69,7 +63,7 @@ public class EstimatesImpl implements Estimates {
   }
 
   private String getDefaultUrl(Project project) {
-    return conf.getApiUrl(currentWorkspace.getName(), project.getId(), "estimates");
+    return conf.getApiUrl(currentWorkspace, project.getId(), "estimates");
   }
 
   public Estimates using(Workspace currentWorkspace, Project currentProject) {

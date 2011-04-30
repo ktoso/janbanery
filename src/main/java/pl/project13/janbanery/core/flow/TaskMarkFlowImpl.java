@@ -37,9 +37,6 @@ public class TaskMarkFlowImpl implements TaskMarkFlow {
     this.task = task;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskFlow asReadyToPull() throws IOException {
     TaskFlow taskMoveFlow = tasks.markAsReadyToPull(task);
@@ -48,9 +45,6 @@ public class TaskMarkFlowImpl implements TaskMarkFlow {
     return new TaskFlowImpl(tasks, columns, task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskFlow asNotReadyToPull() throws IOException {
     TaskFlow taskMoveFlow = tasks.markAsNotReadyToPull(task);

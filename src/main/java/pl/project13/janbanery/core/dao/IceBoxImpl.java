@@ -55,9 +55,6 @@ public class IceBoxImpl implements IceBox {
     this.restClient = restClient;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public IceBoxFlow create(Task task) throws IOException {
     String url = getDefaultUrl();
@@ -67,17 +64,11 @@ public class IceBoxImpl implements IceBox {
     return new IceBoxFlowImpl(tasks, this, newTask);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void delete(Task task) throws IOException {
     tasks.delete(task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Task> all() throws IOException {
     String url = getDefaultUrl();
@@ -85,24 +76,18 @@ public class IceBoxImpl implements IceBox {
     return restClient.doGet(url, GsonTypeTokens.LIST_TASK);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean contains(Task task) throws IOException {
     return all().contains(task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskUpdateFlow update(Task task) {
     return new TaskUpdateFlowImpl(tasks, columns, task);
   }
 
   private String getDefaultUrl() {
-    return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "icebox/tasks.json";
+    return conf.getApiUrl(currentWorkspace, currentProject.getId()) + "icebox/tasks.json";
   }
 
   public IceBox using(Workspace currentWorkspace, Project currentProject) {

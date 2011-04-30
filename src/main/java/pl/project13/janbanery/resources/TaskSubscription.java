@@ -51,9 +51,6 @@ public class TaskSubscription extends KanbaneryResource {
     this.taskId = taskId;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getResourceId() {
     return "subscription";

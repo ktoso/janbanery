@@ -75,7 +75,7 @@ public class UsersImpl implements Users {
   }
 
   private String getProjectUsersUrl(Project project) {
-    return conf.getApiUrl(currentWorkspace.getName(), project.getId(), "users");
+    return conf.getApiUrl(currentWorkspace, project.getId(), "users");
   }
 
   public Users using(Workspace currentWorkspace, Project currentProject) {

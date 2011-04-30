@@ -27,6 +27,7 @@ import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
 import pl.project13.janbanery.exceptions.ProjectNotFoundException;
 import pl.project13.janbanery.resources.Project;
+import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
@@ -121,6 +122,11 @@ public class Janbanery {
   public Tasks tasks() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new TasksImpl(columns(), conf, restClient, gson).using(currentWorkspace, currentProject);
+  }
+
+  public SubTasks subTasks(Task task) {
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
+    return new SubTasksImpl(tasks(), task, conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public IceBox iceBox() {

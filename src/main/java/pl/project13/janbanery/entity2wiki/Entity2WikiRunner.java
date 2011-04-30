@@ -84,6 +84,7 @@ public class Entity2WikiRunner {
 
     Collection<Class<?>> classesToPrint = classes;
     if (filter != null) {
+      //noinspection unchecked
       classesToPrint = filter(classes, filter);
     }
     writeWikiTextTo(classesToPrint, out);

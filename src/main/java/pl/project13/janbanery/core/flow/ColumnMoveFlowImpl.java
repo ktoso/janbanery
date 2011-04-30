@@ -35,34 +35,22 @@ public class ColumnMoveFlowImpl implements ColumnMoveFlow {
     this.column = column;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ColumnMoveFlow before(Column thatColumn) throws IOException {
     return toPosition(thatColumn.getPosition());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ColumnMoveFlow after(Column thatColumn) throws IOException {
     return toPosition(thatColumn.getPosition() + 1);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ColumnMoveFlow toPosition(Integer position) throws IOException {
     column = columns.update(column).position(position).get();
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Column get() {
     return column;

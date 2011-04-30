@@ -73,11 +73,11 @@ public class TaskTypesImpl implements TaskTypes {
   }
 
   private String getTaskTypeUrl(Long id) {
-    return conf.getApiUrl(currentWorkspace.getName(), "task_types", id);
+    return conf.getApiUrl(currentWorkspace, "task_types", id);
   }
 
   private String getDefaultGetUrl() {
-    return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "task_types.json";
+    return conf.getApiUrl(currentWorkspace, currentProject.getId()) + "task_types.json";
   }
 
   /**

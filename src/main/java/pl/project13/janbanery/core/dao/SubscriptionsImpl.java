@@ -41,9 +41,6 @@ public class SubscriptionsImpl implements Subscriptions {
     this.restClient = restClient;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Boolean isSubscribedTo(Task task) throws IOException {
     String url = getDefaultUrl(task);
@@ -59,9 +56,6 @@ public class SubscriptionsImpl implements Subscriptions {
     return subscription.getTaskId() != null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskSubscription subscribe(Task task) throws IOException {
     String url = getDefaultUrl(task);
@@ -70,9 +64,6 @@ public class SubscriptionsImpl implements Subscriptions {
     return restClient.doPost(url, commandObject, GsonTypeTokens.TASK_SUBSCRIPTION);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void unsubscribe(Task task) {
     String url = getDefaultUrl(task);
@@ -81,7 +72,7 @@ public class SubscriptionsImpl implements Subscriptions {
   }
 
   private String getDefaultUrl(Task task) {
-    return conf.getApiUrl(currentWorkspace.getName()) + "tasks/" + task.getId() + "/subscription.json";
+    return conf.getApiUrl(currentWorkspace) + "tasks/" + task.getId() + "/subscription.json";
   }
 
   public Subscriptions using(Workspace currentWorkspace) {

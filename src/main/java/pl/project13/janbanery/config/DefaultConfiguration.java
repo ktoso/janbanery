@@ -21,6 +21,7 @@ import pl.project13.janbanery.config.auth.*;
 import pl.project13.janbanery.config.auth.ApiKeyAuthProvider;
 import pl.project13.janbanery.config.auth.AuthProvider;
 import pl.project13.janbanery.resources.User;
+import pl.project13.janbanery.resources.Workspace;
 
 import static java.lang.String.format;
 
@@ -60,9 +61,6 @@ public class DefaultConfiguration implements Configuration {
     return authProvider.authorize(requestBuilder);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isCurrentUser(User user) {
     return authProvider.isCurrentUser(user);
@@ -79,28 +77,33 @@ public class DefaultConfiguration implements Configuration {
   }
 
   @Override
-  public String getApiUrl(String workspaceName) {
-    return format("https://%s.kanbanery.com/api/v1/", workspaceName);
+  public String getApiUrl(Workspace workspace) {
+    return format("https://%s.kanbanery.com/api/v1/", workspace);
   }
 
   @Override
-  public String getApiUrl(String workspaceName, String resourcesId, Long id) {
-    return format("https://%s.kanbanery.com/api/v1/%s/%d.json", workspaceName, resourcesId, id);
+  public String getApiUrl(Workspace workspace, String resourcesId, Long id) {
+    return format("https://%s.kanbanery.com/api/v1/%s/%d.json", workspace, resourcesId, id);
   }
 
   @Override
-  public String getApiUrl(String workspaceName, Long projectId, String resourceDotJson) {
-    return format("https://%s.kanbanery.com/api/v1/projects/%s/%s.json", workspaceName, projectId, resourceDotJson);
+  public String getApiUrl(Workspace workspace, Long projectId, String resourceDotJson) {
+    return format("https://%s.kanbanery.com/api/v1/projects/%s/%s.json", workspace, projectId, resourceDotJson);
   }
 
   @Override
-  public String getApiUrl(String workspaceName, Long projectId, String resource, String resourceDotJson) {
-    return format("https://%s.kanbanery.com/api/v1/projects/%d/%s/%s.json", workspaceName, projectId, resource, resourceDotJson);
+  public String getApiUrl(Workspace workspace, Long projectId, String resource, String resourceDotJson) {
+    return format("https://%s.kanbanery.com/api/v1/projects/%d/%s/%s.json", workspace, projectId, resource, resourceDotJson);
   }
 
   @Override
-  public String getApiUrl(String workspaceName, Long projectId) {
-    return format("https://%s.kanbanery.com/api/v1/projects/%s/", workspaceName, projectId);
+  public String getApiUrl(Workspace workspace, String resourcesId, Long id, String resourceDotJson) {
+    return format("https://%s.kanbanery.com/api/v1/%s/%d/%s.json", workspace, resourcesId, id, resourceDotJson);
+  }
+
+  @Override
+  public String getApiUrl(Workspace workspace, Long projectId) {
+    return format("https://%s.kanbanery.com/api/v1/projects/%s/", workspace, projectId);
   }
 
 }

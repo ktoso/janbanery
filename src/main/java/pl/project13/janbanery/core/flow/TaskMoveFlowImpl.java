@@ -44,17 +44,11 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
     this.task = task;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMoveFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException {
     return to(TaskLocation.ICEBOX);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMoveFlow toBoard() throws IOException {
     return to(TaskLocation.BOARD);
@@ -71,9 +65,6 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
     return new TaskFlowImpl(tasks, columns, task);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMoveFlow toNextColumn() throws IOException {
     TaskMoveFlow moveFlow;
@@ -87,25 +78,16 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
     return moveFlow;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMoveFlow toPreviousColumn() throws IOException {
     return to(TaskLocation.PREVIOUS);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMoveFlow toArchive() throws IOException {
     return to(TaskLocation.ARCHIVE);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMoveFlow to(TaskLocation location) throws IOException {
     TaskFlow move = tasks.move(task, location);
@@ -114,9 +96,6 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TaskMoveFlow to(Column column) throws IOException {
     TaskFlow move = tasks.move(task, column);
@@ -125,9 +104,6 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Task get() {
     return task;

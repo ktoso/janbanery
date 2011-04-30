@@ -53,9 +53,6 @@ public class ColumnsImpl implements Columns {
     this.restClient = restClient;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Column> all() throws IOException {
     log.info("Querying for all columns in workspace: '{}' and project: '{}'", currentWorkspace.getName(), currentProject.getName());
@@ -64,9 +61,6 @@ public class ColumnsImpl implements Columns {
     return restClient.doGet(url, GsonTypeTokens.LIST_COLUMN);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ColumnCreateFlow create(Column column) {
     return new ColumnCreateFlowImpl(this, column);
@@ -85,9 +79,6 @@ public class ColumnsImpl implements Columns {
     return restClient.doPost(url, column, GsonTypeTokens.COLUMN);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Column first() throws IOException {
     List<Column> columns = all();
@@ -100,9 +91,6 @@ public class ColumnsImpl implements Columns {
     throw new EntityNotFoundException("Could not find FIRST column. That's very weird...");
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Column last() throws IOException {
     List<Column> columns = all();
@@ -190,11 +178,11 @@ public class ColumnsImpl implements Columns {
   }
 
   private String getDefaultUrl() {
-    return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId(), "columns");
+    return conf.getApiUrl(currentWorkspace, currentProject.getId(), "columns");
   }
 
   private String getColumnUrl(Long columnId) {
-    return conf.getApiUrl(currentWorkspace.getName(), "columns", columnId);
+    return conf.getApiUrl(currentWorkspace, "columns", columnId);
   }
 
   public Columns using(Workspace currentWorkspace, Project currentProject) {
