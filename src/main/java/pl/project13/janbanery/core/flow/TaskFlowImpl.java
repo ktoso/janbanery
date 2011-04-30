@@ -17,7 +17,11 @@
 package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.Columns;
+import pl.project13.janbanery.core.dao.SubTasks;
+import pl.project13.janbanery.core.dao.SubTasksImpl;
 import pl.project13.janbanery.core.dao.Tasks;
+import pl.project13.janbanery.exceptions.NotYetImplementedException;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyArchiveFromLastColumnException;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
@@ -52,6 +56,12 @@ public class TaskFlowImpl implements TaskFlow {
   @Override
   public TaskAssignmentFlow assign() {
     return new TaskAssignmentFlowImpl(tasks, task);
+  }
+
+  @Override
+  public SubTasks subTasks() {
+    throw new NotYetImplementedException();
+    //return new SubTasksImpl(task, ); // todo make this work
   }
 
   @Override

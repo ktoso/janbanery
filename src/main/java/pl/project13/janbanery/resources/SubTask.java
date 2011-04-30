@@ -50,14 +50,14 @@ public class SubTask extends KanbaneryResource implements Serializable {
    * If of the "parent task"
    */
   @SerializedName("task_id")
-  private Integer taskId;
+  private Long taskId;
 
   /**
    * Id of the user who created this {@link SubTask}
    */
   @ReadOnly
   @SerializedName("creator_id")
-  private Integer creatorId;
+  private Long creatorId;
 
   /**
    * True if it is completed, false otherwise
@@ -89,19 +89,19 @@ public class SubTask extends KanbaneryResource implements Serializable {
     this.body = body;
   }
 
-  public Integer getTaskId() {
+  public Long getTaskId() {
     return taskId;
   }
 
-  public void setTaskId(Integer taskId) {
+  public void setTaskId(Long taskId) {
     this.taskId = taskId;
   }
 
-  public Integer getCreatorId() {
+  public Long getCreatorId() {
     return creatorId;
   }
 
-  public void setCreatorId(Integer creatorId) {
+  public void setCreatorId(Long creatorId) {
     this.creatorId = creatorId;
   }
 

@@ -19,6 +19,8 @@ package pl.project13.janbanery.core.flow;
 import pl.project13.janbanery.core.dao.SubTasks;
 import pl.project13.janbanery.resources.SubTask;
 
+import java.io.IOException;
+
 /**
  * @author Konrad Malawski
  */
@@ -34,21 +36,22 @@ public class SubTaskMarkFlowImpl implements SubTaskMarkFlow {
   }
 
   @Override
-  public SubTaskFlow asCompleted() {
+  public SubTaskFlow asCompleted() throws IOException {
     return asCompleted(true);
   }
 
-  private SubTaskFlow asCompleted(boolean isCompleted) {
+  @Override
+  public SubTaskFlow asNotCompleted() throws IOException {
+    return asCompleted(false);
+  }
+
+  // todo which version of asNotCompleted should I delete, so only one remains
+  private SubTaskFlow asCompleted(boolean isCompleted) throws IOException {
     SubTask commandObject = new SubTask();
     commandObject.setId(subTask.getTaskId());
     commandObject.setCompleted(isCompleted);
 
     return subTasks.update(subTask, commandObject);
-  }
-
-  @Override
-  public SubTaskFlow asNotCompleted() {
-    return null;  // todo implement me.
   }
 
   @Override public SubTask get() {

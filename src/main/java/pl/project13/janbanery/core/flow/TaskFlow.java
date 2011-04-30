@@ -16,6 +16,7 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.core.dao.SubTasks;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
@@ -44,15 +45,13 @@ public interface TaskFlow extends KanbaneryFlow<Task> {
    */
   void delete() throws IOException;
 
-  /**
-   * @return
-   */
+  // other flows --------------------------------------------------------------
+
   TaskMarkFlow mark();
 
-  /**
-   * @return
-   */
   TaskMoveFlow move();
 
   TaskAssignmentFlow assign();
+
+  SubTasks subTasks(); // todo implement this, important
 }

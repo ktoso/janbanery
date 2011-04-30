@@ -35,12 +35,12 @@ public class SubTaskFlowImpl implements SubTaskFlow {
   }
 
   @Override
-  public SubTask get() {
-    return null;  // todo implement me.
+  public SubTaskMarkFlow mark() {
+    return new SubTaskMarkFlowImpl(subTasks, subTask);
   }
 
   @Override
-  public SubTaskMarkFlow mark() {
-    return new SubTaskMarkFlowImpl(subTasks, subTask);
+  public SubTask get() {
+    return subTask;
   }
 }

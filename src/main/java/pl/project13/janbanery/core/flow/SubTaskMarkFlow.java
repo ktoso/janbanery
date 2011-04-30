@@ -18,12 +18,14 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.resources.SubTask;
 
+import java.io.IOException;
+
 /**
  * @author Konrad Malawski
  */
 public interface SubTaskMarkFlow extends KanbaneryFlow<SubTask> {
 
-  SubTaskFlow asCompleted();
+  SubTaskFlow asCompleted() throws IOException;
 
-  SubTaskFlow asNotCompleted();
+  SubTaskFlow asNotCompleted() throws IOException;
 }
