@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.dao;
+package pl.project13.janbanery.core.flow;
 
-import pl.project13.janbanery.core.flow.SubTaskFlow;
-import pl.project13.janbanery.core.flow.SubTasksFlow;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 
@@ -27,26 +25,13 @@ import java.util.List;
 /**
  * @author Konrad Malawski
  */
-public interface SubTasks extends SubTasksFor {
+public interface SubTasksFlow extends KanbaneryFlow<Task> {
 
-  // commands -----------------------------------------------------------------
-
-  /**
-   * Creates a new {@link SubTask} for the given {@link Task}
-   *
-   * @param task
-   * @param subTask the object carrying the data of the subtask to be created
-   * @return a subtask flow populated with the newly created subtask
-   */
-  SubTaskFlow create(Task task, SubTask subTask) throws IOException;
+  SubTaskFlow create(SubTask subTask) throws IOException;
 
   SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
 
   void delete(SubTask subTask);
 
-  // queries ------------------------------------------------------------------
-
-  List<SubTask> all(Task task) throws IOException;
-
-  @Override SubTasksFlow of(Task task);
+  List<SubTask> all() throws IOException;
 }

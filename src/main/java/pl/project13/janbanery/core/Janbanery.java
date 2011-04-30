@@ -124,9 +124,9 @@ public class Janbanery {
     return new TasksImpl(columns(), conf, restClient, gson).using(currentWorkspace, currentProject);
   }
 
-  public SubTasks subTasks(Task task) {
+  public SubTasks subTasks() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
-    return new SubTasksImpl(task, conf, restClient).using(currentWorkspace);
+    return new SubTasksImpl(conf, restClient).using(currentWorkspace);
   }
 
   public IceBox iceBox() {

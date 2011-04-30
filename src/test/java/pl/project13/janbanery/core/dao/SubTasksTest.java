@@ -22,6 +22,7 @@ import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
+import pl.project13.janbanery.core.flow.SubTasksFlow;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
@@ -55,13 +56,13 @@ public class SubTasksTest {
   public void shouldCreateSubTask() throws Exception {
     // given
     Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
-    SubTasks subTasks = janbanery.subTasks(task);
+    SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
 
     // when
-    SubTask createdSubTask = subTasks.create(TestEntityHelper.createTestSubTask()).get();
+    SubTask createdSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
 
     // then
-    List<SubTask> allSubtasksOfTask = subTasks.all();
+    List<SubTask> allSubtasksOfTask = subTasksFlow.all();
 
     assertThat(allSubtasksOfTask).contains(createdSubTask);
   }
@@ -70,14 +71,27 @@ public class SubTasksTest {
   public void shouldDeleteSubTask() throws Exception {
     // given
     Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
-    SubTasks subTasks = janbanery.subTasks(task);
+    SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
 
     // when
-    SubTask createdSubTask = subTasks.create(TestEntityHelper.createTestSubTask()).get();
-    subTasks.delete(createdSubTask);
+    SubTask createdSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
+    subTasksFlow.delete(createdSubTask);
 
     // then
-    List<SubTask> allSubtasksOfTask = subTasks.all();
+    List<SubTask> allSubtasksOfTask = subTasksFlow.all();
+
+    assertThat(allSubtasksOfTask).excludes(createdSubTask);
+  }
+
+  @Test
+  public void shouldMarkTaskAsCompleted() throws Exception {
+    // given
+    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
+    SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
+
+    // when
+    SubTask createdSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
+    List<SubTask> allSubtasksOfTask = subTasksFlow.all();
 
     assertThat(allSubtasksOfTask).excludes(createdSubTask);
   }

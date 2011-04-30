@@ -21,7 +21,8 @@ import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.SubTaskFlow;
 import pl.project13.janbanery.core.flow.SubTaskFlowImpl;
-import pl.project13.janbanery.resources.Project;
+import pl.project13.janbanery.core.flow.SubTasksFlow;
+import pl.project13.janbanery.core.flow.SubTasksFlowImpl;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
@@ -39,16 +40,13 @@ public class SubTasksImpl implements SubTasks {
 
   private Workspace currentWorkspace;
 
-  private Task task;
-
-  public SubTasksImpl(Task task, Configuration conf, RestClient restClient) {
-    this.task = task;
+  public SubTasksImpl(Configuration conf, RestClient restClient) {
     this.conf = conf;
     this.restClient = restClient;
   }
 
   @Override
-  public SubTaskFlow create(SubTask subTask) throws IOException {
+  public SubTaskFlow create(Task task, SubTask subTask) throws IOException {
     String url = conf.getApiUrl(currentWorkspace, "tasks", task.getId(), "subtasks");
 
     SubTask createdSubTask = restClient.doPost(url, subTask, GsonTypeTokens.SUB_TASK);
@@ -72,8 +70,8 @@ public class SubTasksImpl implements SubTasks {
   }
 
   @Override
-  public List<SubTask> all() throws IOException {
-    String url = getSubTasksUrl();
+  public List<SubTask> all(Task task) throws IOException {
+    String url = getSubTasksUrl(task);
 
     return restClient.doGet(url, GsonTypeTokens.LIST_SUB_TASK);
   }
@@ -82,13 +80,18 @@ public class SubTasksImpl implements SubTasks {
     return conf.getApiUrl(currentWorkspace, "subtasks", subTask.getId());
   }
 
-  private String getSubTasksUrl() {
+  private String getSubTasksUrl(Task task) {
     return conf.getApiUrl(currentWorkspace, "tasks", task.getId(), "subtasks");
   }
 
-  public SubTasks using(Workspace currentWorkspace) {
+  public SubTasksImpl using(Workspace currentWorkspace) {
     this.currentWorkspace = currentWorkspace;
 
     return this;
+  }
+
+  @Override
+  public SubTasksFlow of(Task task) {
+    return new SubTasksFlowImpl(this, task);
   }
 }
