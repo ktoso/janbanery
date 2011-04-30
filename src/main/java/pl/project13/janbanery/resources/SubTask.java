@@ -32,6 +32,13 @@ import java.io.Serializable;
  */
 public class SubTask extends KanbaneryResource implements Serializable {
 
+
+  /**
+   * The Subtasks id
+   */
+  @ReadOnly
+  private Long id;
+
   /**
    * Short description of the subtask
    */
@@ -64,6 +71,14 @@ public class SubTask extends KanbaneryResource implements Serializable {
   @Override
   public String getResourceId() {
     return "subtask";
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Long getId() {
+    return id;
   }
 
   public String getBody() {
@@ -106,6 +121,9 @@ public class SubTask extends KanbaneryResource implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     SubTask subTask = (SubTask) o;
 
@@ -115,19 +133,13 @@ public class SubTask extends KanbaneryResource implements Serializable {
     if (completed != null ? !completed.equals(subTask.completed) : subTask.completed != null) {
       return false;
     }
-    if (createdAt != null ? !createdAt.equals(subTask.createdAt) : subTask.createdAt != null) {
-      return false;
-    }
     if (creatorId != null ? !creatorId.equals(subTask.creatorId) : subTask.creatorId != null) {
       return false;
     }
+    if (id != null ? !id.equals(subTask.id) : subTask.id != null) {
+      return false;
+    }
     if (taskId != null ? !taskId.equals(subTask.taskId) : subTask.taskId != null) {
-      return false;
-    }
-    if (type != null ? !type.equals(subTask.type) : subTask.type != null) {
-      return false;
-    }
-    if (updatedAt != null ? !updatedAt.equals(subTask.updatedAt) : subTask.updatedAt != null) {
       return false;
     }
 
@@ -136,13 +148,12 @@ public class SubTask extends KanbaneryResource implements Serializable {
 
   @Override
   public int hashCode() {
-    int result = body != null ? body.hashCode() : 0;
+    int result = super.hashCode();
+    result = 31 * result + (id != null ? id.hashCode() : 0);
+    result = 31 * result + (body != null ? body.hashCode() : 0);
     result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
     result = 31 * result + (creatorId != null ? creatorId.hashCode() : 0);
     result = 31 * result + (completed != null ? completed.hashCode() : 0);
-    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
-    result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }
 }

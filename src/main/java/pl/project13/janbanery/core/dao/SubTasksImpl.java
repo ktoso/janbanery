@@ -20,6 +20,7 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.SubTaskFlow;
+import pl.project13.janbanery.core.flow.SubTaskFlowImpl;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
@@ -32,46 +33,61 @@ import java.util.List;
  * @author Konrad Malawski
  */
 public class SubTasksImpl implements SubTasks {
-  private Tasks         tasks;
+
   private Configuration conf;
   private RestClient    restClient;
 
   private Workspace currentWorkspace;
-  private Project   currentProject;
 
   private Task task;
 
-  public SubTasksImpl(Tasks tasks, Task task, Configuration conf, RestClient restClient) {
-    this.tasks = tasks;
+  public SubTasksImpl(Task task, Configuration conf, RestClient restClient) {
     this.task = task;
     this.conf = conf;
     this.restClient = restClient;
   }
 
   @Override
-  public SubTaskFlow create() {
-    return null;  // todo implement me.
+  public SubTaskFlow create(SubTask subTask) throws IOException {
+    String url = conf.getApiUrl(currentWorkspace, "tasks", task.getId(), "subtasks");
+
+    SubTask createdSubTask = restClient.doPost(url, subTask, GsonTypeTokens.SUB_TASK);
+
+    return new SubTaskFlowImpl(this, createdSubTask);
   }
 
   @Override
-  public void delete() {
+  public SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException {
+    String url = getSubTaskUrl(subTask);
 
+    SubTask updatedTask = restClient.doPut(url, newValues, GsonTypeTokens.SUB_TASK);
+    return new SubTaskFlowImpl(this, updatedTask);
+  }
+
+  @Override
+  public void delete(SubTask subTask) {
+    String url = getSubTaskUrl(subTask);
+
+    restClient.doDelete(url);
   }
 
   @Override
   public List<SubTask> all() throws IOException {
-    String url = getSubTasksUrl(task);
+    String url = getSubTasksUrl();
 
     return restClient.doGet(url, GsonTypeTokens.LIST_SUB_TASK);
   }
 
-  private String getSubTasksUrl(Task task) {
+  private String getSubTaskUrl(SubTask subTask) {
+    return conf.getApiUrl(currentWorkspace, "subtasks", subTask.getId());
+  }
+
+  private String getSubTasksUrl() {
     return conf.getApiUrl(currentWorkspace, "tasks", task.getId(), "subtasks");
   }
 
-  public SubTasks using(Workspace currentWorkspace, Project currentProject) {
+  public SubTasks using(Workspace currentWorkspace) {
     this.currentWorkspace = currentWorkspace;
-    this.currentProject = currentProject;
 
     return this;
   }

@@ -18,29 +18,40 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.SubTasks;
 import pl.project13.janbanery.resources.SubTask;
-import pl.project13.janbanery.resources.Task;
 
 /**
  * @author Konrad Malawski
  */
-public class SubTaskFlowImpl implements SubTaskFlow {
+public class SubTaskMarkFlowImpl implements SubTaskMarkFlow {
 
   private SubTasks subTasks;
 
   private SubTask subTask;
 
-  public SubTaskFlowImpl(SubTasks subTasks, SubTask subTask) {
+  public SubTaskMarkFlowImpl(SubTasks subTasks, SubTask subTask) {
     this.subTasks = subTasks;
     this.subTask = subTask;
   }
 
   @Override
-  public SubTask get() {
-    return null;  // todo implement me.
+  public SubTaskFlow asCompleted() {
+    return asCompleted(true);
+  }
+
+  private SubTaskFlow asCompleted(boolean isCompleted) {
+    SubTask commandObject = new SubTask();
+    commandObject.setId(subTask.getTaskId());
+    commandObject.setCompleted(isCompleted);
+
+    return subTasks.update(subTask, commandObject);
   }
 
   @Override
-  public SubTaskMarkFlow mark() {
-    return new SubTaskMarkFlowImpl(subTasks, subTask);
+  public SubTaskFlow asNotCompleted() {
+    return null;  // todo implement me.
+  }
+
+  @Override public SubTask get() {
+    return subTask;
   }
 }

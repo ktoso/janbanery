@@ -33,11 +33,14 @@ public interface SubTasks {
   /**
    * Creates a new {@link SubTask} for the given {@link Task}
    *
+   * @param subTask the object carrying the data of the subtask to be created
    * @return a subtask flow populated with the newly created subtask
    */
-  SubTaskFlow create();
+  SubTaskFlow create(SubTask subTask) throws IOException;
 
-  void delete();
+  SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
+
+  void delete(SubTask subTask);
 
   // queries ------------------------------------------------------------------
 
