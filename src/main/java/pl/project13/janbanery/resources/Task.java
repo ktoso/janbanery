@@ -18,7 +18,6 @@ package pl.project13.janbanery.resources;
 
 import com.google.gson.annotations.SerializedName;
 import org.joda.time.DateTime;
-import pl.project13.janbanery.core.dao.Archive;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.additions.On;
 import pl.project13.janbanery.resources.additions.ReadOnly;
@@ -117,6 +116,12 @@ public class Task extends KanbaneryResource implements Serializable {
   @Settable(On.CreateOrUpdate)
   @SerializedName("ready_to_pull")
   private Boolean readyToPull;
+
+  /**
+   * When this task should be finished
+   */
+  @Settable(On.CreateOrUpdate)
+  private DateTime deadline;
 
   /**
    * True if task is blocked by other task(s), false otherwise
@@ -268,6 +273,14 @@ public class Task extends KanbaneryResource implements Serializable {
     this.movedAt = movedAt;
   }
 
+  public void setDeadline(DateTime deadline) {
+    this.deadline = deadline;
+  }
+
+  public DateTime getDeadline() {
+    return deadline;
+  }
+
   /**
    * Try as best as you can to guess if this task is in the archive.
    * The kanbanery API does not provide this information directly.
@@ -310,6 +323,9 @@ public class Task extends KanbaneryResource implements Serializable {
       return false;
     }
     if (creatorId != null ? !creatorId.equals(task.creatorId) : task.creatorId != null) {
+      return false;
+    }
+    if (deadline != null ? !deadline.equals(task.deadline) : task.deadline != null) {
       return false;
     }
     if (description != null ? !description.equals(task.description) : task.description != null) {
@@ -369,6 +385,11 @@ public class Task extends KanbaneryResource implements Serializable {
       return this;
     }
 
+    public Builder deadline(DateTime deadline) {
+      instance.deadline = deadline;
+      return this;
+    }
+
     public Builder description(String description) {
       instance.description = description;
       return this;
@@ -391,7 +412,7 @@ public class Task extends KanbaneryResource implements Serializable {
     }
 
     public Builder taskTypeId(Long taskTypeId) {
-      instance.taskTypeId = taskTypeId;
+      instance.typeId = taskTypeId;
       return this;
     }
 

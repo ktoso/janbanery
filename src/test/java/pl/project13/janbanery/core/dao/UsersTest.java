@@ -78,6 +78,7 @@ public class UsersTest {
 
   @Test
   public void testNobody() throws Exception {
-    // todo implement me
+    User nobody = janbanery.users().nobody();
+    assertThat(nobody).isNotNull();
   }
 }

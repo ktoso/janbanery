@@ -50,19 +50,15 @@ public class TaskTypesImpl implements TaskTypes {
   }
 
   @Override
-  public TaskType create(TaskType taskType) throws IOException {
-    throw new NotYetImplementedException();  // todo implement me
-  }
-
-  @Override
-  public TaskType update(TaskType taskType, TaskType newValues) throws IOException {
-    throw new NotYetImplementedException();  // todo implement me
-  }
-
-  @Override
   public List<TaskType> all() throws IOException {
     String url = getDefaultGetUrl();
     return restClient.doGet(url, GsonTypeTokens.LIST_TASK_TYPE);
+  }
+
+  @Override
+  public TaskType byId(Long id) throws IOException {
+    String url = getTaskTypeUrl(id);
+    return restClient.doGet(url, GsonTypeTokens.TASK_TYPE);
   }
 
   @Override
@@ -74,6 +70,14 @@ public class TaskTypesImpl implements TaskTypes {
     }
 
     return taskTypes.get(0);
+  }
+
+  private String getTaskTypeUrl(Long id) {
+    return conf.getApiUrl(currentWorkspace.getName(), "task_types", id);
+  }
+
+  private String getDefaultGetUrl() {
+    return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "task_types.json";
   }
 
   /**
@@ -89,9 +93,5 @@ public class TaskTypesImpl implements TaskTypes {
     this.currentWorkspace = currentWorkspace;
     this.currentProject = currentProject;
     return this;
-  }
-
-  private String getDefaultGetUrl() {
-    return conf.getApiUrl(currentWorkspace.getName(), currentProject.getId()) + "task_types.json";
   }
 }

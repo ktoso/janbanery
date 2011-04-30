@@ -53,4 +53,5 @@ public class GsonTypeTokens {
   public static final Class<TaskSubscription> TASK_SUBSCRIPTION = TaskSubscription.class;
   public static final Class<Column>           COLUMN            = Column.class;
   public static final Class<Estimate>         ESTIMATE          = Estimate.class;
+  public static final Class<TaskType>         TASK_TYPE         = TaskType.class;
 }

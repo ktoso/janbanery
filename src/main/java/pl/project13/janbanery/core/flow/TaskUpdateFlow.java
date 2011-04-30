@@ -16,6 +16,7 @@
 
 package pl.project13.janbanery.core.flow;
 
+import org.joda.time.DateTime;
 import pl.project13.janbanery.resources.*;
 
 import java.io.IOException;
@@ -40,6 +41,8 @@ public interface TaskUpdateFlow extends KanbaneryFlow<Task> {
    * @throws IOException
    */
   TaskUpdateFlow position(Integer positionInColumn) throws IOException;
+
+  TaskUpdateFlow deadline(DateTime deadline) throws IOException;
 
   TaskUpdateFlow priority(Priority priority) throws IOException;
 

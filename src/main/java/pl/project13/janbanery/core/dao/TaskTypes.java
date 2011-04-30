@@ -27,14 +27,13 @@ import java.util.List;
 public interface TaskTypes {
 
   // commands -----------------------------------------------------------------
-
-  TaskType create(TaskType taskType) throws IOException;
-
-  TaskType update(TaskType taskType, TaskType newValues) throws IOException;
+  // it is not possible to create or update {@link TaskType} using Kanbanery v1.2 API
 
   // queries ------------------------------------------------------------------
 
   List<TaskType> all() throws IOException;
+
+  TaskType byId(Long id) throws IOException;
 
   TaskType any() throws IOException;
 }

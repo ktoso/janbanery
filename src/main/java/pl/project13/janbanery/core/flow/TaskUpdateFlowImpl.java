@@ -16,6 +16,7 @@
 
 package pl.project13.janbanery.core.flow;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.core.dao.Columns;
@@ -87,6 +88,19 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   public TaskUpdateFlow position(Integer positionInColumn) throws IOException {
     Task commandObject = new Task();
     commandObject.setPosition(positionInColumn);
+
+    task = tasks.update(task, commandObject).get();
+
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public TaskUpdateFlow deadline(DateTime deadline) throws IOException {
+    Task commandObject = new Task();
+    commandObject.setDeadline(deadline);
 
     task = tasks.update(task, commandObject).get();
 
