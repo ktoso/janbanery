@@ -78,32 +78,38 @@ public class DefaultConfiguration implements Configuration {
 
   @Override
   public String getApiUrl(Workspace workspace) {
-    return format("https://%s.kanbanery.com/api/v1/", workspace);
+    String workspaceName = workspace.getName();
+    return format("https://%s.kanbanery.com/api/v1/", workspaceName);
   }
 
   @Override
   public String getApiUrl(Workspace workspace, String resourcesId, Long id) {
-    return format("https://%s.kanbanery.com/api/v1/%s/%d.json", workspace, resourcesId, id);
+    String workspaceName = workspace.getName();
+    return format("https://%s.kanbanery.com/api/v1/%s/%d.json", workspaceName, resourcesId, id);
   }
 
   @Override
   public String getApiUrl(Workspace workspace, Long projectId, String resourceDotJson) {
-    return format("https://%s.kanbanery.com/api/v1/projects/%s/%s.json", workspace, projectId, resourceDotJson);
+    String workspaceName = workspace.getName();
+    return format("https://%s.kanbanery.com/api/v1/projects/%s/%s.json", workspaceName, projectId, resourceDotJson);
   }
 
   @Override
   public String getApiUrl(Workspace workspace, Long projectId, String resource, String resourceDotJson) {
-    return format("https://%s.kanbanery.com/api/v1/projects/%d/%s/%s.json", workspace, projectId, resource, resourceDotJson);
+    String workspaceName = workspace.getName();
+    return format("https://%s.kanbanery.com/api/v1/projects/%d/%s/%s.json", workspaceName, projectId, resource, resourceDotJson);
   }
 
   @Override
   public String getApiUrl(Workspace workspace, String resourcesId, Long id, String resourceDotJson) {
-    return format("https://%s.kanbanery.com/api/v1/%s/%d/%s.json", workspace, resourcesId, id, resourceDotJson);
+    String workspaceName = workspace.getName();
+    return format("https://%s.kanbanery.com/api/v1/%s/%d/%s.json", workspaceName, resourcesId, id, resourceDotJson);
   }
 
   @Override
   public String getApiUrl(Workspace workspace, Long projectId) {
-    return format("https://%s.kanbanery.com/api/v1/projects/%s/", workspace, projectId);
+    String workspaceName = workspace.getName();
+    return format("https://%s.kanbanery.com/api/v1/projects/%s/", workspaceName, projectId);
   }
 
 }
