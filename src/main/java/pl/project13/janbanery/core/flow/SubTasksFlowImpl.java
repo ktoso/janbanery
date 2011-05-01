@@ -77,12 +77,15 @@ public class SubTasksFlowImpl implements SubTasksFlow {
 
   @Override
   public List<SubTask> allCompleted() throws IOException {
-    Collection<SubTask> completedTasks = filter(all(), new CompletedSubTaskPredicate());
+    List<SubTask> all = all();
+    Collection<SubTask> completedTasks = filter(all, new CompletedSubTaskPredicate());
     return newArrayList(completedTasks);
   }
 
-  @Override public List<SubTask> allNotCompleted() throws IOException {
-    Collection<SubTask> completedTasks = filter(all(), new NotCompletedSubTaskPredicate());
+  @Override
+  public List<SubTask> allNotCompleted() throws IOException {
+    List<SubTask> all = all();
+    Collection<SubTask> completedTasks = filter(all, new NotCompletedSubTaskPredicate());
     return newArrayList(completedTasks);
   }
 

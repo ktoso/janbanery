@@ -22,6 +22,7 @@ import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
+import pl.project13.janbanery.core.flow.SubTaskFlow;
 import pl.project13.janbanery.core.flow.SubTasksFlow;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
@@ -92,15 +93,17 @@ public class SubTasksTest {
     SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
 
     // when
-    SubTask toBeCompleted = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
+    SubTask willNowGetCompleted = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
     SubTask secondCreatedSubTask = subTasksFlow.create(TestEntityHelper.createSecondTestSubTask()).get();
 
-
-    subTasksFlow.mark(toBeCompleted).asCompleted();
+    SubTask subTaskFromCompletedFlow = subTasksFlow.mark(willNowGetCompleted).asCompleted().get();
     List<SubTask> notCompletedTasks = subTasksFlow.allNotCompleted();
 
     // then
-    assertThat(notCompletedTasks).excludes(toBeCompleted);
+    assertThat(subTaskFromCompletedFlow.getCompleted()).isTrue();
+
+    assertThat(notCompletedTasks).excludes(willNowGetCompleted);
+    assertThat(notCompletedTasks).contains(secondCreatedSubTask);
   }
 
   @Test
@@ -109,13 +112,19 @@ public class SubTasksTest {
     Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
     SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
 
-    // when
     SubTask createdSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
+
+    // when
     subTasksFlow.markAll().asCompleted();
-    List<SubTask> allSubtasksOfTask = subTasksFlow.allNotCompleted();
 
     // then
-    assertThat(allSubtasksOfTask).excludes(createdSubTask);
+    List<SubTask> completedTasks = subTasksFlow.allCompleted();
+    List<SubTask> notCompletedTasks = subTasksFlow.allNotCompleted();
+
+    assertThat(notCompletedTasks).isEmpty();
+
+    assertThat(completedTasks).isNotEmpty();
+    assertThat(completedTasks.size()).isEqualTo(1);
   }
 
 }
