@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * @author Konrad Malawski
  */
-public interface Columns {
+public interface Columns extends KanbaneryDao<Column> {
 
   // commands -----------------------------------------------------------------
 

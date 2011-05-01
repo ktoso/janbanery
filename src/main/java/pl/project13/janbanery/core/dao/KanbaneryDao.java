@@ -23,5 +23,12 @@ import java.io.IOException;
  */
 public interface KanbaneryDao<T> {
 
+  /**
+   * Returns a re-fetched (with updated data) entity of the passed in entity.
+   *
+   * @param entity the entity ro re-fetch
+   * @return a refreshed version of the entity
+   * @throws IOException if unable to fetch the servers response
+   */
   T refresh(T entity) throws IOException;
 }
