@@ -14,18 +14,24 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.entity2wiki;
+package pl.project13.janbanery.util.predicates;
 
 import com.google.common.base.Predicate;
-import pl.project13.janbanery.resources.additions.ReadOnly;
+import pl.project13.janbanery.resources.Priority;
+import pl.project13.janbanery.resources.Task;
 
 /**
  * @author Konrad Malawski
  */
-public class ReadOnlyClassPredicate implements Predicate<Class<?>> {
+public class TaskByPriorityPredicate implements Predicate<Task> {
+  private Priority priority;
+
+  public TaskByPriorityPredicate(Priority priority) {
+    this.priority = priority;
+  }
 
   @Override
-  public boolean apply(Class<?> clazz) {
-    return clazz.isAnnotationPresent(ReadOnly.class);
+  public boolean apply(Task task) {
+    return task.getPriority() == priority;
   }
 }

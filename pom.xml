@@ -135,6 +135,13 @@
             <!--<optional>true</optional>-->
         </dependency>
 
+        <!-- documentation annotations -->
+        <dependency>
+            <groupId>pl.project13.sourceisdoc</groupId>
+            <artifactId>theSourceIsTheDoc-annotations</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -165,21 +172,6 @@
             <version>1.4</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- OPTIONAL; FOR DEVELOPERS ONLY -->
-        <!-- This is used to generate Wiki Markdown from Java source files via reflection and JFlex -->
-        <dependency>
-            <groupId>qdox</groupId>
-            <artifactId>qdox</artifactId>
-            <version>1.6.1</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.madgag</groupId>
-            <artifactId>org.eclipse.jgit</artifactId>
-            <version>0.11.99.4-UNOFFICIAL-ROBERTO-RELEASE</version>
-        </dependency>
-        <!-- END OF OPTIONAL DEPENDENCIES-->
     </dependencies>
 
     <build>

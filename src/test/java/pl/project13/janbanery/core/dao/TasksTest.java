@@ -75,14 +75,14 @@ public class TasksTest {
   public void shouldDeleteTask() throws Exception {
     // given
     Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
-    List<Task> beforeDelete = janbanery.tasks().byTitle(TestConstants.TASK_TITLE);
+    List<Task> beforeDelete = janbanery.tasks().allByTitle(TestConstants.TASK_TITLE);
     Long deletedTaskId = task.getId();
 
     // when
     janbanery.tasks().delete(task);
 
     // then
-    List<Task> afterDelete = janbanery.tasks().byTitle(TASK_TITLE);
+    List<Task> afterDelete = janbanery.tasks().allByTitle(TASK_TITLE);
 
     assertThat(afterDelete.size()).isEqualTo(beforeDelete.size() - 1);
     assertThat(afterDelete).onProperty("id").excludes(deletedTaskId);

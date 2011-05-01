@@ -19,9 +19,15 @@ package pl.project13.janbanery.core.flow;
 import pl.project13.janbanery.core.dao.SubTasks;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.util.predicates.CompletedSubTaskPredicate;
+import pl.project13.janbanery.util.predicates.NotCompletedSubTaskPredicate;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
+
+import static com.google.common.collect.Collections2.filter;
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * @author Konrad Malawski
@@ -58,7 +64,19 @@ public class SubTasksFlowImpl implements SubTasksFlow {
   }
 
   @Override
+  public List<SubTask> allCompleted() throws IOException {
+    Collection<SubTask> completedTasks = filter(all(), new CompletedSubTaskPredicate());
+    return newArrayList(completedTasks);
+  }
+
+  @Override public List<SubTask> allNotCompleted() throws IOException {
+    Collection<SubTask> completedTasks = filter(all(), new NotCompletedSubTaskPredicate());
+    return newArrayList(completedTasks);
+  }
+
+  @Override
   public Task get() {
     return task;
   }
+
 }

@@ -14,25 +14,17 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.entity2wiki;
+package pl.project13.janbanery.util.predicates;
 
-import org.junit.Test;
-
-import java.io.File;
-
-import static org.fest.assertions.Assertions.assertThat;
+import com.google.common.base.Predicate;
+import pl.project13.janbanery.resources.SubTask;
 
 /**
  * @author Konrad Malawski
  */
-public class Entity2WikiRunnerTest {
-
-  Entity2WikiRunner entity2WikiRunner = new Entity2WikiRunner(new File(""));
-
-  @Test
-  public void testName() throws Exception {
-    String markdownized = entity2WikiRunner.markdownize("{@link SomeClass}");
-
-    assertThat(markdownized).isEqualTo("<a href=\"#SomeClass\">SomeClass</a>");
+public class CompletedSubTaskPredicate implements Predicate<SubTask> {
+  @Override
+  public boolean apply(SubTask subTask) {
+    return subTask.getCompleted();
   }
 }

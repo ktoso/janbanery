@@ -91,8 +91,9 @@ public class SubTasksTest {
 
     // when
     SubTask createdSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
-    List<SubTask> allSubtasksOfTask = subTasksFlow.all();
+    List<SubTask> allSubtasksOfTask = subTasksFlow.allNotCompleted();
 
+    // then
     assertThat(allSubtasksOfTask).excludes(createdSubTask);
   }
 

@@ -46,7 +46,7 @@ public class TestEntityHelper {
   }
 
   public static void deleteTestTask(Janbanery janbanery) throws IOException {
-    List<Task> tasks = janbanery.tasks().byTitle(TASK_TITLE);
+    List<Task> tasks = janbanery.tasks().allByTitle(TASK_TITLE);
     if (tasks.size() > 0) {
       Task task = tasks.get(0);
       janbanery.tasks().delete(task);

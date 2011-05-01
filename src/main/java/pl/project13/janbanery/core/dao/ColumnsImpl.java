@@ -16,7 +16,6 @@
 
 package pl.project13.janbanery.core.dao;
 
-import com.google.common.base.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
@@ -27,6 +26,7 @@ import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
+import pl.project13.janbanery.util.predicates.ColumnByNamePredicate;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -191,16 +191,4 @@ public class ColumnsImpl implements Columns {
     return this;
   }
 
-  private static class ColumnByNamePredicate implements Predicate<Column> {
-    private final String name;
-
-    public ColumnByNamePredicate(String name) {
-      this.name = name;
-    }
-
-    @Override
-    public boolean apply(Column column) {
-      return column.getName().equals(name);
-    }
-  }
 }

@@ -14,18 +14,24 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.entity2wiki;
+package pl.project13.janbanery.util.predicates;
 
 import com.google.common.base.Predicate;
-import pl.project13.janbanery.resources.additions.ReadOnly;
+import pl.project13.janbanery.resources.Task;
 
 /**
  * @author Konrad Malawski
  */
-public class NotReadOnlyClassPredicate implements Predicate<Class<?>> {
+public class TaskByTitlePredicate implements Predicate<Task> {
+
+  private String taskTitle;
+
+  public TaskByTitlePredicate(String taskTitle) {
+    this.taskTitle = taskTitle;
+  }
 
   @Override
-  public boolean apply(Class<?> clazz) {
-    return !clazz.isAnnotationPresent(ReadOnly.class);
+  public boolean apply(Task input) {
+    return taskTitle.equals(input.getTitle());
   }
 }

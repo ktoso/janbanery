@@ -14,32 +14,17 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.flow;
+package pl.project13.janbanery.util.predicates;
 
+import com.google.common.base.Predicate;
 import pl.project13.janbanery.resources.SubTask;
-import pl.project13.janbanery.resources.Task;
-
-import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Konrad Malawski
  */
-public interface SubTasksFlow extends KanbaneryFlow<Task> {
-
-  // commands -----------------------------------------------------------------
-
-  SubTaskFlow create(SubTask subTask) throws IOException;
-
-  SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
-
-  void delete(SubTask subTask);
-
-  // queries ------------------------------------------------------------------
-
-  List<SubTask> all() throws IOException;
-
-  List<SubTask> allCompleted() throws IOException;
-
-  List<SubTask> allNotCompleted() throws IOException;
+public class NotCompletedSubTaskPredicate implements Predicate<SubTask> {
+  @Override
+  public boolean apply(SubTask subTask) {
+    return !subTask.getCompleted();
+  }
 }

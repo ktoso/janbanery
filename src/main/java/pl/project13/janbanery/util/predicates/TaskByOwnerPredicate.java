@@ -14,32 +14,24 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.flow;
+package pl.project13.janbanery.util.predicates;
 
-import pl.project13.janbanery.resources.SubTask;
+import com.google.common.base.Predicate;
 import pl.project13.janbanery.resources.Task;
-
-import java.io.IOException;
-import java.util.List;
+import pl.project13.janbanery.resources.User;
 
 /**
  * @author Konrad Malawski
  */
-public interface SubTasksFlow extends KanbaneryFlow<Task> {
+public class TaskByOwnerPredicate implements Predicate<Task> {
+  private Long userId;
 
-  // commands -----------------------------------------------------------------
+  public TaskByOwnerPredicate(User user) {
+    this.userId = user.getId();
+  }
 
-  SubTaskFlow create(SubTask subTask) throws IOException;
-
-  SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
-
-  void delete(SubTask subTask);
-
-  // queries ------------------------------------------------------------------
-
-  List<SubTask> all() throws IOException;
-
-  List<SubTask> allCompleted() throws IOException;
-
-  List<SubTask> allNotCompleted() throws IOException;
+  @Override
+  public boolean apply(Task task) {
+    return task.getOwnerId().equals(userId);
+  }
 }

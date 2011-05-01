@@ -210,13 +210,6 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public List<Task> assignedToMe() throws IOException {
-    List<Task> all = all();
-    Collection<Task> filteredTasks = filter(all, new TaskByOwnerPredicate(conf.getCurrentUser()));
-    return newArrayList(filteredTasks);
-  }
-
-  @Override
   public List<Task> allAssignedTo(User user) throws IOException {
     List<Task> all = all();
     Collection<Task> filteredTasks = filter(all, new TaskByOwnerPredicate(user));
