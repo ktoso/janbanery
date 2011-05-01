@@ -47,7 +47,6 @@ public class SubTaskMarkFlowImpl implements SubTaskMarkFlow {
 
   private SubTaskFlow asCompleted(boolean isCompleted) throws IOException {
     SubTask commandObject = new SubTask();
-    commandObject.setId(subTask.getTaskId());
     commandObject.setCompleted(isCompleted);
 
     return subTasks.update(subTask, commandObject);

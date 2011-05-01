@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.dao;
+package pl.project13.janbanery.core.flow.batch;
 
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +36,7 @@ import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION
 /**
  * @author Konrad Malawski
  */
-public class SubTasksTest {
+public class SubTasksMarkBatchFlowTest {
 
   Janbanery janbanery;
 
@@ -55,54 +55,47 @@ public class SubTasksTest {
   }
 
   @Test
-  public void shouldCreateSubTask() throws Exception {
+  public void shouldMarkAllSubTasksAsCompleted() throws Exception {
     // given
     Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
     SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
 
-    // when
-    SubTask createdSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
-
-    // then
-    List<SubTask> allSubtasksOfTask = subTasksFlow.all();
-
-    assertThat(allSubtasksOfTask).contains(createdSubTask);
-  }
-
-  @Test
-  public void shouldDeleteSubTask() throws Exception {
-    // given
-    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
-    SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
+    subTasksFlow.create(TestEntityHelper.createTestSubTask());
 
     // when
-    SubTask createdSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
-    subTasksFlow.delete(createdSubTask);
+    subTasksFlow.markAll().asCompleted();
 
     // then
-    List<SubTask> allSubtasksOfTask = subTasksFlow.all();
-
-    assertThat(allSubtasksOfTask).excludes(createdSubTask);
-  }
-
-  @Test
-  public void shouldMarkTaskAsCompleted() throws Exception {
-    // given
-    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
-    SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
-
-    // when
-    SubTask willNowGetCompleted = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
-    SubTask secondCreatedSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
-    SubTask subTaskFromCompletedFlow = subTasksFlow.mark(willNowGetCompleted).asCompleted().get();
-
-
-    // then
+    List<SubTask> completedTasks = subTasksFlow.allCompleted();
     List<SubTask> notCompletedTasks = subTasksFlow.allNotCompleted();
-    assertThat(subTaskFromCompletedFlow.getCompleted()).isTrue();
 
-    assertThat(notCompletedTasks).excludes(willNowGetCompleted);
-    assertThat(notCompletedTasks).contains(secondCreatedSubTask);
+    assertThat(notCompletedTasks).isEmpty();
+
+    assertThat(completedTasks).isNotEmpty();
+    assertThat(completedTasks.size()).isEqualTo(1);
+  }
+
+  @Test
+  public void shouldMarkAllSubTasksAsNotCompleted() throws Exception {
+    // given
+    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
+    SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
+
+    subTasksFlow.create(TestEntityHelper.createTestSubTask("first subtask")).mark().asCompleted();
+    subTasksFlow.create(TestEntityHelper.createTestSubTask("second subtask")).mark().asCompleted();
+    subTasksFlow.create(TestEntityHelper.createTestSubTask("third subtask")).mark().asCompleted();
+
+    // when
+    subTasksFlow.markAll().asNotCompleted();
+
+    // then
+    List<SubTask> completedTasks = subTasksFlow.allCompleted();
+    List<SubTask> notCompletedTasks = subTasksFlow.allNotCompleted();
+
+    assertThat(completedTasks).isEmpty();
+
+    assertThat(notCompletedTasks).isNotEmpty();
+    assertThat(notCompletedTasks.size()).isEqualTo(3);
   }
 
 }

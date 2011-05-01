@@ -80,14 +80,12 @@ public class TestEntityHelper {
   }
 
   public static SubTask createTestSubTask() {
-    SubTask subTask = new SubTask();
-    subTask.setBody("Some random subTask body");
-    return subTask;
+    return createTestSubTask("Some sub task body");
   }
 
-  public static SubTask createSecondTestSubTask() {
+  public static SubTask createTestSubTask(String body) {
     SubTask subTask = new SubTask();
-    subTask.setBody("Some second subTask");
+    subTask.setBody(body);
     return subTask;
   }
 }
