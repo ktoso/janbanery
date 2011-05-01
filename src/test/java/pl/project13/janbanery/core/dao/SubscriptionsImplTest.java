@@ -48,6 +48,8 @@ public class SubscriptionsImplTest {
   @After
   public void tearDown() throws Exception {
     TestEntityHelper.deleteTestTask(janbanery);
+
+    janbanery.close();
   }
 
   @Test

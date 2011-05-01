@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
@@ -43,22 +42,24 @@ import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION
 public class TaskUpdateFlowTest {
 
   private static Janbanery janbanery;
-  private static Task      task;
   private static Tasks     tasks;
+  private static Task      task;
 
   @BeforeClass
-  public static void setUp() throws IOException, ExecutionException, InterruptedException {
+  public static void setUp() throws Exception {
     PropertiesConfiguration conf = new PropertiesConfiguration(VALID_CONF_FILE_LOCATION);
     janbanery = new JanbaneryFactory().connectUsing(conf);
     janbanery.usingWorkspace(EXISTING_WORKSPACE);
 
     tasks = janbanery.tasks();
-    task = tasks.create(TestEntityHelper.createTestTask(janbanery)).get();
+    task = TestEntityHelper.createTestTaskFlow(janbanery).get();
   }
 
   @AfterClass
   public static void tearDown() throws IOException {
-    janbanery.tasks().delete(task);
+    TestEntityHelper.deleteTestTask(janbanery);
+
+    janbanery.close();
   }
 
   @Test

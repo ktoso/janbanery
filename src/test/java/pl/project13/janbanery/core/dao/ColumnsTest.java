@@ -16,18 +16,20 @@
 
 package pl.project13.janbanery.core.dao;
 
-import com.sun.corba.se.spi.ior.iiop.GIOPVersion;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
+import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.NotFixedColumnCannotBeFirstException;
 import pl.project13.janbanery.resources.Column;
-import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
+
+import java.util.Collections;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
@@ -50,6 +52,8 @@ public class ColumnsTest {
   @After
   public void tearDown() throws Exception {
     TestEntityHelper.deleteTestColumn(janbanery);
+
+    janbanery.close();
   }
 
   @Test(expected = NotFixedColumnCannotBeFirstException.class)
@@ -81,6 +85,27 @@ public class ColumnsTest {
 
     secondColumn = janbanery.columns().refresh(secondColumn);
     assertThat(secondColumn.getPosition()).isEqualTo(3);
+  }
+
+  @Test
+  public void shouldCreateBeforeLastColumn() throws Exception {
+    // given
+    Column lastColumn = janbanery.columns().last();
+    Integer prevPositionOfLastColumn = lastColumn.getPosition();
+    Column newColumnData = TestEntityHelper.createTestColumn();
+
+    // when
+    Column newColumn = janbanery.columns().create(newColumnData).beforeLast();
+
+    // then
+    assertThat(newColumn.getName()).isEqualTo(newColumnData.getName());
+    assertThat(newColumn.getPosition()).isEqualTo(prevPositionOfLastColumn);
+
+    lastColumn = janbanery.columns().refresh(lastColumn);
+    assertThat(lastColumn.getPosition()).isEqualTo(prevPositionOfLastColumn + 1);
+
+    Column beforeLastShouldBeOurColumn = janbanery.columns().before(lastColumn);
+    assertThat(beforeLastShouldBeOurColumn).isEqualTo(newColumn);
   }
 
   @Test
@@ -179,6 +204,42 @@ public class ColumnsTest {
 
     // then
     assertThat(newColumn.getPosition()).isEqualTo(3);
+  }
+
+  @Test(expected = EntityNotFoundException.class)
+  public void shouldThrowIfUnableToFindFirstColumn() throws Exception {
+    // given
+    Columns columns = Mockito.spy(janbanery.columns());
+    Mockito.when(columns.all()).thenReturn(Collections.<Column>emptyList());
+
+    // when
+    columns.first();
+
+    // then, should have thrown
+  }
+
+  @Test(expected = EntityNotFoundException.class)
+  public void shouldThrowIfUnableToFindLastColumn() throws Exception {
+    // given
+    Columns columns = Mockito.spy(janbanery.columns());
+    Mockito.when(columns.all()).thenReturn(Collections.<Column>emptyList());
+
+    // when
+    columns.last();
+
+    // then, should have thrown
+  }
+
+  @Test(expected = EntityNotFoundException.class)
+  public void shouldThrowIfUnableToFindColumn() throws Exception {
+    // given
+    Columns columns = Mockito.spy(janbanery.columns());
+    Mockito.when(columns.all()).thenReturn(Collections.<Column>emptyList());
+
+    // when
+    columns.onPosition(2);
+
+    // then, should have thrown
   }
 
 }

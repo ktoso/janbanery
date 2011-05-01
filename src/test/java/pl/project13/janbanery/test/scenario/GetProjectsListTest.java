@@ -16,11 +16,12 @@
 
 package pl.project13.janbanery.test.scenario;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
-import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.Janbanery;
+import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
 import pl.project13.janbanery.test.TestConstants;
@@ -43,6 +44,11 @@ public class GetProjectsListTest {
     PropertiesConfiguration configuration = new PropertiesConfiguration(TestConstants.VALID_CONF_FILE_LOCATION);
 
     janbanery = janbaneryFactory.connectUsing(configuration);
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    janbanery.close();
   }
 
   @Test

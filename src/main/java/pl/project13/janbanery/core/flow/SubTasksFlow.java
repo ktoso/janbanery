@@ -16,6 +16,7 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.core.flow.batch.SubTasksMarkBatchFlow;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 
@@ -23,6 +24,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * Based on top of a Task, gives access to operations on all or just one SubTask.
+ *
  * @author Konrad Malawski
  */
 public interface SubTasksFlow extends KanbaneryFlow<Task> {
@@ -34,6 +37,12 @@ public interface SubTasksFlow extends KanbaneryFlow<Task> {
   SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
 
   void delete(SubTask subTask);
+
+  SubTaskMarkFlow mark(SubTask subTask);
+
+  // batch commands -----------------------------------------------------------
+
+  SubTasksMarkBatchFlow markAll();
 
   // queries ------------------------------------------------------------------
 

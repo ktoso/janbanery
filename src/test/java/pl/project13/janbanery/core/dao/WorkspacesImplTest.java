@@ -18,6 +18,7 @@ package pl.project13.janbanery.core.dao;
 
 import com.google.gson.Gson;
 import com.ning.http.client.AsyncHttpClient;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
@@ -39,16 +40,23 @@ public class WorkspacesImplTest {
 
   Workspaces workspaces;
 
+  AsyncHttpClient asyncHttpClient;
+
   @Before
   public void setUp() throws Exception {
     PropertiesConfiguration conf = new PropertiesConfiguration(TestConstants.VALID_CONF_FILE_LOCATION);
 
     Gson gson = GsonFactory.create();
-    AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+    asyncHttpClient = new AsyncHttpClient();
     ReflectionsBodyGenerator encodedBodyGenerator = new ReflectionsBodyGenerator();
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, encodedBodyGenerator);
 
     workspaces = new WorkspacesImpl(conf, restClient);
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    asyncHttpClient.close();
   }
 
   @Test

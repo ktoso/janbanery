@@ -18,7 +18,6 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.SubTasks;
 import pl.project13.janbanery.resources.SubTask;
-import pl.project13.janbanery.resources.Task;
 
 /**
  * @author Konrad Malawski

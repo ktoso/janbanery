@@ -50,6 +50,8 @@ public class SubTasksTest {
   @After
   public void tearDown() throws Exception {
     TestEntityHelper.deleteTestTask(janbanery);
+
+    janbanery.close();
   }
 
   @Test
@@ -90,7 +92,26 @@ public class SubTasksTest {
     SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
 
     // when
+    SubTask toBeCompleted = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
+    SubTask secondCreatedSubTask = subTasksFlow.create(TestEntityHelper.createSecondTestSubTask()).get();
+
+
+    subTasksFlow.mark(toBeCompleted).asCompleted();
+    List<SubTask> notCompletedTasks = subTasksFlow.allNotCompleted();
+
+    // then
+    assertThat(notCompletedTasks).excludes(toBeCompleted);
+  }
+
+  @Test
+  public void shouldMarkAllSubTasksAsCompleted() throws Exception {
+    // given
+    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
+    SubTasksFlow subTasksFlow = janbanery.subTasks().of(task);
+
+    // when
     SubTask createdSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
+    subTasksFlow.markAll().asCompleted();
     List<SubTask> allSubtasksOfTask = subTasksFlow.allNotCompleted();
 
     // then

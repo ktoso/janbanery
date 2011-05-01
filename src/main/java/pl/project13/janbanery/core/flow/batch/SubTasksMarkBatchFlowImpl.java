@@ -14,48 +14,44 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.flow;
+package pl.project13.janbanery.core.flow.batch;
 
-import pl.project13.janbanery.core.dao.SubTasks;
+import pl.project13.janbanery.core.flow.SubTasksFlow;
 import pl.project13.janbanery.resources.SubTask;
+import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
 
 /**
  * @author Konrad Malawski
  */
-public class SubTaskMarkFlowImpl implements SubTaskMarkFlow {
+public class SubTasksMarkBatchFlowImpl implements SubTasksMarkBatchFlow {
 
-  private SubTasks     subTasks;
   private SubTasksFlow subTasksFlow;
 
-  private SubTask subTask;
+  private Task task;
 
-  public SubTaskMarkFlowImpl(SubTasks subTasks, SubTask subTask) {
-    this.subTasks = subTasks;
+  public SubTasksMarkBatchFlowImpl(SubTasksFlow subTasksFlow, Task task) {
     this.subTasksFlow = subTasksFlow;
-    this.subTask = subTask;
+    this.task = task;
   }
 
   @Override
-  public SubTaskFlow asCompleted() throws IOException {
-    return asCompleted(true);
+  public SubTasksFlow asCompleted() throws IOException {
+    for (SubTask completeMeSubTask : subTasksFlow.allNotCompleted()) {
+      subTasksFlow.mark(completeMeSubTask).asCompleted();
+    }
+
+    return subTasksFlow;
   }
 
   @Override
-  public SubTaskFlow asNotCompleted() throws IOException {
-    return asCompleted(false);
+  public SubTasksFlow asNotCompleted() throws IOException {
+    for (SubTask completeMeSubTask : subTasksFlow.allNotCompleted()) {
+      subTasksFlow.mark(completeMeSubTask).asCompleted();
+    }
+
+    return subTasksFlow;
   }
 
-  private SubTaskFlow asCompleted(boolean isCompleted) throws IOException {
-    SubTask commandObject = new SubTask();
-    commandObject.setId(subTask.getTaskId());
-    commandObject.setCompleted(isCompleted);
-
-    return new SubTaskFlowImpl(subTasks, subTask);
-  }
-
-  @Override public SubTask get() {
-    return subTask;
-  }
 }

@@ -81,28 +81,15 @@ public class ColumnsImpl implements Columns {
 
   @Override
   public Column first() throws IOException {
-    List<Column> columns = all();
-    for (Column column : columns) {
-      if (column.getPosition() == 1) {
-        return column;
-      }
-    }
-
-    throw new EntityNotFoundException("Could not find FIRST column. That's very weird...");
+    return onPosition(1);
   }
 
   @Override
   public Column last() throws IOException {
     List<Column> columns = all();
 
-    int lastId = columns.size();
-    for (Column column : columns) {
-      if (column.getPosition() == lastId) {
-        return column;
-      }
-    }
-
-    throw new EntityNotFoundException("Could not find LAST column. That's very weird...");
+    int lastPosition = columns.size();
+    return onPosition(lastPosition);
   }
 
   @Override

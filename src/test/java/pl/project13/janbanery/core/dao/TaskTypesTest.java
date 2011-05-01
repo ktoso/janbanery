@@ -18,6 +18,7 @@ package pl.project13.janbanery.core.dao;
 
 import com.google.gson.Gson;
 import com.ning.http.client.AsyncHttpClient;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
@@ -48,6 +49,11 @@ public class TaskTypesTest {
 
     janbanery = new JanbaneryFactory().connectUsing(conf);
     janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    janbanery.close();
   }
 
   @Test

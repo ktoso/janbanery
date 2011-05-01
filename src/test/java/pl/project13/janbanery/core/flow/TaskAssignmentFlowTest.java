@@ -47,6 +47,8 @@ public class TaskAssignmentFlowTest {
   @After
   public void tearDown() throws Exception {
     TestEntityHelper.deleteTestTask(janbanery);
+
+    janbanery.close();
   }
 
   @Test

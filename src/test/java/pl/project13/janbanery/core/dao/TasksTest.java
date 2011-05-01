@@ -51,6 +51,8 @@ public class TasksTest {
   @After
   public void tearDown() throws Exception {
     TestEntityHelper.deleteTestTask(janbanery);
+
+    janbanery.close();
   }
 
   @Test

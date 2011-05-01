@@ -17,6 +17,7 @@
 package pl.project13.janbanery.core;
 
 import com.ning.http.client.AsyncHttpClient;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.Configuration;
@@ -40,11 +41,18 @@ public class JanbaneryFactoryTest {
 
   JanbaneryFactory janbaneryFactory;
 
+  Janbanery janbanery;
+
   @Before
   public void setUp() throws Exception {
     asyncHttpClient = new AsyncHttpClient();
 
     janbaneryFactory = new JanbaneryFactory(asyncHttpClient);
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    janbanery.close();
   }
 
   @Test
@@ -53,7 +61,7 @@ public class JanbaneryFactoryTest {
     configuration = new PropertiesConfiguration(TestConstants.VALID_CONF_FILE_LOCATION);
 
     // when
-    Janbanery janbanery = janbaneryFactory.connectUsing(configuration);
+    janbanery = janbaneryFactory.connectUsing(configuration);
 
     // then, should use API key mode
     AuthProvider usedAuthProvider = janbanery.getAuthMode();
@@ -68,7 +76,7 @@ public class JanbaneryFactoryTest {
     String apiKey = props.getProperty(PropertiesConfiguration.P_APIKEY);
 
     // when
-    Janbanery janbanery = janbaneryFactory.connectUsing(apiKey);
+    janbanery = janbaneryFactory.connectUsing(apiKey);
 
     // then, should use API key mode
     AuthProvider usedAuthProvider = janbanery.getAuthMode();
@@ -84,7 +92,7 @@ public class JanbaneryFactoryTest {
     String password = (String) properties.get("password");
 
     // when
-    Janbanery janbanery = janbaneryFactory.connectAndKeepUsing(user, password);
+    janbanery = janbaneryFactory.connectAndKeepUsing(user, password);
 
     // then, should use API key mode
     AuthProvider usedAuthProvider = janbanery.getAuthMode();
@@ -100,7 +108,7 @@ public class JanbaneryFactoryTest {
     String password = (String) properties.get("password");
 
     // when
-    Janbanery janbanery = janbaneryFactory.connectUsing(user, password);
+    janbanery = janbaneryFactory.connectUsing(user, password);
 
     // then, should use API key mode
     AuthProvider usedAuthProvider = janbanery.getAuthMode();

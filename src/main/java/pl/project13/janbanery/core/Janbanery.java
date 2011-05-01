@@ -27,7 +27,6 @@ import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
 import pl.project13.janbanery.exceptions.ProjectNotFoundException;
 import pl.project13.janbanery.resources.Project;
-import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
@@ -172,5 +171,9 @@ public class Janbanery {
 
   public Projects projects() {
     return new ProjectsImpl(workspaces());
+  }
+
+  public void close() {
+    asyncHttpClient.close();
   }
 }
