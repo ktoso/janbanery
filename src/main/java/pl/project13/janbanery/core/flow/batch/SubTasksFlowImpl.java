@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.flow;
+package pl.project13.janbanery.core.flow.batch;
 
 import pl.project13.janbanery.core.dao.SubTasks;
-import pl.project13.janbanery.core.flow.batch.SubTasksMarkBatchFlow;
-import pl.project13.janbanery.core.flow.batch.SubTasksMarkBatchFlowImpl;
+import pl.project13.janbanery.core.flow.SubTaskFlow;
+import pl.project13.janbanery.core.flow.SubTaskMarkFlow;
+import pl.project13.janbanery.core.flow.SubTaskMarkFlowImpl;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.util.predicates.CompletedSubTaskPredicate;

@@ -42,6 +42,8 @@ public class GsonTypeTokens {
   }.getType();
   public static final Type LIST_SUB_TASK  = new TypeToken<List<SubTask>>() {
   }.getType();
+  public static final Type LIST_COMMENT   = new TypeToken<List<Comment>>() {
+  }.getType();
   public static final Type LIST_COLUMN    = new TypeToken<List<Column>>() {
   }.getType();
   public static final Type LIST_ESTIMATE  = new TypeToken<List<Estimate>>() {
@@ -53,6 +55,7 @@ public class GsonTypeTokens {
   public static final Class<User>             USER              = User.class;
   public static final Class<Task>             TASK              = Task.class;
   public static final Class<SubTask>          SUB_TASK          = SubTask.class;
+  public static final Class<Comment>          COMMENT           = Comment.class;
   public static final Class<TaskSubscription> TASK_SUBSCRIPTION = TaskSubscription.class;
   public static final Class<Column>           COLUMN            = Column.class;
   public static final Class<Estimate>         ESTIMATE          = Estimate.class;

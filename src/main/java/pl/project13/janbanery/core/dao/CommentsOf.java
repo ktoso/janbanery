@@ -16,13 +16,13 @@
 
 package pl.project13.janbanery.core.dao;
 
-import pl.project13.janbanery.core.flow.SubTasksFlow;
+import pl.project13.janbanery.core.flow.batch.CommentsFlow;
 import pl.project13.janbanery.resources.Task;
 
 /**
  * @author Konrad Malawski
  */
-public interface SubTasksFor {
+public interface CommentsOf {
 
   /**
    * Creates the actual instance on which you can work with subtasks of a concrete task
@@ -30,5 +30,5 @@ public interface SubTasksFor {
    * @param task task for which to fetch the subtasks
    * @return ready to work SubTasks instance
    */
-  SubTasksFlow of(Task task);
+  CommentsFlow of(Task task);
 }

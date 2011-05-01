@@ -16,7 +16,9 @@
 
 package pl.project13.janbanery.core.flow.batch;
 
-import pl.project13.janbanery.resources.SubTask;
+import pl.project13.janbanery.core.dao.Comments;
+import pl.project13.janbanery.core.flow.CommentFlow;
+import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
@@ -25,35 +27,39 @@ import java.util.List;
 /**
  * @author Konrad Malawski
  */
-public class SubTasksMarkBatchFlowImpl implements SubTasksMarkBatchFlow {
+public class CommentsFlowImpl implements CommentsFlow {
 
-  private SubTasksFlow subTasksFlow;
+  private Comments comments;
 
   private Task task;
 
-  public SubTasksMarkBatchFlowImpl(SubTasksFlow subTasksFlow, Task task) {
-    this.subTasksFlow = subTasksFlow;
+  public CommentsFlowImpl(Comments comments, Task task) {
+    this.comments = comments;
     this.task = task;
   }
 
   @Override
-  public SubTasksFlow asCompleted() throws IOException {
-    List<SubTask> notCompletedSubTasks = subTasksFlow.allNotCompleted();
-    for (SubTask completeMeSubTask : notCompletedSubTasks) {
-      subTasksFlow.mark(completeMeSubTask).asCompleted();
-    }
-
-    return subTasksFlow;
+  public CommentFlow create(Comment comment) throws IOException {
+    return comments.create(task, comment);
   }
 
   @Override
-  public SubTasksFlow asNotCompleted() throws IOException {
-    List<SubTask> completedSubTasks = subTasksFlow.allCompleted();
-    for (SubTask completeMeSubTask : completedSubTasks) {
-      subTasksFlow.mark(completeMeSubTask).asNotCompleted();
-    }
-
-    return subTasksFlow;
+  public CommentFlow update(Comment comment, Comment newValues) throws IOException {
+    return comments.update(comment, newValues);
   }
 
+  @Override
+  public void delete(Comment comment) {
+    comments.delete(comment);
+  }
+
+  @Override
+  public List<Comment> all() throws IOException {
+    return comments.all(task);
+  }
+
+  @Override
+  public Task get() {
+    return task;
+  }
 }

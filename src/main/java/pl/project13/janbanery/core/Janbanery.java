@@ -128,6 +128,11 @@ public class Janbanery {
     return new SubTasksImpl(conf, restClient).using(currentWorkspace);
   }
 
+  public Comments comments() {
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
+    return new CommentsImpl(conf, restClient).using(currentWorkspace);
+  }
+
   public IceBox iceBox() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new IceBoxImpl(tasks(), columns(), conf, restClient).using(currentWorkspace, currentProject);

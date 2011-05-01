@@ -16,8 +16,8 @@
 
 package pl.project13.janbanery.core.dao;
 
-import pl.project13.janbanery.core.flow.SubTaskFlow;
-import pl.project13.janbanery.resources.SubTask;
+import pl.project13.janbanery.core.flow.CommentFlow;
+import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
@@ -26,24 +26,25 @@ import java.util.List;
 /**
  * @author Konrad Malawski
  */
-public interface SubTasks extends SubTasksOf {
+public interface Comments extends CommentsOf {
 
-  // commands -----------------------------------------------------------------
+// commands -----------------------------------------------------------------
 
   /**
-   * Creates a new {@link SubTask} for the given {@link Task}
+   * Creates a new {@link Comment} for the given {@link Task}
    *
    * @param task    the task we want to add this subtask to
-   * @param subTask the object carrying the data of the subtask to be created
-   * @return a subtask flow populated with the newly created subtask
+   * @param comment the comment we're about to create
+   * @return a {@link CommentFlow} populated with the newly created subtask
+   * @throws IOException when unable to fetch the servers response
    */
-  SubTaskFlow create(Task task, SubTask subTask) throws IOException;
+  CommentFlow create(Task task, Comment comment) throws IOException;
 
-  SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
+  CommentFlow update(Comment comment, Comment newValues) throws IOException;
 
-  void delete(SubTask subTask);
+  void delete(Comment comment);
 
   // queries ------------------------------------------------------------------
 
-  List<SubTask> all(Task task) throws IOException;
+  List<Comment> all(Task task) throws IOException;
 }

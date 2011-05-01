@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.dao;
+package pl.project13.janbanery.core.flow.batch;
 
+import pl.project13.janbanery.core.flow.CommentFlow;
+import pl.project13.janbanery.core.flow.KanbaneryFlow;
 import pl.project13.janbanery.core.flow.SubTaskFlow;
+import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 
@@ -26,24 +29,17 @@ import java.util.List;
 /**
  * @author Konrad Malawski
  */
-public interface SubTasks extends SubTasksOf {
+public interface CommentsFlow extends KanbaneryFlow<Task> {
 
   // commands -----------------------------------------------------------------
 
-  /**
-   * Creates a new {@link SubTask} for the given {@link Task}
-   *
-   * @param task    the task we want to add this subtask to
-   * @param subTask the object carrying the data of the subtask to be created
-   * @return a subtask flow populated with the newly created subtask
-   */
-  SubTaskFlow create(Task task, SubTask subTask) throws IOException;
+  CommentFlow create(Comment comment) throws IOException;
 
-  SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
+  CommentFlow update(Comment comment, Comment newValues) throws IOException;
 
-  void delete(SubTask subTask);
+  void delete(Comment comment);
 
   // queries ------------------------------------------------------------------
 
-  List<SubTask> all(Task task) throws IOException;
+  List<Comment> all() throws IOException;
 }

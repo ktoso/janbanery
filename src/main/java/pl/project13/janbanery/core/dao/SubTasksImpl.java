@@ -21,8 +21,8 @@ import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.SubTaskFlow;
 import pl.project13.janbanery.core.flow.SubTaskFlowImpl;
-import pl.project13.janbanery.core.flow.SubTasksFlow;
-import pl.project13.janbanery.core.flow.SubTasksFlowImpl;
+import pl.project13.janbanery.core.flow.batch.SubTasksFlow;
+import pl.project13.janbanery.core.flow.batch.SubTasksFlowImpl;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
@@ -47,7 +47,7 @@ public class SubTasksImpl implements SubTasks {
 
   @Override
   public SubTaskFlow create(Task task, SubTask subTask) throws IOException {
-    String url = conf.getApiUrl(currentWorkspace, "tasks", task.getId(), "subtasks");
+    String url = getSubTasksUrl(task);
 
     SubTask createdSubTask = restClient.doPost(url, subTask, GsonTypeTokens.SUB_TASK);
 
@@ -59,6 +59,7 @@ public class SubTasksImpl implements SubTasks {
     String url = getSubTaskUrl(subTask);
 
     SubTask updatedTask = restClient.doPut(url, newValues, GsonTypeTokens.SUB_TASK);
+
     return new SubTaskFlowImpl(this, updatedTask);
   }
 

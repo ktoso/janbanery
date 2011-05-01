@@ -57,6 +57,10 @@ public class Comment extends KanbaneryResource {
   public Comment() {
   }
 
+  public Comment(String body) {
+    this.body = body;
+  }
+
   @Override
   public String getResourceId() {
     return "comments";
