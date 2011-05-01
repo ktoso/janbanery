@@ -26,14 +26,12 @@ import java.io.IOException;
  */
 public class SubTaskMarkFlowImpl implements SubTaskMarkFlow {
 
-  private SubTasks     subTasks;
-  private SubTasksFlow subTasksFlow;
+  private SubTasks subTasks;
 
   private SubTask subTask;
 
   public SubTaskMarkFlowImpl(SubTasks subTasks, SubTask subTask) {
     this.subTasks = subTasks;
-    this.subTasksFlow = subTasksFlow;
     this.subTask = subTask;
   }
 
@@ -52,10 +50,11 @@ public class SubTaskMarkFlowImpl implements SubTaskMarkFlow {
     commandObject.setId(subTask.getTaskId());
     commandObject.setCompleted(isCompleted);
 
-    return new SubTaskFlowImpl(subTasks, subTask);
+    return subTasks.update(subTask, commandObject);
   }
 
-  @Override public SubTask get() {
+  @Override
+  public SubTask get() {
     return subTask;
   }
 }
