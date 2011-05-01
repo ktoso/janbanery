@@ -21,7 +21,7 @@ import pl.project13.janbanery.resources.SubTask;
 /**
  * @author Konrad Malawski
  */
-public interface SubTaskFlow extends KanbaneryFlow<SubTask> {
+public interface SubTaskFlow extends Flow<SubTask> {
 
   SubTaskMarkFlow mark();
 }

@@ -23,7 +23,7 @@ import java.io.IOException;
 /**
  * @author Konrad Malawski
  */
-public interface ColumnUpdateFlow extends KanbaneryFlow<Column> {
+public interface ColumnUpdateFlow extends Flow<Column> {
 
   ColumnUpdateFlow name(String name) throws IOException;
 

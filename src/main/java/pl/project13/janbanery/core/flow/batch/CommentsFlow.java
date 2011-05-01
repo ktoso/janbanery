@@ -17,10 +17,8 @@
 package pl.project13.janbanery.core.flow.batch;
 
 import pl.project13.janbanery.core.flow.CommentFlow;
-import pl.project13.janbanery.core.flow.KanbaneryFlow;
-import pl.project13.janbanery.core.flow.SubTaskFlow;
+import pl.project13.janbanery.core.flow.Flow;
 import pl.project13.janbanery.resources.Comment;
-import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
@@ -29,7 +27,7 @@ import java.util.List;
 /**
  * @author Konrad Malawski
  */
-public interface CommentsFlow extends KanbaneryFlow<Task> {
+public interface CommentsFlow extends Flow<Task> {
 
   // commands -----------------------------------------------------------------
 

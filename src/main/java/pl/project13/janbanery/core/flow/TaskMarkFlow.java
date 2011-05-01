@@ -23,7 +23,7 @@ import java.io.IOException;
 /**
  * @author Konrad Malawski
  */
-public interface TaskMarkFlow extends KanbaneryFlow<Task> {
+public interface TaskMarkFlow extends Flow<Task> {
 
   /**
    * @return

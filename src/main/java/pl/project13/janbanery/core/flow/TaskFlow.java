@@ -25,7 +25,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author Konrad Malawski
  */
-public interface TaskFlow extends KanbaneryFlow<Task> {
+public interface TaskFlow extends Flow<Task> {
 
   /**
    * Get the task passed into this flow.

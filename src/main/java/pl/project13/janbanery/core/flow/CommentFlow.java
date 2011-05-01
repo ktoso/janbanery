@@ -17,12 +17,11 @@
 package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.resources.Comment;
-import pl.project13.janbanery.resources.Task;
 
 /**
  * @author Konrad Malawski
  */
-public interface CommentFlow extends KanbaneryFlow<Comment> { // todo rename it to flow<>
+public interface CommentFlow extends Flow<Comment> { // todo rename it to flow<>
 
   void delete();
 }

@@ -16,10 +16,9 @@
 
 package pl.project13.janbanery.core.flow.batch;
 
-import pl.project13.janbanery.core.flow.KanbaneryFlow;
+import pl.project13.janbanery.core.flow.Flow;
 import pl.project13.janbanery.core.flow.SubTaskFlow;
 import pl.project13.janbanery.core.flow.SubTaskMarkFlow;
-import pl.project13.janbanery.core.flow.batch.SubTasksMarkBatchFlow;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 
@@ -31,7 +30,7 @@ import java.util.List;
  *
  * @author Konrad Malawski
  */
-public interface SubTasksFlow extends KanbaneryFlow<Task> {
+public interface SubTasksFlow extends Flow<Task> {
 
   // commands -----------------------------------------------------------------
 

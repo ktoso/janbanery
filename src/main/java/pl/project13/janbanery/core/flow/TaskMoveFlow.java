@@ -26,7 +26,7 @@ import java.io.IOException;
 /**
  * @author Konrad Malawski
  */
-public interface TaskMoveFlow extends KanbaneryFlow<Task> {
+public interface TaskMoveFlow extends Flow<Task> {
 
   TaskMoveFlow toNextColumn() throws IOException;
 

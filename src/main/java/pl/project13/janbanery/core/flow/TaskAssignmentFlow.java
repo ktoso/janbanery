@@ -24,7 +24,7 @@ import java.io.IOException;
 /**
  * @author Konrad Malawski
  */
-public interface TaskAssignmentFlow extends KanbaneryFlow<Task> {
+public interface TaskAssignmentFlow extends Flow<Task> {
 
   TaskFlow to(User user) throws IOException;
 

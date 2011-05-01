@@ -24,7 +24,7 @@ import java.util.Date;
 /**
  * @author Konrad Malawski
  */
-public interface TaskUpdateFlow extends KanbaneryFlow<Task> {
+public interface TaskUpdateFlow extends Flow<Task> {
 
   TaskUpdateFlow title(String title) throws IOException;
 

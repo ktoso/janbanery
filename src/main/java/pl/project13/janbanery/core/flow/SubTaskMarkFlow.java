@@ -23,7 +23,7 @@ import java.io.IOException;
 /**
  * @author Konrad Malawski
  */
-public interface SubTaskMarkFlow extends KanbaneryFlow<SubTask> {
+public interface SubTaskMarkFlow extends Flow<SubTask> {
 
   SubTaskFlow asCompleted() throws IOException;
 

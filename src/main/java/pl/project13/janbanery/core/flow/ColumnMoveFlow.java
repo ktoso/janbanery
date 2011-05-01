@@ -23,7 +23,7 @@ import java.io.IOException;
 /**
  * @author Konrad Malawski
  */
-public interface ColumnMoveFlow extends KanbaneryFlow<Column> {
+public interface ColumnMoveFlow extends Flow<Column> {
 
   ColumnMoveFlow before(Column thatColumn) throws IOException;
 
