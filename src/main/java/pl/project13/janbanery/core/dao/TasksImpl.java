@@ -16,7 +16,6 @@
 
 package pl.project13.janbanery.core.dao;
 
-import com.google.common.base.Predicate;
 import com.google.gson.Gson;
 import com.ning.http.client.Response;
 import org.slf4j.Logger;
@@ -28,6 +27,10 @@ import pl.project13.janbanery.core.flow.*;
 import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.resources.additions.TaskLocation;
+import pl.project13.janbanery.util.predicates.TaskByOwnerPredicate;
+import pl.project13.janbanery.util.predicates.TaskByPriorityPredicate;
+import pl.project13.janbanery.util.predicates.TaskByTitleIgnoreCasePredicate;
+import pl.project13.janbanery.util.predicates.TaskByTitlePredicate;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -193,33 +196,35 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public List<Task> byTitle(String taskTitle) throws IOException {
+  public List<Task> allByTitle(String taskTitle) throws IOException {
     List<Task> tasks = all();
     Collection<Task> filteredTasks = filter(tasks, new TaskByTitlePredicate(taskTitle));
     return newArrayList(filteredTasks);
   }
 
   @Override
-  public List<Task> byTitleIgnoreCase(String taskTitle) throws IOException {
+  public List<Task> allByTitleIgnoreCase(String taskTitle) throws IOException {
     List<Task> tasks = all();
     Collection<Task> filteredTasks = filter(tasks, new TaskByTitleIgnoreCasePredicate(taskTitle));
     return newArrayList(filteredTasks);
   }
 
   @Override
-  public List<Task> assignedToMe() {
-    throw new NotYetImplementedException(); // todo
+  public List<Task> assignedToMe() throws IOException {
+    List<Task> all = all();
+    Collection<Task> filteredTasks = filter(all, new TaskByOwnerPredicate(conf.getCurrentUser()));
+    return newArrayList(filteredTasks);
   }
 
   @Override
-  public List<Task> assignedTo(User user) throws IOException {
+  public List<Task> allAssignedTo(User user) throws IOException {
     List<Task> all = all();
     Collection<Task> filteredTasks = filter(all, new TaskByOwnerPredicate(user));
     return newArrayList(filteredTasks);
   }
 
   @Override
-  public List<Task> withPriority(Priority priority) throws IOException {
+  public List<Task> allWithPriority(Priority priority) throws IOException {
     List<Task> all = all();
     Collection<Task> filteredTasks = filter(all, new TaskByPriorityPredicate(priority));
     return newArrayList(filteredTasks);
@@ -276,59 +281,4 @@ public class TasksImpl implements Tasks {
     return conf.getApiUrl(currentWorkspace) + "columns/" + columnId + "/tasks.json";
   }
 
-  // ------------------------- inner predicate classes ------------------------
-
-  private static class TaskByTitlePredicate implements Predicate<Task> {
-
-    private String taskTitle;
-
-    public TaskByTitlePredicate(String taskTitle) {
-      this.taskTitle = taskTitle;
-    }
-
-    @Override
-    public boolean apply(Task input) {
-      return taskTitle.equals(input.getTitle());
-    }
-  }
-
-  private static class TaskByTitleIgnoreCasePredicate implements Predicate<Task> {
-
-    private String taskTitle;
-
-    public TaskByTitleIgnoreCasePredicate(String taskTitle) {
-      this.taskTitle = taskTitle;
-    }
-
-    @Override
-    public boolean apply(Task input) {
-      return taskTitle.equalsIgnoreCase(input.getTitle());
-    }
-  }
-
-  private static class TaskByOwnerPredicate implements Predicate<Task> {
-    private Long userId;
-
-    public TaskByOwnerPredicate(User user) {
-      this.userId = user.getId();
-    }
-
-    @Override
-    public boolean apply(Task task) {
-      return task.getOwnerId().equals(userId);
-    }
-  }
-
-  private static class TaskByPriorityPredicate implements Predicate<Task> {
-    private Priority priority;
-
-    public TaskByPriorityPredicate(Priority priority) {
-      this.priority = priority;
-    }
-
-    @Override
-    public boolean apply(Task task) {
-      return task.getPriority() == priority;
-    }
-  }
 }

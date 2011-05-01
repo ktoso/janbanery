@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @author Konrad Malawski
  */
-public interface Tasks {
+public interface Tasks extends KanbaneryDao<Task> {
 
   // commands -----------------------------------------------------------------
 
@@ -72,19 +72,15 @@ public interface Tasks {
 
   List<Task> allIn(Column column) throws IOException;
 
-  List<Task> byTitle(String taskTitle) throws IOException;
+  List<Task> allByTitle(String taskTitle) throws IOException;
 
-  List<Task> byTitleIgnoreCase(String taskTitle) throws IOException;
+  List<Task> allByTitleIgnoreCase(String taskTitle) throws IOException;
+
+  List<Task> allAssignedTo(User user) throws IOException;
+
+  List<Task> allWithPriority(Priority priority) throws IOException;
 
   Task byId(Long taskId) throws IOException;
-
-  List<Task> assignedToMe();
-
-  List<Task> assignedTo(User user) throws IOException;
-
-  List<Task> withPriority(Priority priority) throws IOException;
-
-  Task refresh(Task task) throws IOException;
 
   TaskFlow assign(Task task, User user) throws IOException;
 }
