@@ -18,6 +18,7 @@ package pl.project13.janbanery.resources;
 
 import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.On;
+import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
 
@@ -26,33 +27,47 @@ import pl.project13.janbanery.resources.additions.Settable;
  *
  * @author Konrad Malawski
  */
-public class TaskComments extends KanbaneryResource {
+public class Comment extends KanbaneryResource {
 
   /**
-   * The content of the {@link TaskComments}
+   * Id of this comment resource
+   */
+  @ReadOnly
+  private Long id;
+
+  /**
+   * The content of the {@link Comment}
    */
   @Required
   @Settable(On.Create)
-  String body;
+  private String body;
 
   /**
    * Id of the task that this comment is about
    */
   @SerializedName("task_id")
-  Integer taskId;
+  private Integer taskId;
 
   /**
    * Id of the creator of this comment
    */
   @SerializedName("author_id")
-  Integer authorId;
+  private Integer authorId;
 
-  public TaskComments() {
+  public Comment() {
   }
 
   @Override
   public String getResourceId() {
     return "comments";
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getBody() {
@@ -77,5 +92,45 @@ public class TaskComments extends KanbaneryResource {
 
   public void setAuthorId(Integer authorId) {
     this.authorId = authorId;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
+
+    Comment comment = (Comment) o;
+
+    if (authorId != null ? !authorId.equals(comment.authorId) : comment.authorId != null) {
+      return false;
+    }
+    if (body != null ? !body.equals(comment.body) : comment.body != null) {
+      return false;
+    }
+    if (id != null ? !id.equals(comment.id) : comment.id != null) {
+      return false;
+    }
+    if (taskId != null ? !taskId.equals(comment.taskId) : comment.taskId != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = super.hashCode();
+    result = 31 * result + (id != null ? id.hashCode() : 0);
+    result = 31 * result + (body != null ? body.hashCode() : 0);
+    result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
+    result = 31 * result + (authorId != null ? authorId.hashCode() : 0);
+    return result;
   }
 }
