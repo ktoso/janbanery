@@ -108,4 +108,25 @@ public class CommentsFlowTest {
 
     assertThat(commentsAfter).isEmpty();
   }
+
+  @Test
+  public void shouldDeleteCommentById() throws Exception {
+    // given
+    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
+    Comment deleteFromThisComment = TestEntityHelper.createTestComment(janbanery, task).get();
+    TestEntityHelper.createTestComment(janbanery, task);
+    TestEntityHelper.createTestComment(janbanery, task);
+
+    CommentsFlow commentsFlow = janbanery.comments().of(task);
+
+    // when
+    Long deleteThisId = deleteFromThisComment.getId();
+    commentsFlow.byId(deleteThisId).delete();
+
+    // then
+    List<Comment> commentsAfter = commentsFlow.all();
+
+    assertThat(commentsAfter.size()).isEqualTo(2);
+    assertThat(commentsAfter).excludes(deleteFromThisComment);
+  }
 }
