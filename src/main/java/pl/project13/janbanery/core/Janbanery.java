@@ -128,7 +128,7 @@ public class Janbanery {
     return new SubTasksImpl(conf, restClient).using(currentWorkspace);
   }
 
-  public Comments comments() {
+  public CommentsOf comments() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new CommentsImpl(conf, restClient).using(currentWorkspace);
   }
@@ -150,8 +150,7 @@ public class Janbanery {
 
   public Users users() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
-    UsersImpl users = new UsersImpl(conf, restClient);
-    return users.using(currentWorkspace, currentProject);
+    return new UsersImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public Subscriptions subscriptions() {
