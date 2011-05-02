@@ -16,13 +16,15 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.resources.Issue;
+
 import java.io.IOException;
 import java.net.URL;
 
 /**
  * @author Konrad Malawski
  */
-public interface IssueUpdateFlow {
+public interface IssueUpdateFlow extends Flow<Issue> {
 
   IssueUpdateFlow url(String url) throws IOException;
 

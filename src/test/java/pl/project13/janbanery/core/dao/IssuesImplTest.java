@@ -127,9 +127,12 @@ public class IssuesImplTest {
     IssueFlow issueFlow = issuesFlow.create(TestEntityHelper.createTestIssue());
 
     // when
-    issueFlow.update()
+    String newIssueUrl = "http://jira.project13.pl/tasks/345345345";
+
+    Issue issue = issueFlow.update().url(newIssueUrl).get();
 
     // then
-    assertThat(issue.getResolved()).isFalse();
+    assertThat(issue.getResolved()).isFalse(); // double check this, a new tasks should be not resolved
+    assertThat(issue.getUrl()).isEqualTo(newIssueUrl);
   }
 }

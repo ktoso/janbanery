@@ -50,4 +50,9 @@ public class IssueUpdateFlowImpl implements IssueUpdateFlow {
   public IssueMarkFlow mark() {
     return new IssueMarkFlowImpl(issues, issue);
   }
+
+  @Override
+  public Issue get() {
+    return issue;
+  }
 }
