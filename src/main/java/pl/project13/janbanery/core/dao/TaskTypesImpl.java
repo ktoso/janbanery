@@ -51,13 +51,19 @@ public class TaskTypesImpl implements TaskTypes {
   @Override
   public List<TaskType> all() throws IOException {
     String url = getDefaultGetUrl();
-    return restClient.doGet(url, GsonTypeTokens.LIST_TASK_TYPE);
+
+    List<TaskType> taskTypes = restClient.doGet(url, GsonTypeTokens.LIST_TASK_TYPE);
+
+    return taskTypes;
   }
 
   @Override
   public TaskType byId(Long id) throws IOException {
     String url = getTaskTypeUrl(id);
-    return restClient.doGet(url, GsonTypeTokens.TASK_TYPE);
+
+    TaskType taskType = restClient.doGet(url, GsonTypeTokens.TASK_TYPE);
+
+    return taskType;
   }
 
   @Override

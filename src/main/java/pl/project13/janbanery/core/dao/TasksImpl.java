@@ -174,7 +174,10 @@ public class TasksImpl implements Tasks {
   @Override
   public List<Task> allIn(Column column) throws IOException {
     String url = getColumnTasksUrl(column.getId());
-    return restClient.doGet(url, GsonTypeTokens.LIST_TASK);
+
+    List<Task> tasks = restClient.doGet(url, GsonTypeTokens.LIST_TASK);
+
+    return tasks;
   }
 
   @Override

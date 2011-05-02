@@ -54,6 +54,7 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
    * @return the "best" exception to be thrown for such an response JSON, based on it's error messages
    */
   public static KanbaneryException mostSpecializedException(String response) {
+    //todo refactor this!!!
     if (response == null || "".equals(response)) {
       return new InvalidEntityKanbaneryException(response);
     } else if (TaskAlreadyInFirstColumnException.isBestExceptionFor(response)) {
@@ -68,7 +69,7 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
       return new CanOnlyArchiveFromLastColumnException(response);
     } else if (NotFixedColumnCannotBeFirstException.isBestExceptionFor(response)) {
       return new NotFixedColumnCannotBeFirstException(response);
-    } else if(BodyMustNotBeBlankException.isBestExceptionFor(response)){
+    } else if (BodyMustNotBeBlankException.isBestExceptionFor(response)) {
       return new BodyMustNotBeBlankException(response);
     } else {
       return new InvalidEntityKanbaneryException(response);

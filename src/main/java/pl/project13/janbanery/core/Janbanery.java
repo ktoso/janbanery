@@ -123,6 +123,11 @@ public class Janbanery {
     return new TasksImpl(columns(), conf, restClient, gson).using(currentWorkspace, currentProject);
   }
 
+  public IssuesOf issues() {
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
+    return new IssuesImpl(conf, restClient).using(currentWorkspace);
+  }
+
   public SubTasks subTasks() {
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new SubTasksImpl(conf, restClient).using(currentWorkspace);

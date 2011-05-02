@@ -18,6 +18,7 @@ package pl.project13.janbanery.resources;
 
 import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.On;
+import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
 
@@ -29,6 +30,12 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class Issue extends KanbaneryResource implements Serializable {
+
+  /**
+   * Id of this entity
+   */
+  @ReadOnly
+  private Long id;
 
   /**
    * URL pointing to the issue in an external bug-tracking system
@@ -54,7 +61,15 @@ public class Issue extends KanbaneryResource implements Serializable {
 
   @Override
   public String getResourceId() {
-    return "issues";
+    return "issue";
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getUrl() {
@@ -90,22 +105,19 @@ public class Issue extends KanbaneryResource implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     Issue issue = (Issue) o;
 
-    if (createdAt != null ? !createdAt.equals(issue.createdAt) : issue.createdAt != null) {
+    if (id != null ? !id.equals(issue.id) : issue.id != null) {
       return false;
     }
     if (resolved != null ? !resolved.equals(issue.resolved) : issue.resolved != null) {
       return false;
     }
     if (taskId != null ? !taskId.equals(issue.taskId) : issue.taskId != null) {
-      return false;
-    }
-    if (type != null ? !type.equals(issue.type) : issue.type != null) {
-      return false;
-    }
-    if (updatedAt != null ? !updatedAt.equals(issue.updatedAt) : issue.updatedAt != null) {
       return false;
     }
     if (url != null ? !url.equals(issue.url) : issue.url != null) {
@@ -117,12 +129,11 @@ public class Issue extends KanbaneryResource implements Serializable {
 
   @Override
   public int hashCode() {
-    int result = url != null ? url.hashCode() : 0;
+    int result = super.hashCode();
+    result = 31 * result + (id != null ? id.hashCode() : 0);
+    result = 31 * result + (url != null ? url.hashCode() : 0);
     result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
     result = 31 * result + (resolved != null ? resolved.hashCode() : 0);
-    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
-    result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
   }
 }

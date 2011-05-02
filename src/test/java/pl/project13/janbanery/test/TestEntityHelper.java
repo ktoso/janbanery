@@ -92,4 +92,10 @@ public class TestEntityHelper {
                     .of(task)
                     .create(new Comment("Comment text"));
   }
+
+  public static Issue createTestIssue() {
+    Issue issue = new Issue();
+    issue.setUrl("http://jira.project13.pl/task/324345");
+    return issue;
+  }
 }
