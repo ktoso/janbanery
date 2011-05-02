@@ -63,7 +63,7 @@ public class Comment extends KanbaneryResource {
 
   @Override
   public String getResourceId() {
-    return "comments";
+    return "comment";
   }
 
   public Long getId() {
