@@ -55,14 +55,6 @@ public class CommentsImpl implements Comments {
   }
 
   @Override
-  public CommentFlow update(Comment comment, Comment newValues) throws IOException {
-    String url = getCommentUrl(comment);
-
-    Comment createdComment = restClient.doPut(url, newValues, GsonTypeTokens.COMMENT);
-    return new CommentFlowImpl(this, createdComment);
-  }
-
-  @Override
   public void delete(Comment comment) {
     String url = getCommentUrl(comment);
 

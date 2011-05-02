@@ -41,19 +41,6 @@ public class CommentFlowImpl implements CommentFlow {
   }
 
   @Override
-  public CommentFlow update(String newCommentBody) throws IOException {
-    Comment commandObject = new Comment();
-    commandObject.setBody(newCommentBody);
-
-    return update(commandObject);
-  }
-
-  @Override
-  public CommentFlow update(Comment newValues) throws IOException {
-    return comments.update(comment, newValues);
-  }
-
-  @Override
   public Comment get() {
     return comment;
   }
