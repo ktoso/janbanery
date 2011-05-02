@@ -90,6 +90,7 @@ public class TaskAssignmentFlowTest {
                                 .get();
 
     // then
+    assertThat(taskFlow.assign().get()).isEqualTo(taskFlow.get());
     assertThat(assignedTask.getOwnerId()).isNull();
   }
 }

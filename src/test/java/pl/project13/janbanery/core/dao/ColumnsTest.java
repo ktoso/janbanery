@@ -206,6 +206,41 @@ public class ColumnsTest {
     assertThat(newColumn.getPosition()).isEqualTo(3);
   }
 
+  @Test
+  public void shouldUpdateColumnName() throws Exception {
+    // given
+    Column newColumnData = TestEntityHelper.createTestColumn();
+    Column column = janbanery.columns().create(newColumnData).afterFirst();
+
+    // when
+    String newColumnName = "New Column Name";
+    column = janbanery.columns().update(column).name(newColumnName).get();
+
+    // then
+    column = janbanery.columns().refresh(column);
+
+    assertThat(column.getName()).isEqualTo(newColumnName);
+
+    // cleanup
+    janbanery.columns().delete(column);
+  }
+
+  @Test
+  public void shouldUpdateColumnCapacity() throws Exception {
+    // given
+    Column newColumnData = TestEntityHelper.createTestColumn();
+    Column column = janbanery.columns().create(newColumnData).afterFirst();
+
+    // when
+    Integer newColumnCapacity = 10;
+    column = janbanery.columns().update(column).capacity(newColumnCapacity).get();
+
+    // then
+    column = janbanery.columns().refresh(column);
+
+    assertThat(column.getCapacity()).isEqualTo(newColumnCapacity);
+  }
+
   @Test(expected = EntityNotFoundException.class)
   public void shouldThrowIfUnableToFindFirstColumn() throws Exception {
     // given

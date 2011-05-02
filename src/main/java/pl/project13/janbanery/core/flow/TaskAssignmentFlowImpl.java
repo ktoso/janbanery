@@ -43,6 +43,7 @@ public class TaskAssignmentFlowImpl implements TaskAssignmentFlow {
 
   @Override
   public TaskFlow toNobody() throws IOException {
+    //noinspection NullableProblems
     return tasks.assign(task, null);
   }
 
