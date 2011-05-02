@@ -24,9 +24,7 @@ import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.IssueFlow;
 import pl.project13.janbanery.core.flow.batch.IssuesFlow;
-import pl.project13.janbanery.core.flow.batch.SubTasksFlow;
 import pl.project13.janbanery.resources.Issue;
-import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
 
@@ -134,5 +132,21 @@ public class IssuesImplTest {
     // then
     assertThat(issue.getResolved()).isFalse(); // double check this, a new tasks should be not resolved
     assertThat(issue.getUrl()).isEqualTo(newIssueUrl);
+  }
+
+  @Test
+  public void shouldDeleteIssue() throws Exception {
+    // given
+    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
+    IssuesFlow issuesFlow = janbanery.issues().of(task);
+    Issue issue = issuesFlow.create(TestEntityHelper.createTestIssue()).get();
+
+    // when
+    janbanery.issues().delete(issue);
+
+    // then
+    List<Issue> allIssues = issuesFlow.all();
+
+    assertThat(allIssues).excludes(issue);
   }
 }

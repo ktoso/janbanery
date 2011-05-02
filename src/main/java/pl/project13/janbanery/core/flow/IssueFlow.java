@@ -16,7 +16,6 @@
 
 package pl.project13.janbanery.core.flow;
 
-import pl.project13.janbanery.core.flow.batch.IssuesFlow;
 import pl.project13.janbanery.resources.Issue;
 
 /**
@@ -24,9 +23,11 @@ import pl.project13.janbanery.resources.Issue;
  */
 public interface IssueFlow extends Flow<Issue> {
 
-  IssueMarkFlow mark();
-
   void delete();
+
+  // goto other flows -----------------
+
+  IssueMarkFlow mark();
 
   IssueUpdateFlow update();
 

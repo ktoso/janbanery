@@ -17,6 +17,7 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.batch.IssuesFlow;
+import pl.project13.janbanery.resources.Issue;
 import pl.project13.janbanery.resources.Task;
 
 /**
@@ -31,4 +32,6 @@ public interface IssuesOf {
    * @return ready to work SubTasks instance
    */
   IssuesFlow of(Task task);
+
+  void delete(Issue issue);
 }

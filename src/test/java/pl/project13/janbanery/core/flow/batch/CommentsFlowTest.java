@@ -129,4 +129,18 @@ public class CommentsFlowTest {
     assertThat(commentsAfter.size()).isEqualTo(2);
     assertThat(commentsAfter).excludes(commentToBeDeleted);
   }
+
+  @Test
+  public void shouldDeleteCommentFromJanbaneryComments() throws Exception {
+    // given
+    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
+    Comment commentToBeDeleted = TestEntityHelper.createTestComment(janbanery, task).get();
+
+    // when
+    janbanery.comments().delete(commentToBeDeleted);
+
+    // then
+    List<Comment> commentsAfter = janbanery.comments().of(task).all();
+    assertThat(commentsAfter).excludes(commentToBeDeleted);
+  }
 }

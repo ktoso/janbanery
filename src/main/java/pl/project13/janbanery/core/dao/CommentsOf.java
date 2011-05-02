@@ -17,6 +17,7 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.batch.CommentsFlow;
+import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
 
 /**
@@ -31,4 +32,6 @@ public interface CommentsOf {
    * @return ready to work SubTasks instance
    */
   CommentsFlow of(Task task);
+
+  void delete(Comment comment);
 }
