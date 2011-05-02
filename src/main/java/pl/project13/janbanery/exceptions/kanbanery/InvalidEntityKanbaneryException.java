@@ -68,6 +68,8 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
       return new CanOnlyArchiveFromLastColumnException(response);
     } else if (NotFixedColumnCannotBeFirstException.isBestExceptionFor(response)) {
       return new NotFixedColumnCannotBeFirstException(response);
+    } else if(BodyMustNotBeBlankException.isBestExceptionFor(response)){
+      return new BodyMustNotBeBlankException(response);
     } else {
       return new InvalidEntityKanbaneryException(response);
     }

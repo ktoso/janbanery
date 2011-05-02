@@ -78,26 +78,7 @@ public class CommentsFlowTest {
   }
 
   @Test
-  public void testUpdate() throws Exception {
-    // given
-    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
-    CommentFlow commentFlow = TestEntityHelper.createTestComment(janbanery, task);
-
-    // when
-    commentFlow = commentFlow.update("New Message Updated");
-    Comment comment = commentFlow.get();
-
-    // then
-    List<Comment> commentsNow = janbanery.comments().of(task).all();
-
-    assertThat(commentsNow).isNotEmpty();
-    assertThat(commentsNow).contains(comment);
-    assertThat(commentsNow.get(0).getBody()).isEqualTo(comment.getBody());
-    assertThat(commentsNow.get(0).getAuthorId()).isEqualTo(janbanery.users().current().getId());
-  }
-
-  @Test
-  public void testDelete() throws Exception {
+  public void shouldDeleteComment() throws Exception {
     // given
     Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
     CommentFlow commentFlow = TestEntityHelper.createTestComment(janbanery, task);
@@ -107,6 +88,23 @@ public class CommentsFlowTest {
 
     // then
     List<Comment> commentsAfter = janbanery.comments().of(task).all();
+
+    assertThat(commentsAfter).isEmpty();
+  }
+
+  @Test
+  public void shouldDeleteAllComments() throws Exception {
+    // given
+    Task task = TestEntityHelper.createTestTaskFlow(janbanery).get();
+    TestEntityHelper.createTestComment(janbanery, task);
+    TestEntityHelper.createTestComment(janbanery, task);
+    TestEntityHelper.createTestComment(janbanery, task);
+
+    // when
+    CommentsFlow commentsFlow = janbanery.comments().of(task).deleteAll();
+
+    // then
+    List<Comment> commentsAfter = commentsFlow.all();
 
     assertThat(commentsAfter).isEmpty();
   }
