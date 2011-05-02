@@ -31,7 +31,7 @@ import java.util.List;
 public class WorkspacesImpl implements Workspaces {
 
   private Configuration conf;
-  private RestClient    restClient;
+  private RestClient restClient;
 
   public WorkspacesImpl(Configuration conf, RestClient restClient) {
     this.conf = conf;

@@ -28,8 +28,8 @@ import java.io.IOException;
 public class TaskMarkFlowImpl implements TaskMarkFlow {
 
   private Columns columns;
-  private Tasks   tasks;
-  private Task    task;
+  private Tasks tasks;
+  private Task task;
 
   public TaskMarkFlowImpl(Tasks tasks, Columns columns, Task task) {
     this.tasks = tasks;

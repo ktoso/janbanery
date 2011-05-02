@@ -366,7 +366,7 @@ public class Task extends KanbaneryResource implements Serializable {
     throw new NotYetImplementedException();
   }
 
-  public static class Builder{
+  public static class Builder {
     private Task instance;
 
     public Builder(String title, Long taskTypeId) {

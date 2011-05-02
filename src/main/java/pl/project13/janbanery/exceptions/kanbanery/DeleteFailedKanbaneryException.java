@@ -27,8 +27,8 @@ package pl.project13.janbanery.exceptions.kanbanery;
  */
 public class DeleteFailedKanbaneryException extends KanbaneryException {
 
-  private static final long serialVersionUID  = 3373392157247136394L;
-  public static final  int  MAPPED_ERROR_CODE = 409;
+  private static final long serialVersionUID = 3373392157247136394L;
+  public static final int MAPPED_ERROR_CODE = 409;
 
   public DeleteFailedKanbaneryException() {
   }

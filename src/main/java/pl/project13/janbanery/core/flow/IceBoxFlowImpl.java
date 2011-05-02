@@ -31,9 +31,9 @@ public class IceBoxFlowImpl implements IceBoxFlow {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-  private Tasks  tasks;
+  private Tasks tasks;
   private IceBox iceBox;
-  private Task   task;
+  private Task task;
 
   public IceBoxFlowImpl(Tasks tasks, IceBox iceBox, Task task) {
     this.tasks = tasks;

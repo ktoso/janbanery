@@ -36,7 +36,7 @@ import java.util.List;
 public class CommentsImpl implements Comments {
 
   private Configuration conf;
-  private RestClient    restClient;
+  private RestClient restClient;
 
   private Workspace currentWorkspace;
 

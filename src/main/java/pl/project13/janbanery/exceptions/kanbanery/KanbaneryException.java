@@ -25,8 +25,8 @@ package pl.project13.janbanery.exceptions.kanbanery;
  */
 public class KanbaneryException extends RuntimeException {
 
-  private static final long serialVersionUID  = -600128530560346354L;
-  public static final  int  MAPPED_ERROR_CODE = 500;
+  private static final long serialVersionUID = -600128530560346354L;
+  public static final int MAPPED_ERROR_CODE = 500;
 
   public KanbaneryException() {
   }

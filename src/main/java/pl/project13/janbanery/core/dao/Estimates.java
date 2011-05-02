@@ -17,7 +17,6 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.resources.Estimate;
-import pl.project13.janbanery.resources.Project;
 
 import java.io.IOException;
 import java.util.List;

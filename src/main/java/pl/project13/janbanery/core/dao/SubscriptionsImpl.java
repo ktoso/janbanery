@@ -32,7 +32,7 @@ import java.io.IOException;
 public class SubscriptionsImpl implements Subscriptions {
 
   private Configuration conf;
-  private RestClient    restClient;
+  private RestClient restClient;
 
   private Workspace currentWorkspace;
 

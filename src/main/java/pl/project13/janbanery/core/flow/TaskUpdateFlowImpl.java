@@ -32,9 +32,9 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-  private Tasks   tasks;
+  private Tasks tasks;
   private Columns columns;
-  private Task    task;
+  private Task task;
 
   public TaskUpdateFlowImpl(Tasks tasks, Columns columns, Task task) {
     this.tasks = tasks;

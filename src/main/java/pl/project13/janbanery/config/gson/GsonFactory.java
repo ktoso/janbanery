@@ -33,7 +33,7 @@ import java.util.Date;
  */
 public class GsonFactory {
 
-  private static final DateTimeFormatter dateFormatter     = DateTimeFormat.forPattern("yyyy-MM-dd");
+  private static final DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
   private static final DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ");
 
   private GsonFactory() {
@@ -70,7 +70,8 @@ public class GsonFactory {
       return deserializeIso8601DateTime(dateString);
     }
 
-    @VisibleForTesting DateTime deserializeIso8601DateTime(String dateString) {
+    @VisibleForTesting
+    DateTime deserializeIso8601DateTime(String dateString) {
       return dateTimeFormatter.parseDateTime(dateString);
     }
   }

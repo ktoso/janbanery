@@ -30,8 +30,8 @@ import pl.project13.janbanery.exceptions.kanbanery.invalidentity.*;
  */
 public class InvalidEntityKanbaneryException extends KanbaneryException {
 
-  private static final long serialVersionUID  = -5929890856952121819L;
-  public static final  int  MAPPED_ERROR_CODE = 422;
+  private static final long serialVersionUID = -5929890856952121819L;
+  public static final int MAPPED_ERROR_CODE = 422;
 
   public InvalidEntityKanbaneryException(String message) {
     super(message);

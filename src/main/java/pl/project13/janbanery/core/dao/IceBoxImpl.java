@@ -39,14 +39,14 @@ public class IceBoxImpl implements IceBox {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-  private Tasks   tasks;
+  private Tasks tasks;
   private Columns columns;
 
   private Configuration conf;
-  private RestClient    restClient;
+  private RestClient restClient;
 
   private Workspace currentWorkspace;
-  private Project   currentProject;
+  private Project currentProject;
 
   public IceBoxImpl(Tasks tasks, Columns columns, Configuration conf, RestClient restClient) {
     this.tasks = tasks;

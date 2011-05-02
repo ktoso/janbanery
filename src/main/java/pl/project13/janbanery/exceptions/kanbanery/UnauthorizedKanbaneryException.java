@@ -24,8 +24,8 @@ package pl.project13.janbanery.exceptions.kanbanery;
  */
 public class UnauthorizedKanbaneryException extends KanbaneryException {
 
-  private static final long serialVersionUID  = -2697280407763407943L;
-  public static final  int  MAPPED_ERROR_CODE = 401;
+  private static final long serialVersionUID = -2697280407763407943L;
+  public static final int MAPPED_ERROR_CODE = 401;
 
   public UnauthorizedKanbaneryException() {
   }

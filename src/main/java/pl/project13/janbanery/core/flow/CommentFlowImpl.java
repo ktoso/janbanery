@@ -18,7 +18,6 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.Comments;
 import pl.project13.janbanery.resources.Comment;
-import pl.project13.janbanery.resources.Task;
 
 /**
  * @author Konrad Malawski

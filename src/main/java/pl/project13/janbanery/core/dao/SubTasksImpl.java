@@ -36,7 +36,7 @@ import java.util.List;
 public class SubTasksImpl implements SubTasks {
 
   private Configuration conf;
-  private RestClient    restClient;
+  private RestClient restClient;
 
   private Workspace currentWorkspace;
 

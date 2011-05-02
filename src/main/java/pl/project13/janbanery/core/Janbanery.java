@@ -41,12 +41,12 @@ public class Janbanery {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-  private Configuration   conf;
+  private Configuration conf;
   private AsyncHttpClient asyncHttpClient;
-  private Gson            gson;
+  private Gson gson;
 
   private Workspace currentWorkspace;
-  private Project   currentProject;
+  private Project currentProject;
 
   private FormUrlEncodedBodyGenerator bodyGenerator;
 

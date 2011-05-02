@@ -22,7 +22,6 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
-import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.TaskType;
 import pl.project13.janbanery.resources.Workspace;
@@ -40,7 +39,7 @@ public class TaskTypesImpl implements TaskTypes {
   private Configuration conf;
 
   private Workspace currentWorkspace;
-  private Project   currentProject;
+  private Project currentProject;
 
   private RestClient restClient;
 

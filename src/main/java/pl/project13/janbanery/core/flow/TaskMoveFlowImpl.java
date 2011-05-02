@@ -35,8 +35,8 @@ import java.io.IOException;
 public class TaskMoveFlowImpl implements TaskMoveFlow {
 
   private Columns columns;
-  private Tasks   tasks;
-  private Task    task;
+  private Tasks tasks;
+  private Task task;
 
   public TaskMoveFlowImpl(Tasks tasks, Columns columns, Task task) {
     this.columns = columns;

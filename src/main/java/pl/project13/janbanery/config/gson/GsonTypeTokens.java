@@ -34,30 +34,30 @@ public class GsonTypeTokens {
 
   public static final Type LIST_WORKSPACE = new TypeToken<List<Workspace>>() {
   }.getType();
-  public static final Type LIST_USER      = new TypeToken<List<User>>() {
+  public static final Type LIST_USER = new TypeToken<List<User>>() {
   }.getType();
   public static final Type LIST_TASK_TYPE = new TypeToken<List<TaskType>>() {
   }.getType();
-  public static final Type LIST_TASK      = new TypeToken<List<Task>>() {
+  public static final Type LIST_TASK = new TypeToken<List<Task>>() {
   }.getType();
-  public static final Type LIST_SUB_TASK  = new TypeToken<List<SubTask>>() {
+  public static final Type LIST_SUB_TASK = new TypeToken<List<SubTask>>() {
   }.getType();
-  public static final Type LIST_COMMENT   = new TypeToken<List<Comment>>() {
+  public static final Type LIST_COMMENT = new TypeToken<List<Comment>>() {
   }.getType();
-  public static final Type LIST_COLUMN    = new TypeToken<List<Column>>() {
+  public static final Type LIST_COLUMN = new TypeToken<List<Column>>() {
   }.getType();
-  public static final Type LIST_ESTIMATE  = new TypeToken<List<Estimate>>() {
+  public static final Type LIST_ESTIMATE = new TypeToken<List<Estimate>>() {
   }.getType();
 
 
   // simple types
 
-  public static final Class<User>             USER              = User.class;
-  public static final Class<Task>             TASK              = Task.class;
-  public static final Class<SubTask>          SUB_TASK          = SubTask.class;
-  public static final Class<Comment>          COMMENT           = Comment.class;
+  public static final Class<User> USER = User.class;
+  public static final Class<Task> TASK = Task.class;
+  public static final Class<SubTask> SUB_TASK = SubTask.class;
+  public static final Class<Comment> COMMENT = Comment.class;
   public static final Class<TaskSubscription> TASK_SUBSCRIPTION = TaskSubscription.class;
-  public static final Class<Column>           COLUMN            = Column.class;
-  public static final Class<Estimate>         ESTIMATE          = Estimate.class;
-  public static final Class<TaskType>         TASK_TYPE         = TaskType.class;
+  public static final Class<Column> COLUMN = Column.class;
+  public static final Class<Estimate> ESTIMATE = Estimate.class;
+  public static final Class<TaskType> TASK_TYPE = TaskType.class;
 }

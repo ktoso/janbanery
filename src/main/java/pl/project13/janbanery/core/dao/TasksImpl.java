@@ -24,7 +24,6 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.*;
-import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 import pl.project13.janbanery.util.predicates.TaskByOwnerPredicate;
@@ -47,13 +46,13 @@ public class TasksImpl implements Tasks {
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private Configuration conf;
-  private RestClient    restClient;
-  private Gson          gson;
+  private RestClient restClient;
+  private Gson gson;
 
   private Columns columns;
 
   private Workspace currentWorkspace;
-  private Project   currentProject;
+  private Project currentProject;
 
   public TasksImpl(Columns columns, Configuration conf, RestClient restClient, Gson gson) {
     this.conf = conf;

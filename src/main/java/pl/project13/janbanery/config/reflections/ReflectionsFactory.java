@@ -70,9 +70,9 @@ public class ReflectionsFactory {
         .setUrls(clazzUrls)
         .setScanners(new TypesScanner(),
 //                     new SubTypesScanner(), // not needed for now
-                     new TypeElementsScanner(),
-                     new FieldAnnotationsScanner()
-                    );
+            new TypeElementsScanner(),
+            new FieldAnnotationsScanner()
+        );
 
     return new Reflections(configuration);
   }

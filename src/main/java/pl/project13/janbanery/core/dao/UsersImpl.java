@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
-import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.Workspace;
@@ -37,10 +36,10 @@ public class UsersImpl implements Users {
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private Configuration conf;
-  private RestClient    restClient;
+  private RestClient restClient;
 
   private Workspace currentWorkspace;
-  private Project   currentProject;
+  private Project currentProject;
 
   public UsersImpl(Configuration conf, RestClient restClient) {
     this.conf = conf;

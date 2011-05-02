@@ -43,10 +43,10 @@ public class ColumnsImpl implements Columns {
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private Configuration conf;
-  private RestClient    restClient;
+  private RestClient restClient;
 
   private Workspace currentWorkspace;
-  private Project   currentProject;
+  private Project currentProject;
 
   public ColumnsImpl(Configuration conf, RestClient restClient) {
     this.conf = conf;

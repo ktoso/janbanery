@@ -31,9 +31,9 @@ import java.util.Properties;
 public class PropertiesConfiguration extends DefaultConfiguration implements Configuration {
 
   public static final String DEFAULT_PROPS_FILENAME = "janbanery.properties";
-  public static final String P_APIKEY               = "apikey";
-  public static final String P_USERNAME             = "username";
-  public static final String P_PASSWORD             = "password";
+  public static final String P_APIKEY = "apikey";
+  public static final String P_USERNAME = "username";
+  public static final String P_PASSWORD = "password";
 
   private Properties properties = new Properties();
 

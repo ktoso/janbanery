@@ -27,8 +27,8 @@ package pl.project13.janbanery.exceptions.kanbanery;
  */
 public class ForbiddenOperationKanbaneryException extends KanbaneryException {
 
-  private static final long serialVersionUID  = -7400474381727697473L;
-  public static final  int  MAPPED_ERROR_CODE = 403;
+  private static final long serialVersionUID = -7400474381727697473L;
+  public static final int MAPPED_ERROR_CODE = 403;
 
   public ForbiddenOperationKanbaneryException() {
     super();

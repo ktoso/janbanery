@@ -32,10 +32,10 @@ import java.util.List;
 public class EstimatesImpl implements Estimates {
 
   private Configuration conf;
-  private RestClient    restClient;
+  private RestClient restClient;
 
   private Workspace currentWorkspace;
-  private Project   currentProject;
+  private Project currentProject;
 
   public EstimatesImpl(Configuration conf, RestClient restClient) {
     this.conf = conf;

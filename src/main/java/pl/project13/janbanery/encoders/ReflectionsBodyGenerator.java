@@ -68,20 +68,23 @@ public class ReflectionsBodyGenerator implements FormUrlEncodedBodyGenerator {
     return joinDataParts(fieldsWithValues);
   }
 
-  @VisibleForTesting <T extends KanbaneryResource> Collection<String> getAllFields(T entity) {
+  @VisibleForTesting
+  <T extends KanbaneryResource> Collection<String> getAllFields(T entity) {
     Multimap<String, String> typeElements = reflections.getStore().get(TypeElementsScanner.class);
 
     Collection<String> allFields = typeElements.get(entity.getClass().getCanonicalName());
     return filter(allFields, new NotAMethodPredicate());
   }
 
-  @VisibleForTesting String joinDataParts(Collection<String> formData) {
+  @VisibleForTesting
+  String joinDataParts(Collection<String> formData) {
     return Joiner.on("&").join(formData);
   }
 
 
   private static class NotAMethodPredicate implements Predicate<String> {
-    @Override public boolean apply(String input) {
+    @Override
+    public boolean apply(String input) {
       return !input.contains("("); // it's not a method
     }
   }

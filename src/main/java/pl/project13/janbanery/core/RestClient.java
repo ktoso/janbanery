@@ -48,9 +48,9 @@ public class RestClient {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-  private Configuration               conf;
-  private Gson                        gson;
-  private AsyncHttpClient             asyncHttpClient;
+  private Configuration conf;
+  private Gson gson;
+  private AsyncHttpClient asyncHttpClient;
   private FormUrlEncodedBodyGenerator encodedBodyGenerator;
 
   public RestClient(Configuration conf, Gson gson, AsyncHttpClient asyncHttpClient, FormUrlEncodedBodyGenerator encodedBodyGenerator) {
