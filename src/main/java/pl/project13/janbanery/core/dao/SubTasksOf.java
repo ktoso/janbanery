@@ -17,7 +17,10 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.batch.SubTasksFlow;
+import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
+
+import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -31,4 +34,6 @@ public interface SubTasksOf {
    * @return ready to work SubTasks instance
    */
   SubTasksFlow of(Task task);
+
+  void delete(SubTask subTask) throws IOException;
 }
