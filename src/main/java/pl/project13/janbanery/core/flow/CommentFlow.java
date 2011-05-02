@@ -16,12 +16,20 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.core.flow.batch.CommentsFlow;
 import pl.project13.janbanery.resources.Comment;
+
+import java.io.IOException;
 
 /**
  * @author Konrad Malawski
  */
-public interface CommentFlow extends Flow<Comment> { // todo rename it to flow<>
+public interface CommentFlow extends Flow<Comment> {
 
   void delete();
+
+  CommentFlow update(String newCommentBody) throws IOException;
+
+  CommentFlow update(Comment newValues) throws IOException;
+
 }

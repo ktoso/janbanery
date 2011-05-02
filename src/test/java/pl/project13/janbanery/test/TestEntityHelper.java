@@ -18,12 +18,10 @@ package pl.project13.janbanery.test;
 
 import org.junit.Ignore;
 import pl.project13.janbanery.core.Janbanery;
+import pl.project13.janbanery.core.flow.CommentFlow;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
-import pl.project13.janbanery.resources.Column;
-import pl.project13.janbanery.resources.Priority;
-import pl.project13.janbanery.resources.SubTask;
-import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.resources.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -87,5 +85,11 @@ public class TestEntityHelper {
     SubTask subTask = new SubTask();
     subTask.setBody(body);
     return subTask;
+  }
+
+  public static CommentFlow createTestComment(Janbanery janbanery, Task task) throws IOException {
+    return janbanery.comments()
+                    .of(task)
+                    .create(new Comment("Comment text"));
   }
 }

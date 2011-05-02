@@ -33,11 +33,12 @@ public interface CommentsFlow extends Flow<Task> {
 
   CommentFlow create(Comment comment) throws IOException;
 
-  CommentFlow update(Comment comment, Comment newValues) throws IOException;
-
-  void delete(Comment comment);
+  CommentsFlow deleteAll() throws IOException;
 
   // queries ------------------------------------------------------------------
 
+  CommentFlow byId(Long id) throws IOException;
+
   List<Comment> all() throws IOException;
+
 }

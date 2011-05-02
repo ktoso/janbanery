@@ -18,6 +18,8 @@ package pl.project13.janbanery.core.flow.batch;
 
 import pl.project13.janbanery.core.dao.Comments;
 import pl.project13.janbanery.core.flow.CommentFlow;
+import pl.project13.janbanery.core.flow.CommentFlowImpl;
+import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
 
@@ -44,13 +46,31 @@ public class CommentsFlowImpl implements CommentsFlow {
   }
 
   @Override
-  public CommentFlow update(Comment comment, Comment newValues) throws IOException {
-    return comments.update(comment, newValues);
+  public CommentFlow byId(Long id) throws IOException {
+    Comment foundComment = null;
+
+    for (Comment comment : all()) {
+      if (comment.getId().equals(id)) {
+        foundComment = comment;
+        break;
+      }
+    }
+    if (foundComment == null) {
+      throw new EntityNotFoundException("Task with ID: " + task.getId() +
+                                            " does not have a " +
+                                            "comment with ID: " + id);
+    }
+
+    return new CommentFlowImpl(comments, foundComment);
   }
 
   @Override
-  public void delete(Comment comment) {
-    comments.delete(comment);
+  public CommentsFlow deleteAll() throws IOException {
+    for (Comment comment : all()) {
+      comments.delete(comment);
+    }
+
+    return this;
   }
 
   @Override

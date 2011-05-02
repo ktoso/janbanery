@@ -40,6 +40,11 @@ public class CommentsImpl implements Comments {
 
   private Workspace currentWorkspace;
 
+  public CommentsImpl(Configuration conf, RestClient restClient) {
+    this.conf = conf;
+    this.restClient = restClient;
+  }
+
   @Override
   public CommentFlow create(Task task, Comment comment) throws IOException {
     String url = getCommentsUrl(task);

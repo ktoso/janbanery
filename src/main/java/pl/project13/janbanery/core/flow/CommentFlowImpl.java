@@ -19,6 +19,8 @@ package pl.project13.janbanery.core.flow;
 import pl.project13.janbanery.core.dao.Comments;
 import pl.project13.janbanery.resources.Comment;
 
+import java.io.IOException;
+
 /**
  * @author Konrad Malawski
  */
@@ -36,6 +38,19 @@ public class CommentFlowImpl implements CommentFlow {
   @Override
   public void delete() {
     comments.delete(comment);
+  }
+
+  @Override
+  public CommentFlow update(String newCommentBody) throws IOException {
+    Comment commandObject = new Comment();
+    commandObject.setBody(newCommentBody);
+
+    return update(commandObject);
+  }
+
+  @Override
+  public CommentFlow update(Comment newValues) throws IOException {
+    return comments.update(comment, newValues);
   }
 
   @Override

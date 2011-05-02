@@ -46,13 +46,13 @@ public class Comment extends KanbaneryResource {
    * Id of the task that this comment is about
    */
   @SerializedName("task_id")
-  private Integer taskId;
+  private Long taskId;
 
   /**
    * Id of the creator of this comment
    */
   @SerializedName("author_id")
-  private Integer authorId;
+  private Long authorId;
 
   public Comment() {
   }
@@ -82,19 +82,19 @@ public class Comment extends KanbaneryResource {
     this.body = body;
   }
 
-  public Integer getTaskId() {
+  public Long getTaskId() {
     return taskId;
   }
 
-  public void setTaskId(Integer taskId) {
+  public void setTaskId(Long taskId) {
     this.taskId = taskId;
   }
 
-  public Integer getAuthorId() {
+  public Long getAuthorId() {
     return authorId;
   }
 
-  public void setAuthorId(Integer authorId) {
+  public void setAuthorId(Long authorId) {
     this.authorId = authorId;
   }
 
