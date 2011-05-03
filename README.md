@@ -159,8 +159,6 @@ Just to make you get the feel of Janbanery let's look at some examples right now
                                   .all();
 ```
 
-```java
-
 **You can also work on columns**
 
 ```java
