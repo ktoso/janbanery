@@ -145,6 +145,21 @@ Some examples
 -------------
 Just to make you get the feel of Janbanery let's look at some examples right now:
 
+**Ok, what projects can I access?**
+
+```java
+    List<Project> projects = janbanery.projects()
+                                       .all();
+
+    List<Project> projects = janbanery.usingWorkspace("janbanery").projects()
+                                       .all();
+
+    Project project = janbanery.projects().byName("janbaneryProject");
+
+    List<Project> projects = janbanery.projects()
+                                       .allAcrossWorkspaces();
+```
+
 **Get my User**
 
 ```java
@@ -157,6 +172,9 @@ Just to make you get the feel of Janbanery let's look at some examples right now
 ```java
     List<TaskType> all = janbanery.taskTypes()
                                   .all();
+
+    TaskType any = janbanery.taskTypes()
+                            .any();
 ```
 
 **You can also work on columns**
