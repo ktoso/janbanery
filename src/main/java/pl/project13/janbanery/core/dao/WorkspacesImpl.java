@@ -33,6 +33,8 @@ public class WorkspacesImpl implements Workspaces {
   private Configuration conf;
   private RestClient restClient;
 
+  private Workspace currentWorkspace;
+
   public WorkspacesImpl(Configuration conf, RestClient restClient) {
     this.conf = conf;
     this.restClient = restClient;
@@ -55,4 +57,18 @@ public class WorkspacesImpl implements Workspaces {
     throw new WorkspaceNotFoundException("Could not find workspace named '" + name + "'");
   }
 
+  @Override
+  public Workspace current() {
+    if (currentWorkspace == null) {
+      throw new WorkspaceNotFoundException("Janbanery has no current workspace! That's very bad and weird - you may be doing something weird.");
+    }
+
+    return currentWorkspace;
+  }
+
+  public Workspaces using(Workspace currentWorkspace) {
+    this.currentWorkspace = currentWorkspace;
+
+    return this;
+  }
 }

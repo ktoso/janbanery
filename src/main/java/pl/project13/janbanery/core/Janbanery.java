@@ -153,7 +153,7 @@ public class Janbanery {
   }
 
   public Workspaces workspaces() {
-    return new WorkspacesImpl(conf, restClient);
+    return new WorkspacesImpl(conf, restClient).using(currentWorkspace);
   }
 
   public Columns columns() {

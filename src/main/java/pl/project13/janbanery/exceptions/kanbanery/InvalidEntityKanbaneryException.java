@@ -75,6 +75,8 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
       return new MaximumNumbersOfCollaboratorsReachedException(response);
     } else if (UserAlreadyAssignedToThisProjectException.isBestExceptionFor(response)) {
       return new UserAlreadyAssignedToThisProjectException(response);
+    } else if (ProjectOwnerCanNotBeGivenProjectMembership.isBestExceptionFor(response)) {
+      return new ProjectOwnerCanNotBeGivenProjectMembership(response);
     } else {
       return new InvalidEntityKanbaneryException(response);
     }

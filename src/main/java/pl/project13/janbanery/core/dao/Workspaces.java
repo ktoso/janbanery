@@ -43,4 +43,5 @@ public interface Workspaces {
    */
   Workspace byName(String name) throws IOException, WorkspaceNotFoundException;
 
+  Workspace current();
 }

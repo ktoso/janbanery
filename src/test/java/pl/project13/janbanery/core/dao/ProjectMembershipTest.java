@@ -23,7 +23,13 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.MembershipFlow;
-import pl.project13.janbanery.resources.*;
+import pl.project13.janbanery.core.flow.batch.MembershipsFlow;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.MaximumNumbersOfCollaboratorsReachedException;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.ProjectOwnerCanNotBeGivenProjectMembership;
+import pl.project13.janbanery.resources.Permission;
+import pl.project13.janbanery.resources.Project;
+import pl.project13.janbanery.resources.ProjectMembership;
+import pl.project13.janbanery.resources.Workspace;
 
 import java.util.List;
 
@@ -47,7 +53,11 @@ public class ProjectMembershipTest {
 
   @After
   public void tearDown() throws Exception {
-    shouldDeleteAllMemberships();
+    try {
+      shouldDeleteAllMemberships();
+    } catch (Exception ignore) {
+      // ok, don't mind
+    }
 
     janbanery.close();
   }
@@ -56,7 +66,6 @@ public class ProjectMembershipTest {
   public void shouldCreateNewMembership() throws Exception {
     // given
     shouldDeleteAllMemberships();
-    Project current = janbanery.projects().current();
     ProjectMembership projectMembership = new ProjectMembership.Builder().email("ktoso@project13.pl")
                                                                          .permission(Permission.VIEWER)
                                                                          .build();
@@ -69,41 +78,76 @@ public class ProjectMembershipTest {
     assertThat(membership).isNotNull();
   }
 
+  @Test(expected = ProjectOwnerCanNotBeGivenProjectMembership.class)
+  public void shouldThrowOnAddingOwner() throws Exception {
+    // given
+    shouldDeleteAllMemberships();
+    ProjectMembership projectMembership = new ProjectMembership("kmalawski@project13.pl", Permission.VIEWER);
+
+    // when
+    MembershipsFlow membershipsFlow = janbanery.memberships().ofCurrentProject();
+    membershipsFlow.create(projectMembership);
+
+    // then, should have thrown
+  }
+
+  @Test(expected = MaximumNumbersOfCollaboratorsReachedException.class)
+  public void shouldThrowOnExceededUsersInProjectLimit() throws Exception {
+    // given
+    shouldDeleteAllMemberships();
+
+    // when
+    MembershipsFlow membershipsFlow = janbanery.memberships().ofCurrentProject();
+    // todo this test makes no sense if you have an unlimited account....
+
+    //noinspection InfiniteLoopStatement
+    for (int i = 0; i < 10; i++) {
+      String email = String.format("testaccount%d@project13.pl", i);
+      membershipsFlow.create(new ProjectMembership(email, Permission.VIEWER));
+    }
+
+    // then, should have thrown
+  }
+
+  @Test
+  public void shouldChangeUsersPermissions() throws Exception {
+    // given
+    shouldDeleteAllMemberships();
+    Permission initialPermission = Permission.VIEWER;
+    ProjectMembership projectMembership = new ProjectMembership("ktoso@project13.pl", initialPermission);
+
+    MembershipFlow membershipFlow = janbanery.memberships().ofCurrentProject().create(projectMembership);
+
+    // when
+    Permission permissionAfterUpdate = Permission.MANAGER;
+    membershipFlow = membershipFlow.update().permission(permissionAfterUpdate);
+    // remember to keep updating the reference if you won't be using it as "pure fluent" api
+
+    // then
+    ProjectMembership membership = membershipFlow.get();
+
+    assertThat(membership).isNotNull();
+    assertThat(membership.getPermission()).isEqualTo(permissionAfterUpdate);
+  }
+
   @Test
   public void shouldDeleteAllMemberships() throws Exception {
     // given
-    List<ProjectMembership> all = janbanery.memberships().ofCurrentProject().all();
+    MembershipsFlow membershipsFlow = janbanery.memberships().ofCurrentProject();
 
     // when
-    for (ProjectMembership membership : all) {
-      janbanery.memberships().ofCurrentProject().delete(membership);
-    }
+    membershipsFlow.deleteAll();
 
     // then
-    List<ProjectMembership> allMembersAfterClean = janbanery.memberships().ofCurrentProject().all();
+    List<ProjectMembership> allMembersAfterClean = membershipsFlow.all();
 
     assertThat(allMembersAfterClean).isEmpty();
   }
 
   @Test
-  public void shouldFetchAllFromCurrentProject() throws Exception {
-    //given
-    User current = janbanery.users().current();
-
-    // when
-    List<ProjectMembership> members = janbanery.memberships().ofCurrentProject().all();
-
-    // then
-    assertThat(members).isNotEmpty();
-    String currentProject = janbanery.projects().current().getName();
-    janbanery.usingProject(currentProject);
-    assertThat(members).onProperty("email").containsExactly(current.getEmail());
-  }
-
-  @Test
   public void shouldFetchMembershipsInDifferentWorkspaces() throws Exception {
     // given
-    assert janbanery.projects().all().size() > 1 : "This test assumes you have more than one project";
+    assert janbanery.projects().allAcrossWorkspaces().size() > 1 : "This test assumes you have more than one project";
 
     // when
     Project firstProject = janbanery.usingWorkspace("janbanery").projects().all().get(0);
@@ -114,39 +158,33 @@ public class ProjectMembershipTest {
   }
 
   @Test
-  public void shouldFetchMembershipFromCurrentProjectById() throws Exception {
+  public void shouldThrowOnProjectNotInThisWorkspace() throws Exception {
     // given
-    assert janbanery.projects().all().size() > 1 : "This test assumes you have more than one project";
-
-    Workspace firstWorkspace = janbanery.workspaces().all().get(0);
-    Workspace secondWorkspace = janbanery.workspaces().all().get(1);
-
-    Project currentProject = janbanery.usingWorkspace(firstWorkspace.getName()).projects().all().get(0);
-    Project otherProject = janbanery.usingWorkspace(secondWorkspace.getName()).projects().all().get(0);
-
-    List<ProjectMembership> allMembersOfCurrent = janbanery.memberships().of(currentProject).all();
-    ProjectMembership anyOneFromCurrent = allMembersOfCurrent.get(0);
+    Project janbaneryProject = janbanery.projects().current();
 
     // when
-    Long membershipId = anyOneFromCurrent.getId();
-    ProjectMembership foundMember = janbanery.memberships().ofCurrentProject().byId(membershipId).get();
+    List<ProjectMembership> projectMemberships = janbanery.usingWorkspace("sckrk").memberships().of(janbaneryProject).all();// sckrk does NOT have janbaneryProject
 
     // then
-    assertThat(foundMember).isEqualTo(anyOneFromCurrent);
+    assertThat(projectMemberships).isEmpty();
+    // because this project is not in this workspace
+    // Kanbanery does return an empty array, so do we
   }
 
   @Test
-  public void shouldThrowOnCrossProjectByIdFetch() throws Exception {
+  public void shouldFetchOnByHandSetupWorkspaceAndProject() throws Exception {
     // given
-    List<Project> allProjects = janbanery.projects().all();
-    assert allProjects.size() > 1 : "This test assumes you have more than one project";
-    Project current = (Project) allProjects;
+    Workspace janbaneryWorkspace = janbanery.workspaces().current();
+    Project janbaneryProject = janbanery.projects().current();
 
     // when
-    janbanery.memberships().of(current).all().get(0);
+    List<ProjectMembership> all = janbanery.usingWorkspace(janbaneryWorkspace.getName())
+                                           .memberships().of(janbaneryProject)
+                                           .all();// this is a proper project / workspace pair
 
     // then
-
+    // if it didn't throw it's ok
+    assertThat(all).isNotNull();
   }
 
   @Test
