@@ -88,24 +88,12 @@ public class User extends KanbaneryResource implements Serializable {
     return id;
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public String getApiToken() {
     return apiToken;
   }
 
-  public void setApiToken(String apiToken) {
-    this.apiToken = apiToken;
-  }
-
   public String getEmail() {
     return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   public String getFirstName() {
@@ -126,10 +114,6 @@ public class User extends KanbaneryResource implements Serializable {
 
   public String getGravatarUrl() {
     return gravatarUrl;
-  }
-
-  public void setGravatarUrl(String gravatarUrl) {
-    this.gravatarUrl = gravatarUrl;
   }
 
   @Override
