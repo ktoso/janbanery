@@ -15,7 +15,9 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -28,7 +30,6 @@
     <artifactId>janbanery</artifactId>
     <version>1.1-SNAPSHOT</version>
     <name>Janbanery - Fluent Kanbanery API Java Wrapper</name>
-
     <description>
         Kanbanery (https://kanbanery.com) is a simple but powerful Agile project management system,
         to be precise it focuses around the idea of Kanban, a somewhat near idea to SCRUM but with less strict rules.
@@ -86,10 +87,6 @@
             <id>reflections-repository</id>
             <name>Reflections Maven2 Repository</name>
             <url>http://reflections.googlecode.com/svn/repo</url>
-        </repository>
-        <repository>
-            <id>jgit-repository</id>
-            <url>http://download.eclipse.org/jgit/maven</url>
         </repository>
     </repositories>
 
