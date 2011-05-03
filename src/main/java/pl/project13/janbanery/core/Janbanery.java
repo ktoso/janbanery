@@ -88,32 +88,32 @@ public class Janbanery {
    *
    * @param name the name of the project you want to use (it should be from the current {@link Workspace}
    * @return the now being used project
-   * @throws IOException
-   * @throws ExecutionException
-   * @throws InterruptedException
    * @throws ProjectNotFoundException will be thrown if no project with such name isSubscribedTo in the current workspace
+   * @throws IOException              if unable to communicate with the server
    */
-  public Project usingProject(String name) throws IOException, ExecutionException, InterruptedException, ProjectNotFoundException {
-    return this.usingProject(currentWorkspace, name);
+  public Janbanery usingProject(String name) throws IOException {
+    return usingProject(currentWorkspace, name);
   }
 
-  public Project usingProject(Workspace workspace, String name) throws IOException, ExecutionException, InterruptedException, ProjectNotFoundException {
+  public Janbanery usingProject(Workspace workspace, String name) throws IOException {
     for (Project project : workspace.getProjects()) {
       if (project.getName().equals(name)) {
-        return using(project);
+        return using(workspace).using(project);
       }
     }
     throw new ProjectNotFoundException("The workspace '" + workspace.getName() + "' has no project named '" + name + "'.");
   }
 
-  private Workspace using(Workspace workspace) {
+  public Janbanery using(Workspace workspace) {
     currentWorkspace = workspace;
-    return currentWorkspace;
+
+    return this;
   }
 
-  private Project using(Project project) {
+  public Janbanery using(Project project) {
     currentProject = project;
-    return currentProject;
+
+    return this;
   }
 
   /* return initially setup instances of dao objects */
@@ -178,8 +178,13 @@ public class Janbanery {
     return new EstimatesImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
+  public MembershipsOf memberships() {
+    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
+    return new MembershipsImpl(conf, restClient).using(currentWorkspace, currentProject);
+  }
+
   public Projects projects() {
-    return new ProjectsImpl(workspaces());
+    return new ProjectsImpl(workspaces()).using(currentProject);
   }
 
   public void close() {
