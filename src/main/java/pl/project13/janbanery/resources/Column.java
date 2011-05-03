@@ -82,10 +82,6 @@ public class Column extends KanbaneryResource implements Serializable {
     return id;
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public String getName() {
     return name;
   }
@@ -98,16 +94,8 @@ public class Column extends KanbaneryResource implements Serializable {
     return projectId;
   }
 
-  public void setProjectId(Integer projectId) {
-    this.projectId = projectId;
-  }
-
   public Boolean getFixed() {
     return fixed;
-  }
-
-  public void setFixed(Boolean fixed) {
-    this.fixed = fixed;
   }
 
   public Integer getCapacity() {
@@ -181,9 +169,9 @@ public class Column extends KanbaneryResource implements Serializable {
     sb.append("{id=").append(id);
     sb.append(", name='").append(name).append('\'');
     sb.append(", projectId=").append(projectId);
+    sb.append(", fixed=").append(fixed);
     sb.append(", capacity=").append(capacity);
     sb.append(", position=").append(position);
-    sb.append(", fixed=").append(fixed);
     sb.append('}');
     return sb.toString();
   }
@@ -213,4 +201,6 @@ public class Column extends KanbaneryResource implements Serializable {
       return instance;
     }
   }
+
+
 }

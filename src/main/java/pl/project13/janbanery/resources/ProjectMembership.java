@@ -186,4 +186,16 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
       return instance;
     }
   }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("ProjectMembership");
+    sb.append("{id=").append(id);
+    sb.append(", email='").append(email).append('\'');
+    sb.append(", permission=").append(permission);
+    sb.append(", projectId=").append(projectId);
+    sb.append('}');
+    return sb.toString();
+  }
 }

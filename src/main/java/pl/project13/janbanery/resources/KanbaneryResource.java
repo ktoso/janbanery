@@ -66,24 +66,12 @@ public abstract class KanbaneryResource implements Resource {
     return createdAt;
   }
 
-  public void setCreatedAt(DateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
   public DateTime getUpdatedAt() {
     return updatedAt;
   }
 
-  public void setUpdatedAt(DateTime updatedAt) {
-    this.updatedAt = updatedAt;
-  }
-
   public String getType() {
     return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
   }
 
   @Override
@@ -116,5 +104,16 @@ public abstract class KanbaneryResource implements Resource {
     result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("KanbaneryResource");
+    sb.append("{createdAt=").append(createdAt);
+    sb.append(", updatedAt=").append(updatedAt);
+    sb.append(", type='").append(type).append('\'');
+    sb.append('}');
+    return sb.toString();
   }
 }

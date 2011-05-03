@@ -67,10 +67,6 @@ public class Estimate extends KanbaneryResource implements Serializable {
     return id;
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public BigDecimal getValue() {
     return value;
   }
@@ -89,10 +85,6 @@ public class Estimate extends KanbaneryResource implements Serializable {
 
   public Integer getProjectId() {
     return projectId;
-  }
-
-  public void setProjectId(Integer project_id) {
-    this.projectId = project_id;
   }
 
   @Override
@@ -137,5 +129,17 @@ public class Estimate extends KanbaneryResource implements Serializable {
     result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("Estimate");
+    sb.append("{id=").append(id);
+    sb.append(", value=").append(value);
+    sb.append(", label='").append(label).append('\'');
+    sb.append(", projectId=").append(projectId);
+    sb.append('}');
+    return sb.toString();
   }
 }

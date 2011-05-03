@@ -127,6 +127,7 @@ public class Task extends KanbaneryResource implements Serializable {
   /**
    * True if task is blocked by other task(s), false otherwise
    */
+  @ReadOnly
   private Boolean blocked;
 
   /**
@@ -144,14 +145,6 @@ public class Task extends KanbaneryResource implements Serializable {
     return "task";
   }
 
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public Task(String title) {
     this.title = title;
   }
@@ -164,6 +157,10 @@ public class Task extends KanbaneryResource implements Serializable {
   public Task(String title, Long taskTypeId) {
     this.title = title;
     this.taskTypeId = taskTypeId;
+  }
+
+  public Long getId() {
+    return id;
   }
 
   public String getTitle() {
@@ -200,10 +197,6 @@ public class Task extends KanbaneryResource implements Serializable {
 
   public Long getCreatorId() {
     return creatorId;
-  }
-
-  public void setCreatorId(Long creatorId) {
-    this.creatorId = creatorId;
   }
 
   public String getDescription() {
@@ -250,10 +243,6 @@ public class Task extends KanbaneryResource implements Serializable {
     return readyToPull;
   }
 
-  public Boolean isReadyToPull() {
-    return readyToPull;
-  }
-
   public void setReadyToPull(Boolean readyToPull) {
     this.readyToPull = readyToPull;
   }
@@ -262,16 +251,8 @@ public class Task extends KanbaneryResource implements Serializable {
     return blocked;
   }
 
-  public void setBlocked(Boolean blocked) {
-    this.blocked = blocked;
-  }
-
   public DateTime getMovedAt() {
     return movedAt;
-  }
-
-  public void setMovedAt(DateTime movedAt) {
-    this.movedAt = movedAt;
   }
 
   public void setDeadline(Date deadline) {
@@ -425,5 +406,22 @@ public class Task extends KanbaneryResource implements Serializable {
     public Task build() {
       return instance;
     }
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("Task");
+    sb.append("{id=").append(id);
+    sb.append(", title='").append(title).append('\'');
+    sb.append(", taskTypeId=").append(taskTypeId);
+    sb.append(", creatorId=").append(creatorId);
+    sb.append(", ownerId=").append(ownerId);
+    sb.append(", readyToPull=").append(readyToPull);
+    sb.append(", position=").append(position);
+    sb.append(", priority=").append(priority);
+    sb.append(", columnId=").append(columnId);
+    sb.append('}');
+    return sb.toString();
   }
 }

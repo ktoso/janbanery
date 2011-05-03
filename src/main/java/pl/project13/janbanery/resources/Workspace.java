@@ -63,24 +63,12 @@ public class Workspace extends KanbaneryResource implements Serializable {
     return id;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
   public String getName() {
     return name;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public List<Project> getProjects() {
     return projects;
-  }
-
-  public void setProjects(List<Project> projects) {
-    this.projects = projects;
   }
 
   @Override
@@ -125,5 +113,16 @@ public class Workspace extends KanbaneryResource implements Serializable {
     result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("Workspace");
+    sb.append("{id=").append(id);
+    sb.append(", name='").append(name).append('\'');
+    sb.append(", projects=").append(projects);
+    sb.append('}');
+    return sb.toString();
   }
 }

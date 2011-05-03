@@ -163,4 +163,16 @@ public class User extends KanbaneryResource implements Serializable {
     result = 31 * result + (gravatarUrl != null ? gravatarUrl.hashCode() : 0);
     return result;
   }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("User");
+    sb.append("{id=").append(id);
+    sb.append(", email='").append(email).append('\'');
+    sb.append(", firstName='").append(firstName).append('\'');
+    sb.append(", lastName='").append(lastName).append('\'');
+    sb.append('}');
+    return sb.toString();
+  }
 }

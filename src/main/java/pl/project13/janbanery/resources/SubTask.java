@@ -49,6 +49,7 @@ public class SubTask extends KanbaneryResource implements Serializable {
   /**
    * If of the "parent task"
    */
+  @ReadOnly
   @SerializedName("task_id")
   private Long taskId;
 
@@ -73,10 +74,6 @@ public class SubTask extends KanbaneryResource implements Serializable {
     return "subtask";
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public Long getId() {
     return id;
   }
@@ -93,16 +90,8 @@ public class SubTask extends KanbaneryResource implements Serializable {
     return taskId;
   }
 
-  public void setTaskId(Long taskId) {
-    this.taskId = taskId;
-  }
-
   public Long getCreatorId() {
     return creatorId;
-  }
-
-  public void setCreatorId(Long creatorId) {
-    this.creatorId = creatorId;
   }
 
   public Boolean getCompleted() {
@@ -155,5 +144,18 @@ public class SubTask extends KanbaneryResource implements Serializable {
     result = 31 * result + (creatorId != null ? creatorId.hashCode() : 0);
     result = 31 * result + (completed != null ? completed.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("SubTask");
+    sb.append("{id=").append(id);
+    sb.append(", body='").append(body).append('\'');
+    sb.append(", taskId=").append(taskId);
+    sb.append(", creatorId=").append(creatorId);
+    sb.append(", completed=").append(completed);
+    sb.append('}');
+    return sb.toString();
   }
 }

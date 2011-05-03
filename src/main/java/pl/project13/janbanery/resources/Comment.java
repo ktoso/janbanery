@@ -70,10 +70,6 @@ public class Comment extends KanbaneryResource {
     return id;
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public String getBody() {
     return body;
   }
@@ -136,5 +132,17 @@ public class Comment extends KanbaneryResource {
     result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
     result = 31 * result + (authorId != null ? authorId.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("Comment");
+    sb.append("{id=").append(id);
+    sb.append(", body='").append(body).append('\'');
+    sb.append(", taskId=").append(taskId);
+    sb.append(", authorId=").append(authorId);
+    sb.append('}');
+    return sb.toString();
   }
 }

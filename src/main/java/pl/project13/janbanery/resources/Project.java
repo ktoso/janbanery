@@ -40,11 +40,6 @@ public class Project extends KanbaneryResource implements Serializable {
   @ReadOnly
   private String name;
 
-//  /**
-//   * Full URL to the project
-//   */
-//  private String  url;
-
   public Project() {
   }
 
@@ -57,25 +52,9 @@ public class Project extends KanbaneryResource implements Serializable {
     return id;
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public String getName() {
     return name;
   }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-//  public String getUrl() {
-//    return url;
-//  }
-//
-//  public void setUrl(String url) {
-//    this.url = url;
-//  }
 
   @Override
   public boolean equals(Object o) {
@@ -103,9 +82,6 @@ public class Project extends KanbaneryResource implements Serializable {
     if (updatedAt != null ? !updatedAt.equals(project.updatedAt) : project.updatedAt != null) {
       return false;
     }
-//    if (url != null ? !url.equals(project.url) : project.url != null) {
-//      return false;
-//    }
 
     return true;
   }

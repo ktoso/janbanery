@@ -47,6 +47,7 @@ public class Issue extends KanbaneryResource implements Serializable {
   /**
    * Task related to this issue
    */
+  @ReadOnly
   @SerializedName("task_id")
   private Integer taskId;
 
@@ -68,10 +69,6 @@ public class Issue extends KanbaneryResource implements Serializable {
     return id;
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public String getUrl() {
 
     return url;
@@ -83,10 +80,6 @@ public class Issue extends KanbaneryResource implements Serializable {
 
   public Integer getTaskId() {
     return taskId;
-  }
-
-  public void setTaskId(Integer taskId) {
-    this.taskId = taskId;
   }
 
   public Boolean getResolved() {
@@ -135,5 +128,17 @@ public class Issue extends KanbaneryResource implements Serializable {
     result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
     result = 31 * result + (resolved != null ? resolved.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("Issue");
+    sb.append("{id=").append(id);
+    sb.append(", url='").append(url).append('\'');
+    sb.append(", taskId=").append(taskId);
+    sb.append(", resolved=").append(resolved);
+    sb.append('}');
+    return sb.toString();
   }
 }
