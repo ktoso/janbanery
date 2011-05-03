@@ -61,7 +61,7 @@ public class TaskMarkFlowImplTest {
     task = janbanery.tasks().mark(task).asReadyToPull().get();
 
     // then
-    assertThat(task.isReadyToPull()).isTrue();
+    assertThat(task.getReadyToPull()).isTrue();
   }
 
   @Test
@@ -74,7 +74,7 @@ public class TaskMarkFlowImplTest {
     task = markFlow.asNotReadyToPull().get();
 
     // then
-    assertThat(task.isReadyToPull()).isFalse();
+    assertThat(task.getReadyToPull()).isFalse();
   }
 
   private Task createTestTask() throws IOException, ExecutionException, InterruptedException {
