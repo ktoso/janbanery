@@ -16,8 +16,10 @@
 
 package pl.project13.janbanery.resources;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.annotations.SerializedName;
 import pl.project13.janbanery.resources.additions.On;
+import pl.project13.janbanery.resources.additions.ReadOnly;
 import pl.project13.janbanery.resources.additions.Required;
 import pl.project13.janbanery.resources.additions.Settable;
 
@@ -30,6 +32,12 @@ import java.io.Serializable;
  * @author Konrad Malawski
  */
 public class ProjectMembership extends KanbaneryResource implements Serializable {
+
+  /**
+   * The resources ID
+   */
+  @ReadOnly
+  private Long id;
 
   /**
    * User email (weird?)
@@ -60,9 +68,18 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
   public ProjectMembership() {
   }
 
+  public ProjectMembership(String email, Permission permission) {
+    this.email = email;
+    this.permission = permission;
+  }
+
   @Override
   public String getResourceId() {
-    return "memberships";
+    return "project_membership";
+  }
+
+  public Long getId() {
+    return id;
   }
 
   public String getEmail() {
@@ -143,5 +160,31 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
     result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
     result = 31 * result + (type != null ? type.hashCode() : 0);
     return result;
+  }
+
+
+  public static class Builder {
+
+    private ProjectMembership instance;
+
+    public Builder() {
+      instance = new ProjectMembership();
+    }
+
+    public Builder email(String email) {
+      instance.email = email;
+      return this;
+    }
+
+    public Builder permission(Permission permission) {
+      instance.permission = permission;
+      return this;
+    }
+
+    public ProjectMembership build() {
+      Preconditions.checkNotNull(instance.email);
+      Preconditions.checkNotNull(instance.permission);
+      return instance;
+    }
   }
 }
