@@ -21,6 +21,7 @@ import com.google.gson.*;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import pl.project13.janbanery.resources.Permission;
 import pl.project13.janbanery.resources.Priority;
 
 import java.lang.reflect.Type;
@@ -47,6 +48,8 @@ public class GsonFactory {
         .registerTypeAdapter(Date.class, new DateDeserializer())
         .registerTypeAdapter(Priority.class, new PrioritySerializer())
         .registerTypeAdapter(Priority.class, new PriorityDeserializer())
+        .registerTypeAdapter(Permission.class, new PermissionSerializer())
+        .registerTypeAdapter(Permission.class, new PermissionDeserializer())
 //        .setPrettyPrinting()
         .create();
   }
@@ -88,6 +91,21 @@ public class GsonFactory {
     public Priority deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
       int id = json.getAsInt();
       return Priority.fromPriorityId(id);
+    }
+  }
+
+  public static class PermissionSerializer implements JsonSerializer<Permission> {
+    @Override
+    public JsonElement serialize(Permission permission, Type typeOfSrc, JsonSerializationContext context) {
+      return new JsonPrimitive(permission.jsonRepresentation());
+    }
+  }
+
+  public static class PermissionDeserializer implements JsonDeserializer<Permission> {
+    @Override
+    public Permission deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+      String jsonName = json.getAsString();
+      return Permission.fromJsonName(jsonName);
     }
   }
 

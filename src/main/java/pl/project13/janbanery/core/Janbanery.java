@@ -42,19 +42,18 @@ public class Janbanery {
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private Configuration conf;
-  private AsyncHttpClient asyncHttpClient;
-  private Gson gson;
+  private RestClient restClient;
 
   private Workspace currentWorkspace;
   private Project currentProject;
 
-  private FormUrlEncodedBodyGenerator bodyGenerator;
-
-  public Janbanery(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson, ReflectionsBodyGenerator bodyGenerator) {
+  public Janbanery(Configuration conf, RestClient restClient) {
     this.conf = conf;
-    this.asyncHttpClient = asyncHttpClient;
-    this.gson = gson;
-    this.bodyGenerator = bodyGenerator;
+    this.restClient = restClient;
+  }
+
+  private RestClient getRestClient(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson, ReflectionsBodyGenerator bodyGenerator) {
+    return new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
   }
 
   public AuthProvider getAuthMode() {
@@ -74,13 +73,12 @@ public class Janbanery {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public Workspace usingWorkspace(String name) throws IOException, ExecutionException, InterruptedException {
+  public Janbanery usingWorkspace(String name) throws IOException, ExecutionException, InterruptedException {
     Workspace workspace = workspaces().byName(name);
 
     Project firstProject = workspace.getProjects().get(0);
-    using(firstProject);
 
-    return using(workspace);
+    return using(workspace).using(firstProject);
   }
 
   /**
@@ -104,13 +102,13 @@ public class Janbanery {
     throw new ProjectNotFoundException("The workspace '" + workspace.getName() + "' has no project named '" + name + "'.");
   }
 
-  public Janbanery using(Workspace workspace) {
+  private Janbanery using(Workspace workspace) {
     currentWorkspace = workspace;
 
     return this;
   }
 
-  public Janbanery using(Project project) {
+  private Janbanery using(Project project) {
     currentProject = project;
 
     return this;
@@ -119,75 +117,67 @@ public class Janbanery {
   /* return initially setup instances of dao objects */
 
   public Tasks tasks() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
-    return new TasksImpl(columns(), conf, restClient, gson).using(currentWorkspace, currentProject);
+    return new TasksImpl(columns(), conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public IssuesOf issues() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new IssuesImpl(conf, restClient).using(currentWorkspace);
   }
 
   public SubTasks subTasks() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new SubTasksImpl(conf, restClient).using(currentWorkspace);
   }
 
   public CommentsOf comments() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new CommentsImpl(conf, restClient).using(currentWorkspace);
   }
 
   public IceBox iceBox() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new IceBoxImpl(tasks(), columns(), conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public Archive archive() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator); // todo improve this to be mockable
     return new ArchiveImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public TaskTypes taskTypes() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new TaskTypesImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public Users users() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new UsersImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public Subscriptions subscriptions() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new SubscriptionsImpl(conf, restClient).using(currentWorkspace);
   }
 
   public Workspaces workspaces() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new WorkspacesImpl(conf, restClient);
   }
 
   public Columns columns() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new ColumnsImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public Estimates estimates() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
     return new EstimatesImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public MembershipsOf memberships() {
-    RestClient restClient = new RestClient(conf, gson, asyncHttpClient, bodyGenerator);// todo improve this to be mockable
+
     return new MembershipsImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
   public Projects projects() {
-    return new ProjectsImpl(workspaces()).using(currentProject);
+    return new ProjectsImpl(workspaces()).using(currentWorkspace, currentProject);
   }
 
+  /**
+   * If is very important that you call this method after you're finished working with kanbanery.
+   * It will close all underlying threads and free a lot of memory used by the RestClient.
+   */
   public void close() {
-    asyncHttpClient.close();
+    restClient.close();
   }
 }

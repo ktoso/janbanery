@@ -18,6 +18,7 @@ package pl.project13.janbanery.config;
 
 import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.config.auth.AuthProvider;
+import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.Workspace;
 
@@ -68,4 +69,7 @@ public interface Configuration {
   String getApiUrl(Workspace workspace, Long projectId, String resource, String resourceDotJson);
 
   String getApiUrl(Workspace workspace, String resourcesId, Long resourceId, String resourceDotJson);
+
+  // todo refactor this as VarArgs...
+  String getApiUrl(Workspace currentWorkspace, String resourcesId, Long currentProject, String memberships, Long resourceDotJson);
 }

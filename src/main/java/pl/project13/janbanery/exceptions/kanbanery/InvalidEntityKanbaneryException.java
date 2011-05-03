@@ -71,6 +71,10 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
       return new NotFixedColumnCannotBeFirstException(response);
     } else if (BodyMustNotBeBlankException.isBestExceptionFor(response)) {
       return new BodyMustNotBeBlankException(response);
+    } else if (MaximumNumbersOfCollaboratorsReachedException.isBestExceptionFor(response)) {
+      return new MaximumNumbersOfCollaboratorsReachedException(response);
+    } else if (UserAlreadyAssignedToThisProjectException.isBestExceptionFor(response)) {
+      return new UserAlreadyAssignedToThisProjectException(response);
     } else {
       return new InvalidEntityKanbaneryException(response);
     }

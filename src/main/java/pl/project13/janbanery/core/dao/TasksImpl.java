@@ -16,8 +16,6 @@
 
 package pl.project13.janbanery.core.dao;
 
-import com.google.gson.Gson;
-import com.ning.http.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
@@ -47,17 +45,15 @@ public class TasksImpl implements Tasks {
 
   private Configuration conf;
   private RestClient restClient;
-  private Gson gson;
 
   private Columns columns;
 
   private Workspace currentWorkspace;
   private Project currentProject;
 
-  public TasksImpl(Columns columns, Configuration conf, RestClient restClient, Gson gson) {
+  public TasksImpl(Columns columns, Configuration conf, RestClient restClient) {
     this.conf = conf;
     this.restClient = restClient;
-    this.gson = gson;
     this.columns = columns;
   }
 
@@ -165,10 +161,9 @@ public class TasksImpl implements Tasks {
     // todo port this to *Flow
     String url = getDefaultGetUrl();
 
-    Response response = restClient.doGet(url);
-    String responseBody = response.getResponseBody();
+    List<Task> tasks = restClient.doGet(url, GsonTypeTokens.LIST_TASK);
 
-    return gson.fromJson(responseBody, GsonTypeTokens.LIST_TASK);
+    return tasks;
   }
 
   @Override
@@ -187,14 +182,11 @@ public class TasksImpl implements Tasks {
 
   @Override
   public Task byId(Long taskId) throws IOException {
-    Task task = new Task();
-    task.setId(taskId);
-    String url = getTaskUrl(task);
+    String url = getTaskUrl(taskId);
 
-    Response response = restClient.doGet(url);
-    String responseBody = response.getResponseBody();
+    Task task = restClient.doGet(url, GsonTypeTokens.TASK);
 
-    return gson.fromJson(responseBody, GsonTypeTokens.TASK);
+    return task;
   }
 
   @Override
@@ -250,6 +242,10 @@ public class TasksImpl implements Tasks {
     return conf.getApiUrl(currentWorkspace, currentProject.getId()) + "tasks.json";
   }
 
+  private String getTaskUrl(Long taskId) {
+    return conf.getApiUrl(currentWorkspace, "tasks", taskId);
+  }
+
   /**
    * Returns a proper url to call API calls for this task on -
    * for PUT/DELETE calls.
@@ -260,7 +256,7 @@ public class TasksImpl implements Tasks {
    * @return the proper URL for API calls on this task
    */
   private String getTaskUrl(Task task) {
-    return conf.getApiUrl(currentWorkspace, "tasks", task.getId());
+    return getTaskUrl(task.getId());
   }
 
   /**

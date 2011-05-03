@@ -249,4 +249,12 @@ public class RestClient {
 
     return response;
   }
+
+  /**
+   * If is very important that you call this method after you're finished working with kanbanery.
+   * It will close all underlying threads and free a lot of memory used by the RestClient.
+   */
+  public void close() {
+    asyncHttpClient.close();
+  }
 }

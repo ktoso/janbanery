@@ -162,7 +162,6 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
     return result;
   }
 
-
   public static class Builder {
 
     private ProjectMembership instance;

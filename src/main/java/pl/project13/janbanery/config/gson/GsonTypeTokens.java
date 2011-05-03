@@ -50,6 +50,8 @@ public class GsonTypeTokens {
   }.getType();
   public static final Type LIST_ESTIMATE = new TypeToken<List<Estimate>>() {
   }.getType();
+  public static final Type LIST_PROJECT_MEMBERSHIP = new TypeToken<List<ProjectMembership>>() {
+  }.getType();
 
 
   // simple types
@@ -63,4 +65,5 @@ public class GsonTypeTokens {
   public static final Class<Column> COLUMN = Column.class;
   public static final Class<Estimate> ESTIMATE = Estimate.class;
   public static final Class<TaskType> TASK_TYPE = TaskType.class;
+  public static final Class<ProjectMembership> PROJECT_MEMBERSHIP = ProjectMembership.class;
 }

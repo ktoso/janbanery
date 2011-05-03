@@ -19,6 +19,7 @@ package pl.project13.janbanery.config.gson;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import pl.project13.janbanery.config.gson.GsonFactory;
+import pl.project13.janbanery.resources.Permission;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -27,11 +28,10 @@ import static org.fest.assertions.Assertions.assertThat;
  */
 public class GsonDeserializersTest {
 
-  final GsonFactory.DateTimeDeserializer dateTimeDeserializer = new GsonFactory.DateTimeDeserializer();
-
   @Test
   public void shouldParseIso8601DateTime() throws Exception {
     // given
+    GsonFactory.DateTimeDeserializer dateTimeDeserializer = new GsonFactory.DateTimeDeserializer();
     String dateString = "2010-12-15T01:25:10+00:00"; // as returned by kanbanery
 
     // when

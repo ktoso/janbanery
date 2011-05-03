@@ -18,6 +18,7 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Project;
+import pl.project13.janbanery.resources.Workspace;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,9 +29,33 @@ import java.util.List;
 public interface Projects {
 
   // queries ------------------------------------------------------------------
+
+  /**
+   * Fetches a list of all {@link Project}s inside of the current {@link Workspace}.
+   * If you want to access all Projects you have access to, try {@link #allAcrossWorkspaces()} instead.
+   * <p/>
+   * You may also use it like this to query a specific workspace:
+   * <pre>
+   *   janbanery.usingWorkspace("janbanery").projects().all();
+   * </pre>
+   *
+   * @return
+   * @throws IOException
+   */
   List<Project> all() throws IOException;
 
+  /**
+   * Fetches absolutely all {@link Project}s you have access to - across all Workspaces.
+   * If you're only interested in one workspace, try {@link #all()}.
+   *
+   * @return
+   * @throws IOException
+   */
+  List<Project> allAcrossWorkspaces() throws IOException;
+
   Project byId(Long id) throws EntityNotFoundException, IOException;
+
+  Project current();
 
   // commands -----------------------------------------------------------------
   // no commands on projects are supported by Kanbanery v1.2

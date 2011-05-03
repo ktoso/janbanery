@@ -16,6 +16,7 @@
 
 package pl.project13.janbanery.core;
 
+import com.google.gson.Gson;
 import com.ning.http.client.AsyncHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,8 @@ public class JanbaneryFactory {
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private AsyncHttpClient asyncHttpClient;
+  private ReflectionsBodyGenerator encodedBodyGenerator = new ReflectionsBodyGenerator();
+  private Gson gson = GsonFactory.create();
 
   public JanbaneryFactory() {
     asyncHttpClient = new AsyncHttpClient();
@@ -48,7 +51,8 @@ public class JanbaneryFactory {
   }
 
   public Janbanery connectUsing(Configuration configuration) {
-    return new Janbanery(configuration, asyncHttpClient, GsonFactory.create(), new ReflectionsBodyGenerator());
+    RestClient restClient = getRestClient(configuration);
+    return new Janbanery(configuration, restClient);
   }
 
   /**
@@ -75,7 +79,8 @@ public class JanbaneryFactory {
    */
   public Janbanery connectUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
-    Janbanery janbanery = new Janbanery(conf, asyncHttpClient, GsonFactory.create(), new ReflectionsBodyGenerator());
+    RestClient restClient = getRestClient(conf);
+    Janbanery janbanery = new Janbanery(conf, restClient);
 
     // fetch and switch to apiKey mode
     String apiKey = getCurrentUserApiKey(janbanery);
@@ -104,8 +109,24 @@ public class JanbaneryFactory {
    */
   public Janbanery connectAndKeepUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
-    return new Janbanery(conf, asyncHttpClient, GsonFactory.create(), new ReflectionsBodyGenerator());
+    RestClient restClient = getRestClient(conf);
+    return new Janbanery(conf, restClient);
   }
 
+  private RestClient getRestClient(Configuration configuration) {
+    return new RestClient(configuration, gson, asyncHttpClient, encodedBodyGenerator);
+  }
+
+  public void setAsyncHttpClient(AsyncHttpClient asyncHttpClient) {
+    this.asyncHttpClient = asyncHttpClient;
+  }
+
+  public void setEncodedBodyGenerator(ReflectionsBodyGenerator encodedBodyGenerator) {
+    this.encodedBodyGenerator = encodedBodyGenerator;
+  }
+
+  public void setGson(Gson gson) {
+    this.gson = gson;
+  }
 }
 

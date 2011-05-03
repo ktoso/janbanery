@@ -16,6 +16,8 @@
 
 package pl.project13.janbanery.core.dao;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
@@ -32,12 +34,22 @@ public class ProjectsImpl implements Projects {
 
   private Workspaces workspaces;
 
+  private Workspace currentWorkspace;
+  private Project currentProject;
+
   public ProjectsImpl(Workspaces workspaces) {
     this.workspaces = workspaces;
   }
 
   @Override
   public List<Project> all() throws IOException {
+    Workspace workspace = workspaces.byName(currentWorkspace.getName());
+
+    return workspace.getProjects();
+  }
+
+  @Override
+  public List<Project> allAcrossWorkspaces() throws IOException {
     List<Workspace> allWorkspaces = workspaces.all();
 
     List<Project> allProjects = newArrayList();
@@ -64,5 +76,15 @@ public class ProjectsImpl implements Projects {
     throw new EntityNotFoundException("Could not find project with id: " + id);
   }
 
+  @Override
+  public Project current() {
+    return currentProject;
+  }
+
+  public Projects using(Workspace currentWorkspace, Project currentProject) {
+    this.currentWorkspace = currentWorkspace;
+    this.currentProject = currentProject;
+    return this;
+  }
 }
 
