@@ -1,5 +1,7 @@
 Janbanery - Java Kanbanery API Connector
 ========================================
+Kanbanery
+---------
 <a href="https://kanbanery.com/" style="display:block; background:black;">
 <img src="https://sckrk.kanbanery.com/images/kanbanery-logo-small.png?1303131477" alt="[kanbanery]" style="background:black;"/><br/>
 </a>
@@ -9,6 +11,12 @@ Kanbanery has an web interface, as well as a iPad and iPhone version. The RESTfu
 favourite tool to be integrated with it - and that's what I'm doing. This connector will be used in the upcomming Intellij
 IDEA plugin as well as the Android version of the app.
 
+Janbanery
+---------
+**Janbanery** is a **Java library** that provides a **fluent** and **typesafe** (no magic strings etc) API to access 100% of Kanbanery's features.
+Well, in fact, even above 100% (sic!) as we've added some filtering and mass operations if you'd want to count those as "atomic from the users perspective".
+
+Feel free to use this library in any project integrating Kanbanery with your app or tool. Also, please share any thoughts about it and request new features where you'd see some possible cool things.
 
 If you have any comments, feel free to open issues or contact me <a href="mailto:konrad.malawski@java.pl">via email</a>.
 
@@ -22,22 +30,48 @@ Use this repository for **STABLE** releases.
 By STABLE I mean the full API is covered, all methods are documented and the API will not have breaking changes with minor revision number updates.
 
 ```
-<repository>
-    <id>sonatype-releases</id>
-    <name>Sonatype Releases</name>
-    <url>https://oss.sonatype.org/content/repositories/releases/</url>
-</repository>
+<repositories>
+    <repository>
+        <id>sonatype-releases</id>
+        <name>Sonatype Releases</name>
+        <url>https://oss.sonatype.org/content/repositories/releases/</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <!-- ... -->
+
+    <dependency>
+        <groupId>pl.project13.janbanery</groupId>
+        <artifactId>janbanery</artifactId>
+        <version>1.0</version>
+    </dependency>
+
+</dependencies>
 ```
 
 Use the following repository for access to **SNAPSHOTS** these are very frequently updated and are "bleeding edge", so you may cut yourself 
 when trusting that the API won't change. But as it's updated quicker, there are by far more features in it.
 
 ```
-<repository>
-    <id>sonatype-snapshots</id>
-    <name>Sonatype Snapshots</name>
-    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-</repository>
+<repositories>
+    <repository>
+        <id>sonatype-snapshots</id>
+        <name>Sonatype Snapshots</name>
+        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <!-- ... -->
+
+    <dependency>
+        <groupId>pl.project13.janbanery</groupId>
+        <artifactId>janbanery</artifactId>
+        <version>1.0</version>
+    </dependency>
+
+</dependencies>
 ```
 
 Download the JAR
@@ -52,8 +86,10 @@ To do so, first just get the source (by `git clone` for example) and run `mvn in
 Be sure to let me know via **pull requests** and **opening issues** that you found some kind of bug, would like to add a new feature etc.
 Be sure the Kanbanery API does allow it though - not all Entities can be created via the API for example.
 
-Usage
-=====
+Usage examples
+==============
+These are just a "quick start", if you need more help or conviceing why you should use Janbanery take a look at our Wiki, where all flows are described (soon!).
+
 Logging in
 ----------
 *Easy as goo pie.* To start coding with **Janbanery**, I've prepared a nice factory for you, here's how you may use it:
@@ -105,11 +141,67 @@ password=example
 And when found it will determine if it should user the user/pass method or apikey. If both of these are set, the API key method will be used, if no API KEY is set, the username/password properties will be used.
 You may also pass the path to the properties file explicitely in the constructor of PropertiesConfiguration().
 
-Queries
--------
+Some examples
+-------------
+Just to make you get the feel of Janbanery let's look at some examples right now:
 
-Commands
---------
+**Get my User**
+
+```java
+    User me = janbanery.users()
+                       .current();
+```
+
+**Take a look at the possible Task Types**
+
+```java
+    List<TaskType> all = janbanery.taskTypes()
+                                  .all();
+```
+
+```java
+
+**You can also work on columns**
+
+```java
+    Column column = new Column.Builder("Testing").capacity(5).build();
+
+    Column last = janbanery.columns().last();
+    Column beforeLast = janbanery.columns().before(last);
+
+    column = janbanery.columns().create(column).after(beforeLast);
+
+    janbanery.columns().create(column).beforeLast();
+    janbanery.columns().move(column).toPosition(5);
+```
+
+**And here's how you could use the flows if you wanted to**
+
+```java
+    Task task = janbanery.tasks().create(task)
+                         .assign().to(me) // task flow
+                         .move().toNextColumn() // task movement flow
+                         .asTaskFlow().mark().asReadyToPull() // task flow
+                         .get(); // task
+```
+
+**And there's much more...!**
+
+* Tasks
+* TaskSubscriptions
+* TaskTypes
+* SubTasks
+* Estimates
+* Comments
+* Issues
+* Columns
+* Workspaces
+* Projects
+* ProjectMemberships
+* Permissions
+
+All ready to be used, so just *start coding your Kanbanery integration right now*!
+
 
 Exceptions
 ----------
