@@ -36,19 +36,13 @@ public class ColumnCreateFlowImpl implements ColumnCreateFlow {
   }
 
   @Override
-  public Column after(Column thatColumn) throws IOException {
-    Integer newPosition = thatColumn.getPosition() + 1;
-    return onPosition(newPosition);
-  }
-
-  @Override
   public Column afterFirst() throws IOException {
     return after(columns.first());
   }
 
   @Override
-  public Column before(Column thatColumn) throws IOException {
-    Integer newPosition = thatColumn.getPosition();
+  public Column after(Column thatColumn) throws IOException {
+    Integer newPosition = thatColumn.getPosition() + 1;
     return onPosition(newPosition);
   }
 
@@ -58,13 +52,19 @@ public class ColumnCreateFlowImpl implements ColumnCreateFlow {
   }
 
   @Override
+  public Column before(Column thatColumn) throws IOException {
+    Integer newPosition = thatColumn.getPosition();
+    return onPosition(newPosition);
+  }
+
+  @Override
   public Column onPosition(Integer position) throws IOException {
     column.setPosition(position);
 
     return call();
   }
 
-  public Column call() throws IOException {
+  private Column call() throws IOException {
     return columns.doCreate(column);
   }
 }
