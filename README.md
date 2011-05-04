@@ -197,7 +197,8 @@ Just to make you get the feel of Janbanery let's look at some examples right now
     Task task = janbanery.tasks().create(task)
                          .assign().to(me) // task flow
                          .move().toNextColumn() // task movement flow
-                         .asTaskFlow().mark().asReadyToPull() // task flow
+                         .move().toNextColumn() // task movement flow
+                         .mark().asReadyToPull() // task flow
                          .get(); // task
 ```
 
