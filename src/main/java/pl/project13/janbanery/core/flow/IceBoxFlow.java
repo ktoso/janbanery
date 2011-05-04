@@ -30,7 +30,7 @@ public interface IceBoxFlow extends Flow<Task> {
    * @return the TaskMoveFlow, so you may move the task to some other column right away
    * @throws IOException if the server response could not be fetched
    */
-  TaskMoveFlow moveToBoard() throws IOException;
+  TaskFlow moveToBoard() throws IOException;
 
   /**
    * Delete this task from the icebox

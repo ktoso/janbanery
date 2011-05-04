@@ -69,7 +69,8 @@ public class ArchiveTest {
 
     // when
     task = janbanery.tasks()
-                    .move(task).toLastColumn().toArchive()
+                    .move(task).toLastColumn()
+                    .move().toArchive()
                     .get();
 
     // then

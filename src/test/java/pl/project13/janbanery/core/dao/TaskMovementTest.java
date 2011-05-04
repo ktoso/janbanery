@@ -32,6 +32,7 @@ import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -78,13 +79,12 @@ public class TaskMovementTest {
   public void shouldMoveTaskNextAndPrevToRemainInSameColumn() throws Exception {
     // given
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
-    TaskMoveFlow move = taskFlow.move();
-    Task prev = move.get();
+    Task prev = taskFlow.move().get();
 
     // when
-    Task after = move.toNextColumn()
-                     .toPreviousColumn()
-                     .get();
+    Task after = taskFlow.move().toNextColumn()
+                         .move().toPreviousColumn()
+                         .get();
 
     // then
     assertThat(after).isNotEqualTo(prev); // it has changed (moved_at etc)
@@ -129,12 +129,12 @@ public class TaskMovementTest {
     TaskFlow manualFlow = TestEntityHelper.createTestTaskFlow(janbanery);
 
     // when
-    jumpFlow = jumpFlow.move().toLastColumn().asTaskFlow();
+    jumpFlow = jumpFlow.move().toLastColumn();
 
     try {
       //noinspection InfiniteLoopStatement
       while (true) {
-        manualFlow = manualFlow.move().toNextColumn().asTaskFlow();
+        manualFlow = manualFlow.move().toNextColumn();
       }
     } catch (TaskAlreadyInLastColumnException ignore) {
       // that's ok
@@ -156,7 +156,7 @@ public class TaskMovementTest {
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
 
     // when
-    TaskMoveFlow taskMoveFlow = taskFlow.move().toIceBox();
+    TaskMoveFlow taskMoveFlow = taskFlow.move().toIceBox().move();
 
     // then
     Task taskInIceBox = taskMoveFlow.get();
@@ -171,7 +171,8 @@ public class TaskMovementTest {
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
 
     // when
-    taskFlow.move().toNextColumn().toIceBox();
+    taskFlow.move().toNextColumn()
+            .move().toIceBox();
 
     // then, should have thrown
   }
@@ -183,8 +184,7 @@ public class TaskMovementTest {
 
     // when
     taskFlow = taskFlow.move().toLastColumn()
-                       .toArchive()
-                       .asTaskFlow();
+                       .move().toArchive();
 
     // then
     Task task = taskFlow.get();

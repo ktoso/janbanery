@@ -42,7 +42,7 @@ public class IceBoxFlowImpl implements IceBoxFlow {
   }
 
   @Override
-  public TaskMoveFlow moveToBoard() throws IOException {
+  public TaskFlow moveToBoard() throws IOException {
     return tasks.move(task).toBoard();
   }
 
