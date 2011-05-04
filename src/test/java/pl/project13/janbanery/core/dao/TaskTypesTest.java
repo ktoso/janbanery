@@ -82,4 +82,17 @@ public class TaskTypesTest {
     assertThat(taskType.getName()).isIn("Bug", "Chore", "Story");
   }
 
+  @Test
+  public void shouldFindByName() throws Exception {
+    // given
+    TaskTypes taskTypes = janbanery.taskTypes();
+
+    // when
+    TaskType taskType = taskTypes.byName("Bug");
+
+    // then
+    assertThat(taskType).isNotNull();
+    assertThat(taskType.getName()).isIn("Bug");
+  }
+
 }

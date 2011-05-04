@@ -26,6 +26,7 @@ import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
+import pl.project13.janbanery.util.collections.Collectionz;
 import pl.project13.janbanery.util.predicates.ColumnByNamePredicate;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ import java.util.List;
 
 import static com.google.common.collect.Collections2.filter;
 import static com.google.common.collect.Lists.newArrayList;
+import static pl.project13.janbanery.util.collections.Collectionz.*;
 
 /**
  * @author Konrad Malawski
@@ -124,13 +126,15 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
-  public Column onPosition(Integer desiredPosition) throws IOException, EntityNotFoundException {
-    for (Column maybeNextColumn : all()) {
-      if (maybeNextColumn.getPosition().equals(desiredPosition)) {
-        return maybeNextColumn;
-      }
-    }
-    throw new EntityNotFoundException("Could not find Column with position = " + desiredPosition + ", on this project board.");
+  public Column onPosition(final Integer desiredPosition) throws IOException, EntityNotFoundException {
+    String notFoundMessage = "Could not find Column with position = " + desiredPosition + ", on this project board.";
+    return findOrThrow(all(), notFoundMessage,
+                       new Collectionz.Criteria<Column>() {
+                         @Override
+                         public boolean matches(Column item) {
+                           return item.getPosition().equals(desiredPosition);
+                         }
+                       });
   }
 
   @Override

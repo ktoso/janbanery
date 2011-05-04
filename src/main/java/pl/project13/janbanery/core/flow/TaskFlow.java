@@ -47,11 +47,19 @@ public interface TaskFlow extends Flow<Task> {
 
   // other flows --------------------------------------------------------------
 
+  /**
+   * @return
+   */
   TaskMarkFlow mark();
 
+  /**
+   * @return
+   */
   TaskMoveFlow move();
 
+  /**
+   * @return
+   */
   TaskAssignmentFlow assign();
 
-  SubTasks subTasks(); // todo implement this, important
 }

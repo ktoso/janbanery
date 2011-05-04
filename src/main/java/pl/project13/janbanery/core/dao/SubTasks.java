@@ -36,6 +36,7 @@ public interface SubTasks extends SubTasksOf {
    * @param task    the task we want to add this subtask to
    * @param subTask the object carrying the data of the subtask to be created
    * @return a subtask flow populated with the newly created subtask
+   * @throws java.io.IOException
    */
   SubTaskFlow create(Task task, SubTask subTask) throws IOException;
 

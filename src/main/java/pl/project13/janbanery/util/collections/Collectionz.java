@@ -25,11 +25,11 @@ import java.util.Collection;
  */
 public class Collectionz {
 
-  public <T> T findOrThrow(Collection<T> collection, Criteria<T> criteria) {
+  public static <T> T findOrThrow(Collection<T> collection, Criteria<T> criteria) {
     return findOrThrow(collection, "Could not find entity with using " + criteria, criteria);
   }
 
-  public <T> T findOrThrow(Collection<T> collection, String notFoundExceptionMessage, Criteria<T> criteria) {
+  public static <T> T findOrThrow(Collection<T> collection, String notFoundExceptionMessage, Criteria<T> criteria) {
     for (T item : collection) {
       if (criteria.matches(item)) {
         return item;

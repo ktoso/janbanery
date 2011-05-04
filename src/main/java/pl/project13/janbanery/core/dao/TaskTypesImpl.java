@@ -25,9 +25,12 @@ import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.TaskType;
 import pl.project13.janbanery.resources.Workspace;
+import pl.project13.janbanery.util.collections.Collectionz;
 
 import java.io.IOException;
 import java.util.List;
+
+import static pl.project13.janbanery.util.collections.Collectionz.findOrThrow;
 
 /**
  * @author Konrad Malawski
@@ -64,6 +67,16 @@ public class TaskTypesImpl implements TaskTypes {
     TaskType taskType = restClient.doGet(url, GsonTypeTokens.TASK_TYPE);
 
     return taskType;
+  }
+
+  @Override
+  public TaskType byName(final String name) throws IOException {
+    return findOrThrow(all(), new Collectionz.Criteria<TaskType>() {
+      @Override
+      public boolean matches(TaskType item) {
+        return item.getName().equals(name);
+      }
+    });
   }
 
   @Override

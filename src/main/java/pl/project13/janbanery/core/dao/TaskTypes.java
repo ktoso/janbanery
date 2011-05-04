@@ -35,5 +35,7 @@ public interface TaskTypes {
 
   TaskType byId(Long id) throws IOException;
 
+  TaskType byName(String name) throws IOException;
+
   TaskType any() throws IOException;
 }

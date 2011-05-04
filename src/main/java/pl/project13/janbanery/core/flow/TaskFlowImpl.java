@@ -57,12 +57,6 @@ public class TaskFlowImpl implements TaskFlow {
   }
 
   @Override
-  public SubTasks subTasks() {
-    throw new NotYetImplementedException();
-    //return new SubTasksImpl(task, ); // todo make this work
-  }
-
-  @Override
   public TaskMarkFlow mark() {
     return new TaskMarkFlowImpl(tasks, columns, task);
   }
