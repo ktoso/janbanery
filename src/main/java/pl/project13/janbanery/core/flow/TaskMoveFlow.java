@@ -28,13 +28,13 @@ import java.io.IOException;
  */
 public interface TaskMoveFlow extends Flow<Task> {
 
-  TaskMoveFlow toNextColumn() throws IOException;
+  TaskFlow toNextColumn() throws IOException;
 
-  TaskMoveFlow toPreviousColumn() throws IOException;
+  TaskFlow toPreviousColumn() throws IOException;
 
-  TaskMoveFlow to(TaskLocation location) throws IOException;
+  TaskFlow to(TaskLocation location) throws IOException;
 
-  TaskMoveFlow to(Column column) throws IOException;
+  TaskFlow to(Column column) throws IOException;
 
   /**
    * Move this task to the project's <strong>icebox</strong>.
@@ -45,7 +45,7 @@ public interface TaskMoveFlow extends Flow<Task> {
    * @throws CanOnlyIceBoxTaskFromFirstColumnException
    *                     if the task is NOT in the first column
    */
-  TaskMoveFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException;
+  TaskFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException;
 
   /**
    * Move this task to the project's <strong>archive</strong>.
@@ -54,7 +54,7 @@ public interface TaskMoveFlow extends Flow<Task> {
    * @return a TaskMoveFlow instance to allow further task operations
    * @throws IOException if unable to fetch the server response
    */
-  TaskMoveFlow toArchive() throws IOException;
+  TaskFlow toArchive() throws IOException;
 
   /**
    * Move this task to the project's kanban <strong>board</strong>.
@@ -63,9 +63,8 @@ public interface TaskMoveFlow extends Flow<Task> {
    * @return a TaskMoveFlow instance to allow further task operations
    * @throws IOException if unable to fetch the server response
    */
-  TaskMoveFlow toBoard() throws IOException;
+  TaskFlow toBoard() throws IOException;
 
-  TaskMoveFlow toLastColumn() throws IOException;
+  TaskFlow toLastColumn() throws IOException;
 
-  TaskFlow asTaskFlow();
 }

@@ -16,11 +16,9 @@
 
 package pl.project13.janbanery.core.flow;
 
-import pl.project13.janbanery.core.dao.SubTasks;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author Konrad Malawski
@@ -40,8 +38,6 @@ public interface TaskFlow extends Flow<Task> {
    * If you just queried for a Task, you may delete it right away using this method.
    *
    * @throws IOException
-   * @throws ExecutionException
-   * @throws InterruptedException
    */
   void delete() throws IOException;
 

@@ -45,63 +45,58 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
   }
 
   @Override
-  public TaskMoveFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException {
+  public TaskFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException {
     return to(TaskLocation.ICEBOX);
   }
 
   @Override
-  public TaskMoveFlow toBoard() throws IOException {
+  public TaskFlow toBoard() throws IOException {
     return to(TaskLocation.BOARD);
   }
 
   @Override
-  public TaskMoveFlow toLastColumn() throws IOException {
+  public TaskFlow toLastColumn() throws IOException {
     Column last = columns.last();
     return to(last);
   }
 
   @Override
-  public TaskFlow asTaskFlow() {
-    return new TaskFlowImpl(tasks, columns, task);
-  }
-
-  @Override
-  public TaskMoveFlow toNextColumn() throws IOException {
-    TaskMoveFlow moveFlow;
+  public TaskFlow toNextColumn() throws IOException {
+    TaskFlow taskFlow;
     try {
-      moveFlow = to(TaskLocation.NEXT);
+      taskFlow = to(TaskLocation.NEXT);
     } catch (InternalServerErrorKanbaneryException e) { // this is a bug workaround
       // kanbanery does handle "ArrayIndexOutOfBounds" right for movement to the left,
       // but for movement to the right it fails and throws a 500 Internal Server Error...
       throw new TaskAlreadyInLastColumnException("{position: 'task is already in last column'}", e); // this is a kanbanery bug workaround
     }
-    return moveFlow;
+    return taskFlow;
   }
 
   @Override
-  public TaskMoveFlow toPreviousColumn() throws IOException {
+  public TaskFlow toPreviousColumn() throws IOException {
     return to(TaskLocation.PREVIOUS);
   }
 
   @Override
-  public TaskMoveFlow toArchive() throws IOException {
+  public TaskFlow toArchive() throws IOException {
     return to(TaskLocation.ARCHIVE);
   }
 
   @Override
-  public TaskMoveFlow to(TaskLocation location) throws IOException {
+  public TaskFlow to(TaskLocation location) throws IOException {
     TaskFlow move = tasks.move(task, location);
 
     task = move.get();
-    return this;
+    return new TaskFlowImpl(tasks, columns, task);
   }
 
   @Override
-  public TaskMoveFlow to(Column column) throws IOException {
+  public TaskFlow to(Column column) throws IOException {
     TaskFlow move = tasks.move(task, column);
 
     task = move.get();
-    return this;
+    return new TaskFlowImpl(tasks, columns, task);
   }
 
   @Override
