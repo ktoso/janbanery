@@ -24,9 +24,9 @@ import static org.fest.assertions.Assertions.assertThat;
 /**
  * @author Konrad Malawski
  */
-public class ReflectionsBodyGeneratorTest {
+public class ReflectionBodyGeneratorTest {
 
-  ReflectionsBodyGenerator reflectionsBodyGenerator = new ReflectionsBodyGenerator();
+  ReflectionBodyGenerator reflectionBodyGenerator = new ReflectionBodyGenerator();
 
   @Test
   public void testAsString() throws Exception {
@@ -36,7 +36,7 @@ public class ReflectionsBodyGeneratorTest {
     Task task = new Task(title, taskTypeName);
 
     // when
-    String encodedString = reflectionsBodyGenerator.asString(task);
+    String encodedString = reflectionBodyGenerator.asString(task);
 
     // then
     // (order of this items may vary, that's why contains() and not isEqualTo())

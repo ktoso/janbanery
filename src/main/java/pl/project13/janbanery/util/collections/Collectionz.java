@@ -17,8 +17,11 @@
 package pl.project13.janbanery.util.collections;
 
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
+import pl.project13.janbanery.resources.Priority;
 
 import java.util.Collection;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * @author Konrad Malawski
@@ -37,6 +40,14 @@ public class Collectionz {
     }
 
     throw new EntityNotFoundException(notFoundExceptionMessage);
+  }
+
+  public static <T> T findOrThrow(T[] array, Criteria<T> criteria) {
+    return findOrThrow(newArrayList(array), criteria);
+  }
+
+  public static <T> T findOrThrow(T[] array, String notFoundExceptionMessage, Criteria<T> criteria) {
+    return findOrThrow(newArrayList(array), notFoundExceptionMessage, criteria);
   }
 
   public static interface Criteria<T> {

@@ -66,7 +66,8 @@ public class ProjectsImpl implements Projects {
     List<Workspace> allWorkspaces = workspaces.all();
 
     for (Workspace workspace : allWorkspaces) {
-      for (Project project : workspace.getProjects()) {
+      List<Project> allItsProjects = workspace.getProjects();
+      for (Project project : allItsProjects) {
         if (project.getId().equals(id)) {
           return project;
         }

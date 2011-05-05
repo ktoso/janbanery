@@ -45,6 +45,7 @@ public class Task extends KanbaneryResource implements Serializable {
    * The tasks title
    */
   @Required
+  @Settable(On.CreateOrUpdate)
   private String title;
 
   /**
@@ -52,6 +53,7 @@ public class Task extends KanbaneryResource implements Serializable {
    * Instead of setting this id you can just set task_type_name to "Bug".
    */
   @Required(alternativeTo = "taskTypeName")
+  @Settable(On.CreateOrUpdate)
   @SerializedName("task_type_id")
   private Long taskTypeId;
 
@@ -60,6 +62,7 @@ public class Task extends KanbaneryResource implements Serializable {
    * Instead of setting this name you can set task_type_id to 1337.
    */
   @Required(alternativeTo = "taskTypeId")
+  @Settable(On.CreateOrUpdate)
   @SerializedName("task_type_name")
   private String taskTypeName;
 
@@ -94,6 +97,7 @@ public class Task extends KanbaneryResource implements Serializable {
   /**
    * Who is currently assigned to it
    */
+  @Settable(On.CreateOrUpdate)
   @SerializedName("owner_id")
   private Long ownerId;
 

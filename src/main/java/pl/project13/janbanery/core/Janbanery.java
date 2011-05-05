@@ -23,8 +23,7 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.auth.AuthProvider;
 import pl.project13.janbanery.core.dao.*;
-import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
-import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
+import pl.project13.janbanery.encoders.ReflectionBodyGenerator;
 import pl.project13.janbanery.exceptions.ProjectNotFoundException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
@@ -52,7 +51,7 @@ public class Janbanery {
     this.restClient = restClient;
   }
 
-  private RestClient getRestClient(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson, ReflectionsBodyGenerator bodyGenerator) {
+  private RestClient getRestClient(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson, ReflectionBodyGenerator bodyGenerator) {
     return new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
   }
 

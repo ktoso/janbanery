@@ -16,7 +16,7 @@
 
 package pl.project13.janbanery.resources;
 
-import pl.project13.janbanery.exceptions.NoSuchPriorityException;
+import pl.project13.janbanery.util.collections.Collectionz;
 
 /**
  * Task priorities. Currently kanbanery is only supporting 3 levels of priorities - {0, 1, 2}
@@ -55,13 +55,17 @@ public enum Priority implements KanbaneryEnumResource {
     return String.valueOf(priorityId);
   }
 
-  public static Priority fromPriorityId(Integer id) {
-    for (Priority priority : Priority.values()) {
-      if (priority.priorityId.equals(id)) {
-        return priority;
-      }
-    }
-    throw new NoSuchPriorityException("Tried to create priority for priority id = " + id);
+  public static Priority fromPriorityId(final Integer id) {
+    String notFoundExceptionMessage = "Tried to create priority for priority id = " + id;
+    return Collectionz.findOrThrow(Priority.values(),
+                                   notFoundExceptionMessage,
+                                   new Collectionz.Criteria<Priority>() {
+                                     @Override
+                                     public boolean matches(Priority priority) {
+                                       return priority.priorityId.equals(id);
+                                     }
+                                   });
+
   }
 
 }

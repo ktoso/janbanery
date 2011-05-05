@@ -19,12 +19,14 @@ package pl.project13.janbanery.core.flow.batch;
 import pl.project13.janbanery.core.dao.Comments;
 import pl.project13.janbanery.core.flow.CommentFlow;
 import pl.project13.janbanery.core.flow.CommentFlowImpl;
-import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.util.collections.Collectionz;
 
 import java.io.IOException;
 import java.util.List;
+
+import static pl.project13.janbanery.util.collections.Collectionz.findOrThrow;
 
 /**
  * @author Konrad Malawski
@@ -46,22 +48,18 @@ public class CommentsFlowImpl implements CommentsFlow {
   }
 
   @Override
-  public CommentFlow byId(Long id) throws IOException {
-    Comment foundComment = null;
+  public CommentFlow byId(final Long id) throws IOException {
+    String notFoundMessage = String.format("Task with ID: %d does not have a comment with ID: %d", task.getId(), id);
+    Comment comment = findOrThrow(all(),
+                                  notFoundMessage,
+                                  new Collectionz.Criteria<Comment>() {
+                                    @Override
+                                    public boolean matches(Comment comment) {
+                                      return comment.getId().equals(id);
+                                    }
+                                  });
 
-    for (Comment comment : all()) {
-      if (comment.getId().equals(id)) {
-        foundComment = comment;
-        break;
-      }
-    }
-    if (foundComment == null) {
-      throw new EntityNotFoundException("Task with ID: " + task.getId() +
-                                            " does not have a " +
-                                            "comment with ID: " + id);
-    }
-
-    return new CommentFlowImpl(comments, foundComment);
+    return new CommentFlowImpl(comments, comment);
   }
 
   @Override

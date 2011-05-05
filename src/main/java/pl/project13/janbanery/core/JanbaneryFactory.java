@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.DefaultConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
-import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
+import pl.project13.janbanery.encoders.ReflectionBodyGenerator;
 import pl.project13.janbanery.resources.User;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class JanbaneryFactory {
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private AsyncHttpClient asyncHttpClient;
-  private ReflectionsBodyGenerator encodedBodyGenerator = new ReflectionsBodyGenerator();
+  private ReflectionBodyGenerator encodedBodyGenerator = new ReflectionBodyGenerator();
   private Gson gson = GsonFactory.create();
 
   public JanbaneryFactory() {
@@ -121,7 +121,7 @@ public class JanbaneryFactory {
     this.asyncHttpClient = asyncHttpClient;
   }
 
-  public void setEncodedBodyGenerator(ReflectionsBodyGenerator encodedBodyGenerator) {
+  public void setEncodedBodyGenerator(ReflectionBodyGenerator encodedBodyGenerator) {
     this.encodedBodyGenerator = encodedBodyGenerator;
   }
 

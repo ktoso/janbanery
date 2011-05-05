@@ -24,7 +24,7 @@ import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.core.RestClient;
-import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
+import pl.project13.janbanery.encoders.ReflectionBodyGenerator;
 import pl.project13.janbanery.exceptions.WorkspaceNotFoundException;
 import pl.project13.janbanery.resources.Workspace;
 import pl.project13.janbanery.test.TestConstants;
@@ -48,7 +48,7 @@ public class WorkspacesImplTest {
 
     Gson gson = GsonFactory.create();
     asyncHttpClient = new AsyncHttpClient();
-    ReflectionsBodyGenerator encodedBodyGenerator = new ReflectionsBodyGenerator();
+    ReflectionBodyGenerator encodedBodyGenerator = new ReflectionBodyGenerator();
     RestClient restClient = new RestClient(conf, gson, asyncHttpClient, encodedBodyGenerator);
 
     workspaces = new WorkspacesImpl(conf, restClient);

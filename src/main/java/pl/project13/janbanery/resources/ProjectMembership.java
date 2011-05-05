@@ -56,12 +56,14 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
   /**
    * Id of the project we're talking about here
    */
+  @ReadOnly
   @SerializedName("project_id")
   private Integer projectId;
 
   /**
    * The id of the user we're checking here
    */
+  @ReadOnly
   @SerializedName("user_id")
   private Integer userId;
 
@@ -102,16 +104,8 @@ public class ProjectMembership extends KanbaneryResource implements Serializable
     return projectId;
   }
 
-  public void setProjectId(Integer projectId) {
-    this.projectId = projectId;
-  }
-
   public Integer getUserId() {
     return userId;
-  }
-
-  public void setUserId(Integer userId) {
-    this.userId = userId;
   }
 
   @Override

@@ -16,11 +16,9 @@
 
 package pl.project13.janbanery.resources;
 
-import pl.project13.janbanery.encoders.ReflectionsBodyGenerator;
-
 /**
  * This interface is used to ensure all enums will be able to be represented
- * via the automatic {@link ReflectionsBodyGenerator}
+ * via the automatic {@link pl.project13.janbanery.encoders.ReflectionBodyGenerator}
  *
  * @author Konrad Malawski
  */

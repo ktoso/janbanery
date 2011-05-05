@@ -83,11 +83,6 @@
             <name>Maven Central</name>
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
-        <repository>
-            <id>reflections-repository</id>
-            <name>Reflections Maven2 Repository</name>
-            <url>http://reflections.googlecode.com/svn/repo</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -115,21 +110,6 @@
             <artifactId>joda-time</artifactId>
             <version>1.6.2</version>
         </dependency>
-        <!-- reflections -->
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.5-RC2</version>
-        </dependency>
-        <!-- effectively needed when XmlSerializer is used -->
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6</version>
-            <!--<scope>runtime</scope>-->
-            <!--<optional>true</optional>-->
-        </dependency>
-
         <!-- documentation annotations -->
         <!--<dependency>-->
         <!--<groupId>pl.project13.sourceisdoc</groupId>-->

@@ -23,6 +23,7 @@ import com.google.common.base.Joiner;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import static com.google.common.primitives.Chars.asList;
 /**
  * @author Konrad Malawski
  */
-public class FieldNameToArrayNotationWithValueFunction<T extends KanbaneryResource> implements Function<String, String> {
+public class FieldNameToArrayNotationWithValueFunction<T extends KanbaneryResource> implements Function<Field, String> {
 
   private final String fieldRepresentation = "%s[%s]=%s";
 
@@ -45,10 +46,12 @@ public class FieldNameToArrayNotationWithValueFunction<T extends KanbaneryResour
   }
 
   @Override
-  public String apply(String fieldName) {
+  public String apply(Field field) {
+    String fieldName = field.getName();
     String resourceId = entity.getResourceId();
+
     String underscoredFieldName = camelCaseToUnderscore(fieldName);
-    Object value = reflectionHelper.getFieldValueRepresentationOrNull(entity, fieldName);
+    Object value = reflectionHelper.getFieldValueRepresentationOrNull(entity, field);
 
     return asEncodedFieldRepresentation(resourceId, underscoredFieldName, value);
   }
