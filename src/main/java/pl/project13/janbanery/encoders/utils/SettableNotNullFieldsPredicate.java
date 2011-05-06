@@ -34,13 +34,11 @@ public class SettableNotNullFieldsPredicate<T extends KanbaneryResource> impleme
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private T entity;
-  private Class<? extends KanbaneryResource> clazz;
 
   private ReflectionHelper reflectionHelper = new ReflectionHelper();
 
   public SettableNotNullFieldsPredicate(T entity) {
     this.entity = entity;
-    clazz = entity.getClass();
   }
 
   @Override

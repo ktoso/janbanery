@@ -64,7 +64,7 @@ class ReflectionHelper {
     }
 
     if (value != null) {
-      log.info(entity.getClass().getSimpleName() + "." + field.getName() + " = " + value);
+      log.debug(entity.getClass().getSimpleName() + "." + field.getName() + " = " + value);
     }
     return value;
   }
