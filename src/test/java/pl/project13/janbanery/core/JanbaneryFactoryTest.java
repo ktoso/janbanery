@@ -31,13 +31,15 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
+import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
 
 /**
  * @author Konrad Malawski
  */
 public class JanbaneryFactoryTest {
   AsyncHttpClient asyncHttpClient;
-  Configuration   configuration;
+  Configuration configuration;
 
   JanbaneryFactory janbaneryFactory;
 
@@ -58,10 +60,10 @@ public class JanbaneryFactoryTest {
   @Test
   public void shouldLoginUsingValidApiKey() throws Exception {
     // given
-    configuration = new PropertiesConfiguration(TestConstants.VALID_CONF_FILE_LOCATION);
+    configuration = new PropertiesConfiguration(VALID_CONF_FILE_LOCATION);
 
     // when
-    janbanery = janbaneryFactory.connectUsing(configuration);
+    janbanery = janbaneryFactory.connectUsing(configuration).toWorkspace(EXISTING_WORKSPACE);
 
     // then, should use API key mode
     AuthProvider usedAuthProvider = janbanery.getAuthMode();
@@ -72,11 +74,11 @@ public class JanbaneryFactoryTest {
   public void shouldLoginUsingPlainApiKey() throws Exception {
     // given
     Properties props = new Properties();
-    props.load(new FileInputStream(TestConstants.VALID_CONF_FILE_LOCATION));
+    props.load(new FileInputStream(VALID_CONF_FILE_LOCATION));
     String apiKey = props.getProperty(PropertiesConfiguration.P_APIKEY);
 
     // when
-    janbanery = janbaneryFactory.connectUsing(apiKey);
+    janbanery = janbaneryFactory.connectUsing(apiKey).toWorkspace(EXISTING_WORKSPACE);
 
     // then, should use API key mode
     AuthProvider usedAuthProvider = janbanery.getAuthMode();
@@ -87,7 +89,7 @@ public class JanbaneryFactoryTest {
   public void shouldConnectAndKeepUsingUserPassMode() throws Exception {
     // given
     Properties properties = new Properties();
-    properties.load(new FileInputStream(TestConstants.VALID_CONF_FILE_LOCATION));
+    properties.load(new FileInputStream(VALID_CONF_FILE_LOCATION));
     String user = (String) properties.get("username");
     String password = (String) properties.get("password");
 
@@ -103,12 +105,12 @@ public class JanbaneryFactoryTest {
   public void shouldLoginWithUserPassButThenFallbackToApiKeyMode() throws Exception {
     // given
     Properties properties = new Properties();
-    properties.load(new FileInputStream(TestConstants.VALID_CONF_FILE_LOCATION));
+    properties.load(new FileInputStream(VALID_CONF_FILE_LOCATION));
     String user = (String) properties.get("username");
     String password = (String) properties.get("password");
 
     // when
-    janbanery = janbaneryFactory.connectUsing(user, password);
+    janbanery = janbaneryFactory.connectUsing(user, password).toWorkspace(EXISTING_WORKSPACE);
 
     // then, should use API key mode
     AuthProvider usedAuthProvider = janbanery.getAuthMode();

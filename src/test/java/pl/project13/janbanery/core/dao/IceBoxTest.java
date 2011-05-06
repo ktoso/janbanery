@@ -38,13 +38,12 @@ import static pl.project13.janbanery.test.TestConstants.*;
 public class IceBoxTest {
 
   Janbanery janbanery;
-  IceBox    iceBox;
+  IceBox iceBox;
 
   @Before
   public void setUp() throws Exception {
     PropertiesConfiguration conf = new PropertiesConfiguration(VALID_CONF_FILE_LOCATION);
-    janbanery = new JanbaneryFactory().connectUsing(conf);
-    janbanery.usingWorkspace(EXISTING_WORKSPACE);
+    janbanery = new JanbaneryFactory().connectUsing(conf).toWorkspace(EXISTING_WORKSPACE);
 
     iceBox = janbanery.iceBox();
   }

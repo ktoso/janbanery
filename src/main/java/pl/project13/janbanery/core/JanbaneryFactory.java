@@ -50,9 +50,9 @@ public class JanbaneryFactory {
     this.asyncHttpClient = asyncHttpClient;
   }
 
-  public Janbanery connectUsing(Configuration configuration) {
+  public JanbaneryToWorkspace connectUsing(Configuration configuration) {
     RestClient restClient = getRestClient(configuration);
-    return new Janbanery(configuration, restClient);
+    return new JanbaneryToWorkspace(new Janbanery(configuration, restClient));
   }
 
   /**
@@ -61,7 +61,7 @@ public class JanbaneryFactory {
    * @param apiKey your API key for kanbanery, you can find it in your profile settings on kanbanery.com
    * @return a properly setup Janbanery instance using your API key for authentication
    */
-  public Janbanery connectUsing(String apiKey) {
+  public JanbaneryToWorkspace connectUsing(String apiKey) {
     DefaultConfiguration conf = new DefaultConfiguration(apiKey);
     return connectUsing(conf);
   }
@@ -77,7 +77,7 @@ public class JanbaneryFactory {
    * @throws InterruptedException
    * @throws ExecutionException
    */
-  public Janbanery connectUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
+  public JanbaneryToWorkspace connectUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
     RestClient restClient = getRestClient(conf);
     Janbanery janbanery = new Janbanery(conf, restClient);
@@ -86,7 +86,7 @@ public class JanbaneryFactory {
     String apiKey = getCurrentUserApiKey(janbanery);
     conf.forceKeyAuthMode(apiKey);
 
-    return janbanery;
+    return new JanbaneryToWorkspace(janbanery);
   }
 
   private String getCurrentUserApiKey(Janbanery janbanery) throws IOException, ExecutionException, InterruptedException {
@@ -127,6 +127,27 @@ public class JanbaneryFactory {
 
   public void setGson(Gson gson) {
     this.gson = gson;
+  }
+
+  /**
+   * This is a small "flow", to force the user into telling us what workspace we'll be working on
+   * <p/>
+   * // todo find a batter name for this
+   *
+   * @author Konrad Malawski
+   */
+  public static class JanbaneryToWorkspace {
+
+    private Janbanery janbanery;
+
+    public JanbaneryToWorkspace(Janbanery janbanery) {
+      this.janbanery = janbanery;
+    }
+
+    public Janbanery toWorkspace(String name) throws IOException, ExecutionException, InterruptedException {
+      return janbanery.usingWorkspace(name);
+    }
+
   }
 }
 

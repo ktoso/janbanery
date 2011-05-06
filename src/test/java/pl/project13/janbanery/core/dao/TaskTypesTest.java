@@ -26,12 +26,11 @@ import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.resources.TaskType;
-import pl.project13.janbanery.test.TestConstants;
 
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
+import static pl.project13.janbanery.test.TestConstants.*;
 
 /**
  * @author Konrad Malawski
@@ -47,8 +46,7 @@ public class TaskTypesTest {
     Gson gson = GsonFactory.create();
     AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
-    janbanery = new JanbaneryFactory().connectUsing(conf);
-    janbanery.usingWorkspace(TestConstants.EXISTING_WORKSPACE);
+    janbanery = new JanbaneryFactory().connectUsing(conf).toWorkspace(EXISTING_WORKSPACE);
   }
 
   @After

@@ -30,6 +30,8 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
+import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
 
 /**
  * @author Konrad Malawski
@@ -41,9 +43,9 @@ public class GetProjectsListTest {
   @Before
   public void setUp() throws Exception {
     JanbaneryFactory janbaneryFactory = new JanbaneryFactory();
-    PropertiesConfiguration configuration = new PropertiesConfiguration(TestConstants.VALID_CONF_FILE_LOCATION);
+    PropertiesConfiguration configuration = new PropertiesConfiguration(VALID_CONF_FILE_LOCATION);
 
-    janbanery = janbaneryFactory.connectUsing(configuration);
+    janbanery = janbaneryFactory.connectUsing(configuration).toWorkspace(EXISTING_WORKSPACE);
   }
 
   @After

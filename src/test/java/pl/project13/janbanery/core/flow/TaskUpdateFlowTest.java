@@ -42,14 +42,13 @@ import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION
 public class TaskUpdateFlowTest {
 
   private static Janbanery janbanery;
-  private static Tasks     tasks;
-  private static Task      task;
+  private static Tasks tasks;
+  private static Task task;
 
   @BeforeClass
   public static void setUp() throws Exception {
     PropertiesConfiguration conf = new PropertiesConfiguration(VALID_CONF_FILE_LOCATION);
-    janbanery = new JanbaneryFactory().connectUsing(conf);
-    janbanery.usingWorkspace(EXISTING_WORKSPACE);
+    janbanery = new JanbaneryFactory().connectUsing(conf).toWorkspace(EXISTING_WORKSPACE);
 
     tasks = janbanery.tasks();
     task = TestEntityHelper.createTestTaskFlow(janbanery).get();

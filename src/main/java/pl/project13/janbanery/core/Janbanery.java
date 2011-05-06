@@ -93,7 +93,9 @@ public class Janbanery {
   }
 
   public Janbanery usingProject(Workspace workspace, String name) throws IOException {
-    for (Project project : workspace.getProjects()) {
+    currentWorkspace = workspace;
+
+    for (Project project : currentWorkspace.getProjects()) {
       if (project.getName().equals(name)) {
         return using(workspace).using(project);
       }
