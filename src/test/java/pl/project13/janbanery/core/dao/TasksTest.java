@@ -57,8 +57,7 @@ public class TasksTest {
   @Test
   public void shouldCreateTaskOnBoard() throws Exception {
     // given
-    Task bug = new Task.Builder(TASK_TITLE)
-        .taskType(janbanery.taskTypes().any())
+    Task bug = new Task.Builder(TASK_TITLE, janbanery.taskTypes().any())
         .description("A task I have created using the Janbanery library")
         .priority(Priority.MEDIUM)
         .build();

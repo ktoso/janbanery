@@ -36,8 +36,7 @@ import static pl.project13.janbanery.test.TestConstants.TASK_TITLE;
 public class TestEntityHelper {
 
   public static Task createTestTask(Janbanery janbanery) throws IOException {
-    return new Task.Builder(TASK_TITLE)
-        .taskType(janbanery.taskTypes().any())
+    return new Task.Builder(TASK_TITLE, janbanery.taskTypes().any())
         .description("A task I have created using the Janbanery library")
         .priority(Priority.LOW)
         .build();
@@ -52,8 +51,7 @@ public class TestEntityHelper {
   }
 
   public static TaskFlow createTestTaskFlow(Janbanery janbanery) throws IOException {
-    Task build = new Task.Builder(TASK_TITLE)
-        .taskType(janbanery.taskTypes().any())
+    Task build = new Task.Builder(TASK_TITLE, janbanery.taskTypes().any())
         .description("A task I have created using the Janbanery library")
         .priority(Priority.LOW)
         .build();

@@ -354,16 +354,16 @@ public class Task extends KanbaneryResource implements Serializable {
   public static class Builder {
     private Task instance;
 
+    public Builder(String title, TaskType taskType) {
+      this(title, taskType.getId());
+    }
+
     public Builder(String title, Long taskTypeId) {
       this.instance = new Task(title, taskTypeId);
     }
 
     public Builder(String title, String taskTypeName) {
       this.instance = new Task(title, taskTypeName);
-    }
-
-    public Builder(String title) {
-      this.instance = new Task(title);
     }
 
     public Builder priority(Priority priority) {

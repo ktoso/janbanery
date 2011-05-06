@@ -73,8 +73,7 @@ public class IceBoxTest {
   @Test
   public void shouldCreateAndDelete() throws Exception {
     // given
-    Task story = new Task.Builder(TASK_TITLE)
-        .taskType(janbanery.taskTypes().any())
+    Task story = new Task.Builder(TASK_TITLE, janbanery.taskTypes().any())
         .description("A task I have created using the Janbanery library")
         .priority(Priority.LOW)
         .build();
