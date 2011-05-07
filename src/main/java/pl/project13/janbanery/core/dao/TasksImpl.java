@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.RestClient;
+import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.flow.*;
 import pl.project13.janbanery.core.flow.batch.TasksMoveAllFlow;
 import pl.project13.janbanery.core.flow.batch.TasksMoveAllFlowImpl;

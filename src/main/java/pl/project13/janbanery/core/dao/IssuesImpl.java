@@ -18,7 +18,7 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.RestClient;
+import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.flow.IssueFlow;
 import pl.project13.janbanery.core.flow.IssueFlowImpl;
 import pl.project13.janbanery.core.flow.batch.IssuesFlow;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core;
+package pl.project13.janbanery.core.rest;
 
 import com.google.gson.Gson;
 import com.ning.http.client.AsyncHttpClient;

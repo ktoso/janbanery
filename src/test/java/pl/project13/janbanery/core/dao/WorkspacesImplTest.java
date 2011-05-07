@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
-import pl.project13.janbanery.core.AsyncHttpClientRestClient;
+import pl.project13.janbanery.core.rest.AsyncHttpClientRestClient;
 import pl.project13.janbanery.encoders.ReflectionBodyGenerator;
 import pl.project13.janbanery.exceptions.WorkspaceNotFoundException;
 import pl.project13.janbanery.resources.Workspace;

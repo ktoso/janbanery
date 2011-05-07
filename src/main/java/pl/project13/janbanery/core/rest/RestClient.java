@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core;
+package pl.project13.janbanery.core.rest;
 
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
@@ -29,6 +29,7 @@ import java.lang.reflect.Type;
  * @author Konrad Malawski
  */
 public interface RestClient {
+
   void verifyResponseCode(Response response) throws KanbaneryException;
 
   Response doPost(String url, KanbaneryResource resource) throws IOException;

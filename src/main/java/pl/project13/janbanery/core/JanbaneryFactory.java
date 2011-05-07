@@ -23,6 +23,8 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.DefaultConfiguration;
 import pl.project13.janbanery.config.gson.GsonFactory;
+import pl.project13.janbanery.core.rest.AsyncHttpClientRestClient;
+import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.encoders.ReflectionBodyGenerator;
 import pl.project13.janbanery.resources.User;
 
