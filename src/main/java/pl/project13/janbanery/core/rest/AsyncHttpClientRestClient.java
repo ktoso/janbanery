@@ -44,7 +44,7 @@ import static java.lang.String.format;
  *
  * @author Konrad Malawski
  */
-public class AsyncHttpClientRestClient implements RestClient {
+public class AsyncHttpClientRestClient extends RestClient {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -58,42 +58,6 @@ public class AsyncHttpClientRestClient implements RestClient {
     this.gson = gson;
     this.asyncHttpClient = asyncHttpClient;
     this.encodedBodyGenerator = encodedBodyGenerator;
-  }
-
-  @Override
-  public void verifyResponseCode(Response response) throws KanbaneryException {
-    Integer statusCode = response.getStatusCode();
-
-    switch (statusCode) {
-      case DeleteFailedKanbaneryException.MAPPED_ERROR_CODE:
-        throw new DeleteFailedKanbaneryException(errorMessageFrom(response));
-      case ForbiddenOperationKanbaneryException.MAPPED_ERROR_CODE:
-        throw new ForbiddenOperationKanbaneryException(errorMessageFrom(response));
-      case InternalServerErrorKanbaneryException.MAPPED_ERROR_CODE:
-        throw new InternalServerErrorKanbaneryException(errorMessageFrom(response));
-      case InvalidEntityKanbaneryException.MAPPED_ERROR_CODE:
-        throw InvalidEntityKanbaneryException.mostSpecializedException(errorMessageFrom(response));
-      case UnauthorizedKanbaneryException.MAPPED_ERROR_CODE:
-        throw new UnauthorizedKanbaneryException(errorMessageFrom(response));
-      case NotFoundKanbaneryException.MAPPED_ERROR_CODE:
-        throw new NotFoundKanbaneryException(errorMessageFrom(response));
-    }
-
-    if (statusCode > 400) {
-      throw new KanbaneryException(format("Unexpected response code '%d' and message: '%s'.", statusCode, response.getStatusText()));
-    }
-  }
-
-  private static String errorMessageFrom(Response response) {
-    StringBuilder sb = new StringBuilder().append(response.getStatusCode()).append(" - ").append(response.getStatusText()).append("\n");
-    try {
-      sb.append(response.getResponseBody());
-    } catch (IOException ignored) {
-      // ok, so no response could be fetched
-      sb.append("[EXCEPTION WHILE GETTING RESPONSE BODY]");
-    }
-
-    return sb.toString();
   }
 
   @Override

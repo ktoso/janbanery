@@ -18,48 +18,79 @@ package pl.project13.janbanery.core.rest;
 
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
+import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
 import pl.project13.janbanery.exceptions.RestClientException;
-import pl.project13.janbanery.exceptions.kanbanery.KanbaneryException;
+import pl.project13.janbanery.exceptions.kanbanery.*;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 
+import static java.lang.String.format;
+
 /**
  * @author Konrad Malawski
  */
-public interface RestClient {
+public abstract class RestClient {
 
-  void verifyResponseCode(Response response) throws KanbaneryException;
+  public void verifyResponseCode(Response response) throws KanbaneryException {
+    Integer statusCode = response.getStatusCode();
 
-  Response doPost(String url, KanbaneryResource resource) throws IOException;
+    switch (statusCode) {
+      case DeleteFailedKanbaneryException.MAPPED_ERROR_CODE:
+        throw new DeleteFailedKanbaneryException(errorMessageFrom(response));
+      case ForbiddenOperationKanbaneryException.MAPPED_ERROR_CODE:
+        throw new ForbiddenOperationKanbaneryException(errorMessageFrom(response));
+      case InternalServerErrorKanbaneryException.MAPPED_ERROR_CODE:
+        throw new InternalServerErrorKanbaneryException(errorMessageFrom(response));
+      case InvalidEntityKanbaneryException.MAPPED_ERROR_CODE:
+        throw InvalidEntityKanbaneryException.mostSpecializedException(errorMessageFrom(response));
+      case UnauthorizedKanbaneryException.MAPPED_ERROR_CODE:
+        throw new UnauthorizedKanbaneryException(errorMessageFrom(response));
+      case NotFoundKanbaneryException.MAPPED_ERROR_CODE:
+        throw new NotFoundKanbaneryException(errorMessageFrom(response));
+    }
 
-  @SuppressWarnings("unchecked")
-  <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) throws IOException;
+    if (statusCode > 400) {
+      throw new KanbaneryException(format("Unexpected response code '%d' and message: '%s'.", statusCode, response.getStatusText()));
+    }
+  }
 
-  Response doGet(String url);
+  private String errorMessageFrom(Response response) {
+    StringBuilder sb = new StringBuilder().append(response.getStatusCode()).append(" - ").append(response.getStatusText()).append("\n");
+    try {
+      sb.append(response.getResponseBody());
+    } catch (IOException ignored) {
+      // ok, so no response could be fetched
+      sb.append("[EXCEPTION WHILE GETTING RESPONSE BODY]");
+    }
 
-  @SuppressWarnings("unchecked")
-  <T> T doGet(String url, Type returnType) throws IOException;
+    return sb.toString();
+  }
 
-  Response doDelete(String url);
+  public abstract Response doPost(String url, KanbaneryResource resource) throws IOException;
 
-  Response doPut(String url, String requestBody);
+  public abstract <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) throws IOException;
 
-  @SuppressWarnings({"unchecked"})
-  <T> T doPut(String url, String requestBody, Class<?> returnType) throws IOException;
+  public abstract Response doGet(String url);
 
-  @SuppressWarnings({"unchecked"})
-  <T> T doPut(String url, String requestBody, Type returnType) throws IOException;
+  public abstract <T> T doGet(String url, Type returnType) throws IOException;
 
-  @SuppressWarnings("unchecked")
-  <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) throws IOException;
+  public abstract Response doDelete(String url);
 
-  void authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder);
+  public abstract Response doPut(String url, String requestBody);
 
-  void setFormUrlEncodedBody(AsyncHttpClient.BoundRequestBuilder requestBuilder, String requestBody);
+  public abstract <T> T doPut(String url, String requestBody, Class<?> returnType) throws IOException;
 
-  Response execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) throws RestClientException;
+  public abstract <T> T doPut(String url, String requestBody, Type returnType) throws IOException;
 
-  void close();
+  public abstract <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) throws IOException;
+
+  public abstract void authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder);
+
+  public abstract void setFormUrlEncodedBody(AsyncHttpClient.BoundRequestBuilder requestBuilder, String requestBody);
+
+  public abstract Response execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) throws RestClientException;
+
+  public abstract void close();
 }
