@@ -16,8 +16,6 @@
 
 package pl.project13.janbanery.core.dao;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;

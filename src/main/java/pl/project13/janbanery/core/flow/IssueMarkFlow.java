@@ -17,7 +17,6 @@
 package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.resources.Issue;
-import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
 

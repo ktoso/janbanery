@@ -16,13 +16,8 @@
 
 package pl.project13.janbanery.core.dao;
 
-import pl.project13.janbanery.core.flow.MembershipFlow;
 import pl.project13.janbanery.core.flow.batch.MembershipsFlow;
 import pl.project13.janbanery.resources.Project;
-import pl.project13.janbanery.resources.ProjectMembership;
-
-import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Konrad Malawski

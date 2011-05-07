@@ -18,7 +18,6 @@ package pl.project13.janbanery.config;
 
 import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.config.auth.AuthProvider;
-import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.Workspace;
 

@@ -19,8 +19,6 @@ package pl.project13.janbanery.core.flow;
 import pl.project13.janbanery.core.dao.Comments;
 import pl.project13.janbanery.resources.Comment;
 
-import java.io.IOException;
-
 /**
  * @author Konrad Malawski
  */

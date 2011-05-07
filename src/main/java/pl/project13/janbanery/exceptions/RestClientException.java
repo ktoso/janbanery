@@ -17,7 +17,7 @@
 package pl.project13.janbanery.exceptions;
 
 /**
- * Thrown when the {@link pl.project13.janbanery.core.RestClient} encounters any problems
+ * Thrown when the {@link pl.project13.janbanery.core.AsyncHttpClientRestClient} encounters any problems
  * while fetching the server response, note that Kanbanery error response codes are mapped as subclasses of
  * {@link pl.project13.janbanery.exceptions.kanbanery.KanbaneryException}.
  * This exception signals problems with network or interruption of a Future waiting etc.

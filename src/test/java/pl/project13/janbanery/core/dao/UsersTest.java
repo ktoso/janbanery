@@ -22,11 +22,8 @@ import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
-import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.resources.Project;
-import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
-import pl.project13.janbanery.test.TestEntityHelper;
 
 import java.util.List;
 

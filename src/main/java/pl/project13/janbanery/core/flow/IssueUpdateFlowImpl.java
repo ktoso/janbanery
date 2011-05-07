@@ -20,7 +20,6 @@ import pl.project13.janbanery.core.dao.Issues;
 import pl.project13.janbanery.resources.Issue;
 
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * @author Konrad Malawski

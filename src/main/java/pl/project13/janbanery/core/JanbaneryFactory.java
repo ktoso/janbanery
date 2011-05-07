@@ -50,6 +50,10 @@ public class JanbaneryFactory {
     this.asyncHttpClient = asyncHttpClient;
   }
 
+  public JanbaneryFactory(RestClient restClient) {
+
+  }
+
   public JanbaneryToWorkspace connectUsing(Configuration configuration) {
     RestClient restClient = getRestClient(configuration);
     return new JanbaneryToWorkspace(new Janbanery(configuration, restClient));
@@ -114,7 +118,7 @@ public class JanbaneryFactory {
   }
 
   private RestClient getRestClient(Configuration configuration) {
-    return new RestClient(configuration, gson, asyncHttpClient, encodedBodyGenerator);
+    return new AsyncHttpClientRestClient(configuration, gson, asyncHttpClient, encodedBodyGenerator);
   }
 
   public void setAsyncHttpClient(AsyncHttpClient asyncHttpClient) {

@@ -17,7 +17,6 @@
 package pl.project13.janbanery.exceptions.kanbanery.invalidentity;
 
 import pl.project13.janbanery.exceptions.kanbanery.InvalidEntityKanbaneryException;
-import pl.project13.janbanery.exceptions.kanbanery.KanbaneryException;
 
 /**
  * @author Konrad Malawski

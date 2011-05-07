@@ -18,7 +18,6 @@ package pl.project13.janbanery.encoders;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
-import com.google.common.base.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.encoders.utils.FieldNameToArrayNotationWithValueFunction;

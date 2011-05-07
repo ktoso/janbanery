@@ -17,7 +17,6 @@
 package pl.project13.janbanery.util.collections;
 
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
-import pl.project13.janbanery.resources.Priority;
 
 import java.util.Collection;
 

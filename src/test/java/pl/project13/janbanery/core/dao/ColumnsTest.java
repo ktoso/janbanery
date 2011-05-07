@@ -278,7 +278,9 @@ public class ColumnsTest {
 
     // when
     Integer newColumnCapacity = 10;
-    column = janbanery.columns().update(column).capacity(newColumnCapacity).get();
+    column = janbanery.columns().update(column)
+                      .name("New Name")
+                      .capacity(newColumnCapacity).get();
 
     // then
     column = janbanery.columns().refresh(column);

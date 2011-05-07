@@ -35,7 +35,7 @@ import java.util.List;
 
 import static com.google.common.collect.Collections2.filter;
 import static com.google.common.collect.Lists.newArrayList;
-import static pl.project13.janbanery.util.collections.Collectionz.*;
+import static pl.project13.janbanery.util.collections.Collectionz.findOrThrow;
 
 /**
  * @author Konrad Malawski

@@ -52,7 +52,7 @@ public class Janbanery {
   }
 
   private RestClient getRestClient(Configuration conf, AsyncHttpClient asyncHttpClient, Gson gson, ReflectionBodyGenerator bodyGenerator) {
-    return new RestClient(conf, gson, asyncHttpClient, bodyGenerator);
+    return new AsyncHttpClientRestClient(conf, gson, asyncHttpClient, bodyGenerator);
   }
 
   public AuthProvider getAuthMode() {

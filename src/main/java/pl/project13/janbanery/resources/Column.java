@@ -73,6 +73,15 @@ public class Column extends KanbaneryResource implements Serializable {
   public Column() {
   }
 
+  public Column(String name) {
+    this.name = name;
+  }
+
+  public Column(String name, Integer capacity) {
+    this.name = name;
+    this.capacity = capacity;
+  }
+
   @Override
   public String getResourceId() {
     return "column";

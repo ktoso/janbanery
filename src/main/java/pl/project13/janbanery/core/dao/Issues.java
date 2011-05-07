@@ -17,8 +17,6 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.IssueFlow;
-import pl.project13.janbanery.core.flow.IssueMarkFlow;
-import pl.project13.janbanery.core.flow.batch.IssuesFlow;
 import pl.project13.janbanery.resources.Issue;
 import pl.project13.janbanery.resources.Task;
 
