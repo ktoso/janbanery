@@ -185,12 +185,10 @@ public class AsyncHttpClientRestClient extends RestClient {
     return (T) gson.fromJson(responseBody, returnType);
   }
 
-  @Override
   public void authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
     conf.authorize(requestBuilder);
   }
 
-  @Override
   public void setFormUrlEncodedBody(AsyncHttpClient.BoundRequestBuilder requestBuilder, String requestBody) {
     requestBuilder.setBody(requestBody);
     requestBuilder.setHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -204,7 +202,6 @@ public class AsyncHttpClientRestClient extends RestClient {
    * @return return the response fetched from the server
    * @throws RestClientException if the response could not be fetched
    */
-  @Override
   public RestClientResponse execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) throws RestClientException {
     Response response;
 

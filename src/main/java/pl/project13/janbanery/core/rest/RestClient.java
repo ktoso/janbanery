@@ -81,11 +81,5 @@ public abstract class RestClient {
 
   public abstract <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) throws IOException;
 
-  public abstract void authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder);
-
-  public abstract void setFormUrlEncodedBody(AsyncHttpClient.BoundRequestBuilder requestBuilder, String requestBody);
-
-  public abstract RestClientResponse execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) throws RestClientException;
-
   public abstract void close();
 }
