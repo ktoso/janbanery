@@ -19,6 +19,8 @@ package pl.project13.janbanery.core.flow;
 import pl.project13.janbanery.core.dao.Issues;
 import pl.project13.janbanery.resources.Issue;
 
+import java.io.IOException;
+
 /**
  * @author Konrad Malawski
  */
@@ -39,7 +41,7 @@ public class IssueFlowImpl implements IssueFlow {
   }
 
   @Override
-  public void delete() {
+  public void delete() throws IOException {
     issues.delete(issue);
   }
 

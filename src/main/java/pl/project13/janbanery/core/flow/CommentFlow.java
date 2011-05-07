@@ -18,11 +18,13 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.resources.Comment;
 
+import java.io.IOException;
+
 /**
  * @author Konrad Malawski
  */
 public interface CommentFlow extends Flow<Comment> {
 
-  void delete();
+  void delete() throws IOException;
 
 }

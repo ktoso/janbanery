@@ -38,7 +38,7 @@ public interface SubTasksFlow extends Flow<Task> {
 
   SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
 
-  void delete(SubTask subTask);
+  void delete(SubTask subTask) throws IOException;
 
   SubTaskMarkFlow mark(SubTask subTask);
 

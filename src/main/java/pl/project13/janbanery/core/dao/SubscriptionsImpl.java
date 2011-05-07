@@ -65,7 +65,7 @@ public class SubscriptionsImpl implements Subscriptions {
   }
 
   @Override
-  public void unsubscribe(Task task) {
+  public void unsubscribe(Task task) throws IOException {
     String url = getDefaultUrl(task);
 
     restClient.doDelete(url);

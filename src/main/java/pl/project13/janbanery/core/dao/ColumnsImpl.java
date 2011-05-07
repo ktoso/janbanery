@@ -157,7 +157,7 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
-  public void delete(Column column) {
+  public void delete(Column column) throws IOException {
     String url = getColumnUrl(column.getId());
 
     restClient.doDelete(url);

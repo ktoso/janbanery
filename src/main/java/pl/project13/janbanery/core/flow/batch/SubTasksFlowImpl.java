@@ -57,7 +57,7 @@ public class SubTasksFlowImpl implements SubTasksFlow {
   }
 
   @Override
-  public void delete(SubTask subTask) {
+  public void delete(SubTask subTask) throws IOException {
     subTasks.delete(subTask);
   }
 

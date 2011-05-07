@@ -18,12 +18,14 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.resources.Issue;
 
+import java.io.IOException;
+
 /**
  * @author Konrad Malawski
  */
 public interface IssueFlow extends Flow<Issue> {
 
-  void delete();
+  void delete() throws IOException;
 
   // goto other flows -----------------
 

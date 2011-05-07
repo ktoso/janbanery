@@ -67,11 +67,11 @@ public abstract class RestClient {
 
   public abstract <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) throws IOException;
 
-  public abstract RestClientResponse doGet(String url);
+  public abstract RestClientResponse doGet(String url) throws IOException;
 
   public abstract <T> T doGet(String url, Type returnType) throws IOException;
 
-  public abstract RestClientResponse doDelete(String url);
+  public abstract RestClientResponse doDelete(String url) throws IOException;
 
   public abstract RestClientResponse doPut(String url, String requestBody);
 

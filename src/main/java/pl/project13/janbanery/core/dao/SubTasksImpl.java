@@ -70,7 +70,7 @@ public class SubTasksImpl implements SubTasks {
   }
 
   @Override
-  public void delete(SubTask subTask) {
+  public void delete(SubTask subTask) throws IOException {
     String url = getSubTaskUrl(subTask);
 
     restClient.doDelete(url);

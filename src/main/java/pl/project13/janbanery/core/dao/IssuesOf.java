@@ -20,6 +20,8 @@ import pl.project13.janbanery.core.flow.batch.IssuesFlow;
 import pl.project13.janbanery.resources.Issue;
 import pl.project13.janbanery.resources.Task;
 
+import java.io.IOException;
+
 /**
  * @author Konrad Malawski
  */
@@ -33,5 +35,5 @@ public interface IssuesOf {
    */
   IssuesFlow of(Task task);
 
-  void delete(Issue issue);
+  void delete(Issue issue) throws IOException;
 }

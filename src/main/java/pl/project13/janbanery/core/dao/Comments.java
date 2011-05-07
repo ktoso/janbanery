@@ -40,7 +40,7 @@ public interface Comments extends CommentsOf {
    */
   CommentFlow create(Task task, Comment comment) throws IOException;
 
-  void delete(Comment comment);
+  void delete(Comment comment) throws IOException;
 
   // queries ------------------------------------------------------------------
 

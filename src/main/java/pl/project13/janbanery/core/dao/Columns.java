@@ -40,7 +40,7 @@ public interface Columns extends KanbaneryDao<Column> {
 
   ColumnUpdateFlow update(Long columnId, Column newValues) throws IOException;
 
-  void delete(Column column);
+  void delete(Column column) throws IOException;
 
   ColumnMoveFlow move(Column column);
 

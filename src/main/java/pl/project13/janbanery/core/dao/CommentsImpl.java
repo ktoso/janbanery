@@ -55,7 +55,7 @@ public class CommentsImpl implements Comments {
   }
 
   @Override
-  public void delete(Comment comment) {
+  public void delete(Comment comment) throws IOException {
     String url = getCommentUrl(comment);
 
     restClient.doDelete(url);

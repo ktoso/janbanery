@@ -42,7 +42,7 @@ public interface Issues extends IssuesOf {
 
   IssueFlow update(Issue issue, Issue newValues) throws IOException;
 
-  void delete(Issue issue);
+  void delete(Issue issue) throws IOException;
 
   // queries ------------------------------------------------------------------
 

@@ -30,7 +30,7 @@ public interface Subscriptions {
 
   TaskSubscription subscribe(Task task) throws IOException;
 
-  void unsubscribe(Task task);
+  void unsubscribe(Task task) throws IOException;
 
   // queries ------------------------------------------------------------------
 

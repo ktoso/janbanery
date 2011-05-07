@@ -35,7 +35,7 @@ public interface Memberships extends MembershipsOf {
 
   MembershipFlow update(Project project, ProjectMembership membership, ProjectMembership newValues) throws IOException;
 
-  void delete(Project project, ProjectMembership membership);
+  void delete(Project project, ProjectMembership membership) throws IOException;
 
   void deleteAll(Project project) throws IOException;
 

@@ -49,7 +49,7 @@ public class IssuesFlowImpl implements IssuesFlow {
   }
 
   @Override
-  public void delete(Issue issue) {
+  public void delete(Issue issue) throws IOException {
     issues.delete(issue);
   }
 

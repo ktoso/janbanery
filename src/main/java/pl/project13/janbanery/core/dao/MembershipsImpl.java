@@ -72,7 +72,7 @@ public class MembershipsImpl implements Memberships {
   }
 
   @Override
-  public void delete(Project project, ProjectMembership membership) {
+  public void delete(Project project, ProjectMembership membership) throws IOException {
     String url = getMembershipUrl(project, membership);
 
     restClient.doDelete(url);

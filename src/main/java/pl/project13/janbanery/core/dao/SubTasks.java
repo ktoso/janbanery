@@ -42,7 +42,7 @@ public interface SubTasks extends SubTasksOf {
 
   SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
 
-  void delete(SubTask subTask);
+  void delete(SubTask subTask) throws IOException;
 
   // queries ------------------------------------------------------------------
 

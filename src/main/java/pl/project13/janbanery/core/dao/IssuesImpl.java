@@ -63,7 +63,7 @@ public class IssuesImpl implements Issues {
   }
 
   @Override
-  public void delete(Issue issue) {
+  public void delete(Issue issue) throws IOException {
     String url = getIssueUrl(issue);
 
     restClient.doDelete(url);

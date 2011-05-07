@@ -49,7 +49,7 @@ public class MembershipsFlowImpl implements MembershipsFlow {
   }
 
   @Override
-  public void delete(ProjectMembership membership) {
+  public void delete(ProjectMembership membership) throws IOException {
     memberships.delete(project, membership);
   }
 

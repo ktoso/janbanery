@@ -34,7 +34,7 @@ public interface MembershipsFlow {
   // queries ------------------------------------------------------------------
   List<ProjectMembership> all() throws IOException;
 
-  void delete(ProjectMembership membership);
+  void delete(ProjectMembership membership) throws IOException;
 
   void deleteAll() throws IOException;
 
