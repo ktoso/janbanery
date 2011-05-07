@@ -41,7 +41,13 @@ public class UserPassAuthProvider implements AuthProvider {
 
   @Override
   public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
-    return requestBuilder.addHeader("Authorization", "Basic " + authData);
+    Header header = getAuthHeader();
+    return requestBuilder.addHeader(header.getKey(), header.getValue());
+  }
+
+  @Override
+  public Header getAuthHeader() {
+    return new Header("Authorization", "Basic " + authData);
   }
 
   public String encodeUserPassword(String user, String password) {

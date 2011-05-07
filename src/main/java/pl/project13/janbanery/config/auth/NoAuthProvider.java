@@ -40,4 +40,9 @@ public class NoAuthProvider implements AuthProvider {
   public boolean isCurrentUser(User user) {
     return false;
   }
+
+  @Override
+  public Header getAuthHeader() {
+    return new Header("", "");
+  }
 }

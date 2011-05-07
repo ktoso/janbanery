@@ -17,7 +17,7 @@
 package pl.project13.janbanery.core.rest;
 
 import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.Response;
+import pl.project13.janbanery.core.rest.response.RestClientResponse;
 import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
 import pl.project13.janbanery.exceptions.RestClientException;
 import pl.project13.janbanery.exceptions.kanbanery.*;
@@ -33,7 +33,7 @@ import static java.lang.String.format;
  */
 public abstract class RestClient {
 
-  public void verifyResponseCode(Response response) throws KanbaneryException {
+  public void verifyResponseCode(RestClientResponse response) throws KanbaneryException {
     Integer statusCode = response.getStatusCode();
 
     switch (statusCode) {
@@ -56,29 +56,24 @@ public abstract class RestClient {
     }
   }
 
-  private String errorMessageFrom(Response response) {
+  private String errorMessageFrom(RestClientResponse response) {
     StringBuilder sb = new StringBuilder().append(response.getStatusCode()).append(" - ").append(response.getStatusText()).append("\n");
-    try {
-      sb.append(response.getResponseBody());
-    } catch (IOException ignored) {
-      // ok, so no response could be fetched
-      sb.append("[EXCEPTION WHILE GETTING RESPONSE BODY]");
-    }
+    sb.append(response.getResponseBody());
 
     return sb.toString();
   }
 
-  public abstract Response doPost(String url, KanbaneryResource resource) throws IOException;
+  public abstract RestClientResponse doPost(String url, KanbaneryResource resource) throws IOException;
 
   public abstract <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) throws IOException;
 
-  public abstract Response doGet(String url);
+  public abstract RestClientResponse doGet(String url);
 
   public abstract <T> T doGet(String url, Type returnType) throws IOException;
 
-  public abstract Response doDelete(String url);
+  public abstract RestClientResponse doDelete(String url);
 
-  public abstract Response doPut(String url, String requestBody);
+  public abstract RestClientResponse doPut(String url, String requestBody);
 
   public abstract <T> T doPut(String url, String requestBody, Class<?> returnType) throws IOException;
 
@@ -90,7 +85,7 @@ public abstract class RestClient {
 
   public abstract void setFormUrlEncodedBody(AsyncHttpClient.BoundRequestBuilder requestBuilder, String requestBody);
 
-  public abstract Response execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) throws RestClientException;
+  public abstract RestClientResponse execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) throws RestClientException;
 
   public abstract void close();
 }

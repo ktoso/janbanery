@@ -36,7 +36,8 @@ public class ApiKeyAuthProvider implements AuthProvider {
 
   @Override
   public AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder) {
-    return requestBuilder.addHeader(API_TOKEN_HEADER, authData);
+    Header authHeader = getAuthHeader();
+    return requestBuilder.addHeader(authHeader.getKey(), authHeader.getValue());
   }
 
   public String encodeUserPassword(String user, String password) {
@@ -53,5 +54,10 @@ public class ApiKeyAuthProvider implements AuthProvider {
   @Override
   public boolean isCurrentUser(User user) {
     return authData.equals(user.getApiToken());
+  }
+
+  @Override
+  public Header getAuthHeader() {
+    return new Header(API_TOKEN_HEADER, authData);
   }
 }

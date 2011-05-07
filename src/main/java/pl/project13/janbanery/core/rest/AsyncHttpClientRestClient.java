@@ -23,10 +23,10 @@ import com.ning.http.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
+import pl.project13.janbanery.core.rest.response.NingRestClientResponse;
+import pl.project13.janbanery.core.rest.response.RestClientResponse;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
-import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
 import pl.project13.janbanery.exceptions.RestClientException;
-import pl.project13.janbanery.exceptions.kanbanery.*;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
 import java.io.IOException;
@@ -61,7 +61,7 @@ public class AsyncHttpClientRestClient extends RestClient {
   }
 
   @Override
-  public Response doPost(String url, KanbaneryResource resource) throws IOException {
+  public RestClientResponse doPost(String url, KanbaneryResource resource) throws IOException {
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePost(url);
     authorize(requestBuilder);
 
@@ -69,7 +69,7 @@ public class AsyncHttpClientRestClient extends RestClient {
     log.info("Generated request body is: '{}'", requestBody);
     setFormUrlEncodedBody(requestBuilder, requestBody);
 
-    Response response = execute(requestBuilder);
+    RestClientResponse response = execute(requestBuilder);
 
     verifyResponseCode(response);
 
@@ -83,7 +83,7 @@ public class AsyncHttpClientRestClient extends RestClient {
   @Override
   @SuppressWarnings("unchecked")
   public <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) throws IOException {
-    Response response = doPost(url, resource);
+    RestClientResponse response = doPost(url, resource);
     String responseBody = response.getResponseBody();
 
     return (T) gson.fromJson(responseBody, returnType);
@@ -95,16 +95,16 @@ public class AsyncHttpClientRestClient extends RestClient {
    * method.
    *
    * @param url url to call
-   * @return the Response object containing the server response to our call
+   * @return the RestClientResponse object containing the server response to our call
    */
   @Override
-  public Response doGet(String url) {
+  public RestClientResponse doGet(String url) {
     log.info("Calling GET on: " + url);
 
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareGet(url);
     authorize(requestBuilder);
 
-    Response response = execute(requestBuilder);
+    RestClientResponse response = execute(requestBuilder);
 
     verifyResponseCode(response);
 
@@ -124,20 +124,20 @@ public class AsyncHttpClientRestClient extends RestClient {
   @Override
   @SuppressWarnings("unchecked")
   public <T> T doGet(String url, Type returnType) throws IOException {
-    Response response = doGet(url);
+    RestClientResponse response = doGet(url);
     String responseBody = response.getResponseBody();
 
     return (T) gson.fromJson(responseBody, returnType);
   }
 
   @Override
-  public Response doDelete(String url) {
+  public RestClientResponse doDelete(String url) {
     log.info("Calling DELETE on: " + url);
 
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareDelete(url);
     authorize(requestBuilder);
 
-    Response response = execute(requestBuilder);
+    RestClientResponse response = execute(requestBuilder);
 
     verifyResponseCode(response);
 
@@ -145,7 +145,7 @@ public class AsyncHttpClientRestClient extends RestClient {
   }
 
   @Override
-  public Response doPut(String url, String requestBody) {
+  public RestClientResponse doPut(String url, String requestBody) {
     log.info("Calling PUT on: '" + url + "', with data: " + requestBody);
 
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePut(url);
@@ -153,7 +153,7 @@ public class AsyncHttpClientRestClient extends RestClient {
 
     setFormUrlEncodedBody(requestBuilder, requestBody);
 
-    Response response = execute(requestBuilder);
+    RestClientResponse response = execute(requestBuilder);
 
     verifyResponseCode(response);
 
@@ -163,7 +163,7 @@ public class AsyncHttpClientRestClient extends RestClient {
   @Override
   @SuppressWarnings({"unchecked"})
   public <T> T doPut(String url, String requestBody, Class<?> returnType) throws IOException {
-    Response response = doPut(url, requestBody);
+    RestClientResponse response = doPut(url, requestBody);
     String responseBody = response.getResponseBody();
     return (T) gson.fromJson(responseBody, returnType);
   }
@@ -171,7 +171,7 @@ public class AsyncHttpClientRestClient extends RestClient {
   @Override
   @SuppressWarnings({"unchecked"})
   public <T> T doPut(String url, String requestBody, Type returnType) throws IOException {
-    Response response = doPut(url, requestBody);
+    RestClientResponse response = doPut(url, requestBody);
     String responseBody = response.getResponseBody();
     return (T) gson.fromJson(responseBody, returnType);
   }
@@ -180,7 +180,7 @@ public class AsyncHttpClientRestClient extends RestClient {
   @SuppressWarnings("unchecked")
   public <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) throws IOException {
     String requestBody = encodedBodyGenerator.asString(requestObject);
-    Response response = doPut(url, requestBody);
+    RestClientResponse response = doPut(url, requestBody);
     String responseBody = response.getResponseBody();
     return (T) gson.fromJson(responseBody, returnType);
   }
@@ -205,7 +205,7 @@ public class AsyncHttpClientRestClient extends RestClient {
    * @throws RestClientException if the response could not be fetched
    */
   @Override
-  public Response execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) throws RestClientException {
+  public RestClientResponse execute(AsyncHttpClient.BoundRequestBuilder requestBuilder) throws RestClientException {
     Response response;
 
     try {
@@ -224,7 +224,7 @@ public class AsyncHttpClientRestClient extends RestClient {
       throw new RestClientException("Encountered IOException while executing REST request.", e);
     }
 
-    return response;
+    return new NingRestClientResponse(response);
   }
 
   /**

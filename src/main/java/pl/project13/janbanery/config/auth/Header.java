@@ -16,28 +16,23 @@
 
 package pl.project13.janbanery.config.auth;
 
-import com.ning.http.client.AsyncHttpClient;
-import pl.project13.janbanery.resources.User;
-
 /**
- * Common interface for all methods allowing authorization into the Kanbanery API.
- * For example, via API Key or plain user/password method.
- *
  * @author Konrad Malawski
  */
-public interface AuthProvider {
+public class Header {
+  private String key;
+  private String value;
 
-  AsyncHttpClient.BoundRequestBuilder authorize(AsyncHttpClient.BoundRequestBuilder requestBuilder);
+  public Header(String key, String value) {
+    this.key = key;
+    this.value = value;
+  }
 
-  String encodeUserPassword(String user, String password);
+  public String getKey() {
+    return key;
+  }
 
-  /**
-   * Identify if the passed in user is the "current" user.
-   *
-   * @param user user to check if it's "us"
-   * @return true if the user is "us", false otherwise
-   */
-  boolean isCurrentUser(User user);
-
-  Header getAuthHeader();
+  public String getValue() {
+    return value;
+  }
 }
