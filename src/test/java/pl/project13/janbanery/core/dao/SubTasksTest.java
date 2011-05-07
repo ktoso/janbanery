@@ -95,6 +95,14 @@ public class SubTasksTest {
     SubTask secondCreatedSubTask = subTasksFlow.create(TestEntityHelper.createTestSubTask()).get();
     SubTask subTaskFromCompletedFlow = subTasksFlow.mark(willNowGetCompleted).asCompleted().get();
 
+    janbanery.subTasks().all(task);
+    janbanery.subTasks().allCompleted(task);
+    janbanery.subTasks().allNotCompleted(task);
+
+    janbanery.subTasks().of(task).all();
+    janbanery.subTasks().of(task).allCompleted();
+    janbanery.subTasks().of(task).allNotCompleted();
+
 
     // then
     List<SubTask> notCompletedTasks = subTasksFlow.allNotCompleted();

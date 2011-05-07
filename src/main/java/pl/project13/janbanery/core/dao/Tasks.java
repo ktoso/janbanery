@@ -17,6 +17,7 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.*;
+import pl.project13.janbanery.core.flow.batch.TasksMoveAllFlow;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
@@ -44,6 +45,10 @@ public interface Tasks extends KanbaneryDao<Task> {
   // task movement --------------------
 
   TaskMoveFlow move(Task task);
+
+  TasksMoveAllFlow moveAllFrom(Column column) throws IOException;
+
+  void moveAll(Column srcColumn, Column destColumn) throws IOException;
 
   TaskFlow move(Task task, TaskLocation location) throws IOException;
 
@@ -83,4 +88,5 @@ public interface Tasks extends KanbaneryDao<Task> {
   Task byId(Long taskId) throws IOException;
 
   TaskFlow assign(Task task, User user) throws IOException;
+
 }

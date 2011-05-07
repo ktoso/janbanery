@@ -60,6 +60,10 @@ public class Issue extends KanbaneryResource implements Serializable {
   public Issue() {
   }
 
+  public Issue(String url) {
+    this.url = url;
+  }
+
   @Override
   public String getResourceId() {
     return "issue";

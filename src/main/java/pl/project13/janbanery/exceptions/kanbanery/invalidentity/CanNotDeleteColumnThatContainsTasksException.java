@@ -14,26 +14,30 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.exceptions.kanbanery;
+package pl.project13.janbanery.exceptions.kanbanery.invalidentity;
+
+import pl.project13.janbanery.exceptions.kanbanery.InvalidEntityKanbaneryException;
+import pl.project13.janbanery.exceptions.kanbanery.KanbaneryException;
 
 /**
  * @author Konrad Malawski
  */
-public class CanNotDeleteNotEmptyColumnException extends KanbaneryException {
+public class CanNotDeleteColumnThatContainsTasksException extends InvalidEntityKanbaneryException {
   private static final long serialVersionUID = -672905745028613743L;
 
-  public CanNotDeleteNotEmptyColumnException() {
-  }
-
-  public CanNotDeleteNotEmptyColumnException(String message) {
+  public CanNotDeleteColumnThatContainsTasksException(String message) {
     super(message);
   }
 
-  public CanNotDeleteNotEmptyColumnException(String message, Throwable cause) {
+  public CanNotDeleteColumnThatContainsTasksException(String message, Throwable cause) {
     super(message, cause);
   }
 
-  public CanNotDeleteNotEmptyColumnException(Throwable cause) {
+  public CanNotDeleteColumnThatContainsTasksException(Throwable cause) {
     super(cause);
+  }
+
+  public static boolean isBestExceptionFor(String response) {
+    return response.contains("Cannot destroy column that contains tasks");
   }
 }

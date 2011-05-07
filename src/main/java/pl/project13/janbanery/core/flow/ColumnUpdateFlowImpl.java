@@ -67,6 +67,11 @@ public class ColumnUpdateFlowImpl implements ColumnUpdateFlow {
   }
 
   @Override
+  public ColumnMoveFlow move() {
+    return new ColumnMoveFlowImpl(columns, column);
+  }
+
+  @Override
   public Column get() {
     return column;
   }

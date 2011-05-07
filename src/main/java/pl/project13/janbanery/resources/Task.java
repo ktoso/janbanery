@@ -49,7 +49,7 @@ public class Task extends KanbaneryResource implements Serializable {
   private String title;
 
   /**
-   * The task's type, ie. "Bug", "Story", here an ID has to be given.
+   * The task's taskType, ie. "Bug", "Story", here an ID has to be given.
    * Instead of setting this id you can just set task_type_name to "Bug".
    */
   @Required(alternativeTo = "taskTypeName")
@@ -58,7 +58,7 @@ public class Task extends KanbaneryResource implements Serializable {
   private Long taskTypeId;
 
   /**
-   * The task's type, ie. "Bug", "Story".
+   * The task's taskType, ie. "Bug", "Story".
    * Instead of setting this name you can set task_type_id to 1337.
    */
   @Required(alternativeTo = "taskTypeId")
@@ -397,18 +397,41 @@ public class Task extends KanbaneryResource implements Serializable {
       return this;
     }
 
-    public Builder taskTypeId(Long taskTypeId) {
-      instance.taskTypeId = taskTypeId;
+    public Builder estimate(Estimate estimate) {
+      instance.estimateId = estimate.getId();
       return this;
     }
 
-    public Builder taskType(TaskType taskType) {
-      instance.taskTypeId = taskType.getId();
-      return this;
+    public DeadlineBuilder deadline() {
+      return new DeadlineBuilder(this);
     }
 
     public Task build() {
       return instance;
+    }
+  }
+
+  public static class DeadlineBuilder {
+    private Builder builder;
+
+    public DeadlineBuilder(Builder builder) {
+      this.builder = builder;
+    }
+
+    public Builder tomorrow() {
+      return inDays(1);
+    }
+
+    public Builder nextWeek() {
+      return inDays(7);
+    }
+
+    public Builder inWeeks(Integer weeks) {
+      return inDays(weeks * 7);
+    }
+
+    public Builder inDays(Integer days) {
+      return builder.deadline(new DateTime().plusDays(days).toDate());
     }
   }
 

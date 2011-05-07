@@ -30,4 +30,6 @@ public interface ColumnUpdateFlow extends Flow<Column> {
   ColumnUpdateFlow capacity(Integer capacity) throws IOException;
 
   ColumnUpdateFlow position(Integer position) throws IOException;
+
+  ColumnMoveFlow move();
 }

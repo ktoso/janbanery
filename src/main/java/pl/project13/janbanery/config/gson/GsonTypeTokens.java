@@ -30,7 +30,7 @@ public class GsonTypeTokens {
   private GsonTypeTokens() {
   }
 
-  // type tokens for generic types
+  // taskType tokens for generic types
 
   public static final Type LIST_WORKSPACE = new TypeToken<List<Workspace>>() {
   }.getType();

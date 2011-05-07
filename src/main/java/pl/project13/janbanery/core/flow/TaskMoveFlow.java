@@ -27,7 +27,6 @@ import java.io.IOException;
  * @author Konrad Malawski
  */
 public interface TaskMoveFlow extends Flow<Task> {
-
   TaskFlow toNextColumn() throws IOException;
 
   TaskFlow toPreviousColumn() throws IOException;
@@ -40,10 +39,10 @@ public interface TaskMoveFlow extends Flow<Task> {
    * Move this task to the project's <strong>icebox</strong>.
    * <strong>Requirement</strong>: The task MUST be in the FIRST column.
    *
-   * @return a TaskMoveFlow instance to allow further task operations
-   * @throws IOException if unable to fetch the server response
-   * @throws CanOnlyIceBoxTaskFromFirstColumnException
-   *                     if the task is NOT in the first column
+   * @return a TaskMoveOneFlow instance to allow further task operations
+   * @throws java.io.IOException if unable to fetch the server response
+   * @throws pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException
+   *                             if the task is NOT in the first column
    */
   TaskFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException;
 
@@ -51,8 +50,8 @@ public interface TaskMoveFlow extends Flow<Task> {
    * Move this task to the project's <strong>archive</strong>.
    * <strong>Requirement</strong>: The task MUST be in the LAST column.
    *
-   * @return a TaskMoveFlow instance to allow further task operations
-   * @throws IOException if unable to fetch the server response
+   * @return a TaskMoveOneFlow instance to allow further task operations
+   * @throws java.io.IOException if unable to fetch the server response
    */
   TaskFlow toArchive() throws IOException;
 
@@ -60,11 +59,12 @@ public interface TaskMoveFlow extends Flow<Task> {
    * Move this task to the project's kanban <strong>board</strong>.
    * <strong>Requirement</strong>: The task MUST be in the iceBox OR archive.
    *
-   * @return a TaskMoveFlow instance to allow further task operations
-   * @throws IOException if unable to fetch the server response
+   * @return a TaskMoveOneFlow instance to allow further task operations
+   * @throws java.io.IOException if unable to fetch the server response
    */
   TaskFlow toBoard() throws IOException;
 
   TaskFlow toLastColumn() throws IOException;
 
+  TaskFlow toFirstColumn() throws IOException;
 }

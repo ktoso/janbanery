@@ -34,7 +34,7 @@ import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION
 /**
  * @author Konrad Malawski
  */
-public class SubscriptionsImplTest {
+public class SubscriptionsTest {
 
   Janbanery janbanery;
 
@@ -70,16 +70,15 @@ public class SubscriptionsImplTest {
   @Test
   public void shouldUnsubscribeFromTask() throws Exception {
     // given
-    Subscriptions subscriptions = janbanery.subscriptions();
     Task testTask = TestEntityHelper.createTestTask(janbanery);
     Task task = janbanery.tasks().create(testTask).get();
 
     // when
-    subscriptions.subscribe(task);
-    subscriptions.unsubscribe(task);
+    janbanery.subscriptions().subscribe(task);
+    janbanery.subscriptions().unsubscribe(task);
 
     // then
-    Boolean isSubscribed = subscriptions.isSubscribedTo(task);
+    Boolean isSubscribed = janbanery.subscriptions().isSubscribedTo(task);
 
     assertThat(isSubscribed).isFalse();
   }

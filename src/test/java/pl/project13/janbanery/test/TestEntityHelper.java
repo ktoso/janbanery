@@ -80,9 +80,7 @@ public class TestEntityHelper {
   }
 
   public static SubTask createTestSubTask(String body) {
-    SubTask subTask = new SubTask();
-    subTask.setBody(body);
-    return subTask;
+    return new SubTask(body);
   }
 
   public static CommentFlow createTestComment(Janbanery janbanery, Task task) throws IOException {
@@ -92,8 +90,6 @@ public class TestEntityHelper {
   }
 
   public static Issue createTestIssue() {
-    Issue issue = new Issue();
-    issue.setUrl("http://jira.project13.pl/task/324345");
-    return issue;
+    return new Issue("http://jira.project13.pl/task/324345");
   }
 }

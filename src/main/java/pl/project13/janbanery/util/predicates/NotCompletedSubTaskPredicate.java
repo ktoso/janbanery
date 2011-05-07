@@ -25,6 +25,7 @@ import pl.project13.janbanery.resources.SubTask;
 public class NotCompletedSubTaskPredicate implements Predicate<SubTask> {
   @Override
   public boolean apply(SubTask subTask) {
-    return !subTask.getCompleted();
+    Boolean completed = subTask.getCompleted();
+    return completed != null && !completed;
   }
 }

@@ -27,7 +27,7 @@ public interface IceBoxFlow extends Flow<Task> {
   /**
    * Move this task to the kanban board of your project.
    *
-   * @return the TaskMoveFlow, so you may move the task to some other column right away
+   * @return the TaskMoveOneFlow, so you may move the task to some other column right away
    * @throws IOException if the server response could not be fetched
    */
   TaskFlow moveToBoard() throws IOException;

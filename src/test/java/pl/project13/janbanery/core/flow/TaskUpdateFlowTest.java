@@ -162,7 +162,7 @@ public class TaskUpdateFlowTest {
     TaskType newValue = taskTypes.get(0);
 
     // when
-    Task updatedTask = tasks.update(task).type(newValue).get();
+    Task updatedTask = tasks.update(task).taskType(newValue).get();
 
     // then
     Task foundTask = tasks.byId(updatedTask.getId());

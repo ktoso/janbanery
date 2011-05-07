@@ -47,4 +47,8 @@ public interface SubTasks extends SubTasksOf {
   // queries ------------------------------------------------------------------
 
   List<SubTask> all(Task task) throws IOException;
+
+  List<SubTask> allCompleted(Task task) throws IOException;
+
+  List<SubTask> allNotCompleted(Task task) throws IOException;
 }

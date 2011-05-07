@@ -14,24 +14,18 @@
  * limitations under the License.
  */
 
-package pl.project13.janbanery.core.dao;
+package pl.project13.janbanery.util.predicates;
 
-import pl.project13.janbanery.resources.Estimate;
-
-import java.io.IOException;
-import java.util.List;
+import com.google.common.base.Predicate;
+import pl.project13.janbanery.resources.SubTask;
 
 /**
  * @author Konrad Malawski
  */
-public interface Estimates {
-
-  // commands -----------------------------------------------------------------
-
-  // queries ------------------------------------------------------------------
-  List<Estimate> all() throws IOException;
-
-  Estimate byId(Long id) throws IOException;
-
-  Estimate any() throws IOException;
+public class CompletedSubTasksPredicate implements Predicate<SubTask> {
+  @Override
+  public boolean apply(SubTask input) {
+    Boolean completed = input.getCompleted();
+    return completed != null && completed;
+  }
 }

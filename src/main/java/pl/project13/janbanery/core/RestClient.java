@@ -148,8 +148,8 @@ public class RestClient {
    * into the requested object
    *
    * @param url        url to call
-   * @param returnType type to parse the returned json into
-   * @param <T>        the return type, should match returnType
+   * @param returnType taskType to parse the returned json into
+   * @param <T>        the return taskType, should match returnType
    * @return the KanbaneryResource created by parsing the retrieved json
    * @throws IOException if the response body could not be fetched
    */

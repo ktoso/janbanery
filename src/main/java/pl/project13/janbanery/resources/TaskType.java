@@ -57,7 +57,7 @@ public class TaskType extends KanbaneryResource implements Serializable {
   private String textColor;
 
   /**
-   * Project to which the task type is assigned
+   * Project to which the task taskType is assigned
    */
   @SerializedName("project_id")
   private Integer projectId;

@@ -112,7 +112,7 @@ public abstract class KanbaneryResource implements Resource {
     sb.append("KanbaneryResource");
     sb.append("{createdAt=").append(createdAt);
     sb.append(", updatedAt=").append(updatedAt);
-    sb.append(", type='").append(type).append('\'');
+    sb.append(", taskType='").append(type).append('\'');
     sb.append('}');
     return sb.toString();
   }

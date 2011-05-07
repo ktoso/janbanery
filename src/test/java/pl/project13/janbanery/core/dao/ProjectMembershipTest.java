@@ -65,9 +65,9 @@ public class ProjectMembershipTest {
   public void shouldCreateNewMembership() throws Exception {
     // given
     shouldDeleteAllMemberships();
-    ProjectMembership projectMembership = new ProjectMembership.Builder().email("ktoso@project13.pl")
-                                                                         .permission(Permission.VIEWER)
-                                                                         .build();
+    ProjectMembership projectMembership = new ProjectMembership("ktoso@project13.pl", Permission.VIEWER);
+
+
     // when
     MembershipFlow membershipFlow = janbanery.memberships().ofCurrentProject().create(projectMembership);
 

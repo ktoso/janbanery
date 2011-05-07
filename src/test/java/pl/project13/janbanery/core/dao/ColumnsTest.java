@@ -23,13 +23,17 @@ import org.mockito.Mockito;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
+import pl.project13.janbanery.core.flow.batch.TasksMoveAllFlow;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
+import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanNotDeleteColumnThatContainsTasksException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.NotFixedColumnCannotBeFirstException;
 import pl.project13.janbanery.resources.Column;
+import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
@@ -76,7 +80,9 @@ public class ColumnsTest {
     Column newColumnData = TestEntityHelper.createTestColumn();
 
     // when
-    Column newColumn = janbanery.columns().create(newColumnData).before(secondColumn);
+    Column newColumn = janbanery.columns().create(newColumnData).before(secondColumn).get();
+
+    janbanery.columns().create(new Column()).onPosition(2);
 
     // then
     assertThat(newColumn.getName()).isEqualTo(newColumnData.getName());
@@ -90,11 +96,12 @@ public class ColumnsTest {
   public void shouldCreateBeforeLastColumn() throws Exception {
     // given
     Column lastColumn = janbanery.columns().last();
+    Column beforeLastColumn = janbanery.columns().before(lastColumn);
     Integer prevPositionOfLastColumn = lastColumn.getPosition();
     Column newColumnData = TestEntityHelper.createTestColumn();
 
     // when
-    Column newColumn = janbanery.columns().create(newColumnData).beforeLast();
+    Column newColumn = janbanery.columns().create(newColumnData).beforeLast().get();
 
     // then
     assertThat(newColumn.getName()).isEqualTo(newColumnData.getName());
@@ -116,7 +123,7 @@ public class ColumnsTest {
     // when
     Column newColumn = janbanery.columns()
                                 .create(newColumnData)
-                                .after(firstColumn);
+                                .after(firstColumn).get();
 
     // then
     assertThat(newColumn.getName()).isEqualTo(newColumnData.getName());
@@ -141,7 +148,7 @@ public class ColumnsTest {
   public void shouldDeleteColumn() throws Exception {
     // given
     Column newColumnData = TestEntityHelper.createTestColumn();
-    Column newColumn = janbanery.columns().create(newColumnData).afterFirst();
+    Column newColumn = janbanery.columns().create(newColumnData).afterFirst().get();
 
     // when
     janbanery.columns().delete(newColumn);
@@ -160,7 +167,7 @@ public class ColumnsTest {
     Column newColumnData = TestEntityHelper.createTestColumn();
     Column newColumn = janbanery.columns()
                                 .create(newColumnData)
-                                .after(firstColumn);
+                                .after(firstColumn).get();
 
     // when
     newColumn = janbanery.columns()
@@ -181,7 +188,7 @@ public class ColumnsTest {
     Column newColumnData = TestEntityHelper.createTestColumn();
     Column newColumn = janbanery.columns()
                                 .create(newColumnData)
-                                .after(firstColumn);
+                                .after(firstColumn).get();
 
     // when
     newColumn = janbanery.columns().move(newColumn).after(firstColumn).get();
@@ -196,7 +203,7 @@ public class ColumnsTest {
     Column newColumnData = TestEntityHelper.createTestColumn();
     Column newColumn = janbanery.columns()
                                 .create(newColumnData)
-                                .afterFirst();
+                                .afterFirst().get();
 
     // when
     newColumn = janbanery.columns().move(newColumn).toPosition(3).get();
@@ -209,7 +216,7 @@ public class ColumnsTest {
   public void shouldUpdateColumnName() throws Exception {
     // given
     Column newColumnData = TestEntityHelper.createTestColumn();
-    Column column = janbanery.columns().create(newColumnData).afterFirst();
+    Column column = janbanery.columns().create(newColumnData).afterFirst().get();
 
     // when
     String newColumnName = "New Column Name";
@@ -225,10 +232,49 @@ public class ColumnsTest {
   }
 
   @Test
+  public void shouldThrowWhenDeletingColumnWithTasks() throws Exception {
+    // given
+    Column newColumnData = TestEntityHelper.createTestColumn();
+    Column column = janbanery.columns().create(newColumnData).afterFirst().get();
+
+    // when
+    Task testTask = TestEntityHelper.createTestTask(janbanery);
+    janbanery.tasks().create(testTask)
+             .move().to(column);
+
+    boolean hasThrownAsExpected = false;
+    try {
+      janbanery.columns().delete(column);
+    } catch (CanNotDeleteColumnThatContainsTasksException e) {
+      hasThrownAsExpected = true;
+    }
+
+    TasksMoveAllFlow taskMoveFlow = janbanery.tasks().moveAllFrom(column).toFirstColumn();
+
+    janbanery.columns().delete(column);
+
+    List<Task> tasks = taskMoveFlow.get();
+    for (Task task : tasks) {
+      janbanery.tasks().delete(task);
+    }
+
+    // then
+    assertThat(hasThrownAsExpected).isTrue();
+
+    boolean shouldNotFindThisEntity = true;
+    try {
+      janbanery.columns().byId(column.getId());
+      shouldNotFindThisEntity = false;
+    } catch (NotFoundKanbaneryException ok) {
+    }
+    assertThat(shouldNotFindThisEntity).isTrue();
+  }
+
+  @Test
   public void shouldUpdateColumnCapacity() throws Exception {
     // given
     Column newColumnData = TestEntityHelper.createTestColumn();
-    Column column = janbanery.columns().create(newColumnData).afterFirst();
+    Column column = janbanery.columns().create(newColumnData).afterFirst().get();
 
     // when
     Integer newColumnCapacity = 10;

@@ -53,7 +53,7 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
    * @param response the JSON server response, containing a error messages
    * @return the "best" exception to be thrown for such an response JSON, based on it's error messages
    */
-  public static KanbaneryException mostSpecializedException(String response) {
+  public static InvalidEntityKanbaneryException mostSpecializedException(String response) {
     //todo refactor this!!!
     if (response == null || "".equals(response)) {
       return new InvalidEntityKanbaneryException(response);
@@ -77,6 +77,8 @@ public class InvalidEntityKanbaneryException extends KanbaneryException {
       return new UserAlreadyAssignedToThisProjectException(response);
     } else if (ProjectOwnerCanNotBeGivenProjectMembership.isBestExceptionFor(response)) {
       return new ProjectOwnerCanNotBeGivenProjectMembership(response);
+    } else if (CanNotDeleteColumnThatContainsTasksException.isBestExceptionFor(response)) {
+      return new CanNotDeleteColumnThatContainsTasksException(response);
     } else {
       return new InvalidEntityKanbaneryException(response);
     }

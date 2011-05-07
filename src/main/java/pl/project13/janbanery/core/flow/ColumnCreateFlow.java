@@ -27,7 +27,7 @@ public interface ColumnCreateFlow {
 
   // commands -----------------------------------------------------------------
 
-  Column after(Column column) throws IOException;
+  ColumnUpdateFlow after(Column column) throws IOException;
 
   /**
    * Shorthand for creating a column after the first column.
@@ -40,9 +40,9 @@ public interface ColumnCreateFlow {
    * @return the newly created column
    * @throws IOException if unable to fetch the servers response
    */
-  Column afterFirst() throws IOException;
+  ColumnUpdateFlow afterFirst() throws IOException;
 
-  Column before(Column column) throws IOException;
+  ColumnUpdateFlow before(Column column) throws IOException;
 
   /**
    * Shorthand for creating a column before the last column.
@@ -55,7 +55,7 @@ public interface ColumnCreateFlow {
    * @return the newly created column
    * @throws IOException if unable to fetch the servers response
    */
-  Column beforeLast() throws IOException;
+  ColumnUpdateFlow beforeLast() throws IOException;
 
-  Column onPosition(Integer position) throws IOException;
+  ColumnUpdateFlow onPosition(Integer position) throws IOException;
 }

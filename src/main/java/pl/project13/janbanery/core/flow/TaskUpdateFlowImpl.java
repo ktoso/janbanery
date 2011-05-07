@@ -103,7 +103,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   }
 
   @Override
-  public TaskUpdateFlow type(TaskType taskType) throws IOException {
+  public TaskUpdateFlow taskType(TaskType taskType) throws IOException {
     Task commandObject = new Task();
     commandObject.setTaskTypeId(taskType.getId());
 

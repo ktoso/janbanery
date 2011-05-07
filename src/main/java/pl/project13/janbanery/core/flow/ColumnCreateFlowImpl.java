@@ -36,35 +36,36 @@ public class ColumnCreateFlowImpl implements ColumnCreateFlow {
   }
 
   @Override
-  public Column afterFirst() throws IOException {
+  public ColumnUpdateFlow afterFirst() throws IOException {
     return after(columns.first());
   }
 
   @Override
-  public Column after(Column thatColumn) throws IOException {
+  public ColumnUpdateFlow after(Column thatColumn) throws IOException {
     Integer newPosition = thatColumn.getPosition() + 1;
     return onPosition(newPosition);
   }
 
   @Override
-  public Column beforeLast() throws IOException {
+  public ColumnUpdateFlow beforeLast() throws IOException {
     return before(columns.last());
   }
 
   @Override
-  public Column before(Column thatColumn) throws IOException {
+  public ColumnUpdateFlow before(Column thatColumn) throws IOException {
     Integer newPosition = thatColumn.getPosition();
     return onPosition(newPosition);
   }
 
   @Override
-  public Column onPosition(Integer position) throws IOException {
+  public ColumnUpdateFlow onPosition(Integer position) throws IOException {
     column.setPosition(position);
 
     return call();
   }
 
-  private Column call() throws IOException {
-    return columns.doCreate(column);
+  private ColumnUpdateFlow call() throws IOException {
+    column = columns.doCreate(column);
+    return new ColumnUpdateFlowImpl(columns, column);
   }
 }

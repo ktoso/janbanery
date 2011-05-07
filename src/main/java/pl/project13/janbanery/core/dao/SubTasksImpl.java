@@ -26,9 +26,15 @@ import pl.project13.janbanery.core.flow.batch.SubTasksFlowImpl;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
+import pl.project13.janbanery.util.predicates.CompletedSubTaskPredicate;
+import pl.project13.janbanery.util.predicates.NotCompletedSubTaskPredicate;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
+
+import static com.google.common.collect.Collections2.*;
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * @author Konrad Malawski
@@ -77,6 +83,20 @@ public class SubTasksImpl implements SubTasks {
     return restClient.doGet(url, GsonTypeTokens.LIST_SUB_TASK);
   }
 
+  @Override
+  public List<SubTask> allNotCompleted(Task task) throws IOException {
+    Collection<SubTask> completedSubTasks = filter(all(task), new NotCompletedSubTaskPredicate());
+
+    return newArrayList(completedSubTasks);
+  }
+
+  @Override
+  public List<SubTask> allCompleted(Task task) throws IOException {
+    Collection<SubTask> completedSubTasks = filter(all(task), new CompletedSubTaskPredicate());
+
+    return newArrayList(completedSubTasks);
+  }
+
   private String getSubTaskUrl(SubTask subTask) {
     return conf.getApiUrl(currentWorkspace, "subtasks", subTask.getId());
   }
@@ -95,4 +115,5 @@ public class SubTasksImpl implements SubTasks {
   public SubTasksFlow of(Task task) {
     return new SubTasksFlowImpl(this, task);
   }
+
 }

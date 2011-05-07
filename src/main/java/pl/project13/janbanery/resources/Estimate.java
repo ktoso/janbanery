@@ -49,7 +49,7 @@ public class Estimate extends KanbaneryResource implements Serializable {
   private String label;
 
   /**
-   * Project to which the task type is assigned
+   * Project to which the task taskType is assigned
    */
   @ReadOnly
   @SerializedName("project_id")

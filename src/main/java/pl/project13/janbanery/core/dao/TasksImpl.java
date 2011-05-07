@@ -22,6 +22,8 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
 import pl.project13.janbanery.core.flow.*;
+import pl.project13.janbanery.core.flow.batch.TasksMoveAllFlow;
+import pl.project13.janbanery.core.flow.batch.TasksMoveAllFlowImpl;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 import pl.project13.janbanery.util.predicates.TaskByOwnerPredicate;
@@ -76,6 +78,21 @@ public class TasksImpl implements Tasks {
   @Override
   public TaskMoveFlow move(Task task) {
     return new TaskMoveFlowImpl(this, columns, task);
+  }
+
+  @Override
+  public TasksMoveAllFlow moveAllFrom(Column column) throws IOException {
+    List<Task> tasks = allIn(column);
+    return new TasksMoveAllFlowImpl(this, tasks);
+  }
+
+  @Override
+  public void moveAll(Column srcColumn, Column destColumn) throws IOException {
+    List<Task> tasks = allIn(srcColumn);
+    for (Task task : tasks) {
+      move(task, destColumn);
+    }
+
   }
 
   @Override

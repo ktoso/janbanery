@@ -32,7 +32,6 @@ import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -63,11 +62,11 @@ public class TaskMovementTest {
   public void shouldMoveTaskToNextColumn() throws Exception {
     // given
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
-    TaskMoveFlow move = taskFlow.move();
-    Task prev = move.get();
+    TaskMoveFlow moveOne = taskFlow.move();
+    Task prev = moveOne.get();
 
     // when
-    Task after = move.toNextColumn().get();
+    Task after = moveOne.toNextColumn().get();
 
     // then
     assertThat(after).isNotEqualTo(prev); // it has changed (moved_at etc)
@@ -94,11 +93,11 @@ public class TaskMovementTest {
   public void shouldThrowWhenForcedToMoveLeftWhenOnFirstColumn() throws Exception {
     // given
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
-    TaskMoveFlow move = taskFlow.move();
-    Task prev = move.get();
+    TaskMoveFlow moveOne = taskFlow.move();
+    Task prev = moveOne.get();
 
     // when
-    move.toPreviousColumn();
+    moveOne.toPreviousColumn();
 
     // then, should have thrown
   }
@@ -107,16 +106,16 @@ public class TaskMovementTest {
   public void shouldThrowWhenForcedToMoveRightWhenOnLastColumn() throws Exception {
     // given
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
-    TaskMoveFlow move = taskFlow.move();
-    Task prev = move.get();
+    TaskMoveFlow moveOne = taskFlow.move();
+    Task prev = moveOne.get();
 
     // when
-    move.toNextColumn();
-    move.toNextColumn();
-    move.toNextColumn();
-    move.toNextColumn(); //fail here
-    move.toNextColumn();
-    move.toNextColumn();
+    moveOne.toNextColumn();
+    moveOne.toNextColumn();
+    moveOne.toNextColumn();
+    moveOne.toNextColumn(); //fail here
+    moveOne.toNextColumn();
+    moveOne.toNextColumn();
 
     // then, should have thrown
   }
@@ -155,10 +154,10 @@ public class TaskMovementTest {
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
 
     // when
-    TaskMoveFlow taskMoveFlow = taskFlow.move().toIceBox().move();
+    TaskMoveFlow taskMoveOneFlow = taskFlow.move().toIceBox().move();
 
     // then
-    Task taskInIceBox = taskMoveFlow.get();
+    Task taskInIceBox = taskMoveOneFlow.get();
     List<Task> tasksInIceBox = janbanery.iceBox().all();
 
     assertThat(tasksInIceBox).contains(taskInIceBox);

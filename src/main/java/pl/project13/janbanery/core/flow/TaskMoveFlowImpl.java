@@ -59,10 +59,14 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
   }
 
   @Override
+  public TaskFlow toFirstColumn() throws IOException {
+    Column first = columns.first();
+    return to(first);
+  }
+
+  @Override
   public TaskFlow toNextColumn() throws IOException {
-    TaskFlow taskFlow;
-    taskFlow = to(TaskLocation.NEXT);
-    return taskFlow;
+    return to(TaskLocation.NEXT);
   }
 
   @Override

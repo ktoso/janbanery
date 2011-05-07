@@ -46,7 +46,7 @@ public interface TaskUpdateFlow extends Flow<Task> {
 
   TaskUpdateFlow priority(Priority priority) throws IOException;
 
-  TaskUpdateFlow type(TaskType taskType) throws IOException;
+  TaskUpdateFlow taskType(TaskType taskType) throws IOException;
 
   TaskUpdateFlow estimate(Estimate estimate) throws IOException;
 

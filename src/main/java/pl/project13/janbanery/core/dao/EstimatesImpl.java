@@ -19,6 +19,7 @@ package pl.project13.janbanery.core.dao;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.RestClient;
+import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Estimate;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
@@ -52,6 +53,17 @@ public class EstimatesImpl implements Estimates {
   public Estimate byId(Long id) throws IOException {
     String url = getEstimateUrl(id);
     return restClient.doGet(url, GsonTypeTokens.ESTIMATE);
+  }
+
+  @Override
+  public Estimate any() throws IOException {
+    List<Estimate> estimates = all();
+
+    if (estimates.size() == 0) {
+      throw new EntityNotFoundException("Could not find any task types.");
+    }
+
+    return estimates.get(0);
   }
 
   private String getEstimateUrl(Long id) {
