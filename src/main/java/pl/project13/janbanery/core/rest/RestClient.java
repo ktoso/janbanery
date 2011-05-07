@@ -73,7 +73,7 @@ public abstract class RestClient {
 
   public abstract RestClientResponse doDelete(String url) throws IOException;
 
-  public abstract RestClientResponse doPut(String url, String requestBody);
+  public abstract RestClientResponse doPut(String url, String requestBody) throws IOException;
 
   public abstract <T> T doPut(String url, String requestBody, Class<?> returnType) throws IOException;
 
