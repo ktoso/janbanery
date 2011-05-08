@@ -41,8 +41,11 @@ public class JanbaneryFactory {
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private AsyncHttpClient asyncHttpClient;
+
   private ReflectionBodyGenerator encodedBodyGenerator = new ReflectionBodyGenerator();
   private Gson gson = GsonFactory.create();
+
+  private RestClient restClient;
 
   public JanbaneryFactory() {
     asyncHttpClient = new AsyncHttpClient();
@@ -53,7 +56,7 @@ public class JanbaneryFactory {
   }
 
   public JanbaneryFactory(RestClient restClient) {
-
+    this.restClient = restClient;
   }
 
   public JanbaneryToWorkspace connectUsing(Configuration configuration) {
@@ -80,10 +83,8 @@ public class JanbaneryFactory {
    * @param password your kanbanery password for this user
    * @return an Janbanery instance setup using the API Key auth, which will be fetched during construction
    * @throws IOException
-   * @throws InterruptedException
-   * @throws ExecutionException
    */
-  public JanbaneryToWorkspace connectUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
+  public JanbaneryToWorkspace connectUsing(String user, String password) throws IOException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
     RestClient restClient = getRestClient(conf);
     Janbanery janbanery = new Janbanery(conf, restClient);
@@ -95,7 +96,7 @@ public class JanbaneryFactory {
     return new JanbaneryToWorkspace(janbanery);
   }
 
-  private String getCurrentUserApiKey(Janbanery janbanery) throws IOException, ExecutionException, InterruptedException {
+  private String getCurrentUserApiKey(Janbanery janbanery) throws IOException {
     User currentUser = janbanery.users().current();
     return currentUser.getApiToken();
   }
@@ -110,17 +111,23 @@ public class JanbaneryFactory {
    * @param password your kanbanery password for this user
    * @return an Janbanery instance setup using the API Key auth, which will be fetched during construction
    * @throws IOException
-   * @throws InterruptedException
-   * @throws ExecutionException
    */
-  public Janbanery connectAndKeepUsing(String user, String password) throws IOException, ExecutionException, InterruptedException {
+  public Janbanery connectAndKeepUsing(String user, String password) throws IOException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
     RestClient restClient = getRestClient(conf);
     return new Janbanery(conf, restClient);
   }
 
   private RestClient getRestClient(Configuration configuration) {
-    return new AsyncHttpClientRestClient(configuration, gson, asyncHttpClient, encodedBodyGenerator);
+    RestClient restClient = this.restClient;
+
+    if (restClient == null) {
+      restClient = new AsyncHttpClientRestClient(asyncHttpClient);
+    }
+
+    restClient.init(configuration, gson, encodedBodyGenerator);
+
+    return restClient;
   }
 
   public void setAsyncHttpClient(AsyncHttpClient asyncHttpClient) {

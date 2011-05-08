@@ -16,8 +16,12 @@
 
 package pl.project13.janbanery.core.rest;
 
+import com.google.gson.Gson;
 import com.ning.http.client.AsyncHttpClient;
+import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.core.rest.response.RestClientResponse;
+import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
+import pl.project13.janbanery.encoders.ReflectionBodyGenerator;
 import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
 import pl.project13.janbanery.exceptions.RestClientException;
 import pl.project13.janbanery.exceptions.kanbanery.*;
@@ -82,4 +86,6 @@ public abstract class RestClient {
   public abstract <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) throws IOException;
 
   public abstract void close();
+
+  public abstract void init(Configuration configuration, Gson gson, FormUrlEncodedBodyGenerator encodedBodyGenerator);
 }

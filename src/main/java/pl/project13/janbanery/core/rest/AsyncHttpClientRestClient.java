@@ -33,8 +33,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.concurrent.ExecutionException;
 
-import static java.lang.String.format;
-
 /**
  * A simple Facade to {@link AsyncHttpClient}.
  * <p/>
@@ -53,10 +51,21 @@ public class AsyncHttpClientRestClient extends RestClient {
   private AsyncHttpClient asyncHttpClient;
   private FormUrlEncodedBodyGenerator encodedBodyGenerator;
 
+  public AsyncHttpClientRestClient(AsyncHttpClient asyncHttpClient) {
+    this.asyncHttpClient = asyncHttpClient;
+  }
+
   public AsyncHttpClientRestClient(Configuration conf, Gson gson, AsyncHttpClient asyncHttpClient, FormUrlEncodedBodyGenerator encodedBodyGenerator) {
     this.conf = conf;
     this.gson = gson;
     this.asyncHttpClient = asyncHttpClient;
+    this.encodedBodyGenerator = encodedBodyGenerator;
+  }
+
+  @Override
+  public void init(Configuration configuration, Gson gson, FormUrlEncodedBodyGenerator encodedBodyGenerator) {
+    this.conf = configuration;
+    this.gson = gson;
     this.encodedBodyGenerator = encodedBodyGenerator;
   }
 
