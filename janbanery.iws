@@ -15,212 +15,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="291f4404-aa41-4027-97fc-98168f216799" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-android/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-android/janbanery-android.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-android/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-android/src/main/java/pl/project13/janbanery/android/rest/AndroidCompatibleRestClient.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-android/src/main/java/pl/project13/janbanery/android/rest/response/ResponseFromHttpResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-android/src/main/java/pl/project13/janbanery/android/util/Strings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-core/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-core/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-core/janbanery-core.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-core/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/janbanery-core/src/test/resources/janbanery.properties" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/Configuration.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/Configuration.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/DefaultConfiguration.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/DefaultConfiguration.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/PropertiesConfiguration.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/PropertiesConfiguration.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/auth/ApiKeyAuthProvider.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/auth/ApiKeyAuthProvider.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/auth/AuthProvider.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/auth/AuthProvider.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/auth/Base64Coder.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/auth/Base64Coder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/auth/Header.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/auth/Header.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/auth/NoAuthProvider.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/auth/NoAuthProvider.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/auth/UserPassAuthProvider.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/auth/UserPassAuthProvider.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/gson/GsonFactory.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/gson/GsonFactory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/config/gson/GsonTypeTokens.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/config/gson/GsonTypeTokens.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/Janbanery.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/Janbanery.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/JanbaneryFactory.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/JanbaneryFactory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Archive.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Archive.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/ArchiveImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/ArchiveImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Columns.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Columns.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/ColumnsImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/ColumnsImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Comments.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Comments.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/CommentsImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/CommentsImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/CommentsOf.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/CommentsOf.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Estimates.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Estimates.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/EstimatesImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/EstimatesImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/IceBox.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/IceBox.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/IceBoxImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/IceBoxImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Issues.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Issues.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/IssuesImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/IssuesImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/IssuesOf.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/IssuesOf.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/KanbaneryDao.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/KanbaneryDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Memberships.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Memberships.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/MembershipsImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/MembershipsImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/MembershipsOf.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/MembershipsOf.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Projects.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Projects.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/ProjectsImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/ProjectsImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/SubTasks.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/SubTasks.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/SubTasksImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/SubTasksImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/SubTasksOf.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/SubTasksOf.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Subscriptions.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Subscriptions.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/SubscriptionsImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/SubscriptionsImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/TaskTypes.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/TaskTypes.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/TaskTypesImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/TaskTypesImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Tasks.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Tasks.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/TasksImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/TasksImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Users.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Users.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/UsersImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/UsersImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/Workspaces.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/Workspaces.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/dao/WorkspacesImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/dao/WorkspacesImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/ColumnCreateFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/ColumnCreateFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/ColumnCreateFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/ColumnCreateFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/ColumnMoveFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/ColumnMoveFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/ColumnMoveFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/ColumnMoveFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/ColumnUpdateFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/ColumnUpdateFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/ColumnUpdateFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/ColumnUpdateFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/CommentFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/CommentFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/CommentFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/CommentFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/Flow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/Flow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/IceBoxFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/IceBoxFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/IceBoxFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/IceBoxFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/IssueFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/IssueFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/IssueFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/IssueFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/IssueMarkFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/IssueMarkFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/IssueMarkFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/IssueMarkFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/IssueUpdateFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/IssueUpdateFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/IssueUpdateFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/IssueUpdateFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/MembershipFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/MembershipFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/MembershipFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/MembershipFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/MembershipUpdateFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/MembershipUpdateFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/MembershipUpdateFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/MembershipUpdateFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/SubTaskFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/SubTaskFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/SubTaskFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/SubTaskFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/SubTaskMarkFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/SubTaskMarkFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/SubTaskMarkFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/SubTaskMarkFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskAssignmentFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskAssignmentFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskAssignmentFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskAssignmentFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskMarkFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskMarkFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskMarkFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskMarkFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskMoveFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskMoveFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskMoveFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskMoveFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskUpdateFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskUpdateFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/TaskUpdateFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/TaskUpdateFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/CommentsFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/CommentsFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/CommentsFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/CommentsFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/IssuesFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/IssuesFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/IssuesFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/IssuesFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/MembershipsFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/MembershipsFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/MembershipsFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/MembershipsFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/SubTasksFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/SubTasksFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/SubTasksFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/SubTasksFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/SubTasksMarkBatchFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/SubTasksMarkBatchFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/SubTasksMarkBatchFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/SubTasksMarkBatchFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/TasksMoveAllFlow.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/TasksMoveAllFlow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/flow/batch/TasksMoveAllFlowImpl.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/flow/batch/TasksMoveAllFlowImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/rest/AsyncHttpClientRestClient.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/rest/AsyncHttpClientRestClient.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/rest/RestClient.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/rest/RestClient.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/rest/response/NingRestClientResponse.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/rest/response/NingRestClientResponse.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/core/rest/response/RestClientResponse.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/core/rest/response/RestClientResponse.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/encoders/FormUrlEncodedBodyGenerator.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/encoders/FormUrlEncodedBodyGenerator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/encoders/ReflectionBodyGenerator.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/encoders/ReflectionBodyGenerator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/encoders/utils/FieldNameToArrayNotationWithValueFunction.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/encoders/utils/FieldNameToArrayNotationWithValueFunction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/encoders/utils/ReflectionHelper.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/encoders/utils/ReflectionHelper.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/encoders/utils/SettableNotNullFieldsPredicate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/encoders/utils/SettableNotNullFieldsPredicate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/EntityNotFoundException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/EntityNotFoundException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/NoSuchPermissionException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/NoSuchPermissionException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/NoSuchPriorityException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/NoSuchPriorityException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/NotFoundKanbaneryException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/NotFoundKanbaneryException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/NotYetImplementedException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/NotYetImplementedException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/ProjectNotFoundException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/ProjectNotFoundException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/RestClientException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/RestClientException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/UserNotFoundException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/UserNotFoundException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/WorkspaceNotFoundException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/WorkspaceNotFoundException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/DeleteFailedKanbaneryException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/DeleteFailedKanbaneryException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/ForbiddenOperationKanbaneryException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/ForbiddenOperationKanbaneryException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/InternalServerErrorKanbaneryException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/InternalServerErrorKanbaneryException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/InvalidEntityKanbaneryException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/InvalidEntityKanbaneryException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/KanbaneryException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/KanbaneryException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/TaskMovementException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/TaskMovementException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/UnauthorizedKanbaneryException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/UnauthorizedKanbaneryException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/BodyMustNotBeBlankException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/BodyMustNotBeBlankException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/CanNotDeleteColumnThatContainsTasksException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/CanNotDeleteColumnThatContainsTasksException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/CanOnlyArchiveFromLastColumnException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/CanOnlyArchiveFromLastColumnException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/CanOnlyIceBoxTaskFromFirstColumnException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/CanOnlyIceBoxTaskFromFirstColumnException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/FieldIsNotSettableInThisContextException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/FieldIsNotSettableInThisContextException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/MaximumNumbersOfCollaboratorsReachedException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/MaximumNumbersOfCollaboratorsReachedException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/NotFixedColumnCannotBeFirstException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/NotFixedColumnCannotBeFirstException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/PositionExceedsNumberOfTasksInColumnException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/PositionExceedsNumberOfTasksInColumnException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/ProjectOwnerCanNotBeGivenProjectMembership.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/ProjectOwnerCanNotBeGivenProjectMembership.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/TaskAlreadyInFirstColumnException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/TaskAlreadyInFirstColumnException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/TaskAlreadyInLastColumnException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/TaskAlreadyInLastColumnException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/UserAlreadyAssignedToThisProjectException.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/invalidentity/UserAlreadyAssignedToThisProjectException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Column.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Column.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Comment.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Comment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Estimate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Estimate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Issue.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Issue.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/KanbaneryEnumResource.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/KanbaneryEnumResource.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/KanbaneryResource.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/KanbaneryResource.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Permission.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Permission.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Priority.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Priority.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Project.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Project.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/ProjectMembership.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/ProjectMembership.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Resource.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Resource.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/SubTask.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/SubTask.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Task.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Task.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/TaskSubscription.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/TaskSubscription.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/TaskType.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/TaskType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/User.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/User.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/Workspace.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/Workspace.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/additions/On.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/additions/On.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/additions/ReadOnly.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/additions/ReadOnly.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/additions/Required.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/additions/Required.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/additions/Settable.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/additions/Settable.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/resources/additions/TaskLocation.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/resources/additions/TaskLocation.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/util/collections/Collectionz.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/util/collections/Collectionz.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/util/predicates/ColumnByNamePredicate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/util/predicates/ColumnByNamePredicate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/util/predicates/CompletedSubTaskPredicate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/util/predicates/CompletedSubTaskPredicate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/util/predicates/CompletedSubTasksPredicate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/util/predicates/CompletedSubTasksPredicate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/util/predicates/NotCompletedSubTaskPredicate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/util/predicates/NotCompletedSubTaskPredicate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/util/predicates/TaskByOwnerPredicate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/util/predicates/TaskByOwnerPredicate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/util/predicates/TaskByPriorityPredicate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/util/predicates/TaskByPriorityPredicate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/util/predicates/TaskByTitleIgnoreCasePredicate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/util/predicates/TaskByTitleIgnoreCasePredicate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pl/project13/janbanery/util/predicates/TaskByTitlePredicate.java" afterPath="$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/util/predicates/TaskByTitlePredicate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/janbanery.example.properties" afterPath="$PROJECT_DIR$/janbanery-core/src/main/resources/janbanery.example.properties" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" afterPath="$PROJECT_DIR$/janbanery-core/src/main/resources/logback.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/config/gson/GsonDeserializersTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/config/gson/GsonDeserializersTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/JanbaneryFactoryTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/JanbaneryFactoryTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/ArchiveTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/ArchiveTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/ColumnsTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/ColumnsTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/EstimatesTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/EstimatesTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/IceBoxTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/IceBoxTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/IssuesImplTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/IssuesImplTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/ProjectMembershipTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/ProjectMembershipTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/ProjectsTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/ProjectsTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/SubTasksTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/SubTasksTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/SubscriptionsTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/SubscriptionsTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/TaskMovementTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/TaskMovementTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/TaskTypesTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/TaskTypesTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/TasksTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/TasksTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/UsersTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/UsersTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/dao/WorkspacesImplTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/WorkspacesImplTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/flow/TaskAssignmentFlowTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/flow/TaskAssignmentFlowTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/flow/TaskMarkFlowImplTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/flow/TaskMarkFlowImplTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/flow/TaskUpdateFlowTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/flow/TaskUpdateFlowTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/flow/batch/CommentsFlowTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/flow/batch/CommentsFlowTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/core/flow/batch/SubTasksMarkBatchFlowTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/flow/batch/SubTasksMarkBatchFlowTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/encoders/ReflectionBodyGeneratorTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/encoders/ReflectionBodyGeneratorTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/encoders/utils/FieldNameToArrayNotationWithValueFunctionTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/encoders/utils/FieldNameToArrayNotationWithValueFunctionTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/resources/InvalidIncomingJsonTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/resources/InvalidIncomingJsonTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/resources/ValidPriorityMappingTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/resources/ValidPriorityMappingTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/test/TestConstants.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/TestConstants.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/test/TestEntityHelper.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/TestEntityHelper.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/pl/project13/janbanery/test/scenario/GetProjectsListTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/scenario/GetProjectsListTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/resources/janbanery.example.properties" afterPath="$PROJECT_DIR$/janbanery-core/src/test/resources/janbanery.example.properties" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/resources/logback.xml" afterPath="$PROJECT_DIR$/janbanery-core/src/test/resources/logback.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/janbanery.iml" afterPath="$PROJECT_DIR$/janbanery.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/scenario/GetProjectsListTest.java" afterPath="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/scenario/GetProjectsListTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/janbanery-core/src/test/resources/logback.xml" afterPath="$PROJECT_DIR$/janbanery-core/src/test/resources/logback.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/janbanery.iws" afterPath="$PROJECT_DIR$/janbanery.iws" />
     </list>
     <ignored path="janbanery.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -283,10 +80,10 @@
         <splitter split-orientation="horizontal" split-proportion="0.5">
           <split-first>
             <leaf>
-              <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="true">
+              <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/janbanery-core/pom.xml">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state line="31" column="0" selection-start="1444" selection-end="2478" vertical-scroll-proportion="-0.91780823">
+                    <state line="137" column="56" selection-start="4988" selection-end="4988" vertical-scroll-proportion="0.8432056">
                       <folding />
                     </state>
                   </provider>
@@ -299,7 +96,7 @@
               <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/pom.xml">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state line="78" column="10" selection-start="2896" selection-end="2896" vertical-scroll-proportion="-0.02739726">
+                    <state line="78" column="10" selection-start="2896" selection-end="2896" vertical-scroll-proportion="-0.041811846">
                       <folding />
                     </state>
                   </provider>
@@ -311,10 +108,64 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/janbanery-android/pom.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="48" column="12" selection-start="1658" selection-end="1658" vertical-scroll-proportion="-0.13013698">
+                <state line="48" column="12" selection-start="1658" selection-end="1658" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="JanbaneryFactoryTest.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/JanbaneryFactoryTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="91" column="58" selection-start="3035" selection-end="3035" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TestConstants.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/TestConstants.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="25" column="60" selection-start="854" selection-end="854" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="InvalidEntityKanbaneryException.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/InvalidEntityKanbaneryException.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="82" column="0" selection-start="3996" selection-end="3996" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ColumnsTest.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/ColumnsTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="96" column="36" selection-start="3402" selection-end="3402" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="GetProjectsListTest.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/scenario/GetProjectsListTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="63" column="52" selection-start="2161" selection-end="2161" vertical-scroll-proportion="0.73887813">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="logback.xml" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/resources/logback.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="25" column="22" selection-start="1004" selection-end="1004" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -346,6 +197,9 @@
         <option value="$PROJECT_DIR$/janbanery-core/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/janbanery-android/pom.xml" />
+        <option value="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/ColumnsTest.java" />
+        <option value="$PROJECT_DIR$/janbanery-core/src/test/resources/logback.xml" />
+        <option value="$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/scenario/GetProjectsListTest.java" />
       </list>
     </option>
   </component>
@@ -449,26 +303,12 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -483,58 +323,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="janbanery-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project13" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery-android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -556,135 +344,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery-android" />
+              <option name="myItemId" value="janbanery-core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project13" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project13" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project13" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="janbanery" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="response" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -694,14 +358,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Facets" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
   </component>
@@ -710,7 +375,7 @@
       <recent name="$PROJECT_DIR$/janbanery-android" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.All in janbanery">
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -791,7 +456,32 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
-    <list size="0" />
+    <configuration default="false" name="All in janbanery" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="janbanery-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/janbanery-core" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="JUnit.All in janbanery" />
+    </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -825,7 +515,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="-9" width="1924" height="1067" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliTail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -846,8 +536,8 @@
       <window_info id="Log4jMonitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JSON Formatter" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20309995" sideWeight="0.6706652" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20309995" sideWeight="0.6706652" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293348" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -879,7 +569,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="LAST_COMMIT_MESSAGE" value="whoops, this was not to be commited" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -892,6 +582,7 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="whoops, this was not to be commited" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -931,23 +622,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/janbanery-core/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="1444" selection-end="2478" vertical-scroll-proportion="-0.91780823">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="10" selection-start="2896" selection-end="2896" vertical-scroll-proportion="-0.02739726">
+        <state line="78" column="10" selection-start="2896" selection-end="2896" vertical-scroll-proportion="-0.041811846">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/janbanery-android/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="12" selection-start="1658" selection-end="1658" vertical-scroll-proportion="-0.13013698">
+        <state line="48" column="12" selection-start="1658" selection-end="1658" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/JanbaneryFactoryTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="58" selection-start="3035" selection-end="3035" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/TestConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="60" selection-start="854" selection-end="854" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/janbanery-core/src/main/java/pl/project13/janbanery/exceptions/kanbanery/InvalidEntityKanbaneryException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="0" selection-start="3996" selection-end="3996" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/core/dao/ColumnsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="36" selection-start="3402" selection-end="3402" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/resources/logback.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="22" selection-start="1004" selection-end="1004" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/janbanery-core/src/test/java/pl/project13/janbanery/test/scenario/GetProjectsListTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="52" selection-start="2161" selection-end="2161" vertical-scroll-proportion="0.73887813">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/janbanery-core/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="137" column="56" selection-start="4988" selection-end="4988" vertical-scroll-proportion="0.8432056">
           <folding />
         </state>
       </provider>
@@ -1005,11 +738,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>janbanery-android</last-edited>
+          <last-edited>janbanery-core</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

@@ -61,6 +61,6 @@ public class GetProjectsListTest {
     // then
     assertThat(allWorkspaces).isNotEmpty();
     Collection<Project> projectsInFirstWorkspace = allWorkspaces.get(0).getProjects();
-    assertThat(projectsInFirstWorkspace).isNotEmpty();
+    assertThat(projectsInFirstWorkspace).isNotNull();
   }
 }
