@@ -82,8 +82,6 @@ public class ColumnsTest {
     // when
     Column newColumn = janbanery.columns().create(newColumnData).before(secondColumn).get();
 
-    janbanery.columns().create(new Column()).onPosition(2);
-
     // then
     assertThat(newColumn.getName()).isEqualTo(newColumnData.getName());
     assertThat(newColumn.getPosition()).isEqualTo(2);
