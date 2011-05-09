@@ -5,37 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
+        <groupId>pl.project13.janbanery</groupId>
+        <artifactId>janbanery</artifactId>
+        <version>${janbanery.version}</version>
     </parent>
 
-    <properties>
-        <janbanery.version>1.2-SNAPSHOT</janbanery.version>
-
-        <maven.source>1.6</maven.source>
-        <maven.target>1.6</maven.target>
-
-        <gson.version>1.7.1</gson.version>
-        <guava.version>r09</guava.version>
-        <joda-time.version>1.6.2</joda-time.version>
-        <slf4j-api.version>1.6.1</slf4j-api.version>
-        <logback-classic.version>0.9.28</logback-classic.version>
-        <logback-core.version>0.9.28</logback-core.version>
-
-    </properties>
-
     <groupId>pl.project13.janbanery</groupId>
-    <artifactId>janbanery</artifactId>
+    <artifactId>janbanery-core</artifactId>
     <version>${janbanery.version}</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>janbanery-core</module>
-        <module>janbanery-android</module>
-    </modules>
-
-    <name>Janbanery - Fluent Kanbanery API Java Wrapper</name>
+    <name>Janbanery - Core</name>
     <description>
         Kanbanery (https://kanbanery.com) is a simple but powerful Agile project management system,
         to be precise it focuses around the idea of Kanban, a somewhat near idea to SCRUM but with less strict rules.
@@ -78,29 +58,54 @@
         <developerConnection>scm:git:git@github.com:ktoso/janbanery.git</developerConnection>
     </scm>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
     <dependencies>
-        <!-- test dependencies -->
+        <!-- async http client -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
+            <groupId>com.ning</groupId>
+            <artifactId>async-http-client</artifactId>
+            <version>1.6.3</version>
+        </dependency>
+        <!-- gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+        <!-- guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <!-- joda time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.easytesting</groupId>
-            <artifactId>fest-assert</artifactId>
-            <version>1.4</version>
-            <scope>test</scope>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
         </dependency>
-        <!-- mockito -->
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.8.1</version>
-            <scope>test</scope>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback-core.version}</version>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
