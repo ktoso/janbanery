@@ -5,12 +5,12 @@
     <parent>
         <groupId>pl.project13.janbanery</groupId>
         <artifactId>janbanery</artifactId>
-        <version>1.3-SNAPSHOT</version>
+        <version>1.3</version>
     </parent>
 
     <groupId>pl.project13.janbanery</groupId>
     <artifactId>janbanery-core</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
     <packaging>jar</packaging>
 
     <name>Janbanery - Core</name>
