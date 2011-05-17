@@ -18,6 +18,7 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.IceBoxFlow;
 import pl.project13.janbanery.core.flow.TaskUpdateFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Task;
 
 import java.io.IOException;
@@ -30,18 +31,18 @@ public interface IceBox {
 
   // commands -----------------------------------------------------------------
 
-  IceBoxFlow create(Task task) throws IOException;
+  IceBoxFlow create(Task task) throws ServerCommunicationException;
 
-  void delete(Task task) throws IOException;
+  void delete(Task task) throws ServerCommunicationException ;
 
   // queries ------------------------------------------------------------------
 
-  List<Task> all() throws IOException;
+  List<Task> all() throws ServerCommunicationException ;
 
-  boolean contains(Task task) throws IOException;
+  boolean contains(Task task) throws ServerCommunicationException;
 
   // other flows --------------------------------------------------------------
 
-  TaskUpdateFlow update(Task task); // todo make this a limited version of TaskUpdateFlow
+  TaskUpdateFlow update(Task task);
 
 }
