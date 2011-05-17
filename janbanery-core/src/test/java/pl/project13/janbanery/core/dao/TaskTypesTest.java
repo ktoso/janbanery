@@ -30,7 +30,8 @@ import pl.project13.janbanery.resources.TaskType;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static pl.project13.janbanery.test.TestConstants.*;
+import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
+import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
 
 /**
  * @author Konrad Malawski

@@ -16,9 +16,9 @@
 
 package pl.project13.janbanery.core.dao;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.TaskType;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,11 +31,11 @@ public interface TaskTypes {
 
   // queries ------------------------------------------------------------------
 
-  List<TaskType> all() throws IOException;
+  List<TaskType> all() throws ServerCommunicationException;
 
-  TaskType byId(Long id) throws IOException;
+  TaskType byId(Long id) throws ServerCommunicationException ;
 
-  TaskType byName(String name) throws IOException;
+  TaskType byName(String name) throws ServerCommunicationException ;
 
-  TaskType any() throws IOException;
+  TaskType any() throws ServerCommunicationException ;
 }

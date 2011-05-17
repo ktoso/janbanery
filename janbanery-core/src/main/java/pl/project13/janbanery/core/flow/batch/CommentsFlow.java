@@ -18,10 +18,10 @@ package pl.project13.janbanery.core.flow.batch;
 
 import pl.project13.janbanery.core.flow.CommentFlow;
 import pl.project13.janbanery.core.flow.Flow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,14 +31,14 @@ public interface CommentsFlow extends Flow<Task> {
 
   // commands -----------------------------------------------------------------
 
-  CommentFlow create(Comment comment) throws IOException;
+  CommentFlow create(Comment comment) throws ServerCommunicationException ;
 
-  CommentsFlow deleteAll() throws IOException;
+  CommentsFlow deleteAll() throws ServerCommunicationException;
 
   // queries ------------------------------------------------------------------
 
-  CommentFlow byId(Long id) throws IOException;
+  CommentFlow byId(Long id) throws ServerCommunicationException;
 
-  List<Comment> all() throws IOException;
+  List<Comment> all() throws ServerCommunicationException;
 
 }

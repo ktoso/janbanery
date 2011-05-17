@@ -24,10 +24,8 @@ import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyArchiveFromLastColumnException;
-import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
-import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.test.TestConstants;
 import pl.project13.janbanery.test.TestEntityHelper;
 

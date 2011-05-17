@@ -16,9 +16,10 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.ProjectMembership;
 
-import java.io.IOException;
+
 
 /**
  * @author Konrad Malawski
@@ -27,6 +28,6 @@ public interface MembershipFlow extends Flow<ProjectMembership> {
 
   MembershipUpdateFlow update();
 
-  void delete() throws IOException;
+  void delete() throws ServerCommunicationException;
 
 }

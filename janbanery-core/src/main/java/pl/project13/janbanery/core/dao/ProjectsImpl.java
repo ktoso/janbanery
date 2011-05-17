@@ -20,7 +20,6 @@ import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -40,14 +39,14 @@ public class ProjectsImpl implements Projects {
   }
 
   @Override
-  public List<Project> all() throws IOException {
+  public List<Project> all() {
     Workspace workspace = workspaces.byName(currentWorkspace.getName());
 
     return workspace.getProjects();
   }
 
   @Override
-  public List<Project> allAcrossWorkspaces() throws IOException {
+  public List<Project> allAcrossWorkspaces() {
     List<Workspace> allWorkspaces = workspaces.all();
 
     List<Project> allProjects = newArrayList();
@@ -60,7 +59,7 @@ public class ProjectsImpl implements Projects {
   }
 
   @Override
-  public Project byId(Long id) throws IOException, EntityNotFoundException {
+  public Project byId(Long id) throws EntityNotFoundException {
     List<Workspace> allWorkspaces = workspaces.all();
 
     for (Workspace workspace : allWorkspaces) {

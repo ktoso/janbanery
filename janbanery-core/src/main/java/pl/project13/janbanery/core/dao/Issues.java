@@ -17,10 +17,10 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.IssueFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Issue;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -33,20 +33,20 @@ public interface Issues extends IssuesOf {
   /**
    * Creates a new {@link pl.project13.janbanery.resources.SubTask} for the given {@link pl.project13.janbanery.resources.Task}
    *
-   * @param task  the task we want to add this subtask to
-   * @param issue the object carrying the data of the subtask to be created
-   * @return a subtask flow populated with the newly created subtask
-   * @throws IOException if unable to fetch the servers response
+   * @param task  the task we want to add this subTask to
+   * @param issue the object carrying the data of the subTask to be created
+   * @return a subTask flow populated with the newly created subTask
+   * @throws ServerCommunicationException if unable to fetch the servers response
    */
-  IssueFlow create(Task task, Issue issue) throws IOException;
+  IssueFlow create(Task task, Issue issue) throws ServerCommunicationException;
 
-  IssueFlow update(Issue issue, Issue newValues) throws IOException;
+  IssueFlow update(Issue issue, Issue newValues) throws ServerCommunicationException;
 
-  void delete(Issue issue) throws IOException;
+  void delete(Issue issue) throws ServerCommunicationException;
 
   // queries ------------------------------------------------------------------
 
-  List<Issue> all(Task task) throws IOException;
+  List<Issue> all(Task task) throws ServerCommunicationException;
 
-  IssueFlow byId(Long id) throws IOException;
+  IssueFlow byId(Long id) throws ServerCommunicationException ;
 }

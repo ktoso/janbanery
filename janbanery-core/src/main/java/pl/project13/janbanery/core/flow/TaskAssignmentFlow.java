@@ -16,17 +16,16 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
  */
 public interface TaskAssignmentFlow extends Flow<Task> {
 
-  TaskFlow to(User user) throws IOException;
+  TaskFlow to(User user) throws ServerCommunicationException;
 
-  TaskFlow toNobody() throws IOException;
+  TaskFlow toNobody() throws ServerCommunicationException;
 }

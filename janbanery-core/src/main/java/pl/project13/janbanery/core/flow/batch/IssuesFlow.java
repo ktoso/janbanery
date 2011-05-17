@@ -17,10 +17,10 @@
 package pl.project13.janbanery.core.flow.batch;
 
 import pl.project13.janbanery.core.flow.IssueFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Issue;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -35,18 +35,18 @@ public interface IssuesFlow {
    *
    * @param issue the object carrying the data of the subtask to be created
    * @return a subtask flow populated with the newly created subtask
-   * @throws IOException
+   * @throws ServerCommunicationException
    */
-  IssueFlow create(Issue issue) throws IOException;
+  IssueFlow create(Issue issue) throws ServerCommunicationException;
 
-  IssueFlow update(Issue issue, Issue newValues) throws IOException;
+  IssueFlow update(Issue issue, Issue newValues) throws ServerCommunicationException ;
 
-  void delete(Issue issue) throws IOException;
+  void delete(Issue issue) throws ServerCommunicationException;
 
   // queries ------------------------------------------------------------------
 
-  List<Issue> all() throws IOException;
+  List<Issue> all() throws ServerCommunicationException;
 
-  IssueFlow byId(Long id) throws IOException;
+  IssueFlow byId(Long id) throws ServerCommunicationException;
 
 }

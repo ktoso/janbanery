@@ -27,10 +27,10 @@ import pl.project13.janbanery.core.rest.AsyncHttpClientRestClient;
 import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.encoders.ReflectionBodyGenerator;
 import pl.project13.janbanery.exceptions.ProjectNotFoundException;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -70,11 +70,11 @@ public class Janbanery {
    *
    * @param name the name of the workspace to be used
    * @return the fetched workspace
-   * @throws IOException
+   * @throws ServerCommunicationException
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public Janbanery usingWorkspace(String name) throws IOException, ExecutionException, InterruptedException {
+  public Janbanery usingWorkspace(String name) throws ServerCommunicationException, ExecutionException, InterruptedException {
     Workspace workspace = workspaces().byName(name);
 
     Project firstProject = workspace.getProjects().get(0);
@@ -88,13 +88,13 @@ public class Janbanery {
    * @param name the name of the project you want to use (it should be from the current {@link Workspace}
    * @return the now being used project
    * @throws ProjectNotFoundException will be thrown if no project with such name isSubscribedTo in the current workspace
-   * @throws IOException              if unable to communicate with the server
+   * @throws ServerCommunicationException              if unable to communicate with the server
    */
-  public Janbanery usingProject(String name) throws IOException {
+  public Janbanery usingProject(String name) throws ServerCommunicationException {
     return usingProject(currentWorkspace, name);
   }
 
-  public Janbanery usingProject(Workspace workspace, String name) throws IOException {
+  public Janbanery usingProject(Workspace workspace, String name) throws ServerCommunicationException {
     currentWorkspace = workspace;
 
     for (Project project : currentWorkspace.getProjects()) {

@@ -27,7 +27,6 @@ import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.test.TestEntityHelper;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +54,7 @@ public class TaskUpdateFlowTest {
   }
 
   @AfterClass
-  public static void tearDown() throws IOException {
+  public static void tearDown() {
     TestEntityHelper.deleteTestTask(janbanery);
 
     janbanery.close();

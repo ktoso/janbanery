@@ -17,17 +17,14 @@
 package pl.project13.janbanery.core.rest;
 
 import com.google.gson.Gson;
-import com.ning.http.client.AsyncHttpClient;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.core.rest.response.RestClientResponse;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
-import pl.project13.janbanery.encoders.ReflectionBodyGenerator;
 import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
-import pl.project13.janbanery.exceptions.RestClientException;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.exceptions.kanbanery.*;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 
 import static java.lang.String.format;
@@ -67,23 +64,23 @@ public abstract class RestClient {
     return sb.toString();
   }
 
-  public abstract RestClientResponse doPost(String url, KanbaneryResource resource) throws IOException;
+  public abstract RestClientResponse doPost(String url, KanbaneryResource resource) throws ServerCommunicationException;
 
-  public abstract <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) throws IOException;
+  public abstract <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) throws ServerCommunicationException;
 
-  public abstract RestClientResponse doGet(String url) throws IOException;
+  public abstract RestClientResponse doGet(String url) throws ServerCommunicationException;
 
-  public abstract <T> T doGet(String url, Type returnType) throws IOException;
+  public abstract <T> T doGet(String url, Type returnType) throws ServerCommunicationException;
 
-  public abstract RestClientResponse doDelete(String url) throws IOException;
+  public abstract RestClientResponse doDelete(String url) throws ServerCommunicationException;
 
-  public abstract RestClientResponse doPut(String url, String requestBody) throws IOException;
+  public abstract RestClientResponse doPut(String url, String requestBody) throws ServerCommunicationException;
 
-  public abstract <T> T doPut(String url, String requestBody, Class<?> returnType) throws IOException;
+  public abstract <T> T doPut(String url, String requestBody, Class<?> returnType) throws ServerCommunicationException;
 
-  public abstract <T> T doPut(String url, String requestBody, Type returnType) throws IOException;
+  public abstract <T> T doPut(String url, String requestBody, Type returnType) throws ServerCommunicationException;
 
-  public abstract <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) throws IOException;
+  public abstract <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) throws ServerCommunicationException;
 
   public abstract void close();
 

@@ -24,7 +24,6 @@ import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
-import pl.project13.janbanery.test.TestConstants;
 
 import java.util.Collection;
 import java.util.List;

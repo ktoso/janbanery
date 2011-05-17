@@ -24,7 +24,6 @@ import pl.project13.janbanery.resources.Estimate;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -44,19 +43,19 @@ public class EstimatesImpl implements Estimates {
   }
 
   @Override
-  public List<Estimate> all() throws IOException {
+  public List<Estimate> all() {
     String url = getDefaultUrl();
     return restClient.doGet(url, GsonTypeTokens.LIST_ESTIMATE);
   }
 
   @Override
-  public Estimate byId(Long id) throws IOException {
+  public Estimate byId(Long id) {
     String url = getEstimateUrl(id);
     return restClient.doGet(url, GsonTypeTokens.ESTIMATE);
   }
 
   @Override
-  public Estimate any() throws IOException {
+  public Estimate any() {
     List<Estimate> estimates = all();
 
     if (estimates.size() == 0) {

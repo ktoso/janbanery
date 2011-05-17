@@ -18,16 +18,16 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.flow.IssueFlow;
 import pl.project13.janbanery.core.flow.IssueFlowImpl;
 import pl.project13.janbanery.core.flow.batch.IssuesFlow;
 import pl.project13.janbanery.core.flow.batch.IssuesFlowImpl;
+import pl.project13.janbanery.core.rest.RestClient;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Issue;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -45,7 +45,7 @@ public class IssuesImpl implements Issues {
   }
 
   @Override
-  public IssueFlow create(Task task, Issue issue) throws IOException {
+  public IssueFlow create(Task task, Issue issue) {
     String url = getIssuesUrl(task);
 
     Issue createdIssue = restClient.doPost(url, issue, GsonTypeTokens.ISSUE);
@@ -54,7 +54,7 @@ public class IssuesImpl implements Issues {
   }
 
   @Override
-  public IssueFlow update(Issue issue, Issue newValues) throws IOException {
+  public IssueFlow update(Issue issue, Issue newValues) {
     String url = getIssueUrl(issue);
 
     Issue updatedIssue = restClient.doPut(url, newValues, GsonTypeTokens.ISSUE);
@@ -63,14 +63,14 @@ public class IssuesImpl implements Issues {
   }
 
   @Override
-  public void delete(Issue issue) throws IOException {
+  public void delete(Issue issue) throws ServerCommunicationException {
     String url = getIssueUrl(issue);
 
     restClient.doDelete(url);
   }
 
   @Override
-  public List<Issue> all(Task task) throws IOException {
+  public List<Issue> all(Task task) {
     String url = getIssuesUrl(task);
 
     List<Issue> issues = restClient.doGet(url, GsonTypeTokens.LIST_ISSUE);
@@ -79,7 +79,7 @@ public class IssuesImpl implements Issues {
   }
 
   @Override
-  public IssueFlow byId(Long id) throws IOException {
+  public IssueFlow byId(Long id) {
     String url = getIssueUrl(id);
 
     Issue issue = restClient.doGet(url, GsonTypeTokens.ISSUE);

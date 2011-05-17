@@ -16,18 +16,19 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Column;
 
-import java.io.IOException;
+
 
 /**
  * @author Konrad Malawski
  */
 public interface ColumnMoveFlow extends Flow<Column> {
 
-  ColumnMoveFlow before(Column thatColumn) throws IOException;
+  ColumnMoveFlow before(Column thatColumn) throws ServerCommunicationException;
 
-  ColumnMoveFlow after(Column thatColumn) throws IOException;
+  ColumnMoveFlow after(Column thatColumn) throws ServerCommunicationException;
 
-  ColumnMoveFlow toPosition(Integer position) throws IOException;
+  ColumnMoveFlow toPosition(Integer position) throws ServerCommunicationException;
 }

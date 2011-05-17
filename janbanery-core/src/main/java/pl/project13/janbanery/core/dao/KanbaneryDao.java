@@ -16,7 +16,9 @@
 
 package pl.project13.janbanery.core.dao;
 
-import java.io.IOException;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
+
+
 
 /**
  * @author Konrad Malawski
@@ -28,7 +30,7 @@ public interface KanbaneryDao<T> {
    *
    * @param entity the entity ro re-fetch
    * @return a refreshed version of the entity
-   * @throws IOException if unable to fetch the servers response
+   * @throws ServerCommunicationException if unable to fetch the servers response
    */
-  T refresh(T entity) throws IOException;
+  T refresh(T entity) throws ServerCommunicationException;
 }

@@ -20,10 +20,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.flow.*;
 import pl.project13.janbanery.core.flow.batch.TasksMoveAllFlow;
 import pl.project13.janbanery.core.flow.batch.TasksMoveAllFlowImpl;
+import pl.project13.janbanery.core.rest.RestClient;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.*;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 import pl.project13.janbanery.util.predicates.TaskByOwnerPredicate;
@@ -31,7 +32,6 @@ import pl.project13.janbanery.util.predicates.TaskByPriorityPredicate;
 import pl.project13.janbanery.util.predicates.TaskByTitleIgnoreCasePredicate;
 import pl.project13.janbanery.util.predicates.TaskByTitlePredicate;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TaskFlow create(Task task) throws IOException {
+  public TaskFlow create(Task task) {
     String url = getDefaultGetUrl();
 
     Task newTask = restClient.doPost(url, task, GsonTypeTokens.TASK);
@@ -69,7 +69,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public void delete(Task task) throws IOException {
+  public void delete(Task task) {
     String url = getTaskUrl(task);
 
     restClient.doDelete(url);
@@ -81,13 +81,13 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TasksMoveAllFlow moveAllFrom(Column column) throws IOException {
+  public TasksMoveAllFlow moveAllFrom(Column column) {
     List<Task> tasks = allIn(column);
     return new TasksMoveAllFlowImpl(this, tasks);
   }
 
   @Override
-  public void moveAll(Column srcColumn, Column destColumn) throws IOException {
+  public void moveAll(Column srcColumn, Column destColumn) {
     List<Task> tasks = allIn(srcColumn);
     for (Task task : tasks) {
       move(task, destColumn);
@@ -96,7 +96,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TaskFlow move(Task task, TaskLocation location) throws IOException {
+  public TaskFlow move(Task task, TaskLocation location) throws ServerCommunicationException {
     String url = getTaskUrl(task);
     String moveRequest = location.requestBody();
 
@@ -106,7 +106,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TaskFlow move(Task task, Column column) throws IOException {
+  public TaskFlow move(Task task, Column column) {
     String url = getTaskUrl(task);
     Task commandObject = new Task();
     commandObject.setColumnId(column.getId());
@@ -123,7 +123,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TaskFlow assign(Task task, User user) throws IOException {
+  public TaskFlow assign(Task task, User user) {
     String url = getTaskUrl(task);
     String command = task.getResourceId() + "[owner_id]=%s";
 
@@ -144,7 +144,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TaskFlow update(Task task, Task newValues) throws IOException {
+  public TaskFlow update(Task task, Task newValues) throws ServerCommunicationException {
     String url = getTaskUrl(task);
 
     Task newTask = restClient.doPut(url, newValues, GsonTypeTokens.TASK);
@@ -158,7 +158,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TaskFlow markAsReadyToPull(Task task) throws IOException {
+  public TaskFlow markAsReadyToPull(Task task) {
     Task commandObject = new Task();
     commandObject.setReadyToPull(true);
 
@@ -166,7 +166,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public TaskFlow markAsNotReadyToPull(Task task) throws IOException {
+  public TaskFlow markAsNotReadyToPull(Task task) {
     Task commandObject = new Task();
     commandObject.setReadyToPull(false);
 
@@ -174,7 +174,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public List<Task> all() throws IOException {
+  public List<Task> all() {
     // todo port this to *Flow
     String url = getDefaultGetUrl();
 
@@ -184,7 +184,7 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public List<Task> allIn(Column column) throws IOException {
+  public List<Task> allIn(Column column) {
     String url = getColumnTasksUrl(column.getId());
 
     List<Task> tasks = restClient.doGet(url, GsonTypeTokens.LIST_TASK);
@@ -193,12 +193,12 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public Task refresh(Task task) throws IOException {
+  public Task refresh(Task task) {
     return byId(task.getId());
   }
 
   @Override
-  public Task byId(Long taskId) throws IOException {
+  public Task byId(Long taskId) {
     String url = getTaskUrl(taskId);
 
     Task task = restClient.doGet(url, GsonTypeTokens.TASK);
@@ -207,28 +207,28 @@ public class TasksImpl implements Tasks {
   }
 
   @Override
-  public List<Task> allByTitle(String taskTitle) throws IOException {
+  public List<Task> allByTitle(String taskTitle) throws ServerCommunicationException {
     List<Task> tasks = all();
     Collection<Task> filteredTasks = filter(tasks, new TaskByTitlePredicate(taskTitle));
     return newArrayList(filteredTasks);
   }
 
   @Override
-  public List<Task> allByTitleIgnoreCase(String taskTitle) throws IOException {
+  public List<Task> allByTitleIgnoreCase(String taskTitle) {
     List<Task> tasks = all();
     Collection<Task> filteredTasks = filter(tasks, new TaskByTitleIgnoreCasePredicate(taskTitle));
     return newArrayList(filteredTasks);
   }
 
   @Override
-  public List<Task> allAssignedTo(User user) throws IOException {
+  public List<Task> allAssignedTo(User user) {
     List<Task> all = all();
     Collection<Task> filteredTasks = filter(all, new TaskByOwnerPredicate(user));
     return newArrayList(filteredTasks);
   }
 
   @Override
-  public List<Task> allWithPriority(Priority priority) throws IOException {
+  public List<Task> allWithPriority(Priority priority) {
     List<Task> all = all();
     Collection<Task> filteredTasks = filter(all, new TaskByPriorityPredicate(priority));
     return newArrayList(filteredTasks);

@@ -18,10 +18,11 @@ package pl.project13.janbanery.config;
 
 import com.google.common.base.Strings;
 import pl.project13.janbanery.config.auth.AuthProvider;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -56,7 +57,7 @@ public class PropertiesConfiguration extends DefaultConfiguration implements Con
    * it will not try to fetch apiKey when configuring the app from a properties file and finding only user/pass data!
    *
    * @param propertiesFilename the filename (location) of the configuration properties file
-   * @throws IOException if the file could not be found or read
+   * @throws ServerCommunicationException if the file could not be found or read
    */
   public PropertiesConfiguration(String propertiesFilename) throws IOException {
     loadPropertiesFile(propertiesFilename);
@@ -86,9 +87,10 @@ public class PropertiesConfiguration extends DefaultConfiguration implements Con
     if (doesNotExist(propsFile)) {
       throw new FileNotFoundException("Could not find '" + propsFile.getAbsolutePath() + "' file.");
     }
-    FileReader reader = new FileReader(propsFile);
 
-    properties.load(reader);
+    FileInputStream propertiesInputStream = new FileInputStream(propsFile);
+
+    properties.load(propertiesInputStream);
   }
 
   @Override

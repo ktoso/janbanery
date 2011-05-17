@@ -19,11 +19,11 @@ package pl.project13.janbanery.core.flow.batch;
 import pl.project13.janbanery.core.dao.Comments;
 import pl.project13.janbanery.core.flow.CommentFlow;
 import pl.project13.janbanery.core.flow.CommentFlowImpl;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.util.collections.Collectionz;
 
-import java.io.IOException;
 import java.util.List;
 
 import static pl.project13.janbanery.util.collections.Collectionz.findOrThrow;
@@ -43,12 +43,12 @@ public class CommentsFlowImpl implements CommentsFlow {
   }
 
   @Override
-  public CommentFlow create(Comment comment) throws IOException {
+  public CommentFlow create(Comment comment) {
     return comments.create(task, comment);
   }
 
   @Override
-  public CommentFlow byId(final Long id) throws IOException {
+  public CommentFlow byId(final Long id) {
     String notFoundMessage = String.format("Task with ID: %d does not have a comment with ID: %d", task.getId(), id);
     Comment comment = findOrThrow(all(),
                                   notFoundMessage,
@@ -63,7 +63,7 @@ public class CommentsFlowImpl implements CommentsFlow {
   }
 
   @Override
-  public CommentsFlow deleteAll() throws IOException {
+  public CommentsFlow deleteAll() {
     for (Comment comment : all()) {
       comments.delete(comment);
     }
@@ -72,7 +72,7 @@ public class CommentsFlowImpl implements CommentsFlow {
   }
 
   @Override
-  public List<Comment> all() throws IOException {
+  public List<Comment> all() throws ServerCommunicationException {
     return comments.all(task);
   }
 

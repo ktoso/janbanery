@@ -19,8 +19,6 @@ package pl.project13.janbanery.core.flow;
 import pl.project13.janbanery.core.dao.Issues;
 import pl.project13.janbanery.resources.Issue;
 
-import java.io.IOException;
-
 /**
  * @author Konrad Malawski
  */
@@ -36,7 +34,7 @@ public class IssueUpdateFlowImpl implements IssueUpdateFlow {
   }
 
   @Override
-  public IssueUpdateFlow url(String url) throws IOException {
+  public IssueUpdateFlow url(String url) {
     Issue commandObject = new Issue();
     commandObject.setUrl(url);
 

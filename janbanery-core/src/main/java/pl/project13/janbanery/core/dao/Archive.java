@@ -16,9 +16,9 @@
 
 package pl.project13.janbanery.core.dao;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,16 +34,16 @@ public interface Archive {
 
   // queries ------------------------------------------------------------------
 
-  List<Task> all() throws IOException;
+  List<Task> all() throws ServerCommunicationException;
 
   /**
    * @param task
    * @return
-   * @throws IOException
+   * @throws ServerCommunicationException
    * @example <pre>
    *                Task myTask = janbanery.tasks().byId(someId);
    *                myTask.isArchived(janbanery.archive());
    *          </pre>
    */
-  boolean contains(Task task) throws IOException;
+  boolean contains(Task task) throws ServerCommunicationException;
 }

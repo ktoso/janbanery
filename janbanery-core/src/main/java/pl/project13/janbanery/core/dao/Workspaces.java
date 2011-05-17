@@ -16,10 +16,10 @@
 
 package pl.project13.janbanery.core.dao;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.exceptions.WorkspaceNotFoundException;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,17 +31,17 @@ public interface Workspaces {
    * Queries for all {@link Workspace}s that you have access to.
    *
    * @return all workspaces you have access to
-   * @throws java.io.IOException
+   * @throws ServerCommunicationException
    */
-  List<Workspace> all() throws IOException;
+  List<Workspace> all() throws ServerCommunicationException;
 
   /**
    * @param name
    * @return
-   * @throws java.io.IOException
+   * @throws ServerCommunicationException
    * @throws WorkspaceNotFoundException
    */
-  Workspace byName(String name) throws IOException, WorkspaceNotFoundException;
+  Workspace byName(String name) throws ServerCommunicationException, WorkspaceNotFoundException;
 
   Workspace current();
 }

@@ -16,16 +16,15 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Issue;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
  */
 public interface IssueFlow extends Flow<Issue> {
 
-  void delete() throws IOException;
+  void delete() throws ServerCommunicationException;
 
   // goto other flows -----------------
 

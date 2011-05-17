@@ -20,9 +20,9 @@ import pl.project13.janbanery.core.flow.ColumnCreateFlow;
 import pl.project13.janbanery.core.flow.ColumnMoveFlow;
 import pl.project13.janbanery.core.flow.ColumnUpdateFlow;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Column;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,32 +36,32 @@ public interface Columns extends KanbaneryDao<Column> {
 
   ColumnUpdateFlow update(Column column);
 
-  ColumnUpdateFlow update(Column column, Column newValues) throws IOException;
+  ColumnUpdateFlow update(Column column, Column newValues) throws ServerCommunicationException;
 
-  ColumnUpdateFlow update(Long columnId, Column newValues) throws IOException;
+  ColumnUpdateFlow update(Long columnId, Column newValues) throws ServerCommunicationException;
 
-  void delete(Column column) throws IOException;
+  void delete(Column column) throws ServerCommunicationException;
 
   ColumnMoveFlow move(Column column);
 
   // queries ------------------------------------------------------------------
 
-  List<Column> all() throws IOException;
+  List<Column> all() throws ServerCommunicationException;
 
-  Column first() throws IOException;
+  Column first() throws ServerCommunicationException;
 
-  Column last() throws IOException;
+  Column last() throws ServerCommunicationException;
 
-  Column byId(Long id) throws IOException;
+  Column byId(Long id) throws ServerCommunicationException;
 
-  Column after(Column column) throws IOException, EntityNotFoundException;
+  Column after(Column column) throws ServerCommunicationException, EntityNotFoundException;
 
-  Column before(Column column) throws IOException, EntityNotFoundException;
+  Column before(Column column) throws ServerCommunicationException, EntityNotFoundException;
 
-  Column onPosition(Integer desiredPosition) throws IOException, EntityNotFoundException;
+  Column onPosition(Integer desiredPosition) throws ServerCommunicationException, EntityNotFoundException;
 
-  Column refresh(Column column) throws IOException;
+  Column refresh(Column column) throws ServerCommunicationException;
 
-  List<Column> byName(String name) throws IOException;
+  List<Column> byName(String name) throws ServerCommunicationException;
 
 }

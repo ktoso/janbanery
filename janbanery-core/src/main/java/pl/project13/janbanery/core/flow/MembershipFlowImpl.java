@@ -20,7 +20,6 @@ import pl.project13.janbanery.core.dao.Memberships;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.ProjectMembership;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -45,15 +44,15 @@ public class MembershipFlowImpl implements MembershipFlow {
   }
 
   @Override
-  public void delete() throws IOException {
+  public void delete() {
     memberships.delete(project, membership);
   }
 
-  public MembershipFlow byId(Long id) throws IOException {
+  public MembershipFlow byId(Long id) {
     return memberships.byId(project, id);
   }
 
-  public List<ProjectMembership> all() throws IOException {
+  public List<ProjectMembership> all() {
     return memberships.all(project);
   }
 

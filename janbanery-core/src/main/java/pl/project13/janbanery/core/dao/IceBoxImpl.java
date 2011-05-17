@@ -20,16 +20,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.flow.IceBoxFlow;
 import pl.project13.janbanery.core.flow.IceBoxFlowImpl;
 import pl.project13.janbanery.core.flow.TaskUpdateFlow;
 import pl.project13.janbanery.core.flow.TaskUpdateFlowImpl;
+import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -56,7 +55,7 @@ public class IceBoxImpl implements IceBox {
   }
 
   @Override
-  public IceBoxFlow create(Task task) throws IOException {
+  public IceBoxFlow create(Task task) {
     String url = getDefaultUrl();
 
     Task newTask = restClient.doPost(url, task, GsonTypeTokens.TASK);
@@ -65,19 +64,19 @@ public class IceBoxImpl implements IceBox {
   }
 
   @Override
-  public void delete(Task task) throws IOException {
+  public void delete(Task task) {
     tasks.delete(task);
   }
 
   @Override
-  public List<Task> all() throws IOException {
+  public List<Task> all() {
     String url = getDefaultUrl();
 
     return restClient.doGet(url, GsonTypeTokens.LIST_TASK);
   }
 
   @Override
-  public boolean contains(Task task) throws IOException {
+  public boolean contains(Task task) {
     return all().contains(task);
   }
 

@@ -17,9 +17,8 @@
 package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.ColumnsImpl;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Column;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -36,35 +35,35 @@ public class ColumnCreateFlowImpl implements ColumnCreateFlow {
   }
 
   @Override
-  public ColumnUpdateFlow afterFirst() throws IOException {
+  public ColumnUpdateFlow afterFirst() {
     return after(columns.first());
   }
 
   @Override
-  public ColumnUpdateFlow after(Column thatColumn) throws IOException {
+  public ColumnUpdateFlow after(Column thatColumn) {
     Integer newPosition = thatColumn.getPosition() + 1;
     return onPosition(newPosition);
   }
 
   @Override
-  public ColumnUpdateFlow beforeLast() throws IOException {
+  public ColumnUpdateFlow beforeLast() throws ServerCommunicationException {
     return before(columns.last());
   }
 
   @Override
-  public ColumnUpdateFlow before(Column thatColumn) throws IOException {
+  public ColumnUpdateFlow before(Column thatColumn) {
     Integer newPosition = thatColumn.getPosition();
     return onPosition(newPosition);
   }
 
   @Override
-  public ColumnUpdateFlow onPosition(Integer position) throws IOException {
+  public ColumnUpdateFlow onPosition(Integer position) {
     column.setPosition(position);
 
     return call();
   }
 
-  private ColumnUpdateFlow call() throws IOException {
+  private ColumnUpdateFlow call() {
     column = columns.doCreate(column);
     return new ColumnUpdateFlowImpl(columns, column);
   }

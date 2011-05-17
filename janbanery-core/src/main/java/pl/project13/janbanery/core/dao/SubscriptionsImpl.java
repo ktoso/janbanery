@@ -20,11 +20,10 @@ import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.exceptions.NotFoundKanbaneryException;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.TaskSubscription;
 import pl.project13.janbanery.resources.Workspace;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -42,7 +41,7 @@ public class SubscriptionsImpl implements Subscriptions {
   }
 
   @Override
-  public Boolean isSubscribedTo(Task task) throws IOException {
+  public Boolean isSubscribedTo(Task task) throws ServerCommunicationException {
     String url = getDefaultUrl(task);
     TaskSubscription subscription;
 
@@ -57,7 +56,7 @@ public class SubscriptionsImpl implements Subscriptions {
   }
 
   @Override
-  public TaskSubscription subscribe(Task task) throws IOException {
+  public TaskSubscription subscribe(Task task) {
     String url = getDefaultUrl(task);
     TaskSubscription commandObject = new TaskSubscription(); // empty object is fine, all data is contained in URL
 
@@ -65,7 +64,7 @@ public class SubscriptionsImpl implements Subscriptions {
   }
 
   @Override
-  public void unsubscribe(Task task) throws IOException {
+  public void unsubscribe(Task task) {
     String url = getDefaultUrl(task);
 
     restClient.doDelete(url);

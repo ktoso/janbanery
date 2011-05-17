@@ -22,7 +22,7 @@ import pl.project13.janbanery.core.dao.IceBox;
 import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
+
 
 /**
  * @author Konrad Malawski
@@ -42,17 +42,17 @@ public class IceBoxFlowImpl implements IceBoxFlow {
   }
 
   @Override
-  public TaskFlow moveToBoard() throws IOException {
+  public TaskFlow moveToBoard() {
     return tasks.move(task).toBoard();
   }
 
   @Override
-  public void delete() throws IOException {
+  public void delete() {
     tasks.delete(task);
   }
 
   @Override
-  public IceBoxFlow update(Task newValues) throws IOException {
+  public IceBoxFlow update(Task newValues) {
     Task updatedTask = tasks.update(task, newValues).get();
     return new IceBoxFlowImpl(tasks, iceBox, updatedTask);
   }

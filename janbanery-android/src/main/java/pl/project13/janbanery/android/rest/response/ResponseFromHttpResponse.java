@@ -4,7 +4,7 @@ import org.apache.http.HttpResponse;
 import pl.project13.janbanery.android.util.Strings;
 import pl.project13.janbanery.core.rest.response.RestClientResponse;
 
-import java.io.IOException;
+
 import java.io.InputStream;
 
 /**

@@ -2,6 +2,7 @@ package pl.project13.janbanery.android.rest;
 
 import com.google.common.base.Charsets;
 import com.google.gson.Gson;
+import com.ning.http.client.providers.jdk.JDKAsyncHttpProvider;
 import org.apache.http.HttpResponse;
 import org.apache.http.ProtocolVersion;
 import org.apache.http.client.methods.*;
@@ -24,10 +25,11 @@ import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.android.rest.response.*;
 import pl.project13.janbanery.core.rest.response.RestClientResponse;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
+
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 
@@ -82,7 +84,7 @@ public class AndroidCompatibleRestClient extends RestClient {
   }
 
   @Override
-  public RestClientResponse doPost(String url, KanbaneryResource resource) throws IOException {
+  public RestClientResponse doPost(String url, KanbaneryResource resource) throws ServerCommunicationException {
     HttpPost request = new HttpPost(url);
 
     authorize(request);
@@ -91,7 +93,8 @@ public class AndroidCompatibleRestClient extends RestClient {
     log.info("Generated request body is: '{}'", requestBody);
     setFormUrlEncodedBody(request, requestBody);
 
-    HttpResponse httpResponse = httpClient.execute(request);
+    HttpResponse httpResponse = executeRequest(request);
+
     ResponseFromHttpResponse response = new ResponseFromHttpResponse(httpResponse);
 
     verifyResponseCode(response);
@@ -115,20 +118,20 @@ public class AndroidCompatibleRestClient extends RestClient {
   }
 
   @Override
-  public <T> T doPost(String url, KanbaneryResource resource, Class<?> type) throws IOException {
+  public <T> T doPost(String url, KanbaneryResource resource, Class<?> type) throws ServerCommunicationException {
     RestClientResponse response = doPost(url, resource);
 
     return (T) gson.fromJson(response.getResponseBody(), type);
   }
 
   @Override
-  public RestClientResponse doGet(String url) throws IOException {
+  public RestClientResponse doGet(String url) throws ServerCommunicationException {
     HttpGet request = new HttpGet(url);
 
     authorize(request);
 
     HttpResponse httpResponse;
-    httpResponse = httpClient.execute(request);
+    httpResponse = executeRequest(request);
     ResponseFromHttpResponse response = new ResponseFromHttpResponse(httpResponse);
 
     verifyResponseCode(response);
@@ -141,20 +144,19 @@ public class AndroidCompatibleRestClient extends RestClient {
   }
 
   @Override
-  public <T> T doGet(String url, Type type) throws IOException {
+  public <T> T doGet(String url, Type type) throws ServerCommunicationException {
     RestClientResponse response = doGet(url);
 
     return (T) gson.fromJson(response.getResponseBody(), type);
   }
 
   @Override
-  public RestClientResponse doDelete(String url) throws IOException {
+  public RestClientResponse doDelete(String url) throws ServerCommunicationException {
     HttpGet request = new HttpGet(url);
 
     authorize(request);
 
-    HttpResponse httpResponse;
-    httpResponse = httpClient.execute(request);
+    HttpResponse httpResponse = executeRequest(request);
     ResponseFromHttpResponse response = new ResponseFromHttpResponse(httpResponse);
 
     verifyResponseCode(response);
@@ -167,7 +169,7 @@ public class AndroidCompatibleRestClient extends RestClient {
   }
 
   @Override
-  public RestClientResponse doPut(String url, String requestBody) throws IOException {
+  public RestClientResponse doPut(String url, String requestBody) throws ServerCommunicationException {
     HttpPut request = new HttpPut(url);
 
     authorize(request);
@@ -175,7 +177,7 @@ public class AndroidCompatibleRestClient extends RestClient {
     log.info("Generated request body is: '{}'", requestBody);
     setFormUrlEncodedBody(request, requestBody);
 
-    HttpResponse httpResponse = httpClient.execute(request);
+    HttpResponse httpResponse = executeRequest(request);
     ResponseFromHttpResponse response = new ResponseFromHttpResponse(httpResponse);
 
     verifyResponseCode(response);
@@ -188,24 +190,34 @@ public class AndroidCompatibleRestClient extends RestClient {
   }
 
   @Override
-  public <T> T doPut(String url, String requestBody, Class<?> type) throws IOException {
+  public <T> T doPut(String url, String requestBody, Class<?> type) throws ServerCommunicationException {
     RestClientResponse response = doPut(url, requestBody);
 
     return (T) gson.fromJson(response.getResponseBody(), type);
   }
 
   @Override
-  public <T> T doPut(String url, String requestBody, Type type) throws IOException {
+  public <T> T doPut(String url, String requestBody, Type type) throws ServerCommunicationException {
     RestClientResponse response = doPut(url, requestBody);
 
     return (T) gson.fromJson(response.getResponseBody(), type);
   }
 
   @Override
-  public <T> T doPut(String url, KanbaneryResource resource, Class<?> type) throws IOException {
+  public <T> T doPut(String url, KanbaneryResource resource, Class<?> type) throws ServerCommunicationException {
     RestClientResponse response = doPut(url, encodedBodyGenerator.asString(resource));
 
     return (T) gson.fromJson(response.getResponseBody(), type);
+  }
+
+  private HttpResponse executeRequest(HttpRequestBase request) {
+    HttpResponse httpResponse;
+    try {
+      httpResponse = httpClient.execute(request);
+    } catch (IOException e) {
+      throw new ServerCommunicationException(e);
+    }
+    return httpResponse;
   }
 
   @Override

@@ -16,9 +16,9 @@
 
 package pl.project13.janbanery.core.dao;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Estimate;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -29,9 +29,9 @@ public interface Estimates {
   // commands -----------------------------------------------------------------
 
   // queries ------------------------------------------------------------------
-  List<Estimate> all() throws IOException;
+  List<Estimate> all() throws ServerCommunicationException;
 
-  Estimate byId(Long id) throws IOException;
+  Estimate byId(Long id) throws ServerCommunicationException;
 
-  Estimate any() throws IOException;
+  Estimate any() throws ServerCommunicationException;
 }

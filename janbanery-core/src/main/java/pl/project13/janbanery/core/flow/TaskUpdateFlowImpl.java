@@ -22,7 +22,6 @@ import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.*;
 
-import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -43,7 +42,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   }
 
   @Override
-  public TaskUpdateFlow title(String title) throws IOException {
+  public TaskUpdateFlow title(String title) {
     Task commandObject = new Task();
     commandObject.setTitle(title);
 
@@ -53,7 +52,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   }
 
   @Override
-  public TaskUpdateFlow description(String description) throws IOException {
+  public TaskUpdateFlow description(String description) {
     Task commandObject = new Task();
     commandObject.setDescription(description);
 
@@ -63,7 +62,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   }
 
   @Override
-  public TaskUpdateFlow assignTo(User user) throws IOException {
+  public TaskUpdateFlow assignTo(User user) {
     Task commandObject = new Task();
     commandObject.setOwnerId(user.getId());
 
@@ -73,7 +72,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   }
 
   @Override
-  public TaskUpdateFlow position(Integer positionInColumn) throws IOException {
+  public TaskUpdateFlow position(Integer positionInColumn) {
     Task commandObject = new Task();
     commandObject.setPosition(positionInColumn);
 
@@ -83,7 +82,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   }
 
   @Override
-  public TaskUpdateFlow deadline(Date deadline) throws IOException {
+  public TaskUpdateFlow deadline(Date deadline) {
     Task commandObject = new Task();
     commandObject.setDeadline(deadline);
 
@@ -93,7 +92,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   }
 
   @Override
-  public TaskUpdateFlow priority(Priority priority) throws IOException {
+  public TaskUpdateFlow priority(Priority priority) {
     Task commandObject = new Task();
     commandObject.setPriority(priority);
 
@@ -103,7 +102,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   }
 
   @Override
-  public TaskUpdateFlow taskType(TaskType taskType) throws IOException {
+  public TaskUpdateFlow taskType(TaskType taskType) {
     Task commandObject = new Task();
     commandObject.setTaskTypeId(taskType.getId());
 
@@ -113,7 +112,7 @@ public class TaskUpdateFlowImpl implements TaskUpdateFlow {
   }
 
   @Override
-  public TaskUpdateFlow estimate(Estimate estimate) throws IOException {
+  public TaskUpdateFlow estimate(Estimate estimate) {
     Task commandObject = new Task();
     commandObject.setEstimateId(estimate.getId());
 

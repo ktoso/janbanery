@@ -17,10 +17,10 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -40,20 +40,20 @@ public interface Projects {
    * </pre>
    *
    * @return
-   * @throws IOException
+   * @throws ServerCommunicationException
    */
-  List<Project> all() throws IOException;
+  List<Project> all() throws ServerCommunicationException ;
 
   /**
    * Fetches absolutely all {@link Project}s you have access to - across all Workspaces.
    * If you're only interested in one workspace, try {@link #all()}.
    *
    * @return
-   * @throws IOException
+   * @throws ServerCommunicationException
    */
-  List<Project> allAcrossWorkspaces() throws IOException;
+  List<Project> allAcrossWorkspaces() throws ServerCommunicationException;
 
-  Project byId(Long id) throws EntityNotFoundException, IOException;
+  Project byId(Long id) throws EntityNotFoundException, ServerCommunicationException;
 
   Project current();
 

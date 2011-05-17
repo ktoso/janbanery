@@ -23,6 +23,7 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.resources.Estimate;
+import pl.project13.janbanery.resources.additions.ReadOnly;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION
  */
 public class EstimatesTest {
 
+  @ReadOnly
   Janbanery janbanery;
 
   @Before

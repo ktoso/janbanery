@@ -26,9 +26,9 @@ import pl.project13.janbanery.config.gson.GsonFactory;
 import pl.project13.janbanery.core.rest.AsyncHttpClientRestClient;
 import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.encoders.ReflectionBodyGenerator;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.User;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -82,9 +82,9 @@ public class JanbaneryFactory {
    * @param user     your kanbanery username (email)
    * @param password your kanbanery password for this user
    * @return an Janbanery instance setup using the API Key auth, which will be fetched during construction
-   * @throws IOException
+   * @throws ServerCommunicationException
    */
-  public JanbaneryToWorkspace connectUsing(String user, String password) throws IOException {
+  public JanbaneryToWorkspace connectUsing(String user, String password) throws ServerCommunicationException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
     RestClient restClient = getRestClient(conf);
     Janbanery janbanery = new Janbanery(conf, restClient);
@@ -96,7 +96,7 @@ public class JanbaneryFactory {
     return new JanbaneryToWorkspace(janbanery);
   }
 
-  private String getCurrentUserApiKey(Janbanery janbanery) throws IOException {
+  private String getCurrentUserApiKey(Janbanery janbanery) throws ServerCommunicationException {
     User currentUser = janbanery.users().current();
     return currentUser.getApiToken();
   }
@@ -110,9 +110,9 @@ public class JanbaneryFactory {
    * @param user     your kanbanery username (email)
    * @param password your kanbanery password for this user
    * @return an Janbanery instance setup using the API Key auth, which will be fetched during construction
-   * @throws IOException
+   * @throws ServerCommunicationException
    */
-  public Janbanery connectAndKeepUsing(String user, String password) throws IOException {
+  public Janbanery connectAndKeepUsing(String user, String password) throws ServerCommunicationException {
     DefaultConfiguration conf = new DefaultConfiguration(user, password);
     RestClient restClient = getRestClient(conf);
     return new Janbanery(conf, restClient);
@@ -157,7 +157,7 @@ public class JanbaneryFactory {
       this.janbanery = janbanery;
     }
 
-    public Janbanery toWorkspace(String name) throws IOException, ExecutionException, InterruptedException {
+    public Janbanery toWorkspace(String name) throws ServerCommunicationException, ExecutionException, InterruptedException {
       return janbanery.usingWorkspace(name);
     }
 

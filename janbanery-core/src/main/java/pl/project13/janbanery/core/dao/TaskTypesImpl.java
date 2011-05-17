@@ -27,7 +27,6 @@ import pl.project13.janbanery.resources.TaskType;
 import pl.project13.janbanery.resources.Workspace;
 import pl.project13.janbanery.util.collections.Collectionz;
 
-import java.io.IOException;
 import java.util.List;
 
 import static pl.project13.janbanery.util.collections.Collectionz.findOrThrow;
@@ -52,7 +51,7 @@ public class TaskTypesImpl implements TaskTypes {
   }
 
   @Override
-  public List<TaskType> all() throws IOException {
+  public List<TaskType> all() {
     String url = getDefaultGetUrl();
 
     List<TaskType> taskTypes = restClient.doGet(url, GsonTypeTokens.LIST_TASK_TYPE);
@@ -61,7 +60,7 @@ public class TaskTypesImpl implements TaskTypes {
   }
 
   @Override
-  public TaskType byId(Long id) throws IOException {
+  public TaskType byId(Long id) {
     String url = getTaskTypeUrl(id);
 
     TaskType taskType = restClient.doGet(url, GsonTypeTokens.TASK_TYPE);
@@ -70,7 +69,7 @@ public class TaskTypesImpl implements TaskTypes {
   }
 
   @Override
-  public TaskType byName(final String name) throws IOException {
+  public TaskType byName(final String name) {
     return findOrThrow(all(), new Collectionz.Criteria<TaskType>() {
       @Override
       public boolean matches(TaskType item) {
@@ -80,7 +79,7 @@ public class TaskTypesImpl implements TaskTypes {
   }
 
   @Override
-  public TaskType any() throws IOException {
+  public TaskType any() {
     List<TaskType> taskTypes = all();
 
     if (taskTypes.size() == 0) {

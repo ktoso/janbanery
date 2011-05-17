@@ -20,16 +20,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.flow.*;
+import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
 import pl.project13.janbanery.util.collections.Collectionz;
 import pl.project13.janbanery.util.predicates.ColumnByNamePredicate;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
-  public List<Column> all() throws IOException {
+  public List<Column> all() {
     log.info("Querying for all columns in workspace: '{}' and project: '{}'", currentWorkspace.getName(), currentProject.getName());
 
     String url = getDefaultUrl();
@@ -74,20 +74,20 @@ public class ColumnsImpl implements Columns {
    *
    * @param column the column data to be used for the new column
    * @return the freshly created (and populated) column
-   * @throws IOException if the server response could not be fetched
+   * @throws ServerCommunicationException if the server response could not be fetched
    */
-  public Column doCreate(Column column) throws IOException {
+  public Column doCreate(Column column) {
     String url = getDefaultUrl();
     return restClient.doPost(url, column, GsonTypeTokens.COLUMN);
   }
 
   @Override
-  public Column first() throws IOException {
+  public Column first() {
     return onPosition(1);
   }
 
   @Override
-  public Column last() throws IOException {
+  public Column last() {
     List<Column> columns = all();
 
     int lastPosition = columns.size();
@@ -95,38 +95,38 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
-  public Column refresh(Column column) throws IOException {
+  public Column refresh(Column column) {
     return byId(column.getId());
   }
 
   @Override
-  public List<Column> byName(final String name) throws IOException {
+  public List<Column> byName(final String name) {
     Collection<Column> filteredColumns = filter(all(), new ColumnByNamePredicate(name));
     return newArrayList(filteredColumns);
   }
 
   @Override
-  public Column byId(Long id) throws IOException {
+  public Column byId(Long id) {
     String url = getColumnUrl(id);
     return restClient.doGet(url, GsonTypeTokens.COLUMN);
   }
 
   @Override
-  public Column after(Column column) throws IOException, EntityNotFoundException {
+  public Column after(Column column) throws EntityNotFoundException {
     Integer desiredPosition = column.getPosition() + 1;
 
     return onPosition(desiredPosition);
   }
 
   @Override
-  public Column before(Column column) throws IOException, EntityNotFoundException {
+  public Column before(Column column) throws ServerCommunicationException, EntityNotFoundException {
     Integer desiredPosition = column.getPosition() - 1;
 
     return onPosition(desiredPosition);
   }
 
   @Override
-  public Column onPosition(final Integer desiredPosition) throws IOException, EntityNotFoundException {
+  public Column onPosition(final Integer desiredPosition) throws EntityNotFoundException {
     String notFoundMessage = "Could not find Column with position = " + desiredPosition + ", on this project board.";
     return findOrThrow(all(), notFoundMessage,
                        new Collectionz.Criteria<Column>() {
@@ -143,12 +143,12 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
-  public ColumnUpdateFlow update(Column column, Column newValues) throws IOException {
+  public ColumnUpdateFlow update(Column column, Column newValues) {
     return update(column.getId(), newValues);
   }
 
   @Override
-  public ColumnUpdateFlow update(Long columnId, Column newValues) throws IOException {
+  public ColumnUpdateFlow update(Long columnId, Column newValues) {
     String url = getColumnUrl(columnId);
 
     Column column = restClient.doPut(url, newValues, GsonTypeTokens.COLUMN);
@@ -157,7 +157,7 @@ public class ColumnsImpl implements Columns {
   }
 
   @Override
-  public void delete(Column column) throws IOException {
+  public void delete(Column column) {
     String url = getColumnUrl(column.getId());
 
     restClient.doDelete(url);

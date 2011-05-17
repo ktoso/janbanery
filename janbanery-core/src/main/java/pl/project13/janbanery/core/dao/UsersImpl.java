@@ -21,11 +21,11 @@ import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.rest.RestClient;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -47,20 +47,20 @@ public class UsersImpl implements Users {
   }
 
   @Override
-  public User current() throws IOException {
+  public User current() {
     String url = getMyUserUrl();
 
     return restClient.doGet(url, GsonTypeTokens.USER);
   }
 
   @Override
-  public List<User> all() throws IOException {
+  public List<User> all() {
     String url = getProjectUsersUrl();
     return restClient.doGet(url, GsonTypeTokens.LIST_USER);
   }
 
   @Override
-  public List<User> inProject(Project project) throws IOException {
+  public List<User> inProject(Project project) throws ServerCommunicationException {
     String url = getProjectUsersUrl(project);
     return restClient.doGet(url, GsonTypeTokens.LIST_USER);
   }

@@ -20,8 +20,6 @@ import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
-
 /**
  * This flow may be used to perform actions on a fetched or
  *
@@ -40,7 +38,7 @@ public class TaskFlowImpl implements TaskFlow {
   }
 
   @Override
-  public void delete() throws IOException {
+  public void delete() {
     tasks.delete(task);
   }
 

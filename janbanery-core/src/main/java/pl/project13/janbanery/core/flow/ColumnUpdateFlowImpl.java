@@ -18,9 +18,8 @@ package pl.project13.janbanery.core.flow;
 
 import com.google.common.base.Preconditions;
 import pl.project13.janbanery.core.dao.Columns;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Column;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -37,7 +36,7 @@ public class ColumnUpdateFlowImpl implements ColumnUpdateFlow {
   }
 
   @Override
-  public ColumnUpdateFlow name(String name) throws IOException {
+  public ColumnUpdateFlow name(String name) {
     Preconditions.checkNotNull(name);
 
     Column commandObject = new Column();
@@ -47,7 +46,7 @@ public class ColumnUpdateFlowImpl implements ColumnUpdateFlow {
   }
 
   @Override
-  public ColumnUpdateFlow capacity(Integer capacity) throws IOException {
+  public ColumnUpdateFlow capacity(Integer capacity) throws ServerCommunicationException {
     Preconditions.checkNotNull(capacity);
 
     Column commandObject = new Column();
@@ -57,7 +56,7 @@ public class ColumnUpdateFlowImpl implements ColumnUpdateFlow {
   }
 
   @Override
-  public ColumnUpdateFlow position(Integer position) throws IOException {
+  public ColumnUpdateFlow position(Integer position) {
     Preconditions.checkNotNull(position);
 
     Column commandObject = new Column();

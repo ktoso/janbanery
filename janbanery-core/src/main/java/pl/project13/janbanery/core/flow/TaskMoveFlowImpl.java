@@ -18,12 +18,11 @@ package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.core.dao.Tasks;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
-
-import java.io.IOException;
 
 /**
  * This flow enables the API to fluently move tasks around the Kanban board, making it as fun and powerful as possible.
@@ -43,44 +42,44 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
   }
 
   @Override
-  public TaskFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException {
+  public TaskFlow toIceBox() throws CanOnlyIceBoxTaskFromFirstColumnException {
     return to(TaskLocation.ICEBOX);
   }
 
   @Override
-  public TaskFlow toBoard() throws IOException {
+  public TaskFlow toBoard() {
     return to(TaskLocation.BOARD);
   }
 
   @Override
-  public TaskFlow toLastColumn() throws IOException {
+  public TaskFlow toLastColumn() {
     Column last = columns.last();
     return to(last);
   }
 
   @Override
-  public TaskFlow toFirstColumn() throws IOException {
+  public TaskFlow toFirstColumn() throws ServerCommunicationException {
     Column first = columns.first();
     return to(first);
   }
 
   @Override
-  public TaskFlow toNextColumn() throws IOException {
+  public TaskFlow toNextColumn() {
     return to(TaskLocation.NEXT);
   }
 
   @Override
-  public TaskFlow toPreviousColumn() throws IOException {
+  public TaskFlow toPreviousColumn() {
     return to(TaskLocation.PREVIOUS);
   }
 
   @Override
-  public TaskFlow toArchive() throws IOException {
+  public TaskFlow toArchive() {
     return to(TaskLocation.ARCHIVE);
   }
 
   @Override
-  public TaskFlow to(TaskLocation location) throws IOException {
+  public TaskFlow to(TaskLocation location) {
     TaskFlow move = tasks.move(task, location);
 
     task = move.get();
@@ -88,7 +87,7 @@ public class TaskMoveFlowImpl implements TaskMoveFlow {
   }
 
   @Override
-  public TaskFlow to(Column column) throws IOException {
+  public TaskFlow to(Column column) {
     TaskFlow move = tasks.move(task, column);
 
     task = move.get();

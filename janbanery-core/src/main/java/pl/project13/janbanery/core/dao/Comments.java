@@ -17,10 +17,10 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.CommentFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,13 +36,13 @@ public interface Comments extends CommentsOf {
    * @param task    the task we want to add this subtask to
    * @param comment the comment we're about to create
    * @return a {@link CommentFlow} populated with the newly created subtask
-   * @throws IOException when unable to fetch the servers response
+   * @throws ServerCommunicationException when unable to fetch the servers response
    */
-  CommentFlow create(Task task, Comment comment) throws IOException;
+  CommentFlow create(Task task, Comment comment) throws ServerCommunicationException;
 
-  void delete(Comment comment) throws IOException;
+  void delete(Comment comment) throws ServerCommunicationException;
 
   // queries ------------------------------------------------------------------
 
-  List<Comment> all(Task task) throws IOException;
+  List<Comment> all(Task task) throws ServerCommunicationException ;
 }

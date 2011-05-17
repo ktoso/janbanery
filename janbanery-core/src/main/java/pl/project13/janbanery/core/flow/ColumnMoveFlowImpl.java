@@ -19,8 +19,6 @@ package pl.project13.janbanery.core.flow;
 import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.resources.Column;
 
-import java.io.IOException;
-
 /**
  * @author Konrad Malawski
  */
@@ -36,17 +34,17 @@ public class ColumnMoveFlowImpl implements ColumnMoveFlow {
   }
 
   @Override
-  public ColumnMoveFlow before(Column thatColumn) throws IOException {
+  public ColumnMoveFlow before(Column thatColumn) {
     return toPosition(thatColumn.getPosition());
   }
 
   @Override
-  public ColumnMoveFlow after(Column thatColumn) throws IOException {
+  public ColumnMoveFlow after(Column thatColumn) {
     return toPosition(thatColumn.getPosition() + 1);
   }
 
   @Override
-  public ColumnMoveFlow toPosition(Integer position) throws IOException {
+  public ColumnMoveFlow toPosition(Integer position) {
     column = columns.update(column).position(position).get();
     return this;
   }

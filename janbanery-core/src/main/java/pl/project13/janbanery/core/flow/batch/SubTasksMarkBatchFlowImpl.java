@@ -19,7 +19,6 @@ package pl.project13.janbanery.core.flow.batch;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public class SubTasksMarkBatchFlowImpl implements SubTasksMarkBatchFlow {
   }
 
   @Override
-  public SubTasksFlow asCompleted() throws IOException {
+  public SubTasksFlow asCompleted() {
     List<SubTask> notCompletedSubTasks = subTasksFlow.allNotCompleted();
     for (SubTask completeMeSubTask : notCompletedSubTasks) {
       subTasksFlow.mark(completeMeSubTask).asCompleted();
@@ -47,7 +46,7 @@ public class SubTasksMarkBatchFlowImpl implements SubTasksMarkBatchFlow {
   }
 
   @Override
-  public SubTasksFlow asNotCompleted() throws IOException {
+  public SubTasksFlow asNotCompleted() {
     List<SubTask> completedSubTasks = subTasksFlow.allCompleted();
     for (SubTask completeMeSubTask : completedSubTasks) {
       subTasksFlow.mark(completeMeSubTask).asNotCompleted();

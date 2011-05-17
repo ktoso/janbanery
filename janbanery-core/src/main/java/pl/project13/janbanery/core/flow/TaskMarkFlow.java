@@ -16,9 +16,8 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Task;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -27,13 +26,13 @@ public interface TaskMarkFlow extends Flow<Task> {
 
   /**
    * @return
-   * @throws IOException
+   * @throws ServerCommunicationException
    */
-  TaskFlow asReadyToPull() throws IOException;
+  TaskFlow asReadyToPull() throws ServerCommunicationException;
 
   /**
    * @return
-   * @throws IOException
+   * @throws ServerCommunicationException
    */
-  TaskFlow asNotReadyToPull() throws IOException;
+  TaskFlow asNotReadyToPull() throws ServerCommunicationException;
 }

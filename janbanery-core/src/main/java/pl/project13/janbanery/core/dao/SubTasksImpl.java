@@ -18,18 +18,17 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.flow.SubTaskFlow;
 import pl.project13.janbanery.core.flow.SubTaskFlowImpl;
 import pl.project13.janbanery.core.flow.batch.SubTasksFlow;
 import pl.project13.janbanery.core.flow.batch.SubTasksFlowImpl;
+import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 import pl.project13.janbanery.util.predicates.CompletedSubTaskPredicate;
 import pl.project13.janbanery.util.predicates.NotCompletedSubTaskPredicate;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class SubTasksImpl implements SubTasks {
   }
 
   @Override
-  public SubTaskFlow create(Task task, SubTask subTask) throws IOException {
+  public SubTaskFlow create(Task task, SubTask subTask) {
     String url = getSubTasksUrl(task);
 
     SubTask createdSubTask = restClient.doPost(url, subTask, GsonTypeTokens.SUB_TASK);
@@ -61,7 +60,7 @@ public class SubTasksImpl implements SubTasks {
   }
 
   @Override
-  public SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException {
+  public SubTaskFlow update(SubTask subTask, SubTask newValues) {
     String url = getSubTaskUrl(subTask);
 
     SubTask updatedTask = restClient.doPut(url, newValues, GsonTypeTokens.SUB_TASK);
@@ -70,28 +69,28 @@ public class SubTasksImpl implements SubTasks {
   }
 
   @Override
-  public void delete(SubTask subTask) throws IOException {
+  public void delete(SubTask subTask) {
     String url = getSubTaskUrl(subTask);
 
     restClient.doDelete(url);
   }
 
   @Override
-  public List<SubTask> all(Task task) throws IOException {
+  public List<SubTask> all(Task task) {
     String url = getSubTasksUrl(task);
 
     return restClient.doGet(url, GsonTypeTokens.LIST_SUB_TASK);
   }
 
   @Override
-  public List<SubTask> allNotCompleted(Task task) throws IOException {
+  public List<SubTask> allNotCompleted(Task task) {
     Collection<SubTask> completedSubTasks = filter(all(task), new NotCompletedSubTaskPredicate());
 
     return newArrayList(completedSubTasks);
   }
 
   @Override
-  public List<SubTask> allCompleted(Task task) throws IOException {
+  public List<SubTask> allCompleted(Task task) {
     Collection<SubTask> completedSubTasks = filter(all(task), new CompletedSubTaskPredicate());
 
     return newArrayList(completedSubTasks);

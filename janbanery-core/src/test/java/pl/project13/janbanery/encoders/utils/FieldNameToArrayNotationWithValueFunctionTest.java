@@ -19,7 +19,6 @@ package pl.project13.janbanery.encoders.utils;
 import org.junit.Before;
 import org.junit.Test;
 import pl.project13.janbanery.resources.Task;
-import sun.rmi.runtime.NewThreadAction;
 
 import static org.fest.assertions.Assertions.assertThat;
 

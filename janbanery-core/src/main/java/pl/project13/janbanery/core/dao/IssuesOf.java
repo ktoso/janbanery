@@ -17,10 +17,9 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.batch.IssuesFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Issue;
 import pl.project13.janbanery.resources.Task;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -35,5 +34,5 @@ public interface IssuesOf {
    */
   IssuesFlow of(Task task);
 
-  void delete(Issue issue) throws IOException;
+  void delete(Issue issue) throws ServerCommunicationException;
 }

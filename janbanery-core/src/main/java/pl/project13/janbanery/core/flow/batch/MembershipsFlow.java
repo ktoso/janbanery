@@ -17,6 +17,7 @@
 package pl.project13.janbanery.core.flow.batch;
 
 import pl.project13.janbanery.core.flow.MembershipFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.ProjectMembership;
 
 import java.io.IOException;
@@ -29,16 +30,16 @@ public interface MembershipsFlow {
 
   // commands -----------------------------------------------------------------
 
-  MembershipFlow create(ProjectMembership projectMembership) throws IOException;
+  MembershipFlow create(ProjectMembership projectMembership) throws ServerCommunicationException;
 
   // queries ------------------------------------------------------------------
-  List<ProjectMembership> all() throws IOException;
+  List<ProjectMembership> all() throws ServerCommunicationException;
 
-  void delete(ProjectMembership membership) throws IOException;
+  void delete(ProjectMembership membership) throws ServerCommunicationException;
 
-  void deleteAll() throws IOException;
+  void deleteAll() throws ServerCommunicationException;
 
-  MembershipFlow update(ProjectMembership membership, ProjectMembership newValues) throws IOException;
+  MembershipFlow update(ProjectMembership membership, ProjectMembership newValues) throws ServerCommunicationException;
 
   MembershipFlow byId(Long id) throws IOException;
 }

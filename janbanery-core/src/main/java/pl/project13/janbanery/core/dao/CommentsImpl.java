@@ -18,16 +18,15 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.flow.CommentFlow;
 import pl.project13.janbanery.core.flow.CommentFlowImpl;
 import pl.project13.janbanery.core.flow.batch.CommentsFlow;
 import pl.project13.janbanery.core.flow.batch.CommentsFlowImpl;
+import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -46,7 +45,7 @@ public class CommentsImpl implements Comments {
   }
 
   @Override
-  public CommentFlow create(Task task, Comment comment) throws IOException {
+  public CommentFlow create(Task task, Comment comment) {
     String url = getCommentsUrl(task);
 
     Comment createdComment = restClient.doPost(url, comment, GsonTypeTokens.COMMENT);
@@ -55,14 +54,14 @@ public class CommentsImpl implements Comments {
   }
 
   @Override
-  public void delete(Comment comment) throws IOException {
+  public void delete(Comment comment) {
     String url = getCommentUrl(comment);
 
     restClient.doDelete(url);
   }
 
   @Override
-  public List<Comment> all(Task task) throws IOException {
+  public List<Comment> all(Task task) {
     String url = getCommentsUrl(task);
 
     return restClient.doGet(url, GsonTypeTokens.LIST_COMMENT);

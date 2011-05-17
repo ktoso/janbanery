@@ -21,7 +21,6 @@ import pl.project13.janbanery.core.flow.IssueFlow;
 import pl.project13.janbanery.resources.Issue;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -39,27 +38,27 @@ public class IssuesFlowImpl implements IssuesFlow {
   }
 
   @Override
-  public IssueFlow create(Issue issue) throws IOException {
+  public IssueFlow create(Issue issue) {
     return issues.create(task, issue);
   }
 
   @Override
-  public IssueFlow update(Issue issue, Issue newValues) throws IOException {
+  public IssueFlow update(Issue issue, Issue newValues) {
     return issues.update(issue, newValues);
   }
 
   @Override
-  public void delete(Issue issue) throws IOException {
+  public void delete(Issue issue) {
     issues.delete(issue);
   }
 
   @Override
-  public List<Issue> all() throws IOException {
+  public List<Issue> all() {
     return issues.all(task);
   }
 
   @Override
-  public IssueFlow byId(Long id) throws IOException {
+  public IssueFlow byId(Long id) {
     return issues.byId(id);
   }
 }

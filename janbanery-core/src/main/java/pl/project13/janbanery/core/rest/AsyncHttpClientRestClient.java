@@ -27,6 +27,7 @@ import pl.project13.janbanery.core.rest.response.NingRestClientResponse;
 import pl.project13.janbanery.core.rest.response.RestClientResponse;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.exceptions.RestClientException;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
 import java.io.IOException;
@@ -70,7 +71,7 @@ public class AsyncHttpClientRestClient extends RestClient {
   }
 
   @Override
-  public RestClientResponse doPost(String url, KanbaneryResource resource) throws IOException {
+  public RestClientResponse doPost(String url, KanbaneryResource resource) {
     AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.preparePost(url);
     authorize(requestBuilder);
 
@@ -91,7 +92,7 @@ public class AsyncHttpClientRestClient extends RestClient {
 
   @Override
   @SuppressWarnings("unchecked")
-  public <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) throws IOException {
+  public <T> T doPost(String url, KanbaneryResource resource, Class<?> returnType) {
     RestClientResponse response = doPost(url, resource);
     String responseBody = response.getResponseBody();
 
@@ -128,11 +129,11 @@ public class AsyncHttpClientRestClient extends RestClient {
    * @param returnType taskType to parse the returned json into
    * @param <T>        the return taskType, should match returnType
    * @return the KanbaneryResource created by parsing the retrieved json
-   * @throws IOException if the response body could not be fetched
+   * @throws ServerCommunicationException if the response body could not be fetched
    */
   @Override
   @SuppressWarnings("unchecked")
-  public <T> T doGet(String url, Type returnType) throws IOException {
+  public <T> T doGet(String url, Type returnType) throws ServerCommunicationException {
     RestClientResponse response = doGet(url);
     String responseBody = response.getResponseBody();
 
@@ -171,7 +172,7 @@ public class AsyncHttpClientRestClient extends RestClient {
 
   @Override
   @SuppressWarnings({"unchecked"})
-  public <T> T doPut(String url, String requestBody, Class<?> returnType) throws IOException {
+  public <T> T doPut(String url, String requestBody, Class<?> returnType) {
     RestClientResponse response = doPut(url, requestBody);
     String responseBody = response.getResponseBody();
     return (T) gson.fromJson(responseBody, returnType);
@@ -179,7 +180,7 @@ public class AsyncHttpClientRestClient extends RestClient {
 
   @Override
   @SuppressWarnings({"unchecked"})
-  public <T> T doPut(String url, String requestBody, Type returnType) throws IOException {
+  public <T> T doPut(String url, String requestBody, Type returnType) throws ServerCommunicationException {
     RestClientResponse response = doPut(url, requestBody);
     String responseBody = response.getResponseBody();
     return (T) gson.fromJson(responseBody, returnType);
@@ -187,7 +188,7 @@ public class AsyncHttpClientRestClient extends RestClient {
 
   @Override
   @SuppressWarnings("unchecked")
-  public <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) throws IOException {
+  public <T> T doPut(String url, KanbaneryResource requestObject, Class<?> returnType) {
     String requestBody = encodedBodyGenerator.asString(requestObject);
     RestClientResponse response = doPut(url, requestBody);
     String responseBody = response.getResponseBody();

@@ -25,7 +25,6 @@ import pl.project13.janbanery.core.JanbaneryFactory;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.test.TestEntityHelper;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -76,7 +75,7 @@ public class TaskMarkFlowImplTest {
     assertThat(task.getReadyToPull()).isFalse();
   }
 
-  private Task createTestTask() throws IOException, ExecutionException, InterruptedException {
+  private Task createTestTask() throws ExecutionException, InterruptedException {
     Task task = TestEntityHelper.createTestTask(janbanery);
     return janbanery.tasks().create(task).get();
   }

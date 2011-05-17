@@ -19,11 +19,11 @@ package pl.project13.janbanery.core.dao;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
 import pl.project13.janbanery.core.rest.RestClient;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -43,7 +43,7 @@ public class ArchiveImpl implements Archive {
   }
 
   @Override
-  public List<Task> all() throws IOException {
+  public List<Task> all() throws ServerCommunicationException {
     String url = getArchiveUrl();
 
     return restClient.doGet(url, GsonTypeTokens.LIST_TASK);
@@ -51,7 +51,7 @@ public class ArchiveImpl implements Archive {
 
 
   @Override
-  public boolean contains(Task task) throws IOException {
+  public boolean contains(Task task) throws ServerCommunicationException {
     return all().contains(task);
   }
 

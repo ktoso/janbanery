@@ -16,15 +16,14 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Permission;
 import pl.project13.janbanery.resources.ProjectMembership;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
  */
 public interface MembershipUpdateFlow extends Flow<ProjectMembership> {
 
-  MembershipFlow permission(Permission permission) throws IOException;
+  MembershipFlow permission(Permission permission) throws ServerCommunicationException;
 }

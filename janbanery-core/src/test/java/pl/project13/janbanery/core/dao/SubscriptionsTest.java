@@ -27,7 +27,6 @@ import pl.project13.janbanery.resources.TaskSubscription;
 import pl.project13.janbanery.test.TestEntityHelper;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.fest.assertions.Fail.fail;
 import static pl.project13.janbanery.test.TestConstants.EXISTING_WORKSPACE;
 import static pl.project13.janbanery.test.TestConstants.VALID_CONF_FILE_LOCATION;
 

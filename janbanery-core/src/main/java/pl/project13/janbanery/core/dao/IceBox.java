@@ -21,7 +21,6 @@ import pl.project13.janbanery.core.flow.TaskUpdateFlow;
 import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**

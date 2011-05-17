@@ -18,13 +18,13 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.*;
 import pl.project13.janbanery.core.flow.batch.TasksMoveAllFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Priority;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,23 +36,23 @@ public interface Tasks extends KanbaneryDao<Task> {
 
   // creation -------------------------
 
-  TaskFlow create(Task task) throws IOException;
+  TaskFlow create(Task task) throws ServerCommunicationException;
 
   // deletes --------------------------
 
-  void delete(Task task) throws IOException;
+  void delete(Task task) throws ServerCommunicationException;
 
   // task movement --------------------
 
   TaskMoveFlow move(Task task);
 
-  TasksMoveAllFlow moveAllFrom(Column column) throws IOException;
+  TasksMoveAllFlow moveAllFrom(Column column) throws ServerCommunicationException;
 
-  void moveAll(Column srcColumn, Column destColumn) throws IOException;
+  void moveAll(Column srcColumn, Column destColumn) throws ServerCommunicationException;
 
-  TaskFlow move(Task task, TaskLocation location) throws IOException;
+  TaskFlow move(Task task, TaskLocation location) throws ServerCommunicationException;
 
-  TaskFlow move(Task task, Column column) throws IOException;
+  TaskFlow move(Task task, Column column) throws ServerCommunicationException;
 
   // task assignment ------------------
 
@@ -62,31 +62,31 @@ public interface Tasks extends KanbaneryDao<Task> {
 
   TaskUpdateFlow update(Task task);
 
-  TaskFlow update(Task task, Task newValues) throws IOException;
+  TaskFlow update(Task task, Task newValues) throws ServerCommunicationException;
 
   TaskMarkFlow mark(Task task);
 
-  TaskFlow markAsReadyToPull(Task task) throws IOException;
+  TaskFlow markAsReadyToPull(Task task) throws ServerCommunicationException;
 
-  TaskFlow markAsNotReadyToPull(Task task) throws IOException;
+  TaskFlow markAsNotReadyToPull(Task task) throws ServerCommunicationException;
 
   // queries ------------------------------------------------------------------
 
   // kanban board ---------------------
-  List<Task> all() throws IOException;
+  List<Task> all() throws ServerCommunicationException;
 
-  List<Task> allIn(Column column) throws IOException;
+  List<Task> allIn(Column column) throws ServerCommunicationException;
 
-  List<Task> allByTitle(String taskTitle) throws IOException;
+  List<Task> allByTitle(String taskTitle) throws ServerCommunicationException;
 
-  List<Task> allByTitleIgnoreCase(String taskTitle) throws IOException;
+  List<Task> allByTitleIgnoreCase(String taskTitle) throws ServerCommunicationException;
 
-  List<Task> allAssignedTo(User user) throws IOException;
+  List<Task> allAssignedTo(User user) throws ServerCommunicationException ;
 
-  List<Task> allWithPriority(Priority priority) throws IOException;
+  List<Task> allWithPriority(Priority priority) throws ServerCommunicationException;
 
-  Task byId(Long taskId) throws IOException;
+  Task byId(Long taskId) throws ServerCommunicationException;
 
-  TaskFlow assign(Task task, User user) throws IOException;
+  TaskFlow assign(Task task, User user) throws ServerCommunicationException ;
 
 }

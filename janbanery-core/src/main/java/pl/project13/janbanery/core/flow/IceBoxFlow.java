@@ -16,9 +16,10 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
+
 
 /**
  * @author Konrad Malawski
@@ -28,16 +29,16 @@ public interface IceBoxFlow extends Flow<Task> {
    * Move this task to the kanban board of your project.
    *
    * @return the TaskMoveOneFlow, so you may move the task to some other column right away
-   * @throws IOException if the server response could not be fetched
+   * @throws ServerCommunicationException if the server response could not be fetched
    */
-  TaskFlow moveToBoard() throws IOException;
+  TaskFlow moveToBoard() throws ServerCommunicationException;
 
   /**
    * Delete this task from the icebox
    *
-   * @throws IOException if the server response could not be fetched
+   * @throws ServerCommunicationException if the server response could not be fetched
    */
-  void delete() throws IOException;
+  void delete() throws ServerCommunicationException;
 
   /**
    * You may update this task with a better description etc.
@@ -46,7 +47,7 @@ public interface IceBoxFlow extends Flow<Task> {
    *
    * @param newValues the object with the new values to copy into our underlying task
    * @return a IceBoxFlow instance for other task manipulations
-   * @throws IOException if the server response could not be fetched
+   * @throws ServerCommunicationException if the server response could not be fetched
    */
-  IceBoxFlow update(Task newValues) throws IOException;
+  IceBoxFlow update(Task newValues) throws ServerCommunicationException;
 }

@@ -17,34 +17,34 @@
 package pl.project13.janbanery.core.flow.batch;
 
 import pl.project13.janbanery.core.flow.Flow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
  * @author Konrad Malawski
  */
 public interface TasksMoveAllFlow extends Flow<List<Task>> {
-  TasksMoveAllFlow toNextColumn() throws IOException;
+  TasksMoveAllFlow toNextColumn() throws ServerCommunicationException;
 
-  TasksMoveAllFlow toPreviousColumn() throws IOException;
+  TasksMoveAllFlow toPreviousColumn() throws ServerCommunicationException;
 
-  TasksMoveAllFlow to(TaskLocation location) throws IOException;
+  TasksMoveAllFlow to(TaskLocation location) throws ServerCommunicationException;
 
-  TasksMoveAllFlow to(Column column) throws IOException;
+  TasksMoveAllFlow to(Column column) throws ServerCommunicationException;
 
-  TasksMoveAllFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException;
+  TasksMoveAllFlow toIceBox() throws CanOnlyIceBoxTaskFromFirstColumnException;
 
-  TasksMoveAllFlow toArchive() throws IOException;
+  TasksMoveAllFlow toArchive() throws ServerCommunicationException;
 
-  TasksMoveAllFlow toBoard() throws IOException;
+  TasksMoveAllFlow toBoard() throws ServerCommunicationException;
 
-  TasksMoveAllFlow toLastColumn() throws IOException;
+  TasksMoveAllFlow toLastColumn() throws ServerCommunicationException;
 
-  TasksMoveAllFlow toFirstColumn() throws IOException;
+  TasksMoveAllFlow toFirstColumn() throws ServerCommunicationException;
 
 }

@@ -17,10 +17,9 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.batch.CommentsFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Comment;
 import pl.project13.janbanery.resources.Task;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -35,5 +34,5 @@ public interface CommentsOf {
    */
   CommentsFlow of(Task task);
 
-  void delete(Comment comment) throws IOException;
+  void delete(Comment comment) throws ServerCommunicationException;
 }

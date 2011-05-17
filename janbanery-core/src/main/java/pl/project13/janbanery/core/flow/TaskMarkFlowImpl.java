@@ -20,8 +20,6 @@ import pl.project13.janbanery.core.dao.Columns;
 import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
-
 /**
  * @author Konrad Malawski
  */
@@ -38,7 +36,7 @@ public class TaskMarkFlowImpl implements TaskMarkFlow {
   }
 
   @Override
-  public TaskFlow asReadyToPull() throws IOException {
+  public TaskFlow asReadyToPull() {
     TaskFlow taskMoveFlow = tasks.markAsReadyToPull(task);
     task = taskMoveFlow.get();
 
@@ -46,7 +44,7 @@ public class TaskMarkFlowImpl implements TaskMarkFlow {
   }
 
   @Override
-  public TaskFlow asNotReadyToPull() throws IOException {
+  public TaskFlow asNotReadyToPull() {
     TaskFlow taskMoveFlow = tasks.markAsNotReadyToPull(task);
     task = taskMoveFlow.get();
 

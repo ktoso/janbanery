@@ -18,18 +18,18 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.flow.MembershipFlow;
 import pl.project13.janbanery.core.flow.MembershipFlowImpl;
 import pl.project13.janbanery.core.flow.MembershipUpdateFlow;
 import pl.project13.janbanery.core.flow.MembershipUpdateFlowImpl;
 import pl.project13.janbanery.core.flow.batch.MembershipsFlow;
 import pl.project13.janbanery.core.flow.batch.MembershipsFlowImpl;
+import pl.project13.janbanery.core.rest.RestClient;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.ProjectMembership;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -49,12 +49,12 @@ public class MembershipsImpl implements Memberships {
   }
 
   @Override
-  public MembershipUpdateFlow update(ProjectMembership membership) throws IOException {
+  public MembershipUpdateFlow update(ProjectMembership membership) throws ServerCommunicationException {
     return new MembershipUpdateFlowImpl(currentProject, this, membership);
   }
 
   @Override
-  public MembershipFlow update(Project project, ProjectMembership membership, ProjectMembership newValues) throws IOException {
+  public MembershipFlow update(Project project, ProjectMembership membership, ProjectMembership newValues) {
     String url = getMembershipUrl(project, membership);
 
     ProjectMembership updatedMembership = restClient.doPut(url, newValues, GsonTypeTokens.PROJECT_MEMBERSHIP);
@@ -63,7 +63,7 @@ public class MembershipsImpl implements Memberships {
   }
 
   @Override
-  public MembershipFlow create(Project project, ProjectMembership membership) throws IOException {
+  public MembershipFlow create(Project project, ProjectMembership membership) {
     String url = getMembershipsUrl(project);
 
     ProjectMembership createdMembership = restClient.doPost(url, membership, GsonTypeTokens.PROJECT_MEMBERSHIP);
@@ -72,14 +72,14 @@ public class MembershipsImpl implements Memberships {
   }
 
   @Override
-  public void delete(Project project, ProjectMembership membership) throws IOException {
+  public void delete(Project project, ProjectMembership membership) {
     String url = getMembershipUrl(project, membership);
 
     restClient.doDelete(url);
   }
 
   @Override
-  public void deleteAll(Project project) throws IOException {
+  public void deleteAll(Project project) {
     List<ProjectMembership> all = all(project);
 
     for (ProjectMembership projectMembership : all) {
@@ -88,7 +88,7 @@ public class MembershipsImpl implements Memberships {
   }
 
   @Override
-  public List<ProjectMembership> all(Project project) throws IOException {
+  public List<ProjectMembership> all(Project project) {
     String url = getMembershipsUrl(project);
 
     List<ProjectMembership> memberships = restClient.doGet(url, GsonTypeTokens.LIST_PROJECT_MEMBERSHIP);
@@ -97,7 +97,7 @@ public class MembershipsImpl implements Memberships {
   }
 
   @Override
-  public MembershipFlow byId(Project project, Long id) throws IOException {
+  public MembershipFlow byId(Project project, Long id) {
     String url = getMembershipUrl(project.getId(), id);
 
     ProjectMembership projectMembership = restClient.doGet(url, GsonTypeTokens.PROJECT_MEMBERSHIP);

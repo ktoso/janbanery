@@ -21,8 +21,6 @@ import pl.project13.janbanery.resources.Permission;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.ProjectMembership;
 
-import java.io.IOException;
-
 /**
  * @author Konrad Malawski
  */
@@ -41,7 +39,7 @@ public class MembershipUpdateFlowImpl implements MembershipUpdateFlow {
   }
 
   @Override
-  public MembershipFlow permission(Permission permission) throws IOException {
+  public MembershipFlow permission(Permission permission) {
     ProjectMembership commandObject = new ProjectMembership();
     commandObject.setPermission(permission);
 

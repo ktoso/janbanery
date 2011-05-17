@@ -25,7 +25,6 @@ import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.util.predicates.CompletedSubTaskPredicate;
 import pl.project13.janbanery.util.predicates.NotCompletedSubTaskPredicate;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -47,17 +46,17 @@ public class SubTasksFlowImpl implements SubTasksFlow {
   }
 
   @Override
-  public SubTaskFlow create(SubTask subTask) throws IOException {
+  public SubTaskFlow create(SubTask subTask) {
     return subTasks.create(task, subTask);
   }
 
   @Override
-  public SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException {
+  public SubTaskFlow update(SubTask subTask, SubTask newValues) {
     return subTasks.update(subTask, newValues);
   }
 
   @Override
-  public void delete(SubTask subTask) throws IOException {
+  public void delete(SubTask subTask) {
     subTasks.delete(subTask);
   }
 
@@ -72,19 +71,19 @@ public class SubTasksFlowImpl implements SubTasksFlow {
   }
 
   @Override
-  public List<SubTask> all() throws IOException {
+  public List<SubTask> all() {
     return subTasks.all(task);
   }
 
   @Override
-  public List<SubTask> allCompleted() throws IOException {
+  public List<SubTask> allCompleted() {
     List<SubTask> all = all();
     Collection<SubTask> completedTasks = filter(all, new CompletedSubTaskPredicate());
     return newArrayList(completedTasks);
   }
 
   @Override
-  public List<SubTask> allNotCompleted() throws IOException {
+  public List<SubTask> allNotCompleted() {
     List<SubTask> all = all();
     Collection<SubTask> completedTasks = filter(all, new NotCompletedSubTaskPredicate());
     return newArrayList(completedTasks);

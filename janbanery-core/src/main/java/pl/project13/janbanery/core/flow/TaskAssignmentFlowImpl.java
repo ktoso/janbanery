@@ -20,8 +20,6 @@ import pl.project13.janbanery.core.dao.Tasks;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.User;
 
-import java.io.IOException;
-
 /**
  * @author Konrad Malawski
  */
@@ -37,12 +35,12 @@ public class TaskAssignmentFlowImpl implements TaskAssignmentFlow {
   }
 
   @Override
-  public TaskFlow to(User user) throws IOException {
+  public TaskFlow to(User user) {
     return tasks.assign(task, user);
   }
 
   @Override
-  public TaskFlow toNobody() throws IOException {
+  public TaskFlow toNobody() {
     //noinspection NullableProblems
     return tasks.assign(task, null);
   }

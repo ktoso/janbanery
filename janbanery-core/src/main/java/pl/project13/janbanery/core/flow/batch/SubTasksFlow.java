@@ -19,10 +19,10 @@ package pl.project13.janbanery.core.flow.batch;
 import pl.project13.janbanery.core.flow.Flow;
 import pl.project13.janbanery.core.flow.SubTaskFlow;
 import pl.project13.janbanery.core.flow.SubTaskMarkFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,11 +34,11 @@ public interface SubTasksFlow extends Flow<Task> {
 
   // commands -----------------------------------------------------------------
 
-  SubTaskFlow create(SubTask subTask) throws IOException;
+  SubTaskFlow create(SubTask subTask) throws ServerCommunicationException;
 
-  SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
+  SubTaskFlow update(SubTask subTask, SubTask newValues) throws ServerCommunicationException;
 
-  void delete(SubTask subTask) throws IOException;
+  void delete(SubTask subTask) throws ServerCommunicationException;
 
   SubTaskMarkFlow mark(SubTask subTask);
 
@@ -48,9 +48,9 @@ public interface SubTasksFlow extends Flow<Task> {
 
   // queries ------------------------------------------------------------------
 
-  List<SubTask> all() throws IOException;
+  List<SubTask> all() throws ServerCommunicationException;
 
-  List<SubTask> allCompleted() throws IOException;
+  List<SubTask> allCompleted() throws ServerCommunicationException;
 
-  List<SubTask> allNotCompleted() throws IOException;
+  List<SubTask> allNotCompleted() throws ServerCommunicationException;
 }

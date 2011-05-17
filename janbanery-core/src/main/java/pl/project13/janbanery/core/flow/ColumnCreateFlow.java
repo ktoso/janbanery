@@ -16,9 +16,8 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Column;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -27,7 +26,7 @@ public interface ColumnCreateFlow {
 
   // commands -----------------------------------------------------------------
 
-  ColumnUpdateFlow after(Column column) throws IOException;
+  ColumnUpdateFlow after(Column column) throws ServerCommunicationException;
 
   /**
    * Shorthand for creating a column after the first column.
@@ -38,11 +37,11 @@ public interface ColumnCreateFlow {
    * </code>
    *
    * @return the newly created column
-   * @throws IOException if unable to fetch the servers response
+   * @throws ServerCommunicationException if unable to fetch the servers response
    */
-  ColumnUpdateFlow afterFirst() throws IOException;
+  ColumnUpdateFlow afterFirst() throws ServerCommunicationException;
 
-  ColumnUpdateFlow before(Column column) throws IOException;
+  ColumnUpdateFlow before(Column column) throws ServerCommunicationException;
 
   /**
    * Shorthand for creating a column before the last column.
@@ -53,9 +52,9 @@ public interface ColumnCreateFlow {
    * </code>
    *
    * @return the newly created column
-   * @throws IOException if unable to fetch the servers response
+   * @throws ServerCommunicationException if unable to fetch the servers response
    */
-  ColumnUpdateFlow beforeLast() throws IOException;
+  ColumnUpdateFlow beforeLast() throws ServerCommunicationException;
 
-  ColumnUpdateFlow onPosition(Integer position) throws IOException;
+  ColumnUpdateFlow onPosition(Integer position) throws ServerCommunicationException;
 }

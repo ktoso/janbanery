@@ -25,7 +25,6 @@ import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.config.auth.ApiKeyAuthProvider;
 import pl.project13.janbanery.config.auth.AuthProvider;
 import pl.project13.janbanery.config.auth.UserPassAuthProvider;
-import pl.project13.janbanery.test.TestConstants;
 
 import java.io.FileInputStream;
 import java.util.Properties;

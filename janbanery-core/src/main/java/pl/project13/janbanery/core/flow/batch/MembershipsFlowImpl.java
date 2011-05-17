@@ -21,7 +21,6 @@ import pl.project13.janbanery.core.flow.MembershipFlow;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.ProjectMembership;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -39,32 +38,32 @@ public class MembershipsFlowImpl implements MembershipsFlow {
   }
 
   @Override
-  public MembershipFlow create(ProjectMembership projectMembership) throws IOException {
+  public MembershipFlow create(ProjectMembership projectMembership) {
     return memberships.create(project, projectMembership);
   }
 
   @Override
-  public List<ProjectMembership> all() throws IOException {
+  public List<ProjectMembership> all() {
     return memberships.all(project);
   }
 
   @Override
-  public void delete(ProjectMembership membership) throws IOException {
+  public void delete(ProjectMembership membership) {
     memberships.delete(project, membership);
   }
 
   @Override
-  public void deleteAll() throws IOException {
+  public void deleteAll() {
     memberships.deleteAll(project);
   }
 
   @Override
-  public MembershipFlow update(ProjectMembership membership, ProjectMembership newValues) throws IOException {
+  public MembershipFlow update(ProjectMembership membership, ProjectMembership newValues) {
     return memberships.update(project, membership, newValues);
   }
 
   @Override
-  public MembershipFlow byId(Long id) throws IOException {
+  public MembershipFlow byId(Long id) {
     return memberships.byId(project, id);
   }
 

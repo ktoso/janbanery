@@ -16,16 +16,15 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Issue;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
  */
 public interface IssueUpdateFlow extends Flow<Issue> {
 
-  IssueUpdateFlow url(String url) throws IOException;
+  IssueUpdateFlow url(String url) throws ServerCommunicationException;
 
   // go to other flows ----------------
 

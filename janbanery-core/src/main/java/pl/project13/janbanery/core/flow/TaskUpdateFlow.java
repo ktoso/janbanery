@@ -16,6 +16,7 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.*;
 
 import java.io.IOException;
@@ -26,11 +27,11 @@ import java.util.Date;
  */
 public interface TaskUpdateFlow extends Flow<Task> {
 
-  TaskUpdateFlow title(String title) throws IOException;
+  TaskUpdateFlow title(String title) throws ServerCommunicationException;
 
-  TaskUpdateFlow description(String description) throws IOException;
+  TaskUpdateFlow description(String description) throws ServerCommunicationException ;
 
-  TaskUpdateFlow assignTo(User user) throws IOException;
+  TaskUpdateFlow assignTo(User user) throws ServerCommunicationException;
 
   /**
    * Move the task to the specified priority in the column.
@@ -40,15 +41,15 @@ public interface TaskUpdateFlow extends Flow<Task> {
    * @return
    * @throws IOException
    */
-  TaskUpdateFlow position(Integer positionInColumn) throws IOException;
+  TaskUpdateFlow position(Integer positionInColumn) throws ServerCommunicationException;
 
-  TaskUpdateFlow deadline(Date deadline) throws IOException;
+  TaskUpdateFlow deadline(Date deadline) throws ServerCommunicationException;
 
-  TaskUpdateFlow priority(Priority priority) throws IOException;
+  TaskUpdateFlow priority(Priority priority) throws ServerCommunicationException;
 
-  TaskUpdateFlow taskType(TaskType taskType) throws IOException;
+  TaskUpdateFlow taskType(TaskType taskType) throws ServerCommunicationException;
 
-  TaskUpdateFlow estimate(Estimate estimate) throws IOException;
+  TaskUpdateFlow estimate(Estimate estimate) throws ServerCommunicationException ;
 
   // go to other flows ----------------
 

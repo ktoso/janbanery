@@ -16,16 +16,15 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Issue;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
  */
 public interface IssueMarkFlow extends Flow<Issue> {
 
-  IssueFlow asResolved() throws IOException;
+  IssueFlow asResolved() throws ServerCommunicationException;
 
-  IssueFlow asNotResolved() throws IOException;
+  IssueFlow asNotResolved() throws ServerCommunicationException;
 }

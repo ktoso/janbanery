@@ -16,9 +16,8 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Task;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -37,9 +36,9 @@ public interface TaskFlow extends Flow<Task> {
   /**
    * If you just queried for a Task, you may delete it right away using this method.
    *
-   * @throws IOException
+   * @throws ServerCommunicationException
    */
-  void delete() throws IOException;
+  void delete() throws ServerCommunicationException;
 
   // other flows --------------------------------------------------------------
 

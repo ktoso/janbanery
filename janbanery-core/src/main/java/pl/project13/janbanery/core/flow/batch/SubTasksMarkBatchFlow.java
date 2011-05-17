@@ -16,6 +16,7 @@
 
 package pl.project13.janbanery.core.flow.batch;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.SubTask;
 
 import java.io.IOException;
@@ -29,15 +30,15 @@ public interface SubTasksMarkBatchFlow {
    * Marks all {@link SubTask}s of given task as <strong>completed</strong>.
    *
    * @return the updated SubTaskFlow associated with the Task backing this flow
-   * @throws IOException if the servers response could not be fetched
+   * @throws ServerCommunicationException if the servers response could not be fetched
    */
-  SubTasksFlow asCompleted() throws IOException;
+  SubTasksFlow asCompleted() throws ServerCommunicationException;
 
   /**
    * Marks all {@link SubTask}s of given task as <strong>not completed</strong>.
    *
    * @return the updated SubTaskFlow associated with the Task backing this flow
-   * @throws IOException if the servers response could not be fetched
+   * @throws ServerCommunicationException if the servers response could not be fetched
    */
   SubTasksFlow asNotCompleted() throws IOException;
 

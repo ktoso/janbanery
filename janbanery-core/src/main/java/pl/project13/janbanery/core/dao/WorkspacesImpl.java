@@ -22,7 +22,6 @@ import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.exceptions.WorkspaceNotFoundException;
 import pl.project13.janbanery.resources.Workspace;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -41,13 +40,13 @@ public class WorkspacesImpl implements Workspaces {
   }
 
   @Override
-  public List<Workspace> all() throws IOException {
+  public List<Workspace> all() {
     String url = conf.getApiUrl() + "user/workspaces.json";
     return restClient.doGet(url, GsonTypeTokens.LIST_WORKSPACE);
   }
 
   @Override
-  public Workspace byName(String name) throws IOException, WorkspaceNotFoundException {
+  public Workspace byName(String name) throws WorkspaceNotFoundException {
     List<Workspace> allWorkspaces = all();
     for (Workspace workspace : allWorkspaces) {
       if (workspace.getName().equals(name)) {

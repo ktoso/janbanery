@@ -17,9 +17,8 @@
 package pl.project13.janbanery.core.flow;
 
 import pl.project13.janbanery.core.dao.SubTasks;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.SubTask;
-
-import java.io.IOException;
 
 /**
  * @author Konrad Malawski
@@ -36,16 +35,16 @@ public class SubTaskMarkFlowImpl implements SubTaskMarkFlow {
   }
 
   @Override
-  public SubTaskFlow asCompleted() throws IOException {
+  public SubTaskFlow asCompleted() {
     return asCompleted(true);
   }
 
   @Override
-  public SubTaskFlow asNotCompleted() throws IOException {
+  public SubTaskFlow asNotCompleted() throws ServerCommunicationException {
     return asCompleted(false);
   }
 
-  private SubTaskFlow asCompleted(boolean isCompleted) throws IOException {
+  private SubTaskFlow asCompleted(boolean isCompleted) {
     SubTask commandObject = new SubTask();
     commandObject.setCompleted(isCompleted);
 

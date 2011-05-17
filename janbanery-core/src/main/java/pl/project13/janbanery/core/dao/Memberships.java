@@ -18,10 +18,10 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.MembershipFlow;
 import pl.project13.janbanery.core.flow.MembershipUpdateFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.ProjectMembership;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,20 +31,20 @@ public interface Memberships extends MembershipsOf {
 
   // commands -----------------------------------------------------------------
 
-  MembershipFlow create(Project project, ProjectMembership membership) throws IOException;
+  MembershipFlow create(Project project, ProjectMembership membership) throws ServerCommunicationException;
 
-  MembershipFlow update(Project project, ProjectMembership membership, ProjectMembership newValues) throws IOException;
+  MembershipFlow update(Project project, ProjectMembership membership, ProjectMembership newValues) throws ServerCommunicationException;
 
-  void delete(Project project, ProjectMembership membership) throws IOException;
+  void delete(Project project, ProjectMembership membership) throws ServerCommunicationException;
 
-  void deleteAll(Project project) throws IOException;
+  void deleteAll(Project project) throws ServerCommunicationException;
 
   // queries ------------------------------------------------------------------
 
-  MembershipFlow byId(Project project, Long id) throws IOException;
+  MembershipFlow byId(Project project, Long id) throws ServerCommunicationException;
 
-  MembershipUpdateFlow update(ProjectMembership membership) throws IOException;
+  MembershipUpdateFlow update(ProjectMembership membership) throws ServerCommunicationException;
 
-  List<ProjectMembership> all(Project project) throws IOException;
+  List<ProjectMembership> all(Project project) throws ServerCommunicationException;
 
 }

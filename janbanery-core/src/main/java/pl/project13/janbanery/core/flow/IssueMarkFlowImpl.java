@@ -19,8 +19,6 @@ package pl.project13.janbanery.core.flow;
 import pl.project13.janbanery.core.dao.Issues;
 import pl.project13.janbanery.resources.Issue;
 
-import java.io.IOException;
-
 /**
  * @author Konrad Malawski
  */
@@ -36,16 +34,16 @@ public class IssueMarkFlowImpl implements IssueMarkFlow {
   }
 
   @Override
-  public IssueFlow asResolved() throws IOException {
+  public IssueFlow asResolved() {
     return asResolved(true);
   }
 
   @Override
-  public IssueFlow asNotResolved() throws IOException {
+  public IssueFlow asNotResolved() {
     return asResolved(false);
   }
 
-  private IssueFlow asResolved(boolean isResolved) throws IOException {
+  private IssueFlow asResolved(boolean isResolved) {
     Issue commandObject = new Issue();
     commandObject.setResolved(isResolved);
 

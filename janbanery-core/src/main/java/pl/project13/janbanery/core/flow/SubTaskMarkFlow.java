@@ -16,16 +16,17 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.SubTask;
 
-import java.io.IOException;
+
 
 /**
  * @author Konrad Malawski
  */
 public interface SubTaskMarkFlow extends Flow<SubTask> {
 
-  SubTaskFlow asCompleted() throws IOException;
+  SubTaskFlow asCompleted() throws ServerCommunicationException;
 
-  SubTaskFlow asNotCompleted() throws IOException;
+  SubTaskFlow asNotCompleted() throws ServerCommunicationException;
 }

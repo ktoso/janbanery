@@ -16,24 +16,24 @@
 
 package pl.project13.janbanery.core.flow;
 
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 
-import java.io.IOException;
-
 /**
  * @author Konrad Malawski
  */
 public interface TaskMoveFlow extends Flow<Task> {
-  TaskFlow toNextColumn() throws IOException;
 
-  TaskFlow toPreviousColumn() throws IOException;
+  TaskFlow toNextColumn() throws ServerCommunicationException;
 
-  TaskFlow to(TaskLocation location) throws IOException;
+  TaskFlow toPreviousColumn() throws ServerCommunicationException;
 
-  TaskFlow to(Column column) throws IOException;
+  TaskFlow to(TaskLocation location) throws ServerCommunicationException;
+
+  TaskFlow to(Column column) throws ServerCommunicationException ;
 
   /**
    * Move this task to the project's <strong>icebox</strong>.
@@ -44,7 +44,7 @@ public interface TaskMoveFlow extends Flow<Task> {
    * @throws pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException
    *                             if the task is NOT in the first column
    */
-  TaskFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException;
+  TaskFlow toIceBox() throws ServerCommunicationException, CanOnlyIceBoxTaskFromFirstColumnException;
 
   /**
    * Move this task to the project's <strong>archive</strong>.
@@ -53,18 +53,18 @@ public interface TaskMoveFlow extends Flow<Task> {
    * @return a TaskMoveOneFlow instance to allow further task operations
    * @throws java.io.IOException if unable to fetch the server response
    */
-  TaskFlow toArchive() throws IOException;
+  TaskFlow toArchive() throws ServerCommunicationException;
 
   /**
    * Move this task to the project's kanban <strong>board</strong>.
    * <strong>Requirement</strong>: The task MUST be in the iceBox OR archive.
    *
    * @return a TaskMoveOneFlow instance to allow further task operations
-   * @throws java.io.IOException if unable to fetch the server response
+   * @throws ServerCommunicationException if unable to fetch the server response
    */
-  TaskFlow toBoard() throws IOException;
+  TaskFlow toBoard() throws ServerCommunicationException;
 
-  TaskFlow toLastColumn() throws IOException;
+  TaskFlow toLastColumn() throws ServerCommunicationException;
 
-  TaskFlow toFirstColumn() throws IOException;
+  TaskFlow toFirstColumn() throws ServerCommunicationException;
 }

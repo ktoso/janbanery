@@ -23,7 +23,6 @@ import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.exceptions.EntityNotFoundException;
 import pl.project13.janbanery.resources.*;
 
-import java.io.IOException;
 import java.util.List;
 
 import static pl.project13.janbanery.test.TestConstants.COLUMN_NAME;
@@ -35,14 +34,14 @@ import static pl.project13.janbanery.test.TestConstants.TASK_TITLE;
 @Ignore("It's just an util class")
 public class TestEntityHelper {
 
-  public static Task createTestTask(Janbanery janbanery) throws IOException {
+  public static Task createTestTask(Janbanery janbanery) {
     return new Task.Builder(TASK_TITLE, janbanery.taskTypes().any())
         .description("A task I have created using the Janbanery library")
         .priority(Priority.LOW)
         .build();
   }
 
-  public static void deleteTestTask(Janbanery janbanery) throws IOException {
+  public static void deleteTestTask(Janbanery janbanery) {
     List<Task> tasks = janbanery.tasks().allByTitle(TASK_TITLE);
     if (tasks.size() > 0) {
       Task task = tasks.get(0);
@@ -50,7 +49,7 @@ public class TestEntityHelper {
     }
   }
 
-  public static TaskFlow createTestTaskFlow(Janbanery janbanery) throws IOException {
+  public static TaskFlow createTestTaskFlow(Janbanery janbanery) {
     Task build = new Task.Builder(TASK_TITLE, janbanery.taskTypes().any())
         .description("A task I have created using the Janbanery library")
         .priority(Priority.LOW)
@@ -62,7 +61,7 @@ public class TestEntityHelper {
     return new Column.Builder(COLUMN_NAME).build();
   }
 
-  public static void deleteTestColumn(Janbanery janbanery) throws IOException {
+  public static void deleteTestColumn(Janbanery janbanery) {
     try {
       List<Column> columns = janbanery.columns().byName(COLUMN_NAME);
       if (columns.size() > 0) {
@@ -83,7 +82,7 @@ public class TestEntityHelper {
     return new SubTask(body);
   }
 
-  public static CommentFlow createTestComment(Janbanery janbanery, Task task) throws IOException {
+  public static CommentFlow createTestComment(Janbanery janbanery, Task task) {
     return janbanery.comments()
                     .of(task)
                     .create(new Comment("Comment text"));

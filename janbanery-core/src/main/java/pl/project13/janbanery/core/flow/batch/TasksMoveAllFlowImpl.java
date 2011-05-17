@@ -17,12 +17,12 @@
 package pl.project13.janbanery.core.flow.batch;
 
 import pl.project13.janbanery.core.dao.Tasks;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException;
 import pl.project13.janbanery.resources.Column;
 import pl.project13.janbanery.resources.Task;
 import pl.project13.janbanery.resources.additions.TaskLocation;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -40,7 +40,7 @@ public class TasksMoveAllFlowImpl implements TasksMoveAllFlow {
   }
 
   @Override
-  public TasksMoveAllFlow toNextColumn() throws IOException {
+  public TasksMoveAllFlow toNextColumn() throws ServerCommunicationException {
     for (Task task : allTasks) {
       tasks.move(task).toNextColumn();
     }
@@ -49,7 +49,7 @@ public class TasksMoveAllFlowImpl implements TasksMoveAllFlow {
   }
 
   @Override
-  public TasksMoveAllFlow toPreviousColumn() throws IOException {
+  public TasksMoveAllFlow toPreviousColumn() {
     for (Task task : allTasks) {
       tasks.move(task).toNextColumn();
     }
@@ -58,7 +58,7 @@ public class TasksMoveAllFlowImpl implements TasksMoveAllFlow {
   }
 
   @Override
-  public TasksMoveAllFlow to(TaskLocation location) throws IOException {
+  public TasksMoveAllFlow to(TaskLocation location) throws ServerCommunicationException {
     for (Task task : allTasks) {
       tasks.move(task).to(location);
     }
@@ -67,7 +67,7 @@ public class TasksMoveAllFlowImpl implements TasksMoveAllFlow {
   }
 
   @Override
-  public TasksMoveAllFlow to(Column column) throws IOException {
+  public TasksMoveAllFlow to(Column column) {
     for (Task task : allTasks) {
       tasks.move(task).to(column);
     }
@@ -76,7 +76,7 @@ public class TasksMoveAllFlowImpl implements TasksMoveAllFlow {
   }
 
   @Override
-  public TasksMoveAllFlow toIceBox() throws IOException, CanOnlyIceBoxTaskFromFirstColumnException {
+  public TasksMoveAllFlow toIceBox() throws CanOnlyIceBoxTaskFromFirstColumnException {
     for (Task task : allTasks) {
       tasks.move(task).toIceBox();
     }
@@ -85,7 +85,7 @@ public class TasksMoveAllFlowImpl implements TasksMoveAllFlow {
   }
 
   @Override
-  public TasksMoveAllFlow toArchive() throws IOException {
+  public TasksMoveAllFlow toArchive() {
     for (Task task : allTasks) {
       tasks.move(task).toArchive();
     }
@@ -94,7 +94,7 @@ public class TasksMoveAllFlowImpl implements TasksMoveAllFlow {
   }
 
   @Override
-  public TasksMoveAllFlow toBoard() throws IOException {
+  public TasksMoveAllFlow toBoard() throws ServerCommunicationException {
     for (Task task : allTasks) {
       tasks.move(task).toBoard();
     }
@@ -103,7 +103,7 @@ public class TasksMoveAllFlowImpl implements TasksMoveAllFlow {
   }
 
   @Override
-  public TasksMoveAllFlow toLastColumn() throws IOException {
+  public TasksMoveAllFlow toLastColumn() throws ServerCommunicationException{
     for (Task task : allTasks) {
       tasks.move(task).toLastColumn();
     }
@@ -112,7 +112,7 @@ public class TasksMoveAllFlowImpl implements TasksMoveAllFlow {
   }
 
   @Override
-  public TasksMoveAllFlow toFirstColumn() throws IOException {
+  public TasksMoveAllFlow toFirstColumn() throws ServerCommunicationException {
     for (Task task : allTasks) {
       tasks.move(task).toFirstColumn();
     }

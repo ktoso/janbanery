@@ -17,10 +17,10 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.SubTaskFlow;
+import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,19 +36,19 @@ public interface SubTasks extends SubTasksOf {
    * @param task    the task we want to add this subtask to
    * @param subTask the object carrying the data of the subtask to be created
    * @return a subtask flow populated with the newly created subtask
-   * @throws java.io.IOException
+   * @throws ServerCommunicationException
    */
-  SubTaskFlow create(Task task, SubTask subTask) throws IOException;
+  SubTaskFlow create(Task task, SubTask subTask) throws ServerCommunicationException;
 
-  SubTaskFlow update(SubTask subTask, SubTask newValues) throws IOException;
+  SubTaskFlow update(SubTask subTask, SubTask newValues) throws ServerCommunicationException ;
 
-  void delete(SubTask subTask) throws IOException;
+  void delete(SubTask subTask) throws ServerCommunicationException ;
 
   // queries ------------------------------------------------------------------
 
-  List<SubTask> all(Task task) throws IOException;
+  List<SubTask> all(Task task) throws ServerCommunicationException ;
 
-  List<SubTask> allCompleted(Task task) throws IOException;
+  List<SubTask> allCompleted(Task task) throws ServerCommunicationException ;
 
-  List<SubTask> allNotCompleted(Task task) throws IOException;
+  List<SubTask> allNotCompleted(Task task) throws ServerCommunicationException;
 }
