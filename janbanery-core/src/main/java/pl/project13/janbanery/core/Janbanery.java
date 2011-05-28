@@ -175,6 +175,9 @@ public class Janbanery {
   public Projects projects() {
     return new ProjectsImpl(workspaces()).using(currentWorkspace, currentProject);
   }
+  public Log log() {
+    return new LogImpl(conf, restClient).using(currentWorkspace, currentProject);
+  }
 
   /**
    * If is very important that you call this method after you're finished working with kanbanery.

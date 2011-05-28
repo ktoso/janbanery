@@ -106,16 +106,12 @@ public class TaskMovementTest {
   public void shouldThrowWhenForcedToMoveRightWhenOnLastColumn() throws Exception {
     // given
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
-    TaskMoveFlow moveOne = taskFlow.move();
-    Task prev = moveOne.get();
+    taskFlow.move().to(janbanery.columns().last());
 
     // when
-    moveOne.toNextColumn();
-    moveOne.toNextColumn();
-    moveOne.toNextColumn();
-    moveOne.toNextColumn(); //fail here
-    moveOne.toNextColumn();
-    moveOne.toNextColumn();
+    for (int i = 0; i < 10; i++) {
+      taskFlow.move().toNextColumn(); // fail here
+    }
 
     // then, should have thrown
   }

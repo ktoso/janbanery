@@ -351,6 +351,10 @@ public class Task extends KanbaneryResource implements Serializable {
     throw new NotYetImplementedException();
   }
 
+  public void setId(Long id) {
+    this.id = id;
+  }
+
   public static class Builder {
     private Task instance;
 

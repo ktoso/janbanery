@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>pl.project13.janbanery</groupId>
-        <artifactId>janbanery</artifactId>
-        <version>1.4-SNAPSHOT</version>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
     </parent>
 
-    <groupId>pl.project13.janbanery</groupId>
-    <artifactId>janbanery-core</artifactId>
-    <version>1.4-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <properties>
+        <janbanery.version>1.2-SNAPSHOT</janbanery.version>
 
-    <name>Janbanery - Core</name>
+        <maven.source>1.6</maven.source>
+        <maven.target>1.6</maven.target>
+
+        <gson.version>1.7.1</gson.version>
+        <guava.version>r09</guava.version>
+        <joda-time.version>1.6.2</joda-time.version>
+        <slf4j-api.version>1.6.1</slf4j-api.version>
+        <logback-classic.version>0.9.28</logback-classic.version>
+        <logback-core.version>0.9.28</logback-core.version>
+
+    </properties>
+
+    <groupId>pl.project13.janbanery</groupId>
+    <artifactId>janbanery</artifactId>
+    <version>1.3-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>janbanery-core</module>
+        <module>janbanery-android</module>
+    </modules>
+
+    <name>Janbanery - Fluent Kanbanery API Java Wrapper</name>
     <description>
         Kanbanery (https://kanbanery.com) is a simple but powerful Agile project management system,
         to be precise it focuses around the idea of Kanban, a somewhat near idea to SCRUM but with less strict rules.
@@ -57,66 +76,29 @@
         <developerConnection>scm:git:git@github.com:ktoso/janbanery.git</developerConnection>
     </scm>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
-
     <dependencies>
-        <!-- async http client -->
+        <!-- test dependencies -->
         <dependency>
-            <groupId>com.ning</groupId>
-            <artifactId>async-http-client</artifactId>
-            <version>1.6.3</version>
-        </dependency>
-        <!-- gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${gson.version}</version>
-        </dependency>
-        <!--XStream (for ProjectLog) -->
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.2.2</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>xpp3</groupId>
-            <artifactId>xpp3</artifactId>
-            <version>1.1.3.4.O</version>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert</artifactId>
+            <version>1.4</version>
+            <scope>test</scope>
         </dependency>
-
-        <!-- guava -->
+        <!-- mockito -->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
-        <!-- joda time -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
-        </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback-classic.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback-core.version}</version>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.8.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

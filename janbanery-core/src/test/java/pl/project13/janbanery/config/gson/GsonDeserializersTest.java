@@ -25,7 +25,6 @@ import static org.fest.assertions.Assertions.assertThat;
 /**
  * @author Konrad Malawski
  */
-@Ignore("The android async http client is not yet ready")
 public class GsonDeserializersTest {
 
   @Test
