@@ -1,8 +1,8 @@
 package pl.project13.janbanery.android.rest;
 
+import android.util.Log;
 import com.google.common.base.Charsets;
 import com.google.gson.Gson;
-import com.ning.http.client.providers.jdk.JDKAsyncHttpProvider;
 import org.apache.http.HttpResponse;
 import org.apache.http.ProtocolVersion;
 import org.apache.http.client.methods.*;
@@ -17,19 +17,18 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import pl.project13.janbanery.android.rest.response.ResponseFromHttpResponse;
+import pl.project13.janbanery.android.util.Strings;
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.auth.Header;
 import pl.project13.janbanery.core.rest.RestClient;
-import pl.project13.janbanery.android.rest.response.*;
 import pl.project13.janbanery.core.rest.response.RestClientResponse;
 import pl.project13.janbanery.encoders.FormUrlEncodedBodyGenerator;
 import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
 import java.io.ByteArrayInputStream;
-
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 
@@ -39,7 +38,7 @@ import java.lang.reflect.Type;
 @SuppressWarnings({"unchecked"})
 public class AndroidCompatibleRestClient extends RestClient {
 
-  private Logger log = LoggerFactory.getLogger(getClass());
+  public final String TAG = "AndroidRestClient";
 
   private Configuration conf;
   private Gson gson;
@@ -63,7 +62,7 @@ public class AndroidCompatibleRestClient extends RestClient {
     //sets up parameters
     HttpParams params = new BasicHttpParams();
     HttpProtocolParams.setVersion(params, new ProtocolVersion("HTTP", 1, 1));
-    HttpProtocolParams.setContentCharset(params, "utf-8");
+    HttpProtocolParams.setContentCharset(params, "UTF-8");
     params.setBooleanParameter("http.protocol.expect-continue", false);
 
     //registers schemes for both http and https
@@ -90,7 +89,7 @@ public class AndroidCompatibleRestClient extends RestClient {
     authorize(request);
 
     String requestBody = encodedBodyGenerator.asString(resource);
-    log.info("Generated request body is: '{}'", requestBody);
+    Log.i(TAG, "Generated request body is: '" + requestBody + "'");
     setFormUrlEncodedBody(request, requestBody);
 
     HttpResponse httpResponse = executeRequest(request);
@@ -99,22 +98,7 @@ public class AndroidCompatibleRestClient extends RestClient {
 
     verifyResponseCode(response);
 
-    if (log.isDebugEnabled()) {
-      log.debug("Got response for creating resource: {}", response.getResponseBody());
-    }
-
     return response;
-  }
-
-  private void setFormUrlEncodedBody(HttpEntityEnclosingRequestBase request, String requestBody) {
-    BasicHttpEntity entity = new BasicHttpEntity();
-
-    try {
-      entity.setContent(new ByteArrayInputStream(requestBody.getBytes(Charsets.UTF_8.name())));
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException("Unable to set request body.", e);
-    }
-    request.setEntity(entity);
   }
 
   @Override
@@ -135,10 +119,6 @@ public class AndroidCompatibleRestClient extends RestClient {
     ResponseFromHttpResponse response = new ResponseFromHttpResponse(httpResponse);
 
     verifyResponseCode(response);
-
-    if (log.isDebugEnabled()) {
-      log.debug("Got response for creating resource: {}", response.getResponseBody());
-    }
 
     return response;
   }
@@ -161,10 +141,6 @@ public class AndroidCompatibleRestClient extends RestClient {
 
     verifyResponseCode(response);
 
-    if (log.isDebugEnabled()) {
-      log.debug("Got response for creating resource: {}", response.getResponseBody());
-    }
-
     return response;
   }
 
@@ -174,17 +150,14 @@ public class AndroidCompatibleRestClient extends RestClient {
 
     authorize(request);
 
-    log.info("Generated request body is: '{}'", requestBody);
+    System.out.println(requestBody);
+    Log.i(TAG, "Generated request body is: '" + requestBody + "'");
     setFormUrlEncodedBody(request, requestBody);
 
     HttpResponse httpResponse = executeRequest(request);
     ResponseFromHttpResponse response = new ResponseFromHttpResponse(httpResponse);
 
     verifyResponseCode(response);
-
-    if (log.isDebugEnabled()) {
-      log.debug("Got response for creating resource: {}", response.getResponseBody());
-    }
 
     return response;
   }
@@ -210,7 +183,29 @@ public class AndroidCompatibleRestClient extends RestClient {
     return (T) gson.fromJson(response.getResponseBody(), type);
   }
 
+  private void setFormUrlEncodedBody(HttpEntityEnclosingRequestBase request, String requestBody) {
+    BasicHttpEntity entity = new BasicHttpEntity();
+
+    try {
+      byte[] contentBytes = requestBody.getBytes(Charsets.UTF_8.name());
+
+      ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(contentBytes);
+      System.out.println(">>>>>>>" + Strings.toString(byteArrayInputStream));
+
+      entity.setContent(new ByteArrayInputStream(contentBytes));
+      entity.setContentLength(contentBytes.length);
+      entity.setContentEncoding(Charsets.UTF_8.name());
+      entity.setChunked(false);
+    } catch (UnsupportedEncodingException e) {
+      throw new RuntimeException("Unable to set request body.", e);
+    }
+
+    request.setEntity(entity);
+  }
+
   private HttpResponse executeRequest(HttpRequestBase request) {
+    request.setHeader("Content-Type", "application/x-www-form-urlencoded");
+
     HttpResponse httpResponse;
     try {
       httpResponse = httpClient.execute(request);
