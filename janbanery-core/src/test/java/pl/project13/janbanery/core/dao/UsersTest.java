@@ -22,6 +22,7 @@ import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
+import pl.project13.janbanery.exceptions.UserNotFoundException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.User;
 
@@ -69,7 +70,7 @@ public class UsersTest {
 
   @Test
   public void shouldFindUserById() throws Exception {
-   // given
+    // given
     User me = janbanery.users().current();
     Long myId = me.getId();
 
@@ -78,6 +79,18 @@ public class UsersTest {
 
     // then
     assertThat(foundUser).isEqualTo(me);
+  }
+
+  @Test
+  public void shouldFindNoOneForNullId() throws Exception {
+    // given
+    Long noOneId = null;
+
+    // when
+    User foundUser = janbanery.users().byId(noOneId);
+
+    // then
+    assertThat(foundUser).isEqualTo(new User.NoOne());
   }
 
   @Test

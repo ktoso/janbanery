@@ -17,6 +17,7 @@
 package pl.project13.janbanery.resources;
 
 import com.google.gson.annotations.SerializedName;
+import org.joda.time.DateTime;
 import pl.project13.janbanery.resources.additions.ReadOnly;
 
 import java.io.Serializable;
@@ -42,39 +43,39 @@ public class User extends KanbaneryResource implements Serializable {
    * The user's id
    */
   @ReadOnly
-  private Long id;
+  protected Long id;
 
   /**
    * The user's API token
    */
   @SerializedName("api_token")
   @ReadOnly
-  private String apiToken;
+  protected String apiToken;
 
   /**
    * The user's email
    */
   @ReadOnly
-  private String email;
+  protected String email;
 
   /**
    * The user's first name
    */
   @SerializedName("first_name")
-  private String firstName;
+  protected String firstName;
 
   /**
    * The user's last name
    */
   @SerializedName("last_name")
-  private String lastName;
+  protected String lastName;
 
   /**
    * User's avatar URL (at gravatar.com), determined from his email address
    */
   @SerializedName("gravatar_url")
   @ReadOnly
-  private String gravatarUrl;
+  protected String gravatarUrl;
 
   public User() {
   }
@@ -170,5 +171,20 @@ public class User extends KanbaneryResource implements Serializable {
     sb.append(", lastName='").append(lastName).append('\'');
     sb.append('}');
     return sb.toString();
+  }
+
+  public static class NoOne extends User {
+    public NoOne() {
+      super.id = null;
+      super.email = "";
+      super.firstName = "No";
+      super.lastName = "One";
+      super.apiToken = "IAmNotARealAccount";
+      super.createdAt = new DateTime();
+      super.gravatarUrl = "https://janbanery.kanbanery.com/images/no-user.png";
+      super.type = "User";
+    }
+
+
   }
 }

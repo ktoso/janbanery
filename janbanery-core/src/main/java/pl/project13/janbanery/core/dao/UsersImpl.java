@@ -57,6 +57,10 @@ public class UsersImpl implements Users {
   }
 
   public User byId(final Long userId) throws ServerCommunicationException {
+    if(userId == null) {
+      return new User.NoOne();
+    }
+
     return findOrThrow(all(),
                        "Unable to find user with id: " + userId,
                        new UserByIdCriteria(userId));
