@@ -68,6 +68,19 @@ public class UsersTest {
   }
 
   @Test
+  public void shouldFindUserById() throws Exception {
+   // given
+    User me = janbanery.users().current();
+    Long myId = me.getId();
+
+    // when
+    User foundUser = janbanery.users().byId(myId);
+
+    // then
+    assertThat(foundUser).isEqualTo(me);
+  }
+
+  @Test
   public void testAllInProject() throws Exception {
     // given
     Project project = janbanery.projects().all().get(0);

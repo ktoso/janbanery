@@ -130,9 +130,6 @@ public class User extends KanbaneryResource implements Serializable {
 
     User user = (User) o;
 
-    if (apiToken != null ? !apiToken.equals(user.apiToken) : user.apiToken != null) {
-      return false;
-    }
     if (email != null ? !email.equals(user.email) : user.email != null) {
       return false;
     }
@@ -156,7 +153,6 @@ public class User extends KanbaneryResource implements Serializable {
   public int hashCode() {
     int result = super.hashCode();
     result = 31 * result + (id != null ? id.hashCode() : 0);
-    result = 31 * result + (apiToken != null ? apiToken.hashCode() : 0);
     result = 31 * result + (email != null ? email.hashCode() : 0);
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);

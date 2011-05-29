@@ -35,6 +35,8 @@ public interface Users {
    */
   User current() throws ServerCommunicationException;
 
+  User byId(Long userId) throws ServerCommunicationException;
+
   List<User> all() throws ServerCommunicationException;
 
   List<User> inProject(Project project) throws ServerCommunicationException;

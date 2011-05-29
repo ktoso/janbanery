@@ -25,8 +25,11 @@ import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.User;
 import pl.project13.janbanery.resources.Workspace;
+import pl.project13.janbanery.util.collections.Collectionz;
 
 import java.util.List;
+
+import static pl.project13.janbanery.util.collections.Collectionz.*;
 
 /**
  * @author Konrad Malawski
@@ -47,10 +50,16 @@ public class UsersImpl implements Users {
   }
 
   @Override
-  public User current() {
+  public User current() throws ServerCommunicationException {
     String url = getMyUserUrl();
 
     return restClient.doGet(url, GsonTypeTokens.USER);
+  }
+
+  public User byId(final Long userId) throws ServerCommunicationException {
+    return findOrThrow(all(),
+                       "Unable to find user with id: " + userId,
+                       new UserByIdCriteria(userId));
   }
 
   @Override
@@ -81,6 +90,19 @@ public class UsersImpl implements Users {
     this.currentWorkspace = currentWorkspace;
     this.currentProject = currentProject;
     return this;
+  }
+
+  private static class UserByIdCriteria implements Collectionz.Criteria<User> {
+    private final Long userId;
+
+    public UserByIdCriteria(Long userId) {
+      this.userId = userId;
+    }
+
+    @Override
+    public boolean matches(User item) {
+      return item.getId().equals(userId);
+    }
   }
 }
 
