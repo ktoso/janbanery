@@ -1,8 +1,5 @@
 package pl.project13.janbanery.core.dao;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
@@ -10,7 +7,6 @@ import pl.project13.janbanery.config.auth.Header;
 import pl.project13.janbanery.config.xstream.RssConverter;
 import pl.project13.janbanery.core.rest.RestClient;
 import pl.project13.janbanery.core.rest.response.RestClientResponse;
-import pl.project13.janbanery.exceptions.NotYetImplementedException;
 import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.Project;
 import pl.project13.janbanery.resources.Workspace;
@@ -19,8 +15,8 @@ import pl.project13.janbanery.resources.xml.ProjectLogEntry;
 import pl.project13.janbanery.resources.xml.RssResource;
 
 import java.io.ByteArrayInputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -53,10 +49,22 @@ public class LogImpl implements Log {
     RestClientResponse response = restClient.doGet(url);
     String responseBody = response.getResponseBody();
 
-    RssResource.Rss rss = rssConverter.fromXml(new ByteArrayInputStream(responseBody.getBytes(Charsets.UTF_8)));
+    ByteArrayInputStream inStream = asByteArrayInputStream(responseBody);
+
+    RssResource.Rss rss = rssConverter.fromXml(inStream);
     ProjectLog projectLog = ProjectLog.from(rss);
 
     return projectLog.getItems();
+  }
+
+  private ByteArrayInputStream asByteArrayInputStream(String responseBody) {
+    ByteArrayInputStream inStream;
+    try {
+      inStream = new ByteArrayInputStream(responseBody.getBytes("UTF-8"));
+    } catch (UnsupportedEncodingException e) {
+      throw new ServerCommunicationException(e);
+    }
+    return inStream;
   }
 
   @Override
