@@ -161,6 +161,10 @@ public class JanbaneryFactory {
       return janbanery.usingWorkspace(name);
     }
 
+    public Janbanery notDeclaringWorkspaceYet() throws ServerCommunicationException {
+      return janbanery;
+    }
+
   }
 }
 

@@ -87,8 +87,8 @@ public class Janbanery {
    *
    * @param name the name of the project you want to use (it should be from the current {@link Workspace}
    * @return the now being used project
-   * @throws ProjectNotFoundException will be thrown if no project with such name isSubscribedTo in the current workspace
-   * @throws ServerCommunicationException              if unable to communicate with the server
+   * @throws ProjectNotFoundException     will be thrown if no project with such name isSubscribedTo in the current workspace
+   * @throws ServerCommunicationException if unable to communicate with the server
    */
   public Janbanery usingProject(String name) throws ServerCommunicationException {
     return usingProject(currentWorkspace, name);
@@ -175,8 +175,20 @@ public class Janbanery {
   public Projects projects() {
     return new ProjectsImpl(workspaces()).using(currentWorkspace, currentProject);
   }
+
   public Log log() {
     return new LogImpl(conf, restClient).using(currentWorkspace, currentProject);
+  }
+
+  /**
+   * Set a new configuration to be used.
+   * This is useful when for example, you want to log into a different account,
+   * while holding the same Janbanery instance.
+   *
+   * @param conf thew new Configuration to be used
+   */
+  public void setConf(Configuration conf) {
+    this.conf = conf;
   }
 
   /**

@@ -22,8 +22,11 @@ import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
 import pl.project13.janbanery.core.JanbaneryFactory;
+import pl.project13.janbanery.core.flow.TaskFlow;
 import pl.project13.janbanery.exceptions.UserNotFoundException;
 import pl.project13.janbanery.resources.Project;
+import pl.project13.janbanery.resources.Task;
+import pl.project13.janbanery.resources.TaskType;
 import pl.project13.janbanery.resources.User;
 
 import java.util.List;
@@ -67,6 +70,18 @@ public class UsersTest {
     // then
     assertThat(all).isNotEmpty();
   }
+
+  @Test
+  public void testName() throws Exception {
+    TaskType anyTaskType = janbanery.taskTypes().any();
+    Task build = new Task.Builder("My Task With Deadline", anyTaskType).deadline().inDays(2).build();
+
+    Task task = janbanery.tasks().create(build).get();
+
+    Task GotIty = janbanery.tasks().byId(task.getId());
+    System.out.println(GotIty.getDeadline());
+  }
+
 
   @Test
   public void shouldFindUserById() throws Exception {

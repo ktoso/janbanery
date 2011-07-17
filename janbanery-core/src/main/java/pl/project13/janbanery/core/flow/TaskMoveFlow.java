@@ -40,9 +40,9 @@ public interface TaskMoveFlow extends Flow<Task> {
    * <strong>Requirement</strong>: The task MUST be in the FIRST column.
    *
    * @return a TaskMoveOneFlow instance to allow further task operations
-   * @throws java.io.IOException if unable to fetch the server response
    * @throws pl.project13.janbanery.exceptions.kanbanery.invalidentity.CanOnlyIceBoxTaskFromFirstColumnException
    *                             if the task is NOT in the first column
+   * @throws ServerCommunicationException
    */
   TaskFlow toIceBox() throws ServerCommunicationException, CanOnlyIceBoxTaskFromFirstColumnException;
 
@@ -51,7 +51,7 @@ public interface TaskMoveFlow extends Flow<Task> {
    * <strong>Requirement</strong>: The task MUST be in the LAST column.
    *
    * @return a TaskMoveOneFlow instance to allow further task operations
-   * @throws java.io.IOException if unable to fetch the server response
+   * @throws ServerCommunicationException
    */
   TaskFlow toArchive() throws ServerCommunicationException;
 
