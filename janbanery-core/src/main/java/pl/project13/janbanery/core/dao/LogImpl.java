@@ -1,5 +1,24 @@
+/*
+ * Copyright 2011 Konrad Malawski <konrad.malawski@project13.pl>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.project13.janbanery.core.dao;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.project13.janbanery.config.Configuration;
@@ -16,7 +35,6 @@ import pl.project13.janbanery.resources.xml.RssResource;
 
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -57,6 +75,24 @@ public class LogImpl implements Log {
     return projectLog.getItems();
   }
 
+  @Override
+  public List<ProjectLogEntry> last(Integer numberOfActions) throws ServerCommunicationException {
+    List<ProjectLogEntry> all = all();
+
+    List<ProjectLogEntry> freshestActions = newArrayList(all.subList(0, numberOfActions));
+
+    return freshestActions;
+  }
+
+  @Override
+  public List<ProjectLogEntry> fresherThan(ProjectLogEntry entry) throws ServerCommunicationException {
+    List<ProjectLogEntry> all = all();
+
+    List<ProjectLogEntry> freshEntries = newArrayList(Collections2.filter(all, new FresherProjectLogEntries(entry)));
+
+    return freshEntries;
+  }
+
   private ByteArrayInputStream asByteArrayInputStream(String responseBody) {
     ByteArrayInputStream inStream;
     try {
@@ -65,15 +101,6 @@ public class LogImpl implements Log {
       throw new ServerCommunicationException(e);
     }
     return inStream;
-  }
-
-  @Override
-  public List<ProjectLogEntry> last(Integer numberOfActions) throws ServerCommunicationException {
-    List<ProjectLogEntry> all = all();
-
-    ArrayList<ProjectLogEntry> freshestActions = newArrayList(all.subList(0, numberOfActions));
-
-    return freshestActions;
   }
 
   private String getDefaultLogUrl() {
@@ -89,5 +116,20 @@ public class LogImpl implements Log {
     this.currentProject = currentProject;
 
     return this;
+  }
+
+  private static class FresherProjectLogEntries implements Predicate<ProjectLogEntry> {
+
+    private DateTime splittingDateTime;
+
+    public FresherProjectLogEntries(ProjectLogEntry entry) {
+      splittingDateTime = entry.getPubDate();
+    }
+
+    @Override
+    public boolean apply(ProjectLogEntry input) {
+      DateTime inPubDate = input.getPubDate();
+      return inPubDate.isAfter(splittingDateTime);
+    }
   }
 }
