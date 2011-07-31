@@ -26,6 +26,12 @@ public class ProjectLogEntry {
   public ProjectLogEntry() {
   }
 
+  public ProjectLogEntry(String title, String description, DateTime pubDate) {
+    this.title = title;
+    this.description = description;
+    this.pubDate = pubDate;
+  }
+
   public RssResource.Guid getGuid() {
     return guid;
   }

@@ -28,6 +28,8 @@ public interface Log {
 
   List<ProjectLogEntry> all() throws ServerCommunicationException;
 
+  ProjectLogEntry lastOne() throws ServerCommunicationException;
+
   List<ProjectLogEntry> last(Integer numberOfActions) throws ServerCommunicationException;
 
   List<ProjectLogEntry> fresherThan(ProjectLogEntry entry) throws ServerCommunicationException;

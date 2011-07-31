@@ -76,6 +76,11 @@ public class LogImpl implements Log {
   }
 
   @Override
+  public ProjectLogEntry lastOne() throws ServerCommunicationException {
+    return last(1).get(0);
+  }
+
+  @Override
   public List<ProjectLogEntry> last(Integer numberOfActions) throws ServerCommunicationException {
     List<ProjectLogEntry> all = all();
 

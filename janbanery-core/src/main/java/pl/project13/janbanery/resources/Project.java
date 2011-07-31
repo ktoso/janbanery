@@ -43,6 +43,11 @@ public class Project extends KanbaneryResource implements Serializable {
   public Project() {
   }
 
+  public Project(Long id, String name) {
+    this.id = id;
+    this.name = name;
+  }
+
   @Override
   public String getResourceId() {
     return "projects";

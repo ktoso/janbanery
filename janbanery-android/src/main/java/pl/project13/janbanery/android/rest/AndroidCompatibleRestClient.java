@@ -1,5 +1,6 @@
 package pl.project13.janbanery.android.rest;
 
+import android.os.AsyncTask;
 import android.util.Log;
 import com.google.common.base.Charsets;
 import com.google.gson.Gson;
@@ -28,14 +29,16 @@ import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.KanbaneryResource;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * @author Konrad Malawski
  */
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings("unchecked")
 public class AndroidCompatibleRestClient extends RestClient {
 
   public final String TAG = "AndroidRestClient";
@@ -44,6 +47,8 @@ public class AndroidCompatibleRestClient extends RestClient {
   private Gson gson;
   private DefaultHttpClient httpClient;
   private FormUrlEncodedBodyGenerator encodedBodyGenerator;
+
+  private int callTimeoutSeconds = 30;
 
   public AndroidCompatibleRestClient() {
     this.httpClient = getClient();
@@ -83,7 +88,7 @@ public class AndroidCompatibleRestClient extends RestClient {
   }
 
   @Override
-  public RestClientResponse doPost(String url, KanbaneryResource resource) throws ServerCommunicationException {
+  public RestClientResponse doPost(final String url, final KanbaneryResource resource) throws ServerCommunicationException {
     HttpPost request = new HttpPost(url);
 
     authorize(request);
@@ -95,6 +100,7 @@ public class AndroidCompatibleRestClient extends RestClient {
     HttpResponse httpResponse = executeRequest(request);
 
     ResponseFromHttpResponse response = new ResponseFromHttpResponse(httpResponse);
+
 
     verifyResponseCode(response);
 
@@ -203,15 +209,30 @@ public class AndroidCompatibleRestClient extends RestClient {
     request.setEntity(entity);
   }
 
-  private HttpResponse executeRequest(HttpRequestBase request) {
+  private HttpResponse executeRequest(final HttpRequestBase request) {
     request.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
     HttpResponse httpResponse;
     try {
-      httpResponse = httpClient.execute(request);
-    } catch (IOException e) {
+      httpResponse = new SimpleAsyncTask<HttpResponse>() {
+        @Override
+        protected HttpResponse execute() {
+
+          HttpResponse response = null;
+          try {
+            response = httpClient.execute(request);
+          } catch (Exception e) {
+            throwLater(e);
+          }
+
+          return response;
+        }
+      }.get(callTimeoutSeconds);
+
+    } catch (Exception e) {
       throw new ServerCommunicationException(e);
     }
+
     return httpResponse;
   }
 
@@ -221,4 +242,52 @@ public class AndroidCompatibleRestClient extends RestClient {
     httpClient.clearResponseInterceptors();
   }
 
+  public void setCallTimeoutSeconds(int callTimeoutSeconds) {
+    this.callTimeoutSeconds = callTimeoutSeconds;
+  }
+
+  private abstract class SimpleAsyncTask<T> {
+    private final String TAG = getClass().getSimpleName();
+
+    protected abstract T execute();
+
+    private Throwable throwLater;
+
+    @SuppressWarnings("unchecked")
+    public T get(int callTimeoutSeconds) {
+      T result = null;
+
+      try {
+        result = new AsyncTask<Void, Void, T>() {
+          @Override
+          protected T doInBackground(Void... voids) {
+            return SimpleAsyncTask.this.execute();
+          }
+
+          @Override
+          protected void onPostExecute(T t) {
+            if (throwLater != null) {
+              throw new RuntimeException("Exception was thrown while fetching resource.", throwLater);
+            }
+          }
+        }.execute()
+         .get(callTimeoutSeconds, TimeUnit.SECONDS);
+
+      } catch (InterruptedException e) {
+        Log.e(TAG, "InterruptedException while SimpleAsyncTask get()...\n" + e.toString());
+      } catch (ExecutionException e) {
+        Log.e(TAG, "ExecutionException while SimpleAsyncTask get()...\n" + e.toString());
+      } catch (TimeoutException e) {
+        Log.e(TAG, "ExecutionException while SimpleAsyncTask get()...\n" + e.toString());
+      }
+
+      return result;
+    }
+
+    protected void throwLater(Throwable throwable) {
+      throwLater = throwable;
+    }
+  }
+
 }
+
