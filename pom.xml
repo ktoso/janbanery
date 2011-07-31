@@ -99,7 +99,6 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <plugins>
             <!-- Setting built-in java compiler properties -->
