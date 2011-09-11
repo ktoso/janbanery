@@ -145,6 +145,25 @@ public class TaskMovementTest {
   }
 
   @Test
+  public void shouldMoveToPreviousColumnFromLastColumn() throws Exception {
+    // given
+    TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
+    Column lastColumn = janbanery.columns().last();
+    Column beforeLastColumn = janbanery.columns().before(lastColumn);
+
+    Task taskInLastColumn = taskFlow.move().toLastColumn().get();
+
+    // when
+    Task taskMovedToPreLastColumn = janbanery.tasks()
+                                             .move(taskInLastColumn)
+                                             .toPreviousColumn()
+                                             .get();
+
+    // then
+    assertThat(taskMovedToPreLastColumn.getColumnId()).isEqualTo(beforeLastColumn.getId());
+  }
+
+  @Test
   public void shouldMoveToIceBox() throws Exception {
     // given
     TaskFlow taskFlow = TestEntityHelper.createTestTaskFlow(janbanery);
