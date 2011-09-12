@@ -52,7 +52,7 @@ public abstract class RestClient {
         throw new NotFoundKanbaneryException(errorMessageFrom(response));
     }
 
-    if (statusCode > 400) {
+    if (statusCode >= 400) {
       throw new KanbaneryException(format("Unexpected response code '%d' and message: '%s'.", statusCode, response.getStatusText()));
     }
   }

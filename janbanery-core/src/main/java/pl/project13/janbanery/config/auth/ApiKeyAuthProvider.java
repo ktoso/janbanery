@@ -60,4 +60,8 @@ public class ApiKeyAuthProvider implements AuthProvider {
   public Header getAuthHeader() {
     return new Header(API_TOKEN_HEADER, authData);
   }
+
+  public String toString() {
+    return "ApiKeyAuthProvider{AuthHeader='" + new Header(API_TOKEN_HEADER, authData) + "'}";
+  }
 }

@@ -40,4 +40,5 @@ public interface AuthProvider {
   boolean isCurrentUser(User user);
 
   Header getAuthHeader();
+
 }

@@ -132,13 +132,14 @@ public class AndroidCompatibleRestClient extends RestClient {
   @Override
   public <T> T doGet(String url, Type type) throws ServerCommunicationException {
     RestClientResponse response = doGet(url);
+    String responseBody = response.getResponseBody();
 
-    return (T) gson.fromJson(response.getResponseBody(), type);
+    return (T) gson.fromJson(responseBody, type);
   }
 
   @Override
   public RestClientResponse doDelete(String url) throws ServerCommunicationException {
-    HttpGet request = new HttpGet(url);
+    HttpDelete request = new HttpDelete(url);
 
     authorize(request);
 
