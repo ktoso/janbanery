@@ -72,6 +72,15 @@ public class UsersImpl implements Users {
     return restClient.doGet(url, GsonTypeTokens.LIST_USER);
   }
 
+
+  @Override
+  public List<User> allWithNobody() {
+    List<User> all = all();
+    all.add(new User.NoOne());
+
+    return all;
+  }
+
   @Override
   public List<User> inProject(Project project) throws ServerCommunicationException {
     String url = getProjectUsersUrl(project);

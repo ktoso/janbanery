@@ -177,8 +177,8 @@ public class User extends KanbaneryResource implements Serializable {
     public NoOne() {
       super.id = null;
       super.email = "";
-      super.firstName = "No";
-      super.lastName = "One";
+      super.firstName = "Nobody";
+      super.lastName = "";
       super.apiToken = "IAmNotARealAccount";
       super.createdAt = new DateTime();
       super.gravatarUrl = "https://janbanery.kanbanery.com/images/no-user.png";

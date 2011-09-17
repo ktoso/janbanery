@@ -23,6 +23,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import pl.project13.janbanery.resources.Permission;
 import pl.project13.janbanery.resources.Priority;
+import pl.project13.janbanery.resources.TaskSearch;
 
 import java.lang.reflect.Type;
 import java.util.Date;
@@ -48,6 +49,8 @@ public class GsonFactory {
         .registerTypeAdapter(Date.class, new DateDeserializer())
         .registerTypeAdapter(Priority.class, new PrioritySerializer())
         .registerTypeAdapter(Priority.class, new PriorityDeserializer())
+        .registerTypeAdapter(TaskSearch.Scope.class, new TaskSearchScopeSerializer())
+        .registerTypeAdapter(TaskSearch.Scope.class, new TaskSearchScopeDeserializer())
         .registerTypeAdapter(Permission.class, new PermissionSerializer())
         .registerTypeAdapter(Permission.class, new PermissionDeserializer())
 //        .setPrettyPrinting()
@@ -124,6 +127,22 @@ public class GsonFactory {
       String dateString = json.getAsString();
       DateTime dateTime = dateFormatter.parseDateTime(dateString);
       return dateTime.toDate();
+    }
+  }
+
+  public static class TaskSearchScopeSerializer implements JsonSerializer<TaskSearch.Scope> {
+
+    @Override
+    public JsonElement serialize(TaskSearch.Scope scope, Type typeOfSrc, JsonSerializationContext context) {
+      return new JsonPrimitive(scope.toString());
+    }
+  }
+
+  private static class TaskSearchScopeDeserializer implements JsonDeserializer<TaskSearch.Scope> {
+    @Override
+    public TaskSearch.Scope deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+      String scopeName = json.getAsString().toUpperCase();
+      return TaskSearch.Scope.valueOf(scopeName);
     }
   }
 }

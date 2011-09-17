@@ -15,7 +15,7 @@
         <maven.target>1.6</maven.target>
 
         <gson.version>1.7.1</gson.version>
-        <guava.version>r09</guava.version>
+        <guava.version>10.0-rc1</guava.version>
         <joda-time.version>1.6.2</joda-time.version>
         <slf4j-api.version>1.6.1</slf4j-api.version>
         <logback-classic.version>0.9.28</logback-classic.version>

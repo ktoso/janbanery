@@ -37,4 +37,9 @@ public @interface Required {
    * For example you can set typeId XOR typeName when creating a task.
    */
   String alternativeTo() default "";
+
+  /**
+   * A short explanation how this field may be used etc
+   */
+  String comment() default "";
 }

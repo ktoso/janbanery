@@ -23,30 +23,42 @@ import pl.project13.janbanery.resources.User;
 /**
  * @author Konrad Malawski
  */
-public class TaskAssignmentFlowImpl implements TaskAssignmentFlow {
+public class TaskAssignmentFlowImpl implements TaskAssignmentFlow
+{
 
-  private Tasks tasks;
+   private Tasks tasks;
 
-  private Task task;
+   private Task task;
 
-  public TaskAssignmentFlowImpl(Tasks tasks, Task task) {
-    this.tasks = tasks;
-    this.task = task;
-  }
+   public TaskAssignmentFlowImpl(Tasks tasks, Task task)
+   {
+      this.tasks = tasks;
+      this.task = task;
+   }
 
-  @Override
-  public TaskFlow to(User user) {
-    return tasks.assign(task, user);
-  }
+   @Override
+   public TaskFlow to(User user)
+   {
+      if (user instanceof User.NoOne)
+      {
+         return toNobody();
+      }
+      else
+      {
+         return tasks.assign(task, user);
+      }
+   }
 
-  @Override
-  public TaskFlow toNobody() {
-    //noinspection NullableProblems
-    return tasks.assign(task, null);
-  }
+   @Override
+   public TaskFlow toNobody()
+   {
+      //noinspection NullableProblems
+      return tasks.assign(task, null);
+   }
 
-  @Override
-  public Task get() {
-    return task;
-  }
+   @Override
+   public Task get()
+   {
+      return task;
+   }
 }

@@ -39,6 +39,8 @@ public interface Users {
 
   List<User> all() throws ServerCommunicationException;
 
+  List<User> allWithNobody() throws ServerCommunicationException;
+
   List<User> inProject(Project project) throws ServerCommunicationException;
 
 }

@@ -149,8 +149,9 @@ public class Task extends KanbaneryResource implements Serializable {
     return "task";
   }
 
-  public Task(String title) {
+  public Task(String title, TaskType taskType) {
     this.title = title;
+    this.taskTypeId = taskType.getId();
   }
 
   public Task(String title, String taskTypeName) {
@@ -281,49 +282,7 @@ public class Task extends KanbaneryResource implements Serializable {
 
     Task task = (Task) o;
 
-    if (blocked != null ? !blocked.equals(task.blocked) : task.blocked != null) {
-      return false;
-    }
-    if (columnId != null ? !columnId.equals(task.columnId) : task.columnId != null) {
-      return false;
-    }
-    if (creatorId != null ? !creatorId.equals(task.creatorId) : task.creatorId != null) {
-      return false;
-    }
-    if (deadline != null ? !deadline.equals(task.deadline) : task.deadline != null) {
-      return false;
-    }
-    if (description != null ? !description.equals(task.description) : task.description != null) {
-      return false;
-    }
-    if (estimateId != null ? !estimateId.equals(task.estimateId) : task.estimateId != null) {
-      return false;
-    }
     if (id != null ? !id.equals(task.id) : task.id != null) {
-      return false;
-    }
-    if (movedAt != null ? !movedAt.equals(task.movedAt) : task.movedAt != null) {
-      return false;
-    }
-    if (ownerId != null ? !ownerId.equals(task.ownerId) : task.ownerId != null) {
-      return false;
-    }
-    if (position != null ? !position.equals(task.position) : task.position != null) {
-      return false;
-    }
-    if (priority != task.priority) {
-      return false;
-    }
-    if (readyToPull != null ? !readyToPull.equals(task.readyToPull) : task.readyToPull != null) {
-      return false;
-    }
-    if (taskTypeId != null ? !taskTypeId.equals(task.taskTypeId) : task.taskTypeId != null) {
-      return false;
-    }
-    if (taskTypeName != null ? !taskTypeName.equals(task.taskTypeName) : task.taskTypeName != null) {
-      return false;
-    }
-    if (title != null ? !title.equals(task.title) : task.title != null) {
       return false;
     }
 

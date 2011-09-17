@@ -180,6 +180,10 @@ public class Janbanery {
     return new LogImpl(conf, restClient).using(currentWorkspace, currentProject);
   }
 
+  public Search search() {
+    return new SearchImpl(conf, restClient).using(currentWorkspace, currentProject);
+  }
+
   /**
    * Set a new configuration to be used.
    * This is useful when for example, you want to log into a different account,
