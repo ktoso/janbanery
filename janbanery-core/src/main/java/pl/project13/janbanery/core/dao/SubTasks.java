@@ -17,6 +17,7 @@
 package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.core.flow.SubTaskFlow;
+import pl.project13.janbanery.core.flow.SubTaskMarkFlow;
 import pl.project13.janbanery.exceptions.ServerCommunicationException;
 import pl.project13.janbanery.resources.SubTask;
 import pl.project13.janbanery.resources.Task;
@@ -43,6 +44,8 @@ public interface SubTasks extends SubTasksOf {
   SubTaskFlow update(SubTask subTask, SubTask newValues) throws ServerCommunicationException ;
 
   void delete(SubTask subTask) throws ServerCommunicationException ;
+
+  public SubTaskMarkFlow mark(SubTask subTask) throws ServerCommunicationException;
 
   // queries ------------------------------------------------------------------
 

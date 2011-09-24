@@ -18,8 +18,7 @@ package pl.project13.janbanery.core.dao;
 
 import pl.project13.janbanery.config.Configuration;
 import pl.project13.janbanery.config.gson.GsonTypeTokens;
-import pl.project13.janbanery.core.flow.SubTaskFlow;
-import pl.project13.janbanery.core.flow.SubTaskFlowImpl;
+import pl.project13.janbanery.core.flow.*;
 import pl.project13.janbanery.core.flow.batch.SubTasksFlow;
 import pl.project13.janbanery.core.flow.batch.SubTasksFlowImpl;
 import pl.project13.janbanery.core.rest.RestClient;
@@ -73,6 +72,11 @@ public class SubTasksImpl implements SubTasks {
     String url = getSubTaskUrl(subTask);
 
     restClient.doDelete(url);
+  }
+
+  @Override
+  public SubTaskMarkFlow mark(SubTask subTask) {
+    return new SubTaskMarkFlowImpl(this, subTask);
   }
 
   @Override
