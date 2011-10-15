@@ -74,7 +74,7 @@ public class Janbanery {
    * @throws ExecutionException
    * @throws InterruptedException
    */
-  public Janbanery usingWorkspace(String name) throws ServerCommunicationException, ExecutionException, InterruptedException {
+  public Janbanery usingWorkspace(String name) throws ServerCommunicationException {
     Workspace workspace = workspaces().byName(name);
 
     Project firstProject = workspace.getProjects().get(0);
@@ -105,13 +105,13 @@ public class Janbanery {
     throw new ProjectNotFoundException("The workspace '" + workspace.getName() + "' has no project named '" + name + "'.");
   }
 
-  private Janbanery using(Workspace workspace) {
+  public Janbanery using(Workspace workspace) {
     currentWorkspace = workspace;
 
     return this;
   }
 
-  private Janbanery using(Project project) {
+  public Janbanery using(Project project) {
     currentProject = project;
 
     return this;
