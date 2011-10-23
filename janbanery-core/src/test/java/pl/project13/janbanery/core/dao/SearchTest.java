@@ -2,6 +2,7 @@ package pl.project13.janbanery.core.dao;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
@@ -96,8 +97,9 @@ public class SearchTest {
     // and cleanup
     taskFlow.delete();
   }
-  
-    @Test
+
+  @Ignore("Test needs to be fixed")
+  @Test
   public void shouldFindTasksWithTaskType() throws Exception {
     // given
     String sampleTitle = "TestTask" + System.currentTimeMillis();

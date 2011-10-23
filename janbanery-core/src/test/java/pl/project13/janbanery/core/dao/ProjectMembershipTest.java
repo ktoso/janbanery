@@ -18,6 +18,7 @@ package pl.project13.janbanery.core.dao;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import pl.project13.janbanery.config.PropertiesConfiguration;
 import pl.project13.janbanery.core.Janbanery;
@@ -90,6 +91,7 @@ public class ProjectMembershipTest {
     // then, should have thrown
   }
 
+  @Ignore("See comment bellow, I got an unlimited account, thus this test will never throw")
   @Test(expected = MaximumNumbersOfCollaboratorsReachedException.class)
   public void shouldThrowOnExceededUsersInProjectLimit() throws Exception {
     // given
