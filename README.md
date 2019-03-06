@@ -88,7 +88,7 @@ Be sure the Kanbanery API does allow it though - not all Entities can be created
 
 Usage examples
 ==============
-These are just a "quick start", if you need more help or conviceing why you should use Janbanery take a look at our Wiki, where all flows are described (soon!).
+These are just a "quick start", if you need more help or convicting why you should use Janbanery take a look at our Wiki, where all flows are described (soon!).
 
 Logging in
 ----------
